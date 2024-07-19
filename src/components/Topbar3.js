@@ -98,50 +98,25 @@ const DropdownItem = styled(Link)`
 const Auth = styled.div`
 display : flex;
 margin-left : 750px;
-
+width: 101px;
+height: 38px;
+margin-top : 51px;
+border-radius: 5px;
+background: #FFF;
+text-align : center;
+justify-content : center;
+align-items : center;
+color: #2F4F4F;
+text-align: center;
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 
 
 `;
-const Company=styled(Link)`
-width : 101px;
-height : 38px;
-border-radius: 5px;
-background: #FFF;
-margin-top : 68px;
-color: #2F4F4F;
-text-align: center;
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-text-decoration : none;
-display : flex;
-justify-content : center;
-align-items : center;
-`
 
-const Individual = styled(Link)`
-width : 101px;
-height : 38px;
-border-radius: 5px;
-background: #FFF;
-margin-right : 55px;
-margin-left: 11px;
-margin-top : 68px;
-color: #2F4F4F;
-text-align: center;
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-text-decoration : none;
-display : flex;
-justify-content : center;
-align-items : center;
-
-`
 const Topbar2 = () => {
   return (
     <Layout>
@@ -173,9 +148,7 @@ const Topbar2 = () => {
             <DropdownItem to="/communication24">디자인 리뷰</DropdownItem>
           </DropdownContent>
         </Dropdown>
-        <Auth>
-        <Company to ="/login1">기업 로그인</Company>
-        <Individual to ="/login2">개인 회원</Individual>
+        <Auth>신짱구 님
       </Auth>
         </MenuContainer>
 

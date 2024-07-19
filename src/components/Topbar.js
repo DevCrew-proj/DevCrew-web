@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '../assets/logo.svg'
+import logo from '../assets/image/logo.svg'
 import {Link} from 'react-router-dom'
-import ArrowIcon from '../assets/arrow.svg'
+import ArrowIcon from '../assets/image/arrow.svg'
 
 const Layout = styled.div`
 width : 1920px;

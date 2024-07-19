@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Topbar2 from '../components/Topbar2'
-import logo from '../assets/logowhite.svg'
+import logo from '../assets/image/logowhite.svg'
 import {Link } from 'react-router-dom'
 
 const Layout = styled.div`
