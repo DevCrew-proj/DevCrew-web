@@ -1,22 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '../assets/logo.svg'
+import logo from '../assets/logowhite.svg'
 import {Link} from 'react-router-dom'
-import ArrowIcon from '../assets/arrow.svg'
+import ArrowIcon from '../assets/arrow2.svg'
 
 const Layout = styled.div`
 width : 1920px;
 height : 116px;
 display: flex;
 flex-direction : row;
-background: #F7F7F7;
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #7F7F7F;
 `
 
 const Logocontainer = styled.div`
-width : 180px;
-height : 54px;
+width : 197px;
+height : 59px;
 margin-left: 55px;
 margin-top : 31px;
+margin-right : 25px;
 `
 
 const Logoimg = styled.img`
@@ -31,9 +32,9 @@ flex-direction : row;
 const MenuItem = styled(Link)`
 text-decoration : none;
 color : black;
-margin-top : 56px;
-margin-left : 64px;
-color: #000;
+margin-top : 70px;
+margin-left : 58px;
+color: white;
 font-family: AppleSDGothicNeoB00;
 font-size: 20px;
 font-style: normal;
@@ -45,7 +46,7 @@ height: 28px;
 
 const Dropdown = styled.div`
   position: relative;
-  margin-top : 56px;
+  margin-top : 70px;
   display: inline-block;
   &:hover .dropdown-content {
     display: block;
@@ -102,7 +103,7 @@ width : 101px;
 height : 38px;
 border-radius: 5px;
 background: #FFF;
-margin-top : 51px;
+margin-top : 68px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
@@ -123,7 +124,7 @@ border-radius: 5px;
 background: #FFF;
 margin-right : 55px;
 margin-left: 11px;
-margin-top : 51px;
+margin-top : 68px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
@@ -137,7 +138,7 @@ justify-content : center;
 align-items : center;
 
 `
-const Topbar = () => {
+const Topbar2 = () => {
   return (
     <Layout>
         <Logocontainer>
@@ -178,4 +179,4 @@ const Topbar = () => {
   )
 }
 
-export default Topbar;
+export default Topbar2;
