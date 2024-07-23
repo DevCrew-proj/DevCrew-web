@@ -11,6 +11,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Start />} />
                     <Route path="/main" element={<Main />} />
+            
+
                                       
                 </Routes>
             </Router>
