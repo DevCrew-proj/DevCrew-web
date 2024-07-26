@@ -2,6 +2,7 @@ import "./App.css";
 import Start from "./pages/StartPage";
 import Main from "./pages/MainPage";
 import Login from "./pages/LoginPage";
+import Signin from "./pages/SigninPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
 
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/" element={<Start />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/signin" element={<Signin />} />
             </Routes>
         </Router>
     );

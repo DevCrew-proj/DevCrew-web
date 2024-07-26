@@ -53,6 +53,10 @@ const CustomTextField = styled(TextField)`
         font-weight: 400;
         line-height: normal;
     }
+
+    & .MuiOutlinedInput-input {
+        padding-left: 17px;
+    }
 `;
 
 const LoginBtn = styled.button`
@@ -199,6 +203,7 @@ const LoginPage = () => {
                     <CustomTextField
                         variant="outlined"
                         placeholder="비밀번호"
+                        type="password"
                     />
                     <LoginBtn>
                         <Login to="/login">LOGIN</Login>
