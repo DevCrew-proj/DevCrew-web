@@ -73,22 +73,19 @@ const KakaoLoginBtn = styled.button`
     background: #ffe810;
     margin-top: 18px;
     border: none;
-`;
-
-const Login = styled(Link)`
-    text-decoration: none;
-    color: #fff;
+    cursor: pointer;
+    color: #000;
     text-align: center;
-    font-family: AppleSDGothicNeoEB00;
+    font-family: AppleSDGothicNeoB00;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 `;
 
-const KakaoLogin = styled(Link)`
+const Login = styled(Link)`
     text-decoration: none;
-    color: #000;
+    color: #fff;
     text-align: center;
     font-family: AppleSDGothicNeoEB00;
     font-size: 15px;
@@ -147,7 +144,7 @@ const HorizonLine = ({ text }) => {
             <div
                 style={{
                     flex: 1,
-                    borderBottom: "1px solid #aaa",
+                    borderBottom: "1px solid #DCDADA",
                 }}
             />
             <span
@@ -165,10 +162,26 @@ const HorizonLine = ({ text }) => {
             <div
                 style={{
                     flex: 1,
-                    borderBottom: "1px solid #aaa",
+                    borderBottom: "1px solid #DCDADA",
                 }}
             />
         </div>
+    );
+};
+
+const KakaoLogin = () => {
+    const REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
+    const REDIRECT_URI = "http://localhost:8080/api/login/oauth2/code/kakao";
+    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    const loginHandler = () => {
+        window.location.href = link;
+    };
+
+    return (
+        <KakaoLoginBtn onClick={loginHandler}>
+            카카오톡으로 로그인
+        </KakaoLoginBtn>
     );
 };
 
@@ -191,11 +204,7 @@ const LoginPage = () => {
                         <Login to="/login">LOGIN</Login>
                     </LoginBtn>
                     <HorizonLine text="또는" />
-                    <KakaoLoginBtn>
-                        <KakaoLogin to="/kakologin">
-                            카카오톡으로 로그인
-                        </KakaoLogin>
-                    </KakaoLoginBtn>
+                    <KakaoLogin></KakaoLogin>
                     <Signin to="/signin">Dev:Crew 회원가입</Signin>
                 </LoginContainer>
             </Container>
