@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Topbar2 from "../components/Topbar3";
 import { PortfolioCard } from "../components/PorfolioCard";
+import { useNavigate } from "react-router-dom";
 
 const Layout = styled.div``;
 
@@ -68,6 +69,8 @@ const PortfolioWrapper = styled.div`
 `;
 
 const PortfolioPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Layout>
@@ -100,7 +103,9 @@ const PortfolioPage = () => {
                   노력하겠습니다.
                 </Information>
               </InfoWrapper>
-              <ProfileWriteBtn>자기소개 작성</ProfileWriteBtn>
+              <ProfileWriteBtn onClick={() => navigate(`/introduce`)}>
+                자기소개 작성
+              </ProfileWriteBtn>
             </InfoContainer>
           </ProfileContainer>
           <PortfolioContainer>
