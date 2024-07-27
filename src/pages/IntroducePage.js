@@ -116,7 +116,7 @@ const IntroducePage = () => {
             <Title>기본 정보</Title>
           </TitleContainer>
           {/* 입력 폼 시작 */}
-          <FormContainer onSubmit={alert("작성완료")}>
+          <FormContainer onSubmit={console.log("작성완료")}>
             <ProfileContainer>
               <ProfileWrapper>
                 <LabelContainer>

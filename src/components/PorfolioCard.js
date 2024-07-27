@@ -7,15 +7,16 @@ const Portfolio = styled.div`
   display: flex;
   gap: 28px;
   padding: 26px 21px;
-  background-color: #ffffff;
+  background-color: rgba(47, 79, 79, 0.6);
   border: 1px solid #dadada;
   border-radius: 20px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.16);
 `;
 
 const Thumbnail = styled.div`
   width: 164px;
   height: 164px;
-  background: #94ddfe;
+  background: #ffffff;
   border-radius: 20px;
 `;
 
@@ -29,22 +30,22 @@ const InfoWrapper = styled.div`
 const PortfolioTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: #171717;
+  color: #ffffff;
   margin: 0;
 `;
 
 const Chip = styled.div`
   width: fit-content;
   padding: 4.5px 9.5px;
-  background-color: #2a2a2a;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: rgba(130, 149, 149, 1);
   font-size: 12px;
   font-weight: 700;
   border-radius: 999px;
 `;
 
 const Description = styled.p`
-  color: #6e6e6e;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 500;
   margin: 0;
