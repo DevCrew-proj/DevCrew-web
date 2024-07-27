@@ -17,18 +17,12 @@ const Input = styled.input`
   font-size: 20px;
 `;
 
-export const IntroduceInput = ({ labelText, placeholder }) => {
+export const IntroduceInput = ({ type, labelText, placeholder }) => {
   return (
     <>
       <Container>
         <InputLabel labelText={labelText}></InputLabel>
-        <Input
-          type="text"
-          name="name"
-          id="name"
-          placeholder={placeholder}
-          required
-        />
+        <Input type={type} placeholder={placeholder} required />
       </Container>
     </>
   );
