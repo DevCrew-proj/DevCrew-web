@@ -38,67 +38,66 @@ const ListBar2 = () => {
   // const { id } = useParams();
   return (
     <ListBarContainer>
-      {/* 현재 페이지일 때는 표시 바꾸기 */}
       <StyledLink
-        to='/communication4'
+        to='/communication3'
         className={`${
-          location.pathname === "/communication4" ? "active" : null
+          location.pathname === "/communication3" ? "active" : null
         }`}
       >
         전체
       </StyledLink>
       <StyledLink
-        to='/communication4/java'
+        to='/communication3/java'
         className={`${
-          location.pathname === "/communication4/java" ? "active" : null
+          location.pathname === "/communication3/java" ? "active" : null
         }`}
       >
         JAVA
       </StyledLink>
       <StyledLink
-        to='/communication4/js'
+        to='/communication3/js'
         className={`${
-          location.pathname === "/communication4/js" ? "active" : null
+          location.pathname === "/communication3/js" ? "active" : null
         }`}
       >
         JS
       </StyledLink>
       <StyledLink
-        to='/communication4/koilin'
+        to='/communication3/koilin'
         className={`${
-          location.pathname === "/communication4/kotlin" ? "active" : null
+          location.pathname === "/communication3/kotlin" ? "active" : null
         }`}
       >
         Kotlin
       </StyledLink>
       <StyledLink
-        to='/communication4/python'
+        to='/communication3/python'
         className={`${
-          location.pathname === "/communication4/python" ? "active" : null
+          location.pathname === "/communication3/python" ? "active" : null
         }`}
       >
         Python
       </StyledLink>
       <StyledLink
-        to='/communication4/swift'
+        to='/communication3/swift'
         className={`${
-          location.pathname === "/communication4/swift" ? "active" : null
+          location.pathname === "/communication3/swift" ? "active" : null
         }`}
       >
         Swift
       </StyledLink>
       <StyledLink
-        to='/communication4/c'
+        to='/communication3/c'
         className={`${
-          location.pathname === "/communication4/c" ? "active" : null
+          location.pathname === "/communication3/c" ? "active" : null
         }`}
       >
         C
       </StyledLink>
       <StyledLink
-        to='/communication4/etc'
+        to='/communication3/etc'
         className={`${
-          location.pathname === "/communication4/etc" ? "active" : null
+          location.pathname === "/communication3/etc" ? "active" : null
         }`}
       >
         기타

@@ -37,7 +37,6 @@ const ListBar = () => {
   const location = useLocation();
   return (
     <ListBarContainer>
-      {/* 현재 페이지일 때는 표시 바꾸기 */}
       <StyledLink
         to='/communication1'
         className={`${

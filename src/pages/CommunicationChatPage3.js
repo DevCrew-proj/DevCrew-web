@@ -75,7 +75,7 @@ const SubmitBtn = styled.button`
   float: right;
 `;
 
-const CommunicationChat3 = () => {
+const CommunicationChat4 = () => {
   const navigate = useNavigate();
   const [chatNum, setChatNum] = useState(0); // 답변 count
   /*useEffect - axios
@@ -96,7 +96,7 @@ const CommunicationChat3 = () => {
       <Topbar />
       <Container>
         <IncumbentBox>
-          <Title>디자인 피드백</Title>
+          <Title>코드 리뷰</Title>
           <CommunicationChatContainer />
           <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
@@ -109,4 +109,4 @@ const CommunicationChat3 = () => {
   );
 };
 
-export default CommunicationChat3;
+export default CommunicationChat4;

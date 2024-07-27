@@ -92,7 +92,7 @@ const Communication1 = () => {
           <CommunicationBox />
           <CommunicationBox />
           <CommunicationBox />
-          <QuestionBtn onClick={() => navigate("/communication1Form")}>
+          <QuestionBtn onClick={() => navigate("/communicationForm2")}>
             질문하기
           </QuestionBtn>
           <Pagination page={page} setPage={setPage} />

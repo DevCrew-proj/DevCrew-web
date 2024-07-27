@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Topbar from "../components/Topbar";
-import CommunicationSideBar from "../components/CommunicationSideBar";
-import CommunicationBox from "../components/CommunicationBox";
-import Pagination from "../components/Pagination";
+import Topbar from "../components/Topbar.js";
+import ListBar2 from "../components/Listbar2.js";
+import CommunicationSideBar from "../components/CommunicationSideBar.js";
+import CommunicationBox from "../components/CommunicationBox.js";
+import Pagination from "../components/Pagination.js";
 
 const Layout = styled.div`
+  // 원래 크기에서 height는 60% 감소
   width: 1920px;
-  height: 1842px; // 1842 - 116 - 210 = 1504px
+  height: 2075px; // 2075 - 116 - 210 = 1737px
   background-color: #f0f0f0;
 `;
 
 const Container = styled.div`
   width: 1920px;
-  height: 1504px;
+  height: 1737px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -24,7 +26,7 @@ const Container = styled.div`
 
 const IncumbentBox = styled.div`
   width: 1170px;
-  height: 1203px;
+  height: 1385px;
 `;
 
 const Title = styled.h2`
@@ -57,12 +59,13 @@ const QuestionBtn = styled.button`
   margin: 0 0 58px 85%;
 `;
 
-const Communication3 = () => {
+const Communication4 = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
-  const [communityData, setCommunityData] = useState([]); // 커뮤니티 data 받기
-  const [chatNum, setChatNum] = useState(0);
+  const [category, setCategory] = useState(0); // 각 카테고리 별 표시
+  const [communicationData, setCommunicationData] = useState([]); // 커뮤니티 data 받기
+  const [chatNum, setChatNum] = useState(0); // 답변 count
   /*useEffect - axios
  const getData = async () => {
     try {
@@ -85,13 +88,14 @@ const Communication3 = () => {
       <Topbar />
       <Container>
         <IncumbentBox>
-          <Title>디자인 피드백</Title>
+          <Title>코드 리뷰</Title>
+          <ListBar2 />
           <CommunicationSideBar search={search} />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <QuestionBtn onClick={() => navigate("/communication1Form")}>
+          <CommunicationBox chatNum={chatNum} />
+          <CommunicationBox chatNum={chatNum} />
+          <CommunicationBox chatNum={chatNum} />
+          <CommunicationBox chatNum={chatNum} />
+          <QuestionBtn onClick={() => navigate("/communicationForm3")}>
             질문하기
           </QuestionBtn>
           <Pagination page={page} setPage={setPage} />
@@ -100,4 +104,4 @@ const Communication3 = () => {
     </Layout>
   );
 };
-export default Communication3;
+export default Communication4;
