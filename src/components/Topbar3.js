@@ -31,7 +31,6 @@ flex-direction : row;
 
 const MenuItem = styled(Link)`
 text-decoration : none;
-color : black;
 margin-top : 70px;
 margin-left : 58px;
 color: white;
@@ -50,6 +49,7 @@ const Dropdown = styled.div`
   display: inline-block;
   &:hover .dropdown-content {
     display: block;
+
   }
 `;
 
@@ -73,6 +73,12 @@ const DropdownContent = styled.div`
   transform: translateX(-50%); /* 중앙 정렬 */
   text-align : center;
   border-radius: 8px;
+  color: #2F4F4F;
+  font-family: AppleSDGothicNeoM00;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
   & a {
     color: black;
     padding: 12px 16px;
@@ -93,6 +99,7 @@ const Arrow = styled.img`
   width: 19px;
   height: 19px;
 `;
+
 const DropdownItem = styled(Link)`
 `
 const Auth = styled.div`
@@ -117,7 +124,7 @@ line-height: normal;
 
 `;
 
-const Topbar2 = () => {
+const Topbar3 = () => {
   return (
     <Layout>
         <Logocontainer>
@@ -145,7 +152,7 @@ const Topbar2 = () => {
             <DropdownItem to="/communication1">현직자 조언</DropdownItem>
             <DropdownItem to="/communication2">기획 리뷰</DropdownItem>
             <DropdownItem to="/communication3">코드 리뷰</DropdownItem>
-            <DropdownItem to="/communication24">디자인 리뷰</DropdownItem>
+            <DropdownItem to="/communication4">디자인 리뷰</DropdownItem>
           </DropdownContent>
         </Dropdown>
         <Auth>신짱구 님
@@ -156,4 +163,4 @@ const Topbar2 = () => {
   )
 }
 
-export default Topbar2;
+export default Topbar3;
