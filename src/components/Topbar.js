@@ -17,6 +17,7 @@ width : 180px;
 height : 54px;
 margin-left: 55px;
 margin-top : 31px;
+margin-right : 8px;
 `
 
 const Logoimg = styled.img`
@@ -32,7 +33,7 @@ const MenuItem = styled(Link)`
 text-decoration : none;
 color : black;
 margin-top : 56px;
-margin-left : 64px;
+margin-left : 56px;
 color: #000;
 font-family: AppleSDGothicNeoB00;
 font-size: 20px;
@@ -70,8 +71,14 @@ const DropdownContent = styled.div`
   z-index: 1;
   left: 60%;
   transform: translateX(-50%); /* 중앙 정렬 */
-
+  text-align : center;
   border-radius: 8px;
+  color: #2F4F4F;
+  font-family: AppleSDGothicNeoM00;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
   & a {
     color: black;
     padding: 12px 16px;
@@ -80,6 +87,10 @@ const DropdownContent = styled.div`
 
     &:hover {
       background-color: #f1f1f1;
+      border-radius: 11px;
+      text-decoration : none;
+   //width: 102px;
+    //height: 37px;
     }
   }
 `;
@@ -106,7 +117,7 @@ margin-top : 51px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
-font-size: 16px;
+font-size: 18px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -127,7 +138,7 @@ margin-top : 51px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
-font-size: 16px;
+font-size: 18px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;

@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: AppleSDGothicNeoH00;
+  src: url(../src/assets/font/AppleSDGothicNeoH.ttf);
+}
+
+@font-face {
+  font-family: AppleSDGothicNeoB00;
+  src: url(../src/assets/font/AppleSDGothicNeoB.ttf);
+}
+
+@font-face {
+  font-family: AppleSDGothicNeoM00;
+  src: url(../src/assets/font/AppleSDGothicNeoM.ttf);
+}
+
+@font-face {
+  font-family: AppleSDGothicNeoEB00;
+  src: url(../src/assets/font/AppleSDGothicNeoEB.ttf);
+}
+
+@font-face {
+  font-family: AppleSDGothicNeoL00;
+  src: url(../src/assets/font/AppleSDGothicNeoL.ttf);
+}
+
+@font-face {
+  font-family: Pretendard;
+  src: url(../src/assets/font/Pretendard-Regular.otf);
+}

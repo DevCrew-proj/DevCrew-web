@@ -31,7 +31,6 @@ flex-direction : row;
 
 const MenuItem = styled(Link)`
 text-decoration : none;
-color : black;
 margin-top : 70px;
 margin-left : 58px;
 color: white;
@@ -50,6 +49,7 @@ const Dropdown = styled.div`
   display: inline-block;
   &:hover .dropdown-content {
     display: block;
+
   }
 `;
 
@@ -73,6 +73,12 @@ const DropdownContent = styled.div`
   transform: translateX(-50%); /* 중앙 정렬 */
   text-align : center;
   border-radius: 8px;
+  color: #2F4F4F;
+  font-family: AppleSDGothicNeoM00;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
   & a {
     color: black;
     padding: 12px 16px;
@@ -82,7 +88,8 @@ const DropdownContent = styled.div`
     &:hover {
       border-radius: 11px;
     background: rgba(130, 149, 149, 0.59);
-   // width: 102px;
+    text-decoration : none;
+   //width: 102px;
     //height: 37px;
 
     }
@@ -111,7 +118,7 @@ margin-top : 68px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
-font-size: 16px;
+font-size: 18px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -132,7 +139,7 @@ margin-top : 68px;
 color: #2F4F4F;
 text-align: center;
 font-family: Pretendard;
-font-size: 16px;
+font-size: 18px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
