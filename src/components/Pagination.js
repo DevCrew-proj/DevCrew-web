@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Arrow from "../assets/image/arrow3.svg";
+import { useEffect } from "react";
 
 const PaginationContainer = styled.div`
   width: 100%;
@@ -62,7 +63,7 @@ const ArrowImg = styled.img`
   display: block;
 `;
 
-const Pagination = ({ page, setPage }) => {
+const Pagination = ({ page, totalPages, setPage }) => {
   /** Pagination
    * 어떤 한 페이지 그룹의 첫번째 페이지 번호 = ((페이지 그룹 - 1) * 한 화면에 보여질 페이지 개수) + 1
    * 어떤 한 페이지 그룹의 마지막 페이지 번호 = 페이지 그룹 * 한 화면에 보여질 페이지 개수
@@ -71,8 +72,6 @@ const Pagination = ({ page, setPage }) => {
    * 마지막 페이지 번호 = 2 * 5 = 10
    */
 
-  const totalContent = 31; // contents 총 갯수
-  let totalPage = Math.ceil(totalContent / 4);
   // 총 페이지 수 = Math.ceil(전체 컨텐츠 개수 / 한 페이지에 보여주고자 하는 컨텐츠의 개수)
 
   let pageGroupNum = Math.ceil(page / 3);
@@ -120,20 +119,20 @@ const Pagination = ({ page, setPage }) => {
           {firstPageNum}
         </PageList>
         {/* 현재 페이지일 때는 색깔 바꾸기 */}
-        {firstPageNum + 1 > totalPage ? null : (
+        {firstPageNum + 1 > totalPages ? null : (
           <PageList
             onClick={() => {
-              if (firstPageNum + 1 > totalPage) setPage(totalPage);
+              if (firstPageNum + 1 > totalPages) setPage(totalPages);
               else setPage(firstPageNum + 1);
             }}
           >
             {firstPageNum + 1}
           </PageList>
         )}
-        {lastPageNum > totalPage ? null : (
+        {lastPageNum > totalPages ? null : (
           <PageList
             onClick={() => {
-              if (lastPageNum > totalPage) setPage(totalPage);
+              if (lastPageNum > totalPages) setPage(totalPages);
               else setPage(lastPageNum);
             }}
           >
@@ -144,9 +143,9 @@ const Pagination = ({ page, setPage }) => {
         <PageList
           as='button'
           onClick={() => handlePageAdd()}
-          disabled={page > totalPage - 2}
+          disabled={page > totalPages - 1}
         >
-          {page > totalPage - 2 ? null : (
+          {totalPages <= 3 || page > totalPages - 1 ? null : (
             <ArrowImg src={Arrow} alt='Arrow' rotate='rotate(0deg)' />
           )}
         </PageList>

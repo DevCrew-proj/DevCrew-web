@@ -1,7 +1,6 @@
-import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledLink = styled(Link)`
+const List = styled.div`
   width: 10%;
   color: #b8b8b8;
   font-family: AppleSDGothicNeoM00;
@@ -33,75 +32,57 @@ const ListBarContainer = styled.div`
   margin: 0 auto 82px;
 `;
 
-const ListBar2 = () => {
-  const location = useLocation();
-  // const { id } = useParams();
+const ListBar2 = ({ category, setCategory }) => {
   return (
     <ListBarContainer>
-      <StyledLink
-        to='/communication3'
-        className={`${
-          location.pathname === "/communication3" ? "active" : null
-        }`}
+      <List
+        className={`${category === "전체" ? "active" : null}`}
+        onClick={() => setCategory("전체")}
       >
         전체
-      </StyledLink>
-      <StyledLink
-        to='/communication3/java'
-        className={`${
-          location.pathname === "/communication3/java" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "JAVA" ? "active" : null}`}
+        onClick={() => setCategory("JAVA")}
       >
         JAVA
-      </StyledLink>
-      <StyledLink
-        to='/communication3/js'
-        className={`${
-          location.pathname === "/communication3/js" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "JS" ? "active" : null}`}
+        onClick={() => setCategory("JS")}
       >
         JS
-      </StyledLink>
-      <StyledLink
-        to='/communication3/koilin'
-        className={`${
-          location.pathname === "/communication3/kotlin" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "Kotlin" ? "active" : null}`}
+        onClick={() => setCategory("Kotlin")}
       >
         Kotlin
-      </StyledLink>
-      <StyledLink
-        to='/communication3/python'
-        className={`${
-          location.pathname === "/communication3/python" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "Python" ? "active" : null}`}
+        onClick={() => setCategory("Python")}
       >
         Python
-      </StyledLink>
-      <StyledLink
-        to='/communication3/swift'
-        className={`${
-          location.pathname === "/communication3/swift" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "Swift" ? "active" : null}`}
+        onClick={() => setCategory("Swift")}
       >
         Swift
-      </StyledLink>
-      <StyledLink
-        to='/communication3/c'
-        className={`${
-          location.pathname === "/communication3/c" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "C" ? "active" : null}`}
+        onClick={() => setCategory("C")}
       >
         C
-      </StyledLink>
-      <StyledLink
-        to='/communication3/etc'
-        className={`${
-          location.pathname === "/communication3/etc" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "기타" ? "active" : null}`}
+        onClick={() => setCategory("기타")}
       >
         기타
-      </StyledLink>
+      </List>
     </ListBarContainer>
   );
 };

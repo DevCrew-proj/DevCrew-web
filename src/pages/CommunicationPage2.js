@@ -5,6 +5,7 @@ import Topbar from "../components/Topbar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
+import dummyData from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
@@ -59,27 +60,17 @@ const QuestionBtn = styled.button`
 
 const Communication1 = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
-  const [communityData, setCommunityData] = useState([]); // 커뮤니티 data 받기
   const [chatNum, setChatNum] = useState(0);
 
-  /*useEffect - axios
- const getData = async () => {
-    try {
+  const itemsPerPage = 4;
+  const totalContents = Math.ceil(dummyData.length);
+  const totalPages = Math.ceil(totalContents / itemsPerPage);
 
-    } catch (error) {
-
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, [page]);
-*/
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
+  const currentData = dummyData.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
   return (
     <Layout>
@@ -87,15 +78,14 @@ const Communication1 = () => {
       <Container>
         <IncumbentBox>
           <Title>기획 피드백</Title>
-          <CommunicationSideBar search={search} />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <QuestionBtn onClick={() => navigate("/communicationForm2")}>
+          <CommunicationSideBar totalcontents={totalContents} />
+          {currentData.map((data, index) => (
+            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+          ))}
+          <QuestionBtn onClick={() => navigate("/communicationBoard2")}>
             질문하기
           </QuestionBtn>
-          <Pagination page={page} setPage={setPage} />
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </IncumbentBox>
       </Container>
     </Layout>
