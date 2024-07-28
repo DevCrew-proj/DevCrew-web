@@ -96,7 +96,7 @@ const CommunicationChat2 = () => {
       <Topbar />
       <Container>
         <IncumbentBox>
-          <Title>현직자 조언</Title>
+          <Title>기획 피드백</Title>
           <CommunicationChatContainer />
           <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />

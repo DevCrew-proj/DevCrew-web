@@ -78,18 +78,6 @@ const SubmitBtn = styled.button`
 const CommunicationChat3 = () => {
   const navigate = useNavigate();
   const [chatNum, setChatNum] = useState(0); // 답변 count
-  /*useEffect - axios
- const getData = async () => {
-    try {
-
-    } catch (error) {
-
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, [page]);
-*/
 
   return (
     <Layout>

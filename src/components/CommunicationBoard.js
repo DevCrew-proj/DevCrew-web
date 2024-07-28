@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import CommunicationToolBar from './CommunicationToolBar';
-import CommunicationFileUpload from './CommunicationFileUpload';
-import CommunicationPreview from './CommunicationPreview';
+import React, { useState } from "react";
+import styled from "styled-components";
+import CommunicationToolBar from "./CommunicationToolBar";
+import CommunicationFileUpload from "./CommunicationFileUpload";
+import CommunicationPreview from "./CommunicationPreview";
 
 const Layout = styled.div`
   width: 1290px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,15 +48,15 @@ const TitleInput = styled.input`
   border: none;
   outline: none;
   width: 100%;
-  font-family: 'AppleSDGothicNeoL00', 'Roboto_Condensed';
+  font-family: "AppleSDGothicNeoL00", "Roboto_Condensed";
   font-weight: normal;
   font-size: 1.5rem;
-  color: #000000; 
+  color: #000000;
   background: transparent;
   box-sizing: border-box;
 
   &::placeholder {
-    color: #FFFFFF; 
+    color: #ffffff;
   }
 `;
 
@@ -80,13 +80,13 @@ const ContentEditor = styled.div`
 
 const EditorBox = styled.div`
   box-shadow: 0px 9px 27px 0px rgba(0, 0, 0, 0.07),
-              0px 3.8px 11.3px 0px rgba(0, 0, 0, 0.05),
-              0px 2px 6px 0px rgba(0, 0, 0, 0.042),
-              0px 1.1px 3.4px 0px rgba(0, 0, 0, 0.035),
-              0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.028),
-              0px 0.2px 0.7px 0px rgba(0, 0, 0, 0.02);
+    0px 3.8px 11.3px 0px rgba(0, 0, 0, 0.05),
+    0px 2px 6px 0px rgba(0, 0, 0, 0.042),
+    0px 1.1px 3.4px 0px rgba(0, 0, 0, 0.035),
+    0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.028),
+    0px 0.2px 0.7px 0px rgba(0, 0, 0, 0.02);
   border-radius: 8px;
-  background: var(--white, #FFFFFF);
+  background: var(--white, #ffffff);
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -103,33 +103,34 @@ const TextArea = styled.textarea`
   outline: none;
   width: 100%;
   height: 100%;
-  font-family: 'AppleSDGothicNeoL00', 'Roboto_Condensed';
-  font-weight: ${props => props.bold ? 'bold' : 'normal'};
-  text-decoration: ${props => props.line ? 'line-through' : (props.underline ? 'underline' : 'none')};
-  font-style: ${props => props.italic ? 'italic' : 'normal'};
-  text-align: ${props => props.alignment};
-  list-style-type: ${props => props.listStyle};
-  background-image: ${props => props.backgroundImage};
+  font-family: "AppleSDGothicNeoL00", "Roboto_Condensed";
+  font-weight: ${(props) => (props.bold ? "bold" : "normal")};
+  text-decoration: ${(props) =>
+    props.line ? "line-through" : props.underline ? "underline" : "none"};
+  font-style: ${(props) => (props.italic ? "italic" : "normal")};
+  text-align: ${(props) => props.alignment};
+  list-style-type: ${(props) => props.listStyle};
+  background-image: ${(props) => props.backgroundImage};
   background-size: cover;
   font-size: 1.5rem;
-  color: #000000; 
+  color: #000000;
   background: transparent;
   box-sizing: border-box;
   padding: 16px;
   resize: none;
   margin-top: 10px;
-  line-height: ${props => props.line ? '1.5' : 'normal'}; 
-  
+  line-height: ${(props) => (props.line ? "1.5" : "normal")};
+
   &::placeholder {
-    color: #FFFFFF; 
+    color: #ffffff;
   }
 `;
 
 const UploadButton = styled.button`
-  background-color: #5D6C6F;
+  background-color: #5d6c6f;
   border-radius: 5px;
   padding: 11px 0;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1.5rem;
   width: 169px;
   cursor: pointer;
@@ -145,34 +146,34 @@ const PreviewContainer = styled.div`
 `;
 
 const CommunicationBoard = () => {
-  const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
   const [style, setStyle] = useState({
     bold: false,
     underline: false,
     italic: false,
     line: false,
-    alignment: 'left',
-    listStyle: 'none',
-    backgroundImage: ''
+    alignment: "left",
+    listStyle: "none",
+    backgroundImage: "",
   });
 
   const handleToolChange = (tool, alignment) => {
     switch (tool) {
-      case 'bold':
-        setStyle(prev => ({ ...prev, bold: !prev.bold }));
+      case "bold":
+        setStyle((prev) => ({ ...prev, bold: !prev.bold }));
         break;
-      case 'underline':
-        setStyle(prev => ({ ...prev, underline: !prev.underline }));
+      case "underline":
+        setStyle((prev) => ({ ...prev, underline: !prev.underline }));
         break;
-      case 'slide':
-        setStyle(prev => ({ ...prev, italic: !prev.italic }));
+      case "slide":
+        setStyle((prev) => ({ ...prev, italic: !prev.italic }));
         break;
-      case 'line':
-        setStyle(prev => ({ ...prev, line: !prev.line }));
+      case "line":
+        setStyle((prev) => ({ ...prev, line: !prev.line }));
         break;
-      case 'sort':
-        setStyle(prev => ({ ...prev, alignment }));
+      case "sort":
+        setStyle((prev) => ({ ...prev, alignment }));
         break;
       default:
         break;
@@ -180,7 +181,7 @@ const CommunicationBoard = () => {
   };
 
   const handleEmojiClick = (emoji) => {
-    setDetails(prev => prev + emoji); 
+    setDetails((prev) => prev + emoji);
   };
 
   return (
@@ -188,22 +189,25 @@ const CommunicationBoard = () => {
       <ContentSection>
         <ContentContainer>
           <TitleInputBox>
-            <TitleInput 
-              type="text"
-              placeholder="제목을 입력하세요"
+            <TitleInput
+              type='text'
+              placeholder='제목을 입력하세요'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </TitleInputBox>
           <ContentEditor>
             <EditorBox>
-              <CommunicationToolBar onToolChange={handleToolChange} onEmojiClick={handleEmojiClick} />
+              <CommunicationToolBar
+                onToolChange={handleToolChange}
+                onEmojiClick={handleEmojiClick}
+              />
             </EditorBox>
-            <TextArea 
-              placeholder=""
+            <TextArea
+              placeholder=''
               value={details}
               onChange={(e) => setDetails(e.target.value)}
-              maxLength={1000}
+              maxLength={500}
               {...style}
             />
           </ContentEditor>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Arrow from "../assets/image/arrow3.svg";
+import { useEffect } from "react";
 
 const CommunicationSideBarContainer = styled.div`
   width: 100%;
@@ -31,10 +32,12 @@ const ArrowImg = styled.img`
   display: block;
 `;
 
-const CommunicationSideBar = ({ search }) => {
+const CommunicationSideBar = ({ totalcontents }) => {
   return (
     <CommunicationSideBarContainer>
-      <CommunicationSideContent>검색결과 {search}건</CommunicationSideContent>
+      <CommunicationSideContent>
+        검색결과 {totalcontents}건
+      </CommunicationSideContent>
       <CommunicationSideContent>
         최신순
         <ArrowImg src={Arrow} alt='Arrow' />
