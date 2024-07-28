@@ -73,10 +73,33 @@ const ChatNum = styled.span`
 const CommunicationBox = ({ data, chatNum }) => {
   const navigate = useNavigate();
 
+  const domain = window.location.pathname; // 현재 페이지의 url;
+
+  // 해당 박스 클릭 시 data 정보를 CommunicationChat1 페이지로 넘겨줌
+  const handleClick = () => {
+    if (domain === "/communication1") {
+      navigate("/communicationChat1", {
+        state: { data },
+      });
+    } else if (domain === "/communication2") {
+      navigate("/communicationChat2", {
+        state: { data },
+      });
+    } else if (domain === "/communication3") {
+      navigate("/communicationChat3", {
+        state: { data },
+      });
+    } else if (domain === "/communication4") {
+      navigate("/communicationChat4", {
+        state: { data },
+      });
+    }
+  };
+
   return (
     <CommunityBoxContainer
       onClick={() => {
-        navigate("/CommunicationChat1");
+        handleClick();
       }}
     >
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>

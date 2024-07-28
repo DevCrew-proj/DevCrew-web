@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
@@ -77,19 +77,10 @@ const SubmitBtn = styled.button`
 
 const CommunicationChat2 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [chatNum, setChatNum] = useState(0); // 답변 count
-  /*useEffect - axios
- const getData = async () => {
-    try {
 
-    } catch (error) {
-
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, [page]);
-*/
+  const data = location.state.data;
 
   return (
     <Layout>
@@ -97,7 +88,7 @@ const CommunicationChat2 = () => {
       <Container>
         <IncumbentBox>
           <Title>기획 피드백</Title>
-          <CommunicationChatContainer />
+          <CommunicationChatContainer data={data} />
           <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication2")}>
