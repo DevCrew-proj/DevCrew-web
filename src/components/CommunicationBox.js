@@ -52,19 +52,18 @@ const CommunityBoxCategory = styled.span`
   font-weight: 400;
   text-align: center;
   padding: 5px 14px 3px;
+  margin-right: 5px;
 `;
 
 const ChatImg = styled.img`
   width: 13px;
   height: 13px;
-  position: absolute;
-  top: 8px;
-  left: 50px;
+  margin-right: 5px;
+  vertical-align: middle;
 `;
 
 const ChatNum = styled.span`
   height: 13px;
-  padding-left: 22px;
   color: #5d6c6f;
   font-family: AppleSDGothicNeoM00;
   font-size: 10px;
@@ -82,7 +81,7 @@ const CommunicationBox = ({ data, chatNum }) => {
     >
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
       <CommunityBoxContent>{data.content}</CommunityBoxContent>
-      <div style={{ position: "relative" }}>
+      <div>
         <CommunityBoxCategory>{data.category}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
         <ChatNum>{chatNum}</ChatNum>
