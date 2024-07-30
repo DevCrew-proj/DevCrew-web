@@ -62,7 +62,7 @@ const CommunicationChatContainer = (data) => {
     <CommunicationContainer>
       <CommunicationBox>
         <CommunicationProfileBox>
-          <Profile />
+          <Profile category={data.data.category} />
         </CommunicationProfileBox>
         <CommunicationContentBox>
           <ChatTitle>

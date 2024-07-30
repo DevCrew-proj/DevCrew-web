@@ -45,6 +45,7 @@ const PageList = styled.li`
   border-radius: 14px;
   box-sizing: border-box;
   line-height: 1.3;
+  cursor: pointer;
 
   &:nth-child(2):hover,
   &:nth-child(3):hover,

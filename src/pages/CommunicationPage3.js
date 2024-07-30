@@ -58,6 +58,7 @@ const QuestionBtn = styled.button`
   line-height: 1;
   padding: 13px 38px 15px;
   margin: 0 0 58px 85%;
+  cursor: pointer;
 `;
 
 const Communication4 = () => {

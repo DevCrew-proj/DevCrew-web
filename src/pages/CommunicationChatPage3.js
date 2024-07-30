@@ -73,6 +73,7 @@ const SubmitBtn = styled.button`
   text-align: center;
   display: block;
   float: right;
+  cursor: pointer;
 `;
 
 const CommunicationChat4 = () => {
