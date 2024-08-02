@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar.js";
 import ListBar from "../components/Listbar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox.js";
 import Pagination from "../components/Pagination";
-import dummyData from "../store/dummyData";
+import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
   width: 1920px;
-  height: 2075px; // 2075 - 116 - 210 = 1737px
-  background-color: #f0f0f0;
+  min-height: 2075px; // 2075 - 116 - 210 = 1749px
 `;
 
 const Container = styled.div`
   width: 1920px;
-  height: 1737px;
+  min-height: 1749px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -106,6 +106,7 @@ const Communication1 = () => {
           <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </IncumbentBox>
       </Container>
+      <Bottombar />
     </Layout>
   );
 };

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
 import ChatBox from "../components/ChatBox";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
   width: 1920px;
-  min-height: 2000px; // 1790 - 116 - 210 = 1464px
-  background-color: #f0f0f0;
+  min-height: 1790px; // 1790 - 116 - 210 = 1464px
 `;
 
 const Container = styled.div`
@@ -97,6 +97,7 @@ const CommunicationChat3 = () => {
           </SubmitBtn>
         </IncumbentBox>
       </Container>
+      <Bottombar />
     </Layout>
   );
 };
