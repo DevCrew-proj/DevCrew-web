@@ -20,6 +20,7 @@ import CommunityBoard1 from './pages/CommunityBoard1.jsx';
 import CommunityBoard2 from './pages/CommunityBoard2.jsx';
 import CommunityBoard3 from './pages/CommunityBoard3.jsx';
 import CommunityBoard4 from './pages/CommunityBoard4.jsx';
+import TeamComposition from './pages/TeamCompositionPage.js';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
                     <Route path="/CommunityBoard2" element={<CommunityBoard2 />} />
                     <Route path="/CommunityBoard3" element={<CommunityBoard3 />} />   
                     <Route path="/CommunityBoard4" element={<CommunityBoard4 />} /> 
+                    <Route path="/teamComposition" element={<TeamComposition />} /> 
             </Routes>
         </Router>
     );
