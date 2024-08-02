@@ -12,6 +12,7 @@ const List = styled.div`
   border-top: 8px solid #fff;
   transition: border-top 0.3s ease-in-out;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     color: #2e4f4f;

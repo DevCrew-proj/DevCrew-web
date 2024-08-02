@@ -22,7 +22,7 @@ const CommunicationName = styled.span`
 `;
 
 const CommunicationBoxCategory = styled.span`
-  width: 17px;
+  min-width: 20px;
   color: #fff;
   background-color: #5d6c6f;
   border: none;
@@ -43,7 +43,7 @@ const ChatTime = styled.span`
   font-weight: 400;
 `;
 
-const Profile = () => {
+const Profile = ({ category }) => {
   return (
     <>
       <div style={{ width: "40%", float: "left" }}>
@@ -51,7 +51,9 @@ const Profile = () => {
       </div>
       <div style={{ width: "60%", float: "left" }}>
         <CommunicationName>신짱구</CommunicationName>
-        <CommunicationBoxCategory>기획</CommunicationBoxCategory>
+        <CommunicationBoxCategory>
+          {category === undefined ? "카테고리" : category}
+        </CommunicationBoxCategory>
         <ChatTime>5분 전</ChatTime>
       </div>
     </>

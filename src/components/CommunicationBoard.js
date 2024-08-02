@@ -10,7 +10,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 230px;
 `;
 
 const ContentSection = styled.div`
@@ -204,7 +204,7 @@ const CommunicationBoard = () => {
               />
             </EditorBox>
             <TextArea
-              placeholder=''
+              placeholder='최대 500자까지 입력 가능합니다.'
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               maxLength={500}
