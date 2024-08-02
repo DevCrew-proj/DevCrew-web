@@ -1,6 +1,7 @@
 import "./App.css";
 import Start from "./pages/StartPage";
 import Main from "./pages/MainPage";
+import DevcrewIntroPage from "./pages/DevcrewIntroPage";
 import ContestCheck from "./pages/ContestCheck";
 import ContestCheckSchool from "./pages/ContestCheckSchool";
 import Login from "./pages/LoginPage";
@@ -29,6 +30,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Start />} />
                 <Route path="/main" element={<Main />} />
+                <Route path="/devcrewintro" element={<DevcrewIntroPage />} />
                 <Route path="/team1" element={<ContestCheck />} />
                 <Route path="/team2" element={<ContestCheckSchool />} />
                 <Route path="/login" element={<Login />} />
