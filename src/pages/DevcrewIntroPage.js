@@ -12,24 +12,12 @@ const Layout = styled.div`
     background: #fff;
 `;
 
-const Spacing63 = styled.div`
-    height: 63px;
+const Spacing111 = styled.div`
+    height: 111px;
 `;
 
-const Spacing33 = styled.div`
-    height: 33px;
-`;
-
-const Spacing49 = styled.div`
-    height: 49px;
-`;
-
-const Spacing20 = styled.div`
-    height: 20px;
-`;
-
-const Spacing4 = styled.div`
-    width: 4px;
+const Spacing268 = styled.div`
+    height: 268px;
 `;
 
 const IntroContainer = styled.div`
@@ -40,6 +28,7 @@ const IntroContainer = styled.div`
     background: #f7f7f7;
     margin-top: 125px;
     margin-left: 250px;
+    margin-bottom: 184px;
 `;
 
 const Title = styled.div`
@@ -90,6 +79,46 @@ const SubTitle2 = styled.div`
     padding-left: 279px;
 `;
 
+const SubTitle3 = styled.div`
+    color: #829595;
+    font-family: AppleSDGothicNeoB00;
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+`;
+
+const SubTitle4 = styled.div`
+    color: #2f4f4f;
+    font-family: AppleSDGothicNeoL00;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+`;
+
+const Logocontainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+
+const Logoimg = styled.img`
+    width: 200px;
+    height: 200px;
+`;
+
+const FeatureContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 1132px;
+    margin-left: 157px;
+    justify-content: space-between;
+`;
+
 const DevcrewIntroPage = () => {
     return (
         <Layout>
@@ -114,7 +143,51 @@ const DevcrewIntroPage = () => {
                 있도록 도와드리겠습니다.
             </SubTitle2>
 
-            <IntroContainer></IntroContainer>
+            <IntroContainer>
+                <Spacing111 />
+                <FeatureContainer>
+                    <Logocontainer>
+                        <Logoimg src={peopleImg} alt="peopleImg" />
+                        <SubTitle3>팀 매칭</SubTitle3>
+                    </Logocontainer>
+                    <SubTitle4>
+                        IT 프로젝트를 위한 팀을 찾고, 프로젝트 공고에서 <br />
+                        간편하게 본인 팀을 찾아보세요.
+                    </SubTitle4>
+                </FeatureContainer>
+
+                <Spacing268 />
+
+                <FeatureContainer>
+                    <SubTitle4>
+                        양식에 따라 작성한 본인의 포트폴리오를 관리하고, <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        프로젝트를 체계적으로 운영해보세요.
+                    </SubTitle4>
+                    <Logocontainer>
+                        <Logoimg src={noteImg} alt="noteImg" />
+                        <SubTitle3>
+                            &nbsp;&nbsp;&nbsp;프로젝트 및 <br />
+                            포트폴리오 관리
+                        </SubTitle3>
+                    </Logocontainer>
+                </FeatureContainer>
+
+                <Spacing268 />
+
+                <FeatureContainer>
+                    <Logocontainer>
+                        <Logoimg src={feedbackImg} alt="feedbackImg" />
+                        <SubTitle3>피드백과 조언</SubTitle3>
+                    </Logocontainer>
+                    <SubTitle4>
+                        기획, 디자인, 코드 리뷰 및 피드백과 현직자의 조언을
+                        <br />
+                        받아보세요. 개발의 어려움을 겪거나 고민이 있을
+                        <br />때 서로 도우며 해결해 나갈 수 있습니다.
+                    </SubTitle4>
+                </FeatureContainer>
+            </IntroContainer>
 
             <Bottombar />
         </Layout>
