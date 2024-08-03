@@ -38,7 +38,7 @@ function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path="/signinbusiness" element={<SigninBusiness />} />
         <Route path='/portfolio' element={<PortfolioPage />} />
-        <Route path='/introduce' element={<IntroducePage />} />
+       
         <Route path="/introduceself" element={<IntroduceSelfPage />} />
         <Route path="/teamComposition" element={<TeamComposition />} />
         <Route path='/communication1' element={<Communication1 />} />

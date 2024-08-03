@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import addfile from '../assets/image/addfile.svg'
+import addfile from '../assets/image/AddFile.svg'
 import Bottombar from '../components/Bottombar'
 
 const Layout = styled.div`
