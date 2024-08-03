@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
 import ChatBox from "../components/ChatBox";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
   width: 1920px;
-  min-height: 2000px; // 1790 - 116 - 210 = 1464px
-  background-color: #f0f0f0;
+  min-height: 1790px; // 1790 - 116 - 210 = 1464px
 `;
 
 const Container = styled.div`
@@ -73,23 +73,15 @@ const SubmitBtn = styled.button`
   text-align: center;
   display: block;
   float: right;
+  cursor: pointer;
 `;
 
 const CommunicationChat4 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [chatNum, setChatNum] = useState(0); // 답변 count
-  /*useEffect - axios
- const getData = async () => {
-    try {
 
-    } catch (error) {
-
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, [page]);
-*/
+  const data = location.state.data;
 
   return (
     <Layout>
@@ -97,7 +89,7 @@ const CommunicationChat4 = () => {
       <Container>
         <IncumbentBox>
           <Title>코드 리뷰</Title>
-          <CommunicationChatContainer />
+          <CommunicationChatContainer data={data} />
           <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication3")}>
@@ -105,6 +97,7 @@ const CommunicationChat4 = () => {
           </SubmitBtn>
         </IncumbentBox>
       </Container>
+      <Bottombar />
     </Layout>
   );
 };
