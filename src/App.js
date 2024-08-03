@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
 import "./App.css";
 import Start from "./pages/StartPage";
 import Main from "./pages/MainPage";
@@ -20,8 +21,7 @@ import CommunicationChat3 from "./pages/CommunicationChatPage3.js";
 import Communication4 from "./pages/CommunicationPage4.js";
 import CommunicationBoard4 from "./pages/CommunicationBoard4.js";
 import CommunicationChat4 from "./pages/CommunicationChatPage4.js";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
+import TeamComposition from './pages/TeamCompositionPage.js';
 
 function App() {
     return (
@@ -37,6 +37,7 @@ function App() {
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/introduce" element={<IntroducePage />} />
                 <Route path="/communication1" element={<Communication1 />} />
+                <Route path="/teamComposition" element={<TeamComposition />} /> 
                 <Route
                     path="/CommunicationBoard1"
                     element={<CommunicationBoard1 />}
