@@ -19,6 +19,7 @@ import CommunicationChat3 from "./pages/CommunicationChatPage3.js";
 import Communication4 from "./pages/CommunicationPage4.js";
 import CommunicationBoard4 from "./pages/CommunicationBoard4.js";
 import CommunicationChat4 from "./pages/CommunicationChatPage4.js";
+import ContestUpload from "./pages/ContestUpload.js"
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
 
@@ -46,6 +47,8 @@ function App() {
         <Route path='/communication4' element={<Communication4 />} />
         <Route path='/CommunicationBoard4' element={<CommunicationBoard4 />} />
         <Route path='/communicationChat4' element={<CommunicationChat4 />} />
+        <Route path='/contestupload' element={<ContestUpload />} />
+
       </Routes>
     </Router>
   );

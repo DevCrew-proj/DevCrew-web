@@ -217,13 +217,13 @@ height: 61px;
 flex-shrink: 0;
 border-radius: 38px;
 background: var(--main, #2F4F4F);
-color: #FFF;
+/* color: #FFF;
 text-align: center;
 font-family: Pretendard;
 font-size: 24px;
 font-style: normal;
 font-weight: 600;
-line-height: normal;
+line-height: normal; */
 display : flex;
 justify-content : center;
 align-items:center;
@@ -231,6 +231,16 @@ margin-top : 40px;
 margin-left : 1476px;
 
 `
+const UploadLink = styled(Link)`
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+color : white;
+text-decoration : none;
+`
+
  const Vector = styled.img`
  margin-left: 9px;
  
@@ -395,7 +405,8 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
           </ResultItem>
         ))}
       </SearchResults>
-      <Upload>업로드
+      <Upload>
+      <UploadLink to="/contestupload">업로드</UploadLink>
         <Vector src = {vector} alt='화살표' />
          </Upload>
          <PaginationContainer>
