@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import AddFile from '../assets/image/AddFile.svg';
+import AddFile from '../assets/image/addfile.svg';
 import DropdownArrow from '../assets/image/DropdownArrow.svg'; 
 import DropUpArrow from '../assets/image/DropUpArrow.svg'; 
 
