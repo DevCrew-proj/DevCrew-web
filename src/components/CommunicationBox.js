@@ -52,48 +52,60 @@ const CommunityBoxCategory = styled.span`
   font-weight: 400;
   text-align: center;
   padding: 5px 14px 3px;
+  margin-right: 5px;
 `;
 
 const ChatImg = styled.img`
   width: 13px;
   height: 13px;
-  position: absolute;
-  top: 8px;
-  left: 50px;
+  margin-right: 5px;
+  vertical-align: middle;
 `;
 
 const ChatNum = styled.span`
   height: 13px;
-  padding-left: 22px;
   color: #5d6c6f;
   font-family: AppleSDGothicNeoM00;
   font-size: 10px;
   font-weight: 400;
 `;
 
-const CommunicationBox = ({ chatNum }) => {
+const CommunicationBox = ({ data, chatNum }) => {
   const navigate = useNavigate();
+
+  const domain = window.location.pathname; // 현재 페이지의 url;
+
+  // 해당 박스 클릭 시 data 정보를 CommunicationChat1 페이지로 넘겨줌
+  const handleClick = () => {
+    if (domain === "/communication1") {
+      navigate("/communicationChat1", {
+        state: { data },
+      });
+    } else if (domain === "/communication2") {
+      navigate("/communicationChat2", {
+        state: { data },
+      });
+    } else if (domain === "/communication3") {
+      navigate("/communicationChat3", {
+        state: { data },
+      });
+    } else if (domain === "/communication4") {
+      navigate("/communicationChat4", {
+        state: { data },
+      });
+    }
+  };
 
   return (
     <CommunityBoxContainer
       onClick={() => {
-        navigate("/CommunicationChat1");
+        handleClick();
       }}
     >
-      <CommunityBoxTitle>What is Lorem Ipsum?</CommunityBoxTitle>
-      <CommunityBoxContent>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industrys standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-      </CommunityBoxContent>
-      <div style={{ position: "relative" }}>
-        <CommunityBoxCategory>기획</CommunityBoxCategory>
+      <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
+      <CommunityBoxContent>{data.content}</CommunityBoxContent>
+      <div>
+        <CommunityBoxCategory>{data.category}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
         <ChatNum>{chatNum}</ChatNum>
       </div>

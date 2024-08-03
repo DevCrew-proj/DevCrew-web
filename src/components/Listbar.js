@@ -1,7 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledLink = styled(Link)`
+const List = styled.div`
   min-width: 128px;
   color: #b8b8b8;
   font-family: AppleSDGothicNeoM00;
@@ -13,6 +12,7 @@ const StyledLink = styled(Link)`
   border-top: 8px solid #fff;
   transition: border-top 0.3s ease-in-out;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     color: #2e4f4f;
@@ -33,58 +33,45 @@ const ListBarContainer = styled.div`
   margin: 0 auto 82px;
 `;
 
-const ListBar = () => {
-  const location = useLocation();
+const ListBar = ({ category, setCategory }) => {
   return (
     <ListBarContainer>
-      <StyledLink
-        to='/communication1'
-        className={`${
-          location.pathname === "/communication1" ? "active" : null
-        }`}
+      <List
+        className={`${category === "전체" ? "active" : null}`}
+        onClick={() => setCategory("전체")}
       >
         전체
-      </StyledLink>
-      <StyledLink
-        to='/communication1/plan'
-        className={`${
-          location.pathname === "/communication1/plan" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "기획" ? "active" : null}`}
+        onClick={() => setCategory("기획")}
       >
         기획
-      </StyledLink>
-      <StyledLink
-        to='/communication1/design'
-        className={`${
-          location.pathname === "/communication1/design" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "디자인" ? "active" : null}`}
+        onClick={() => setCategory("디자인")}
       >
         디자인
-      </StyledLink>
-      <StyledLink
-        to='/communication1/frontend'
-        className={`${
-          location.pathname === "/communication1/frontend" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "Front-end" ? "active" : null}`}
+        onClick={() => setCategory("Front-end")}
       >
         Front-end
-      </StyledLink>
-      <StyledLink
-        to='/communication1/backend'
-        className={`${
-          location.pathname === "/communication1/backend" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "Back-end" ? "active" : null}`}
+        onClick={() => setCategory("Back-end")}
       >
         Back-end
-      </StyledLink>
-      <StyledLink
-        to='/communication1/etc'
-        className={`${
-          location.pathname === "/communication1/etc" ? "active" : null
-        }`}
+      </List>
+      <List
+        className={`${category === "기타" ? "active" : null}`}
+        onClick={() => setCategory("기타")}
       >
         기타
-      </StyledLink>
+      </List>
     </ListBarContainer>
   );
 };

@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar.js";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
+import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
-  height: 1842px; // 1842 - 116 - 210 = 1504px
-  background-color: #f0f0f0;
+  min-height: 1842px; // 1842 - 116 - 210 = 1516px
 `;
 
 const Container = styled.div`
   width: 1920px;
-  height: 1504px;
+  min-height: 1516px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -55,31 +56,22 @@ const QuestionBtn = styled.button`
   line-height: 1;
   padding: 13px 38px 15px;
   margin: 0 0 58px 85%;
+  cursor: pointer;
 `;
 
 const Communication1 = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
-  const [communityData, setCommunityData] = useState([]); // 커뮤니티 data 받기
   const [chatNum, setChatNum] = useState(0);
 
-  /*useEffect - axios
- const getData = async () => {
-    try {
+  const itemsPerPage = 4;
+  const totalContents = Math.ceil(dummyData.length);
+  const totalPages = Math.ceil(totalContents / itemsPerPage);
 
-    } catch (error) {
-
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, [page]);
-*/
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
+  const currentData = dummyData.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
   return (
     <Layout>
@@ -87,17 +79,17 @@ const Communication1 = () => {
       <Container>
         <IncumbentBox>
           <Title>기획 피드백</Title>
-          <CommunicationSideBar search={search} />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <CommunicationBox />
-          <QuestionBtn onClick={() => navigate("/communicationForm2")}>
+          <CommunicationSideBar totalcontents={totalContents} />
+          {currentData.map((data, index) => (
+            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+          ))}
+          <QuestionBtn onClick={() => navigate("/communicationBoard2")}>
             질문하기
           </QuestionBtn>
-          <Pagination page={page} setPage={setPage} />
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </IncumbentBox>
       </Container>
+      <Bottombar />
     </Layout>
   );
 };
