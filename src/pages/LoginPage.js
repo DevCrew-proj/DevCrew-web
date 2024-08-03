@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 import logo from "../assets/image/logowhite.svg";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
@@ -9,6 +10,9 @@ const Layout = styled.div`
     width: 1920px;
     height: 1243px;
     background: #778181;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 const Logocontainer = styled.div`
@@ -115,6 +119,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-grow: 1;
 `;
 
 const LoginContainer = styled.div`
@@ -128,7 +133,6 @@ const LoginContainer = styled.div`
     background: rgba(247, 247, 247, 0.2);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(13px);
-    margin-top: 94px;
 `;
 
 const Spacing = styled.div`
@@ -213,6 +217,7 @@ const LoginPage = () => {
                     <Signin to="/signin">Dev:Crew 회원가입</Signin>
                 </LoginContainer>
             </Container>
+            <Bottombar />
         </Layout>
     );
 };

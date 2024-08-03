@@ -72,10 +72,10 @@ const IcArrowRightUp = styled.img`
   height: 10px;
 `;
 
-export const PortfolioCard = () => {
+export const PortfolioCard = ({ onClick }) => {
   return (
     <>
-      <Portfolio>
+      <Portfolio onClick={onClick}>
         <Thumbnail />
         <InfoWrapper>
           <PortfolioInfo1>

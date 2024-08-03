@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import CommunicationHeader from "../components/CommunicationHeader";
 import CommunicationBoard from "../components/CommunicationBoard";
-import CommunicationFooter from "../components/CommunicationFooter";
+import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
   width: 1290px;
@@ -20,7 +20,7 @@ const Communication1 = () => {
       <Topbar />
       <CommunicationHeader title='현직자 조언' showTabs='group1' />
       <CommunicationBoard />
-      <CommunicationFooter />
+      <Bottombar />
     </Layout>
   );
 };

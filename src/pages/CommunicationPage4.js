@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
-import dummyData from "../store/dummyData";
+import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
-  height: 1842px; // 1842 - 116 - 210 = 1504px
-  background-color: #f0f0f0;
+  min-height: 1842px; // 1842 - 116 - 210 = 1516px
 `;
 
 const Container = styled.div`
   width: 1920px;
-  height: 1504px;
+  min-height: 1516px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -56,6 +56,7 @@ const QuestionBtn = styled.button`
   line-height: 1;
   padding: 13px 38px 15px;
   margin: 0 0 58px 85%;
+  cursor: pointer;
 `;
 
 const Communication3 = () => {
@@ -90,6 +91,7 @@ const Communication3 = () => {
           <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </IncumbentBox>
       </Container>
+      <Bottombar />
     </Layout>
   );
 };

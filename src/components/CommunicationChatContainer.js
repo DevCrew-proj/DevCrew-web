@@ -57,32 +57,23 @@ const ChatContent = styled.p`
   line-height: 1.2;
 `;
 
-const CommunicationChatContainer = () => {
+const CommunicationChatContainer = (data) => {
   return (
     <CommunicationContainer>
       <CommunicationBox>
         <CommunicationProfileBox>
-          <Profile />
+          <Profile category={data.data.category} />
         </CommunicationProfileBox>
         <CommunicationContentBox>
           <ChatTitle>
-            경력직을 우선시하는 PM 포지션, 어떻게 준비해야 할까요?
+            {data.data.title === null
+              ? "경력직을 우선시하는 PM 포지션, 어떻게 준비해야 할까요?"
+              : data.data.title}
           </ChatTitle>
           <ChatContent>
-            안녕하세요, 기획자 신짱구입니다. PM 포지션을 목표로 하고 있지만,
-            많은 회사가 경력직만 채용하는 상황에서 고민하고 있습니다. 저는 현재
-            기획자로서 3년의 경험이 있으며, PM 역할에 필요한 스킬과 자격증
-            취득을 준비하고 있습니다. 사이드 프로젝트로 실전 경험을 쌓으려 노력
-            중입니다. 이런 준비가 실제로 경력으로 인정받을 수 있을지, 그리고
-            경력직 요구를 극복하기 위한 추가적인 조언이 필요합니다. 현직 PM
-            분들의 조언을 부탁드립니다. 감사합니다. 안녕하세요, 기획자
-            신짱구입니다. PM 포지션을 목표로 하고 있지만, 많은 회사가 경력직만
-            채용하는 상황에서 고민하고 있습니다. 저는 현재 기획자로서 3년의
-            경험이 있으며, PM 역할에 필요한 스킬과 자격증 취득을 준비하고
-            있습니다. 사이드 프로젝트로 실전 경험을 쌓으려 노력 중입니다. 이런
-            준비가 실제로 경력으로 인정받을 수 있을지, 그리고 경력직 요구를
-            극복하기 위한 추가적인 조언이 필요합니다. 현직 PM 분들의 조언을
-            부탁드.
+            {data.data.content === null
+              ? "안녕하세요, 기획자 신짱구입니다. PM 포지션을 목표로 하고 있지만,많은 회사가 경력직만 채용하는 상황에서 고민하고 있습니다. 저는 현재 기획자로서 3년의 경험이 있으며, PM 역할에 필요한 스킬과 자격증 취득을 준비하고 있습니다. 사이드 프로젝트로 실전 경험을 쌓으려 노력 중입니다. 이런 준비가 실제로 경력으로 인정받을 수 있을지, 그리고 경력직 요구를 극복하기 위한 추가적인 조언이 필요합니다. 현직 PM 분들의 조언을 부탁드립니다. 감사합니다. 안녕하세요, 기획자 신짱구입니다. PM 포지션을 목표로 하고 있지만, 많은 회사가 경력직만 채용하는 상황에서 고민하고 있습니다. 저는 현재 기획자로서 3년의 경험이 있으며, PM 역할에 필요한 스킬과 자격증 취득을 준비하고 있습니다. 사이드 프로젝트로 실전 경험을 쌓으려 노력 중입니다. 이런 준비가 실제로 경력으로 인정받을 수 있을지, 그리고 경력직 요구를 극복하기 위한 추가적인 조언이 필요합니다. 현직 PM 분들의 조언을 부탁드."
+              : data.data.content}
           </ChatContent>
         </CommunicationContentBox>
       </CommunicationBox>

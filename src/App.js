@@ -1,12 +1,15 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
 import "./App.css";
 import Start from "./pages/StartPage";
 import Main from "./pages/MainPage";
+import DevcrewIntroPage from "./pages/DevcrewIntroPage";
 import ContestCheck from "./pages/ContestCheck";
 import ContestCheckSchool from "./pages/ContestCheckSchool";
 import Login from "./pages/LoginPage";
 import Signin from "./pages/SigninPage";
+import SigninBusiness from "./pages/SigninBusinessPage";
 import PortfolioPage from "./pages/PortfolioPage";
-import IntroducePage from "./pages/IntroducePage";
+import IntroduceSelfPage from "./pages/IntroduceSelfPage.js";
 import Communication1 from "./pages/CommunicationPage1";
 import CommunicationBoard1 from "./pages/CommunicationBoard1.js";
 import CommunicationChat1 from "./pages/CommunicationChatPage1";
@@ -20,8 +23,8 @@ import Communication4 from "./pages/CommunicationPage4.js";
 import CommunicationBoard4 from "./pages/CommunicationBoard4.js";
 import CommunicationChat4 from "./pages/CommunicationChatPage4.js";
 import ContestUpload from "./pages/ContestUpload.js"
+import TeamComposition from "./pages/TeamCompositionPage.js";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm install react-router-dom
 
 function App() {
   return (
@@ -33,8 +36,11 @@ function App() {
         <Route path='/team2' element={<ContestCheckSchool />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signin' element={<Signin />} />
+        <Route path="/signinbusiness" element={<SigninBusiness />} />
         <Route path='/portfolio' element={<PortfolioPage />} />
         <Route path='/introduce' element={<IntroducePage />} />
+        <Route path="/introduceself" element={<IntroduceSelfPage />} />
+        <Route path="/teamComposition" element={<TeamComposition />} />
         <Route path='/communication1' element={<Communication1 />} />
         <Route path='/CommunicationBoard1' element={<CommunicationBoard1 />} />
         <Route path='/communicationChat1' element={<CommunicationChat1 />} />
@@ -48,6 +54,7 @@ function App() {
         <Route path='/CommunicationBoard4' element={<CommunicationBoard4 />} />
         <Route path='/communicationChat4' element={<CommunicationChat4 />} />
         <Route path='/contestupload' element={<ContestUpload />} />
+        <Route path="/devcrewintro" element={<DevcrewIntroPage />} />      
 
       </Routes>
     </Router>

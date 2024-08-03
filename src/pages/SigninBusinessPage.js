@@ -152,9 +152,17 @@ const TextFieldContainer = styled.div`
     padding-right: 70px;
 `;
 
-const SigninContainer2 = styled.div`
+const TextFieldContainer2 = styled.div`
     display: flex;
     align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 308px;
+    padding-right: 70px;
+`;
+
+const SigninContainer2 = styled.div`
+    display: flex;
     flex-direction: column;
     width: 1114px;
     height: 635px;
@@ -213,6 +221,17 @@ const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
     },
 }));
 
+const CustomFormControlLabel2 = styled(FormControlLabel)(({ theme }) => ({
+    "& .MuiTypography-root": {
+        color: "rgba(91, 91, 91, 0.89)",
+        fontFamily: "AppleSDGothicNeoB00",
+        fontSize: "18px",
+        fontStyle: "normal",
+        fontWeight: "400",
+        lineHeight: "normal",
+    },
+}));
+
 const CustomCheckboxWithLabel = ({ label, checked, onChange }) => (
     <CustomFormControlLabel
         control={<CustomCheckbox checked={checked} onChange={onChange} />}
@@ -220,7 +239,14 @@ const CustomCheckboxWithLabel = ({ label, checked, onChange }) => (
     />
 );
 
-const SigninPage = () => {
+const CustomCheckboxWithLabel2 = ({ label, checked, onChange }) => (
+    <CustomFormControlLabel2
+        control={<CustomCheckbox checked={checked} onChange={onChange} />}
+        label={label}
+    />
+);
+
+const SigninBusinessPage = () => {
     const [checkedAll, setCheckedAll] = useState(false);
     const [checkedTerms, setCheckedTerms] = useState(false);
     const [checkedPrivacy, setCheckedPrivacy] = useState(false);
@@ -230,6 +256,16 @@ const SigninPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+
+    const [managername, setManagername] = useState("");
+    const [managernumber, setManagernumber] = useState("");
+    const [manageremail, setManageremail] = useState("");
+
+    const [businessname, setBusinessname] = useState("");
+    const [businessnumber, setBusinessnumber] = useState("");
+    const [businessmanager, setBusinessmanager] = useState("");
+
+    const [businessType, setBusinessType] = useState("");
 
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -245,6 +281,10 @@ const SigninPage = () => {
         setCheckedMarketingEmail(isChecked);
         setCheckedMarketingSms(isChecked);
     };
+
+    // const handleBusinessTypeChange = (event) => {
+    //     setBusinessType(event.target.value);
+    // };
 
     useEffect(() => {
         const allChecked =
@@ -272,10 +312,39 @@ const SigninPage = () => {
         const isBasicInfoValid =
             username.trim() !== "" && isPasswordValid && isPasswordMatch;
 
+        const isContactInfoValid =
+            managername.trim() !== "" &&
+            managernumber.trim() !== "" &&
+            manageremail.trim() !== "";
+
+        const isBusinessInfoValid =
+            businessname.trim() !== "" &&
+            businessnumber.trim() !== "" &&
+            businessmanager.trim() !== "" &&
+            businessType.trim() !== "";
+
         const isCheckboxValid = checkedTerms && checkedPrivacy;
 
-        setIsFormValid(isBasicInfoValid && isCheckboxValid);
-    }, [username, password, passwordConfirm, checkedTerms, checkedPrivacy]);
+        setIsFormValid(
+            isBasicInfoValid &&
+                isContactInfoValid &&
+                isBusinessInfoValid &&
+                isCheckboxValid
+        );
+    }, [
+        username,
+        password,
+        passwordConfirm,
+        checkedTerms,
+        checkedPrivacy,
+        managername,
+        managernumber,
+        manageremail,
+        businessname,
+        businessnumber,
+        businessmanager,
+        businessType,
+    ]);
 
     return (
         <Layout>
@@ -332,11 +401,154 @@ const SigninPage = () => {
 
                 <SigninContainer1>
                     <SigninNameContainer>
-                        <SigninName>약관 동의</SigninName>
+                        <SigninName>담당자 정보</SigninName>
                         <Spacing4 />
                         <Star>*</Star>
                     </SigninNameContainer>
 
+                    <Spacing49 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>담당자 명</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            value={managername}
+                            onChange={(e) => setManagername(e.target.value)}
+                        />
+                    </TextFieldContainer>
+
+                    <Spacing33 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>담당자 번호</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            placeholder="-를 제외하고 입력해주세요"
+                            value={managernumber}
+                            onChange={(e) => setManagernumber(e.target.value)}
+                        />
+                    </TextFieldContainer>
+
+                    <Spacing33 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>담당자 이메일</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            placeholder="ID@example.com"
+                            value={manageremail}
+                            onChange={(e) => setManageremail(e.target.value)}
+                        />
+                    </TextFieldContainer>
+                </SigninContainer1>
+
+                <Spacing63 />
+
+                <SigninContainer2>
+                    <SigninNameContainer>
+                        <SigninName>기업 정보</SigninName>
+                        <Spacing4 />
+                        <Star>*</Star>
+                    </SigninNameContainer>
+
+                    <Spacing49 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>기업명</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            value={businessname}
+                            onChange={(e) => setBusinessname(e.target.value)}
+                        />
+                    </TextFieldContainer>
+
+                    <Spacing33 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>사업자 등록번호</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            placeholder="-를 제외하고 입력해주세요"
+                            value={businessnumber}
+                            onChange={(e) => setBusinessnumber(e.target.value)}
+                        />
+                    </TextFieldContainer>
+
+                    <Spacing33 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>대표자</TextFieldName>
+                        <CustomTextField
+                            variant="outlined"
+                            value={businessmanager}
+                            onChange={(e) => setBusinessmanager(e.target.value)}
+                        />
+                    </TextFieldContainer>
+
+                    <Spacing33 />
+
+                    <TextFieldContainer>
+                        <TextFieldName>기업 구분</TextFieldName>
+                        <CustomCheckboxWithLabel2
+                            label="대기업"
+                            checked={businessType === "대기업"}
+                            onChange={() => setBusinessType("대기업")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="중소기업"
+                            checked={businessType === "중소기업"}
+                            onChange={() => setBusinessType("중소기업")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="공공기관/공기업"
+                            checked={businessType === "공공기관/공기업"}
+                            onChange={() => setBusinessType("공공기관/공기업")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="외국계 기업"
+                            checked={businessType === "외국계 기업"}
+                            onChange={() => setBusinessType("외국계 기업")}
+                        />
+                    </TextFieldContainer>
+                    <Spacing33 />
+
+                    <TextFieldContainer2>
+                        <CustomCheckboxWithLabel2
+                            label="비영리단체"
+                            checked={businessType === "비영리단체"}
+                            onChange={() => setBusinessType("비영리단체")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="스타트업"
+                            checked={businessType === "스타트업"}
+                            onChange={() => setBusinessType("스타트업")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="금융권"
+                            checked={businessType === "금융권"}
+                            onChange={() => setBusinessType("금융권")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="학교"
+                            checked={businessType === "학교"}
+                            onChange={() => setBusinessType("학교")}
+                        />
+                        <CustomCheckboxWithLabel2
+                            label="기타"
+                            checked={businessType === "기타"}
+                            onChange={() => setBusinessType("기타")}
+                        />
+                    </TextFieldContainer2>
+                </SigninContainer2>
+
+                <Spacing63 />
+
+                <SigninContainer1>
+                    <SigninNameContainer>
+                        <SigninName>약관 동의</SigninName>
+                        <Spacing4 />
+                        <Star>*</Star>
+                    </SigninNameContainer>
                     <Spacing33 />
 
                     <CheckboxContainer79>
@@ -419,4 +631,4 @@ const SigninPage = () => {
     );
 };
 
-export default SigninPage;
+export default SigninBusinessPage;
