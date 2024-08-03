@@ -148,10 +148,12 @@ const Topbar2 = () => {
     return (
         <Layout>
             <Logocontainer>
-                <Logoimg src={logo} alt="logo" />
+                <Link to="/">
+                    <Logoimg src={logo} alt="logo" />
+                </Link>
             </Logocontainer>
             <MenuContainer>
-                <MenuItem to="/introduce">데브크루 소개</MenuItem>
+                <MenuItem to="/devcrewintro">데브크루 소개</MenuItem>
                 <MenuItem to="/portfolio">포트폴리오</MenuItem>
                 <Dropdown>
                     <MenuItem>

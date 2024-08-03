@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Bottombar from "../components/Bottombar";
 import { Link } from "react-router-dom";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
 
@@ -413,6 +414,7 @@ const SigninPage = () => {
                     </DisableSubmitBtn>
                 )}
             </Container>
+            <Bottombar />
         </Layout>
     );
 };

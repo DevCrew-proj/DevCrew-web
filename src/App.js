@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //npm
 import "./App.css";
 import Start from "./pages/StartPage";
 import Main from "./pages/MainPage";
+import DevcrewIntroPage from "./pages/DevcrewIntroPage";
 import ContestCheck from "./pages/ContestCheck";
 import ContestCheckSchool from "./pages/ContestCheckSchool";
 import Login from "./pages/LoginPage";
@@ -49,6 +50,7 @@ function App() {
         <Route path="/communication4" element={<Communication4 />} />
         <Route path="/CommunicationBoard4" element={<CommunicationBoard4 />} />
         <Route path="/communicationChat4" element={<CommunicationChat4 />} />
+        <Route path="/devcrewintro" element={<DevcrewIntroPage />} />
       </Routes>
     </Router>
   );
