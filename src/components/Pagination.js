@@ -47,6 +47,15 @@ const PageList = styled.li`
   line-height: 1.3;
   cursor: pointer;
 
+  ${(props) => props.active && `background-color: #2f4f4f; color: #fff;`}
+
+  &:active {
+    color: #fff;
+    border: 1px solid #2f4f4f;
+    border-radius: 14px;
+    background-color: #2f4f4f;
+  }
+
   &:nth-child(2):hover,
   &:nth-child(3):hover,
   &:nth-child(4):hover {
@@ -116,6 +125,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
           onClick={() => {
             setPage(firstPageNum);
           }}
+          active={page === firstPageNum}
         >
           {firstPageNum}
         </PageList>
@@ -126,6 +136,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
               if (firstPageNum + 1 > totalPages) setPage(totalPages);
               else setPage(firstPageNum + 1);
             }}
+            active={page === firstPageNum + 1}
           >
             {firstPageNum + 1}
           </PageList>
@@ -136,6 +147,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
               if (lastPageNum > totalPages) setPage(totalPages);
               else setPage(lastPageNum);
             }}
+            active={page === lastPageNum}
           >
             {lastPageNum}
           </PageList>
