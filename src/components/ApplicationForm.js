@@ -171,7 +171,7 @@ const DropdownButton = styled.div`
 
 const DropdownText = styled.span`
     margin: 0 11px 0 0;
-    width: 40px; /* Adjusted to make more space for text */
+    width: 80px;
     word-break: break-word;
     font-family: "AppleSDGothicNeoM00", "Roboto Condensed";
     font-weight: var(--bodyregular-5-font-weight, 400);
@@ -202,7 +202,7 @@ const DropdownList = styled.ul`
 `;
 
 const DropdownListItem = styled.li`
-    padding: 15px 19px;
+    padding: 15px 15px;
     cursor: pointer;
 
     &:hover {
@@ -212,7 +212,7 @@ const DropdownListItem = styled.li`
 
 const TeamCompositionPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("iOS");
+    const [selectedOption, setSelectedOption] = useState("PM");
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
