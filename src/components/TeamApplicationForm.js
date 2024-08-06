@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AddFile from "../assets/image/AddFile.svg";
 import DropdownArrow from "../assets/image/DropdownArrow.svg";
 import DropUpArrow from "../assets/image/DropUpArrow.svg";
 
@@ -150,37 +149,6 @@ const CancelButtonText = styled.span`
     font-weight: var(--headingh-2, 400);
     font-size: 25px;
     color: #5d6c6f;
-`;
-
-const AddFileButton = styled.div`
-    border-radius: 8px;
-    background-color: #829595;
-    margin: 10px 0 0 40px;
-    display: flex;
-    flex-direction: row;
-    padding: 15px 13.4px 15px 16px;
-    width: fit-content;
-    box-sizing: border-box;
-    align-items: center;
-`;
-
-const AddFileIcon = styled.div`
-    background-image: url(${AddFile});
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 1.5px 7px 1.5px 0;
-    width: 25px;
-    height: 25px;
-`;
-
-const AddFileText = styled.span`
-    word-break: break-word;
-    font-family: "AppleSDGothicNeoB00", "Roboto Condensed";
-    font-weight: var(--bodyregular-4-font-weight, 400);
-    font-size: 20px;
-    line-height: var(--bodyregular-4-line-height, 1.4);
-    color: #ffffff;
 `;
 
 const DropdownContainer = styled.div`
@@ -367,10 +335,7 @@ const TeamCompositionPage = () => {
                         <FormLabel>서비스 기획안</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
-                    <AddFileButton>
-                        <AddFileIcon />
-                        <AddFileText>파일추가</AddFileText>
-                    </AddFileButton>
+                    <FormInput />
                 </FormRow>
                 <FormDivider />
                 <FormRow>
