@@ -242,9 +242,47 @@ const DropdownListItem = styled.li`
     }
 `;
 
+
+const ModalOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+`;
+
+const CloseButton = styled.button`
+    background-color: #5d6c6f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "AppleSDGothicNeoB00", "Roboto Condensed";
+    font-size: 20px;
+    margin-top: 20px;
+`;
+
 const TeamCompositionPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("iOS");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -253,6 +291,14 @@ const TeamCompositionPage = () => {
     const handleOptionClick = (option) => {
         setSelectedOption(option);
         setIsDropdownOpen(false);
+    };
+
+    const handleSubmit = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -368,7 +414,7 @@ const TeamCompositionPage = () => {
                 </FormRow>
                 <FormDivider />
                 <SubmitButtonContainer>
-                    <SubmitButton>
+                    <SubmitButton onClick={handleSubmit}>
                         <SubmitButtonText>신청하기</SubmitButtonText>
                     </SubmitButton>
                     <CancelButton>
@@ -376,6 +422,14 @@ const TeamCompositionPage = () => {
                     </CancelButton>
                 </SubmitButtonContainer>
             </InnerContainer>
+            {isModalOpen && (
+                <ModalOverlay>
+                    <ModalContent>
+                        <h2>신청 완료되었습니다!</h2>
+                        <CloseButton onClick={handleCloseModal}>닫기</CloseButton>
+                    </ModalContent>
+                </ModalOverlay>
+            )}
         </Container>
     );
 };
