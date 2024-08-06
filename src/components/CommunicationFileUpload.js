@@ -1,29 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import SelectFile from '../assets/image/selectfile.svg';
-import Delete from '../assets/image/delete.svg';
+import React from "react";
+import styled from "styled-components";
+import SelectFile from "../assets/image/selectfile.svg";
+import Delete from "../assets/image/delete.svg";
 
 const Layout = styled.div`
-  width: 1290px;
-  background-color: #FFFFFF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ContentSection = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  margin-bottom: 50px;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 22px;
-  width: 60%;
+  width: 100%;
 `;
 
 const UploadContainer = styled.div`
@@ -34,7 +15,6 @@ const UploadContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 20.5px 35.9px;
-  width: 1007px;
   box-sizing: border-box;
 `;
 
@@ -52,24 +32,24 @@ const FileIcon = styled.img`
 `;
 
 const FileName = styled.span`
-  word-break: break-word;
-  font-family: 'Pretendard', 'Roboto_Condensed';
+  overflow-wrap: break-word;
+  font-family: "Pretendard";
   font-weight: normal;
   font-size: 30px;
-  color: #6E6E6E;
+  color: #6e6e6e;
 `;
 
 const FileSize = styled.span`
-  word-break: break-word;
-  font-family: 'Pretendard', 'Roboto_Condensed';
+  overflow-wrap: break-word;
+  font-family: "Pretendard";
   font-weight: normal;
   font-size: 30px;
-  color: #C8C8C8;
+  color: #c8c8c8;
 `;
 
 const Dot = styled.div`
   border-radius: 3px;
-  background: #D9D9D9;
+  background: #d9d9d9;
   margin: 15.5px 17px 13.5px 0;
   width: 6px;
   height: 6px;
@@ -84,23 +64,19 @@ const DeleteIcon = styled.img`
 const CommunicationFileUpload = () => {
   return (
     <Layout>
-      <ContentSection>
-        <ContentContainer>
-          <UploadContainer>
-            <FileInfo>
-              <FileIcon src={SelectFile} alt="SelectFile" />
-              <FileName>dev_crew_document.pdf</FileName>
-            </FileInfo>
-            <FileInfo>
-              <Dot />
-              <FileSize>536 kb</FileSize>
-            </FileInfo>
-            <DeleteIcon src={Delete} alt="Delete Icon" />
-          </UploadContainer>
-        </ContentContainer>
-      </ContentSection>
+      <UploadContainer>
+        <FileInfo>
+          <FileIcon src={SelectFile} alt='SelectFile' />
+          <FileName>dev_crew_document.pdf</FileName>
+        </FileInfo>
+        <FileInfo>
+          <Dot />
+          <FileSize>536 kb</FileSize>
+        </FileInfo>
+        <DeleteIcon src={Delete} alt='Delete Icon' />
+      </UploadContainer>
     </Layout>
   );
-}
+};
 
 export default CommunicationFileUpload;
