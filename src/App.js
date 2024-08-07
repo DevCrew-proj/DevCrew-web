@@ -24,7 +24,7 @@ import CommunicationBoard4 from "./pages/CommunicationBoard4.js";
 import CommunicationChat4 from "./pages/CommunicationChatPage4.js";
 import ContestUpload from "./pages/ContestUpload.js"
 import TeamComposition from "./pages/TeamCompositionPage.js";
-
+import TeamMatching from "./pages/TeamMatching.js"
 
 function App() {
   return (
@@ -55,6 +55,8 @@ function App() {
         <Route path='/communicationChat4' element={<CommunicationChat4 />} />
         <Route path='/contestupload' element={<ContestUpload />} />
         <Route path="/devcrewintro" element={<DevcrewIntroPage />} />      
+        <Route path="/teammatching" element={<TeamMatching />} />      
+
 
       </Routes>
     </Router>
