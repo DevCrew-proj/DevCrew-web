@@ -6,12 +6,8 @@ import CommunicationBoard from "../components/CommunicationBoard";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
-  width: 1290px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
+  width: 1920px;
+  height: 1842px;
 `;
 
 const Communication4 = () => {
