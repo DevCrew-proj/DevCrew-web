@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Arrow from "../assets/image/arrow3.svg";
-import { useEffect } from "react";
 
 const PaginationContainer = styled.div`
   width: 100%;
@@ -49,13 +48,6 @@ const PageList = styled.li`
 
   ${(props) => props.active && `background-color: #2f4f4f; color: #fff;`}
 
-  &:active {
-    color: #fff;
-    border: 1px solid #2f4f4f;
-    border-radius: 14px;
-    background-color: #2f4f4f;
-  }
-
   &:nth-child(2):hover,
   &:nth-child(3):hover,
   &:nth-child(4):hover {
@@ -95,9 +87,9 @@ const Pagination = ({ page, totalPages, setPage }) => {
 
   const handlePageSub = () => {
     for (let i = 0; i < 9999; i++) {
-      if (page === 3 * i + 1) setPage(page - 3);
-      else if (page === 3 * i + 2) setPage(page - 4);
-      else if (page === 3 * i + 3) setPage(page - 5);
+      if (page === 3 * i + 1) setPage(page - 1);
+      else if (page === 3 * i + 2) setPage(page - 2);
+      else if (page === 3 * i + 3) setPage(page - 3);
     }
   };
 

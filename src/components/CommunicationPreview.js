@@ -9,7 +9,7 @@ const Sidebar = styled.div`
 const PreviewContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 23px;
+  padding: 5.5%;
   border: 1px solid #829595;
   border-radius: 17px;
   box-sizing: border-box;
