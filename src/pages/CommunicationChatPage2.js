@@ -10,12 +10,11 @@ const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
   width: 1920px;
   min-height: 1790px; // 1790 - 116 - 210 = 1464px
-  background-color: #f0f0f0;
 `;
 
 const Container = styled.div`
   width: 1920px;
-  padding: 90px 0;
+  margin: 140px 0 216px;
   min-height: 1464px;
   background-color: #fff;
   display: flex;
@@ -91,11 +90,11 @@ const CommunicationChat2 = () => {
         <IncumbentBox>
           <Title>기획 피드백</Title>
           <CommunicationChatContainer data={data} />
-          <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication2")}>
             게시
           </SubmitBtn>
+          <ChatBox />
         </IncumbentBox>
       </Container>
       <Bottombar />

@@ -1,15 +1,18 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Profile from "./Profile";
+import { dummyData2 } from "../store/dummyData";
+import Pagination from "./Pagination";
 
 const ShowBox = styled.div`
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 60px;
 `;
 
 const ChatCounterBox = styled.div`
   width: 100%;
   text-align: left;
-  margin: 0 auto;
+  margin: 90px 0 auto;
   padding-bottom: 14px;
   font-family: AppleSDGothicNeoM00;
   font-size: 20px;
@@ -24,7 +27,7 @@ const ChatViewBox = styled.div`
   border-bottom: 1px solid rgba(151, 167, 167, 0.5);
   box-sizing: border-box;
 
-  &:last-of-type {
+  &:nth-child(6n) {
     border-bottom: none;
   }
 
@@ -46,6 +49,7 @@ const ChatProfile = styled.div`
     clear: both;
   }
 `;
+
 const ChatContent = styled.div`
   width: 77%;
   margin-right: 1%;
@@ -56,33 +60,57 @@ const ChatContent = styled.div`
   color: #000;
 `;
 
-const ChatBox = ({ chatNum }) => {
+const ChatBox = (dataCategory) => {
+  const [page, setPage] = useState(1); // 현재 페이지
+  console.log(dataCategory.dataCategory);
+  const [category, setCategory] = useState(dataCategory.dataCategory); // 각 카테고리 별 표시
+
+  // if (dataCategory.dataCategory === null) {
+  //   setCategory("전체");
+  // } // 카테고리가 없을 경우 전체로 설정
+
+  const itemsPerPage = 6; // 페이지당 게시물 수
+  const searchData = Array.from(dummyData2);
+  const filteredData = (tab) => {
+    if (tab === "전체") {
+      return searchData;
+    }
+    return searchData.filter((data) => data.category === tab);
+  }; // 페이지에 따라 데이터 필터링
+
+  const totalchatNum = filteredData(category).length; // 전체 댓글 수
+  const totalChatPages = Math.ceil(
+    filteredData(category).length / itemsPerPage
+  ); // 전체 댓글 페이지 수
+
+  const currentData = filteredData(category).slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  ); // 현재 페이지에 보여줄 댓글 데이터
+
+  const boolCheck = () => {
+    return page === totalChatPages ? true : false;
+  };
+
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
+
   return (
-    <ShowBox>
-      <ChatCounterBox>답변 {chatNum}</ChatCounterBox>
-      <ChatViewBox>
-        <ChatProfile>
-          <Profile />
-        </ChatProfile>
-        <ChatContent>
-          안녕하세요. 현재 PM 3년 차인 신형만입니다. 스타트업에서 시작해서
-          천천히 하다보면 충분히 가능할 것 같아요 화이팅 안녕하세요. 현재 PM 3년
-          차인 신형만입니다. 스타트업에서 시작해서 천천히 하다보면 충분히 가능할
-          것 같아요 화이팅 안녕하세요. 현재 PM 3년 차인 신형만입니다.
-          스타트업에서 시작해서 천천히 하다보면 충분히 가능할 것 같아요 화이팅
-        </ChatContent>
-      </ChatViewBox>
-      <ChatViewBox>
-        <ChatProfile>
-          <Profile />
-        </ChatProfile>
-        <ChatContent>
-          안녕하세요. 현재 PM 3년 차인 신형만입니다. 스타트업에서 시작해서
-          천천히 하다보면 충분히 가능할 것 같아요 화이팅 안녕하세요. 현재 PM 3년
-          차인 신형만입니다.
-        </ChatContent>
-      </ChatViewBox>
-    </ShowBox>
+    <>
+      <ChatCounterBox>답변 {totalchatNum}</ChatCounterBox>
+      <ShowBox>
+        {currentData.map((data, index) => (
+          <ChatViewBox>
+            <ChatProfile key={index}>
+              <Profile name={data.title} category={category} />
+            </ChatProfile>
+            <ChatContent key={index}>{data.content}</ChatContent>
+          </ChatViewBox>
+        ))}
+      </ShowBox>
+      <Pagination page={page} totalPages={totalChatPages} setPage={setPage} />
+    </>
   );
 };
 

@@ -121,7 +121,6 @@ const Pagination = ({ page, totalPages, setPage }) => {
         >
           {firstPageNum}
         </PageList>
-        {/* 현재 페이지일 때는 색깔 바꾸기 */}
         {firstPageNum + 1 > totalPages ? null : (
           <PageList
             onClick={() => {
