@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../assets/image/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ArrowIcon from "../assets/image/arrow.svg";
 
 const Layout = styled.div`
@@ -17,7 +17,7 @@ const Logocontainer = styled.div`
     height: 54px;
     margin-left: 55px;
     margin-top: 31px;
-    margin-right: 8px;
+    margin-right: 64px;
 `;
 
 const Logoimg = styled.img``;
@@ -29,33 +29,37 @@ const MenuContainer = styled.div`
 
 const MenuItem = styled(Link)`
     text-decoration: none;
-    color: black;
+    color: ${({ isActive }) => (isActive ? "black" : "#B8B8B8;")};
     margin-top: 56px;
-    margin-left: 56px;
-    color: #000;
+    margin-right: 56px;
     font-family: AppleSDGothicNeoB00;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     height: 28px;
+    //border-bottom: ${({ isActive }) => (isActive ? "8px solid #2E4F4F" : "none")};
+    &::after {
+        content: "";
+        display: ${({ isActive }) => (isActive ? "block" : "none")};
+        position: absolute;
+        width: 93px;
+        height: 8px;
+       
+        
+        background-color: #2E4F4F;
+        //top: 100%; /* 부모 요소의 아래에 위치하도록 설정 */
+        margin-top: 24px; /* 원하는 margin-top 값을 설정 */
+    }
 `;
 
 const Dropdown = styled.div`
     position: relative;
-    margin-top: 56px;
+    //margin-top: 56px;
     display: inline-block;
     &:hover .dropdown-content {
         display: block;
     }
-`;
-
-const Dropbtn = styled.button`
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px 15px;
-    font-size: 16px;
 `;
 
 const DropdownContent = styled.div`
@@ -67,7 +71,7 @@ const DropdownContent = styled.div`
     border: 1px solid #829595;
     z-index: 1;
     left: 60%;
-    transform: translateX(-50%); /* 중앙 정렬 */
+    transform: translateX(-85%);
     text-align: center;
     border-radius: 8px;
     color: #2f4f4f;
@@ -75,32 +79,33 @@ const DropdownContent = styled.div`
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 140%; /* 22.4px */
+    line-height: 140%;
     & a {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
-
         &:hover {
             background-color: #f1f1f1;
             border-radius: 11px;
             text-decoration: none;
-            //width: 102px;
-            //height: 37px;
         }
     }
 `;
+
 const Arrow = styled.img`
     margin-left: 5px;
     width: 19px;
     height: 19px;
 `;
+
 const DropdownItem = styled(Link)``;
+
 const Auth = styled.div`
     display: flex;
     margin-left: 750px;
 `;
+
 const Company = styled(Link)`
     width: 101px;
     height: 38px;
@@ -140,7 +145,10 @@ const Individual = styled(Link)`
     justify-content: center;
     align-items: center;
 `;
+
 const Topbar = () => {
+    const location = useLocation();
+
     return (
         <Layout>
             <Logocontainer>
@@ -149,36 +157,25 @@ const Topbar = () => {
                 </Link>
             </Logocontainer>
             <MenuContainer>
-                <MenuItem to="/devcrewintro">데브크루 소개</MenuItem>
-                <MenuItem to="/portfolio">포트폴리오</MenuItem>
+                <MenuItem to="/devcrewintro" isActive={location.pathname === "/devcrewintro"}>
+                    데브크루 소개
+                </MenuItem>
+                <MenuItem to="/portfolio" isActive={location.pathname === "/portfolio"}>
+                    포트폴리오
+                </MenuItem>
+                <MenuItem to="/team1" isActive={location.pathname === "/team1"}>
+                    팀 매칭
+                </MenuItem>
                 <Dropdown>
-                    <MenuItem>
-                        팀 매칭
-                        <Arrow src={ArrowIcon} alt="dropdown arrow" />
-                    </MenuItem>
-                    <DropdownContent className="dropdown-content">
-                        <DropdownItem to="/team1">공모전 매칭</DropdownItem>
-                        <DropdownItem to="/team2">교내 매칭</DropdownItem>
-                    </DropdownContent>
-                </Dropdown>
-                <Dropdown>
-                    <MenuItem>
+                    <MenuItem as="div" isActive={location.pathname.startsWith("/communication")}>
                         소통
                         <Arrow src={ArrowIcon} alt="dropdown arrow" />
                     </MenuItem>
                     <DropdownContent className="dropdown-content">
-                        <DropdownItem to="/communication1">
-                            현직자 조언
-                        </DropdownItem>
-                        <DropdownItem to="/communication2">
-                            기획 리뷰
-                        </DropdownItem>
-                        <DropdownItem to="/communication3">
-                            코드 리뷰
-                        </DropdownItem>
-                        <DropdownItem to="/communication4">
-                            디자인 리뷰
-                        </DropdownItem>
+                        <DropdownItem to="/communication1">현직자 조언</DropdownItem>
+                        <DropdownItem to="/communication2">기획 리뷰</DropdownItem>
+                        <DropdownItem to="/communication3">코드 리뷰</DropdownItem>
+                        <DropdownItem to="/communication4">디자인 리뷰</DropdownItem>
                     </DropdownContent>
                 </Dropdown>
                 <Auth>
@@ -191,3 +188,4 @@ const Topbar = () => {
 };
 
 export default Topbar;
+

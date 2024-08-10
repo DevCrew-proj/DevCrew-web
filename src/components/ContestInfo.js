@@ -14,11 +14,12 @@ const Countdown = styled.div`
   border-radius: 5px;
   background-color: #2F4F4F;
   position: relative;
-  margin: 0 1212.7px 23px 0;
+  margin: 0 1212.7px 35px 0;
   display: flex;
   align-self: start;
-  padding: 12px 0 14px 1px;
+  //padding: 12px 0 14px 1px;
   width: 200px;
+  height : 44px;
   box-sizing: border-box;
   align-items: center; 
   justify-content: center;
@@ -26,21 +27,24 @@ const Countdown = styled.div`
 
 const CountdownText = styled.span`
   word-break: break-word;
-  font-family: 'AppleSDGothicNeoEB00', 'Roboto_Condensed';
+  font-family: AppleSDGothicNeoEB00;
   font-weight: normal;
   font-size: 20px;
   color: #FFFFFF;
 `;
 
 const Title = styled.div`
-  margin: 0 0 17px 0;
+  margin: 0 0 56px 0;
   display: inline-block;
   align-self: start;
   word-break: break-word;
-  font-family: 'AppleSDGothicNeoEB00', 'Roboto_Condensed';
-  font-weight: normal;
+  font-family: AppleSDGothicNeoEB00;
   font-size: 43px;
   color: #2F4F4F;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height : 61px;
 `;
 
 const ContentContainer = styled.div`
@@ -51,7 +55,7 @@ const ContentContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  margin: 0 90.5px 0 0;
+  margin: 0 93px 0 0;
   width: 269px;
   height: 380px;
   background: url(${contestimage}) 50% 50% / cover no-repeat;
@@ -63,12 +67,16 @@ const InfoContainer = styled.div`
   font-size: 18px;
   color: #333333;
   line-height: 1.5;
+ 
+
 `;
 
 const InfoGrid = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 20px;
+ 
+
 `;
 
 const InfoTitle = styled.div`
@@ -76,16 +84,19 @@ const InfoTitle = styled.div`
   display: inline-block;
   align-self: start;
   word-break: break-word;
-  font-family: 'AppleSDGothicNeoB00', 'Roboto_Condensed';
-  font-weight: normal;
+  font-family: 'AppleSDGothicNeoB00';
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   font-size: 25px;
   color: #000000;
 `;
 
 const InfoItem = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-right: 100px;
+
 `;
 
 const InfoLabel = styled.div`
@@ -94,6 +105,9 @@ const InfoLabel = styled.div`
 
 const InfoValue = styled.div`
   margin-left: 20px;
+  display : flex;
+  justify-content : flex-start;
+  align-items: center;
 `;
 
 const Button = styled.div`
@@ -112,16 +126,23 @@ const Button = styled.div`
 
 const ButtonText = styled.span`
   word-break: break-word;
-  font-weight: normal;
-  font-size: 24px;
-  color: #FFFFFF;
+  color: #FFF;
+text-align: center;
+font-family: AppleSDGothicNeoB00;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 `;
 
 const Tag = styled.div`
   border-radius: 5px;
-  border: 1px solid #5D6C6F;
+  border: 1px solid var(--sub, #5D6C6F);
   display: flex;
-  padding: 4px 10.8px 3.2px 11.8px;
+  width: 41px;
+  height : 20px;
+  
+ // padding: 4px 10.8px 3.2px 11.8px;
   box-sizing: border-box;
   align-items: center; 
   justify-content: center;
@@ -129,9 +150,13 @@ const Tag = styled.div`
 
 const TagText = styled.span`
   word-break: break-word;
-  font-weight: normal;
-  font-size: 10px;
   color: #5D6C6F;
+text-align: center;
+font-family: AppleSDGothicNeoM00;
+font-size: 10px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 `;
 
 const ContestInfo = () => {
