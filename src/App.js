@@ -26,7 +26,7 @@ import ContestUpload from "./pages/ContestUpload.js";
 import TeamComposition from "./pages/TeamCompositionPage.js";
 import TeamMatching from "./pages/TeamMatching.js"
 import ProjectWritePage from "./pages/ProjectWritePage.js";
-
+import TeamApplication  from "./pages/TeamApplicationPage.js"
 function App() {
   return (
     <Router>
@@ -58,7 +58,7 @@ function App() {
         <Route path='/contestupload' element={<ContestUpload />} />
         <Route path="/devcrewintro" element={<DevcrewIntroPage />} />      
         <Route path="/teammatching" element={<TeamMatching />} />      
-        <Route path="/teamApplication" element={<TeamAplication />} />
+        <Route path="/teamApplication" element={<TeamApplication />} />
 
       </Routes>
     </Router>
