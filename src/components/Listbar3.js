@@ -1,3 +1,4 @@
+import { List } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -39,7 +40,7 @@ const TabItem = styled.span`
   cursor: pointer;
 `;
 
-const CommunicationHeader = ({ title, showTabs }) => {
+const Listbar3 = ({ title, showTabs }) => {
   const [activeTab, setActiveTab] = useState("전체");
 
   const handleTabClick = (tab) => {
@@ -157,4 +158,4 @@ const CommunicationHeader = ({ title, showTabs }) => {
   );
 };
 
-export default CommunicationHeader;
+export default Listbar3;

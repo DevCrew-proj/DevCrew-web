@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
-import CommunicationHeader from "../components/CommunicationHeader";
-import CommunicationBoard from "../components/CommunicationBoard";
+import Listbar3 from "../components/Listbar3";
+import FormBoard from "../components/FormBoard";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
@@ -14,8 +14,8 @@ const Communication1 = () => {
   return (
     <Layout>
       <Topbar />
-      <CommunicationHeader title='현직자 조언' showTabs='group1' />
-      <CommunicationBoard />
+      <Listbar3 title='현직자 조언' showTabs='group1' />
+      <FormBoard />
       <Bottombar />
     </Layout>
   );

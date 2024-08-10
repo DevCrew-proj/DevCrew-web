@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Profile from "./Profile";
 import ImageSlider from "./ImageSlider";
-import FileUpload from "./FileUpload";
+import FileUpload2 from "./FileUpload2";
 
 const CommunicationContainer = styled.div`
   width: 100%;
@@ -89,7 +89,7 @@ const CommunicationChatContainer = (data) => {
             </ChatImageBox>
           )}
           <ChatFileBox>
-            <FileUpload />
+            <FileUpload2 />
           </ChatFileBox>
           {/* {data.data.file === undefined ? null : <ChatFileBox>dk</ChatFileBox>} */}
         </CommunicationContentBox>

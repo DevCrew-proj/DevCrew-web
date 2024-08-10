@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CommunicationFileUpload from "./CommunicationFileUpload";
-import CommunicationPreview from "./CommunicationPreview";
+import FileUpload from "./FileUpload";
+import ImageUpload from "./ImageUpload";
 
 const Layout = styled.div`
   width: 1490px;
@@ -123,10 +123,10 @@ const CommunicationBoard = () => {
               maxLength={500}
             />
           </ContentEditor>
-          <CommunicationFileUpload />
+          <FileUpload />
         </ContentContainer>
         <PreviewContainer>
-          <CommunicationPreview />
+          <ImageUpload />
         </PreviewContainer>
       </FormLayout>
       <UploadButton>업로드 하기</UploadButton>
