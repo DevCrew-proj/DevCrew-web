@@ -22,7 +22,7 @@ const Logocontainer = styled.div`
     height: 59px;
     margin-left: 59px;
     margin-top: 46px;
-    margin-right: 25px;
+    margin-right: 83px;
 `;
 
 const Logoimg = styled.img``;
@@ -35,7 +35,7 @@ const MenuContainer = styled.div`
 const MenuItem = styled(Link)`
     text-decoration: none;
     margin-top: 70px;
-    margin-left: 58px;
+    margin-right: 58px;
     color: white;
     font-family: AppleSDGothicNeoB00;
     font-size: 20px;
@@ -71,7 +71,7 @@ const DropdownContent = styled.div`
     border: 1px solid #829595;
     z-index: 1;
     left: 60%;
-    transform: translateX(-50%); /* 중앙 정렬 */
+    transform: translateX(-85%); /* 중앙 정렬 */
     text-align: center;
     border-radius: 8px;
     color: #2f4f4f;
@@ -132,7 +132,8 @@ const Topbar3 = () => {
             <MenuContainer>
                 <MenuItem to="/devcrewintro">데브크루 소개</MenuItem>
                 <MenuItem to="/portfolio">포트폴리오</MenuItem>
-                <Dropdown>
+                <MenuItem to="/team1">팀 매칭</MenuItem>
+                {/* <Dropdown>
                     <MenuItem>
                         팀 매칭
                         <Arrow src={ArrowIcon} alt="dropdown arrow" />
@@ -141,7 +142,7 @@ const Topbar3 = () => {
                         <DropdownItem to="/team1">공모전 매칭</DropdownItem>
                         <DropdownItem to="/team2">교내 매칭</DropdownItem>
                     </DropdownContent>
-                </Dropdown>
+                </Dropdown> */}
                 <Dropdown>
                     <MenuItem>
                         소통

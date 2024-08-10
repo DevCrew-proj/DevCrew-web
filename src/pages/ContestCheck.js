@@ -93,7 +93,7 @@ const SearchResults = styled.div`
   
 `;
 
-const ResultItem = styled.div`
+const ResultItem = styled(Link)`
   width: 425px;
   height: 216px;
   //padding: 26px 146px 26px 21px;
@@ -113,6 +113,7 @@ font-style: normal;
 font-weight: 700;
 line-height: normal;
 flex-direction : row;
+text-decoration : none;
 `;
 
 const Order = styled.div`
@@ -394,7 +395,7 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
         </SearchInfo>
       <SearchResults>
         {currentData.map((item, index) => (
-          <ResultItem key={index}>
+          <ResultItem key={index}  to="/teammatching">
             <Picture> </Picture>
             <Contents>
               <ContestName>{item.title}</ContestName>
