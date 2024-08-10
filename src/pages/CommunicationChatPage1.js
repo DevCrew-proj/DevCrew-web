@@ -14,7 +14,7 @@ const Layout = styled.div`
 
 const Container = styled.div`
   width: 1920px;
-  padding: 90px 0;
+  margin: 140px 0 216px;
   min-height: 1464px;
   background-color: #fff;
   display: flex;
@@ -79,7 +79,6 @@ const SubmitBtn = styled.button`
 const CommunicationChat1 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [chatNum, setChatNum] = useState(0); // 답변 count
 
   const data = location.state.data; // 데이터
 
@@ -90,11 +89,11 @@ const CommunicationChat1 = () => {
         <IncumbentBox>
           <Title>현직자 조언</Title>
           <CommunicationChatContainer data={data} />
-          <ChatBox chatNum={chatNum} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication1")}>
             게시
           </SubmitBtn>
+          <ChatBox dataCategory={data.category} />
         </IncumbentBox>
       </Container>
       <Bottombar />
