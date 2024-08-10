@@ -20,7 +20,7 @@ const DropdownButton = styled.button`
   width: 100%;
   padding: 19px 18px;
   font-size: 18px;
-  color: #999;
+  color: #000;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #fff;
@@ -43,27 +43,37 @@ const DropdownContent = styled.div`
   z-index: 1;
   border: 1px solid #ccc;
   border-top: none;
-  border-radius: 0 0 10px 10px;
+  border-radius: 9px;
+  margin-top: 7px;
 `;
 
 const DropdownItem = styled.div`
-  padding: 10px 15px;
+  color: #aeaeae;
+  font-family: AppleSDGothicNeoB00;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  height: 55px;
+  padding-left: 22px;
   &:hover {
-    background-color: #f1f1f1;
+    border-radius: 11px;
+    background: rgba(211, 218, 218, 1);
+    text-decoration: none;
   }
 `;
 
 const IcChevronDown = styled.img``;
 
-export const GenderDropdownInput = () => {
+export const GenderDropdownInput = ({ value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("성별 선택");
-
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleItemClick = (item) => {
-    setSelectedItem(item);
+    onChange(item);
     setIsOpen(false);
   };
 
@@ -72,7 +82,7 @@ export const GenderDropdownInput = () => {
       <InputLabel labelText="성별" />
       <DropdownContainer>
         <DropdownButton onClick={toggleDropdown}>
-          {selectedItem}
+          {value}
           <IcChevronDown src={icChevronDown} />
         </DropdownButton>
         <DropdownContent isOpen={isOpen}>

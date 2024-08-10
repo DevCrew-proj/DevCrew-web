@@ -358,7 +358,7 @@ const PortfolioPage = () => {
               ))}
             </PortfolioWrapper>
 
-            <Upload onClick={() => navigate(`/portfoilowrite`)}>
+            <Upload onClick={() => navigate(`/projectWrite`)}>
               업로드
               <Vector src={vector} alt="화살표" />
             </Upload>
