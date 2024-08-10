@@ -4,6 +4,7 @@ import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import { useState, useRef } from "react";
 import addfile from "../assets/image/AddFile.svg";
+import icChevronDown from "../assets/image/icChevronDown.svg";
 
 const Layout = styled.div`
   width: 1920px;
@@ -54,16 +55,15 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  //padding: 10px;
+  padding: 0 16px;
   font-size: 16px;
   border-radius: 11px;
   border: 1px solid #829595;
-  width: 201px;
+  width: 168px;
   height: 52px;
   flex-shrink: 0;
   margin-top: 23px;
   margin-left: 33px;
-  text-align: center;
 `;
 
 const TextArea = styled.textarea`
@@ -84,87 +84,69 @@ const TextArea = styled.textarea`
   margin-top: 23px;
 `;
 
-const Select = styled.select`
-  display: flex;
-  width: 280px;
-  height: 54px;
-  padding: 16px 20px;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px;
-  border: 1px solid rgba(179, 179, 179, 0.7);
-  background: var(--Gray-white, #fff);
-  margin-top: 27px;
-  margin-left: 27px;
-`;
-
-const Option = styled.option`
-  padding: 10px;
-  font-size: 16px;
-  width: 280px;
-  height: 349px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border: 1px solid #829595;
-  background: var(--Gray-white, #fff);
-`;
-
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
-  margin-top: 27px;
-  margin-left: 27px;
+  width: 280px;
+  height: 54px;
+  margin-top: 23px;
+  margin-left: 33px;
 `;
 
 const DropdownButton = styled.button`
-  background: var(--Gray-white, #fff);
-  color: #373737;
-  padding: 16px 20px;
-  font-size: 16px;
-  border: 1px solid rgba(179, 179, 179, 0.7);
-  border-radius: 8px;
-  cursor: pointer;
-  width: 280px;
+  width: 100%;
   height: 54px;
-  text-align: left;
-
-  &:after {
-    content: "▼";
-    float: right;
-    margin-left: 20px;
+  padding: 20px 16px;
+  font-size: 18px;
+  color: #000;
+  border: 1px solid #829595;
+  border-radius: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: none;
+  &:hover {
+    border-color: #bbb;
   }
 `;
 
 const DropdownContent = styled.div`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
+  background-color: #fff;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
-  width: 280px;
-  height: 330px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border: 1px solid #829595;
-  background: var(--Gray-white, #fff);
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 9px;
+  padding: 19px 10px;
+  margin-top: 7px;
 `;
 
 const DropdownItem = styled.div`
   color: #2f4f4f;
-  font-family: AppleSDGothicNeoM00;
+  font-family: AppleSDGothicNeoL00;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: 140%; /* 22.4px */
+  line-height: 22.4px;
+  text-align: left;
   display: flex;
-  //justify-content : center;
   align-items: center;
   cursor: pointer;
   height: 55px;
   padding-left: 22px;
   &:hover {
     border-radius: 11px;
-    background: rgba(130, 149, 149, 0.59);
+    background: rgba(211, 218, 218, 1);
     text-decoration: none;
   }
+`;
+
+const IcChevronDown = styled.img`
+  width: 12px;
 `;
 
 const Button = styled.button`
@@ -263,7 +245,7 @@ const ProjectWritePage = () => {
   };
 
   const handleItemClick = (value) => {
-    setFormData({ ...formData, contestField: value });
+    setFormData({ ...formData, projectField: value });
     setDropdownOpen(false);
   };
 
@@ -331,7 +313,8 @@ const ProjectWritePage = () => {
             <Label>분야 *</Label>
             <DropdownContainer>
               <DropdownButton onClick={handleDropdownClick}>
-                {formData.contestField}
+                {formData.projectField}
+                <IcChevronDown src={icChevronDown} />
               </DropdownButton>
               <DropdownContent isOpen={dropdownOpen}>
                 <DropdownItem onClick={() => handleItemClick("창업")}>

@@ -149,63 +149,6 @@ const FileButton = styled.button`
   margin-left: 27px;
 `;
 
-const DropdownField = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 240px;
-  margin-top: 33px;
-`;
-
-const DropdownButton = styled.button`
-  width: 100%;
-  padding: 19px 18px;
-  font-size: 18px;
-  color: #000;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  outline: none;
-  &:hover {
-    border-color: #bbb;
-  }
-`;
-
-const DropdownContent = styled.div`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  position: absolute;
-  background-color: #fff;
-  min-width: 100%;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 9px;
-  margin-top: 7px;
-`;
-
-const DropdownItem = styled.div`
-  color: #aeaeae;
-  font-family: AppleSDGothicNeoB00;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 28px;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  height: 55px;
-  padding-left: 22px;
-  &:hover {
-    border-radius: 11px;
-    background: rgba(211, 218, 218, 1);
-    text-decoration: none;
-  }
-`;
-
 const IntroduceSelfPage = () => {
   const [formData, setFormData] = useState({
     profileImage: null,
