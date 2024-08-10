@@ -56,6 +56,7 @@ function App() {
         <Route path="/communicationChat4" element={<CommunicationChat4 />} />
         <Route path="/contestupload" element={<ContestUpload />} />
         <Route path="/devcrewintro" element={<DevcrewIntroPage />} />
+        <Route path="/teamApplication" element={<TeamAplication />} />
       </Routes>
     </Router>
   );
