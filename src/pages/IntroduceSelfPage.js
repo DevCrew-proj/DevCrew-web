@@ -3,12 +3,12 @@ import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import icPermIdentity from "../assets/image/icPermIdentity.svg";
 import icWriteNote from "../assets/image/icWriteNote.svg";
-import { IntroduceInput } from "../components/IntroduceInput";
 import { DropdownInput } from "../components/DropdownInput";
 import { InputLabel } from "../components/InputLabel";
 import { GenderDropdownInput } from "../components/GenderDropdownInput";
-import { useForm } from "react-hook-form";
 import Bottombar from "../components/Bottombar";
+import { useState, useRef } from "react";
+import icProfileUpload from "../assets/image/icProfileUpload.svg";
 
 const Layout = styled.div`
   width: 1920px;
@@ -60,9 +60,9 @@ const IcPermIdentity = styled.img`
 const LabelContainer = styled.div``;
 
 const IcProfile = styled.img`
-  width: 275px;
-  height: 288px;
-  margin: 0px 50px;
+  width: 250px;
+  height: 250px;
+  margin: 0px 80px;
 `;
 
 const InputContainer = styled.div`
@@ -73,6 +73,21 @@ const InputContainer = styled.div`
   padding: 72px 63px 20px;
   border-radius: 17px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const InputField = styled.div`
+  flex: 1 1 calc(50% - 67px);
+  box-sizing: border-box;
+  margin-bottom: 67px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 19px 18px;
+  border-radius: 9px;
+  border: none;
+  font-size: 20px;
 `;
 
 const DropDownContainer = styled.div`
@@ -94,8 +109,12 @@ const NoteInput = styled.textarea`
   border-radius: 20px;
   border: none;
   margin-bottom: 57px;
-  font-size: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: AppleSDGothicNeoL00;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 31.9px;
+  text-align: left;
 `;
 
 const InfoRegisterBtn = styled.input`
@@ -109,8 +128,69 @@ const InfoRegisterBtn = styled.input`
   left: 45%;
 `;
 
+const FileInput = styled.input`
+  display: none;
+`;
+
+const FileButton = styled.button`
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background: #829595;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 135px;
+  height: 58px;
+  padding: 15px 17px 15px 16px;
+  margin-top: 22px;
+  margin-left: 27px;
+`;
+
 const IntroduceSelfPage = () => {
-  const { register, handleSubmit } = useForm({ mode: "onChange" });
+  const [formData, setFormData] = useState({
+    profileImage: null,
+    name: "",
+    gender: "성별 선택",
+    phoneNumber: "",
+    email: "",
+    highschool: "",
+    highschoolState: "상태",
+    university: "",
+    universityState: "상태",
+    introduceself: "",
+  });
+
+  const fileInputRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "profileImage") {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleDropdownChange = (dropdown, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [dropdown]: value,
+    }));
+  };
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+  };
+
   return (
     <>
       <Layout>
@@ -122,42 +202,100 @@ const IntroduceSelfPage = () => {
               <Title>기본 정보</Title>
             </TitleContainer>
             {/* 입력 폼 시작 */}
-            <FormContainer onSubmit={console.log("작성완료")}>
+            <FormContainer onSubmit={handleSubmit}>
               <ProfileContainer>
                 <ProfileWrapper>
                   <LabelContainer>
+                    <FileInput
+                      type="file"
+                      name="profileImage"
+                      ref={fileInputRef}
+                      onChange={handleChange}
+                    />
                     <InputLabel labelText="사진" />
-                    <IcProfile />
+                    <IcProfile
+                      src={icProfileUpload}
+                      alt="프로필 사진 업로드"
+                      onClick={handleFileClick}
+                      onChange={handleChange}
+                    />
                   </LabelContainer>
                   <InputContainer>
-                    <IntroduceInput type="text" labelText="이름" />
-                    <GenderDropdownInput />
-                    <IntroduceInput
-                      labelText="전화번호"
-                      placeholder="010-1234-5678"
+                    <InputField>
+                      <InputLabel labelText="이름"></InputLabel>
+                      <Input
+                        type="text"
+                        name="name"
+                        labelText="이름"
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                    </InputField>
+                    <GenderDropdownInput
+                      name="gender"
+                      value={formData.gender}
+                      onChange={(value) =>
+                        handleDropdownChange("gender", value)
+                      }
                     />
-                    <IntroduceInput
-                      {...register("email", {
-                        required: "이메일은 필수 입력입니다",
-                        pattern: {
-                          value:
-                            /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
-                          message: "이메일 형식이 올바르지 않습니다",
-                        },
-                      })}
-                      type="email"
-                      labelText="이메일"
-                    />
+                    <InputField>
+                      <InputLabel labelText="전화번호"></InputLabel>
+                      <Input
+                        name="phoneNumber"
+                        placeholder="010-1234-5678"
+                        onChange={handleChange}
+                      />
+                    </InputField>
+                    <InputField>
+                      <InputLabel labelText="이메일"></InputLabel>
+                      <Input
+                        type="email"
+                        name="email"
+                        labelText="이메일"
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                    </InputField>
                   </InputContainer>
                 </ProfileWrapper>
                 <InputContainer>
                   <DropDownContainer>
-                    <IntroduceInput type="text" labelText="고등학교" />
-                    <DropdownInput />
+                    <InputField>
+                      <InputLabel labelText="고등학교"></InputLabel>
+                      <Input
+                        type="text"
+                        name="highschool"
+                        labelText="고등학교"
+                        value={formData.highschool}
+                        onChange={handleChange}
+                      />
+                    </InputField>
+                    <DropdownInput
+                      name="highschoolState"
+                      value={formData.highschoolState}
+                      onChange={(value) =>
+                        handleDropdownChange("highschoolState", value)
+                      }
+                    />
                   </DropDownContainer>
                   <DropDownContainer>
-                    <IntroduceInput type="text" labelText="대학교" />
-                    <DropdownInput />
+                    <InputField>
+                      <InputLabel labelText="대학교"></InputLabel>
+                      <Input
+                        type="text"
+                        name="university"
+                        labelText="대학교"
+                        value={formData.university}
+                        onChange={handleChange}
+                      />
+                    </InputField>
+                    <DropdownInput
+                      name="universityState"
+                      value={formData.universityState}
+                      onChange={(value) =>
+                        handleDropdownChange("universityState", value)
+                      }
+                    />
                   </DropDownContainer>
                 </InputContainer>
               </ProfileContainer>
@@ -168,7 +306,10 @@ const IntroduceSelfPage = () => {
                 </TitleContainer>
                 <NoteInput
                   type="text"
+                  name="introduceself"
                   placeholder="자기소개를 입력해 주세요."
+                  value={formData.introduceself}
+                  onChange={handleChange}
                 />
               </NoteContainer>
               <InfoRegisterBtn type="submit" value="정보 등록" />

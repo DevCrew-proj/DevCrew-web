@@ -22,22 +22,24 @@ import CommunicationChat3 from "./pages/CommunicationChatPage3.js";
 import Communication4 from "./pages/CommunicationPage4.js";
 import CommunicationBoard4 from "./pages/CommunicationBoard4.js";
 import CommunicationChat4 from "./pages/CommunicationChatPage4.js";
-import ContestUpload from "./pages/ContestUpload.js"
+import ContestUpload from "./pages/ContestUpload.js";
 import TeamComposition from "./pages/TeamCompositionPage.js";
 import TeamMatching from "./pages/TeamMatching.js"
+import ProjectWritePage from "./pages/ProjectWritePage.js";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Start />} />
-        <Route path='/main' element={<Main />} />
-        <Route path='/team1' element={<ContestCheck />} />
-        <Route path='/team2' element={<ContestCheckSchool />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signin' element={<Signin />} />
+        <Route path="/" element={<Start />} />
+        <Route path="/main" element={<Main />} />
+        <Route path="/team1" element={<ContestCheck />} />
+        <Route path="/team2" element={<ContestCheckSchool />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Signin />} />
         <Route path="/signinbusiness" element={<SigninBusiness />} />
-        <Route path='/portfolio' element={<PortfolioPage />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/projectWrite" element={<ProjectWritePage />} />
         {/* <Route path='/introduce' element={<IntroducePage />} /> */}
         <Route path="/introduceself" element={<IntroduceSelfPage />} />
         <Route path="/teamComposition" element={<TeamComposition />} />
@@ -56,7 +58,7 @@ function App() {
         <Route path='/contestupload' element={<ContestUpload />} />
         <Route path="/devcrewintro" element={<DevcrewIntroPage />} />      
         <Route path="/teammatching" element={<TeamMatching />} />      
-
+        <Route path="/teamApplication" element={<TeamAplication />} />
 
       </Routes>
     </Router>

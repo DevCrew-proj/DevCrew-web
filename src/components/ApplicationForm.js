@@ -121,6 +121,7 @@ const SubmitButton = styled.div`
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `;
 
 const SubmitButtonText = styled.span`
@@ -141,6 +142,7 @@ const CancelButton = styled.div`
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `;
 
 const CancelButtonText = styled.span`
@@ -171,7 +173,7 @@ const DropdownButton = styled.div`
 
 const DropdownText = styled.span`
     margin: 0 11px 0 0;
-    width: 40px; /* Adjusted to make more space for text */
+    width: 80px;
     word-break: break-word;
     font-family: "AppleSDGothicNeoM00", "Roboto Condensed";
     font-weight: var(--bodyregular-5-font-weight, 400);
@@ -202,14 +204,13 @@ const DropdownList = styled.ul`
 `;
 
 const DropdownListItem = styled.li`
-    padding: 15px 19px;
+    padding: 15px 15px;
     cursor: pointer;
 
     &:hover {
-        background-color: #c0c0c0; /* Change as needed */
+        background-color: #c0c0c0; 
     }
 `;
-
 
 const ModalOverlay = styled.div`
     position: fixed;
@@ -249,7 +250,7 @@ const CloseButton = styled.button`
 
 const TeamCompositionPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("iOS");
+    const [selectedOption, setSelectedOption] = useState("PM");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -284,14 +285,6 @@ const TeamCompositionPage = () => {
                 <FormDivider />
                 <FormRow>
                     <FormLabelContainer>
-                        <FormLabel>팀명</FormLabel>
-                        <RequiredMark>*</RequiredMark>
-                    </FormLabelContainer>
-                    <FormInput />
-                </FormRow>
-                <FormDivider />
-                <FormRow>
-                    <FormLabelContainer>
                         <FormLabel>팀 패스워드</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
@@ -299,18 +292,6 @@ const TeamCompositionPage = () => {
                     <HelperText>
                         팀으로 가입하기 위해 팀원이 입력해야하는 비밀번호(4자리
                         이상의 숫자)를 입력하여 주십시오.
-                    </HelperText>
-                </FormRow>
-                <FormDivider />
-                <FormRow>
-                    <FormLabelContainer>
-                        <FormLabel>팀 인원</FormLabel>
-                        <RequiredMark>*</RequiredMark>
-                    </FormLabelContainer>
-                    <FormInput />
-                    <HelperText>
-                        팀장을 포함한 팀 최대 인원 수를 입력하여 주십시오. 0
-                        입력시 제한없음으로 설정됩니다.
                     </HelperText>
                 </FormRow>
                 <FormDivider />
@@ -324,7 +305,7 @@ const TeamCompositionPage = () => {
                 <FormDivider />
                 <FormRow>
                     <FormLabelContainer>
-                        <FormLabel>서비스명</FormLabel>
+                        <FormLabel>포트폴리오 링크</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
                     <FormInput />
@@ -332,23 +313,7 @@ const TeamCompositionPage = () => {
                 <FormDivider />
                 <FormRow>
                     <FormLabelContainer>
-                        <FormLabel>서비스 기획안</FormLabel>
-                        <RequiredMark>*</RequiredMark>
-                    </FormLabelContainer>
-                    <FormInput />
-                </FormRow>
-                <FormDivider />
-                <FormRow>
-                    <FormLabelContainer>
-                        <FormLabel>소요 장비 및 SW</FormLabel>
-                        <RequiredMark>*</RequiredMark>
-                    </FormLabelContainer>
-                    <FormInput />
-                </FormRow>
-                <FormDivider />
-                <FormRow>
-                    <FormLabelContainer>
-                        <FormLabel>사용 OS</FormLabel>
+                        <FormLabel>지원 분야</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
                     <DropdownContainer>
@@ -364,14 +329,39 @@ const TeamCompositionPage = () => {
                         {isDropdownOpen && (
                             <DropdownList>
                                 <DropdownListItem
-                                    onClick={() => handleOptionClick("iOS")}
+                                    onClick={() => handleOptionClick("PM")}
                                 >
-                                    iOS
+                                    PM
                                 </DropdownListItem>
                                 <DropdownListItem
-                                    onClick={() => handleOptionClick("AOS")}
+                                    onClick={() => handleOptionClick("Design")}
                                 >
-                                    AOS
+                                    Design
+                                </DropdownListItem>
+                                <DropdownListItem
+                                    onClick={() => handleOptionClick("FE-iOS")}
+                                >
+                                    FE-iOS
+                                </DropdownListItem>
+                                <DropdownListItem
+                                    onClick={() => handleOptionClick("FE-AOS")}
+                                >
+                                    FE-AOS
+                                </DropdownListItem>
+                                <DropdownListItem
+                                    onClick={() => handleOptionClick("BE")}
+                                >
+                                    BE
+                                </DropdownListItem>
+                                <DropdownListItem
+                                    onClick={() => handleOptionClick("데이터 분석")}
+                                >
+                                    데이터 분석
+                                </DropdownListItem>
+                                <DropdownListItem
+                                    onClick={() => handleOptionClick("AI")}
+                                >
+                                    AI
                                 </DropdownListItem>
                             </DropdownList>
                         )}
