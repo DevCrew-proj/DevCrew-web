@@ -28,7 +28,7 @@ const IntroContainer = styled.div`
     background: #f7f7f7;
     margin-top: 125px;
     margin-left: 250px;
-    margin-bottom: 184px;
+    margin-bottom: 250px;
 `;
 
 const Title = styled.div`
