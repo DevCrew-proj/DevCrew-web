@@ -186,10 +186,10 @@ const Topbar2 = () => {
                         </DropdownItem>
                     </DropdownContent>
                 </Dropdown>
-                <Auth>
+                {/* <Auth>
                     <Company to="/signinbusiness">기업 로그인</Company>
                     <Individual to="/login">개인 회원</Individual>
-                </Auth>
+                </Auth> */}
             </MenuContainer>
         </Layout>
     );

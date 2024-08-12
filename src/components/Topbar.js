@@ -38,16 +38,16 @@ const MenuItem = styled(Link)`
     font-weight: 400;
     line-height: normal;
     height: 28px;
-    //border-bottom: ${({ isActive }) => (isActive ? "8px solid #2E4F4F" : "none")};
+    //border-bottom: ${({ isActive }) =>
+        isActive ? "8px solid #2E4F4F" : "none"};
     &::after {
         content: "";
         display: ${({ isActive }) => (isActive ? "block" : "none")};
         position: absolute;
         width: 93px;
         height: 8px;
-       
-        
-        background-color: #2E4F4F;
+
+        background-color: #2e4f4f;
         //top: 100%; /* 부모 요소의 아래에 위치하도록 설정 */
         margin-top: 24px; /* 원하는 margin-top 값을 설정 */
     }
@@ -157,35 +157,53 @@ const Topbar = () => {
                 </Link>
             </Logocontainer>
             <MenuContainer>
-                <MenuItem to="/devcrewintro" isActive={location.pathname === "/devcrewintro"}>
+                <MenuItem
+                    to="/devcrewintro"
+                    isActive={location.pathname === "/devcrewintro"}
+                >
                     데브크루 소개
                 </MenuItem>
-                <MenuItem to="/portfolio" isActive={location.pathname === "/portfolio"}>
+                <MenuItem
+                    to="/portfolio"
+                    isActive={location.pathname === "/portfolio"}
+                >
                     포트폴리오
                 </MenuItem>
                 <MenuItem to="/team1" isActive={location.pathname === "/team1"}>
                     팀 매칭
                 </MenuItem>
                 <Dropdown>
-                    <MenuItem as="div" isActive={location.pathname.startsWith("/communication")}>
+                    <MenuItem
+                        as="div"
+                        isActive={location.pathname.startsWith(
+                            "/communication"
+                        )}
+                    >
                         소통
                         <Arrow src={ArrowIcon} alt="dropdown arrow" />
                     </MenuItem>
                     <DropdownContent className="dropdown-content">
-                        <DropdownItem to="/communication1">현직자 조언</DropdownItem>
-                        <DropdownItem to="/communication2">기획 리뷰</DropdownItem>
-                        <DropdownItem to="/communication3">코드 리뷰</DropdownItem>
-                        <DropdownItem to="/communication4">디자인 리뷰</DropdownItem>
+                        <DropdownItem to="/communication1">
+                            현직자 조언
+                        </DropdownItem>
+                        <DropdownItem to="/communication2">
+                            기획 리뷰
+                        </DropdownItem>
+                        <DropdownItem to="/communication3">
+                            코드 리뷰
+                        </DropdownItem>
+                        <DropdownItem to="/communication4">
+                            디자인 리뷰
+                        </DropdownItem>
                     </DropdownContent>
                 </Dropdown>
-                <Auth>
+                {/* <Auth>
                     <Company to="/signinbusiness">기업 로그인</Company>
                     <Individual to="/login">개인 회원</Individual>
-                </Auth>
+                </Auth> */}
             </MenuContainer>
         </Layout>
     );
 };
 
 export default Topbar;
-
