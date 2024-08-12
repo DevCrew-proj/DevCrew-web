@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import logo from "../assets/image/logowhite.svg";
+import googleLogo from "../assets/image/google.svg";
+import kakaoLogo from "../assets/image/kakao.svg";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 
@@ -19,8 +21,8 @@ const Logocontainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 122px;
-    margin-bottom: 30px;
+    margin-top: 161px;
+    margin-bottom: 55px;
 `;
 
 const Logoimg = styled.img`
@@ -73,13 +75,13 @@ const LoginBtn = styled.button`
     border: none;
 `;
 
-const KakaoLoginBtn = styled.button`
+const GoogleLoginBtn = styled.button`
     width: 327px;
     height: 47px;
     flex-shrink: 0;
     border-radius: 11px;
-    background: #ffe810;
-    margin-top: 18px;
+    background: #f7f7f7;
+
     border: none;
     cursor: pointer;
     color: #000;
@@ -89,6 +91,37 @@ const KakaoLoginBtn = styled.button`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Icon = styled.img`
+    position: absolute;
+    left: 20px;
+`;
+
+const KakaoLoginBtn = styled.button`
+    width: 327px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: #ffe810;
+    margin-top: 11px;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    font-family: AppleSDGothicNeoB00;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Login = styled(Link)`
@@ -102,8 +135,8 @@ const Login = styled(Link)`
     line-height: normal;
 `;
 
-const Signin = styled(Link)`
-    color: #e0e0e0;
+const AddBusiness = styled(Link)`
+    color: #fff;
     text-align: center;
     font-family: AppleSDGothicNeoEB00;
     font-size: 15px;
@@ -111,7 +144,7 @@ const Signin = styled(Link)`
     font-weight: 400;
     line-height: normal;
     text-decoration-line: underline;
-    margin-top: 15px;
+    margin-top: 19px;
 `;
 
 const Container = styled.div`
@@ -177,6 +210,23 @@ const HorizonLine = ({ text }) => {
     );
 };
 
+const GoogleLogin = () => {
+    const REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
+    const REDIRECT_URI = "http://localhost:8080/api/login/oauth2/code/kakao";
+    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    const loginHandler = () => {
+        window.location.href = link;
+    };
+
+    return (
+        <GoogleLoginBtn onClick={loginHandler}>
+            <Icon src={googleLogo} alt="googleLogo" />
+            Google로 로그인
+        </GoogleLoginBtn>
+    );
+};
+
 const KakaoLogin = () => {
     const REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
     const REDIRECT_URI = "http://localhost:8080/api/login/oauth2/code/kakao";
@@ -188,7 +238,8 @@ const KakaoLogin = () => {
 
     return (
         <KakaoLoginBtn onClick={loginHandler}>
-            카카오톡으로 로그인
+            <Icon src={kakaoLogo} alt="kakaoLogo" />
+            카카오로 로그인
         </KakaoLoginBtn>
     );
 };
@@ -202,7 +253,7 @@ const LoginPage = () => {
                     <Logocontainer>
                         <Logoimg src={logo} alt="logo" />
                     </Logocontainer>
-                    <CustomTextField variant="outlined" placeholder="아이디" />
+                    {/* <CustomTextField variant="outlined" placeholder="아이디" />
                     <Spacing></Spacing>
                     <CustomTextField
                         variant="outlined"
@@ -212,9 +263,10 @@ const LoginPage = () => {
                     <LoginBtn>
                         <Login to="/login">LOGIN</Login>
                     </LoginBtn>
-                    <HorizonLine text="또는" />
+                    <HorizonLine text="또는" /> */}
+                    <GoogleLogin></GoogleLogin>
                     <KakaoLogin></KakaoLogin>
-                    <Signin to="/signin">Dev:Crew 회원가입</Signin>
+                    <AddBusiness to="/signin">기업 정보 추가하기</AddBusiness>
                 </LoginContainer>
             </Container>
             <Bottombar />
