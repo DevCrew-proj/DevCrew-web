@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import logo from "../assets/image/logowhite.svg";
 import googleLogo from "../assets/image/google.svg";
 import kakaoLogo from "../assets/image/kakao.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
+// import axios from "axios";
 
 const Layout = styled.div`
     width: 1920px;
@@ -211,9 +212,7 @@ const HorizonLine = ({ text }) => {
 };
 
 const GoogleLogin = () => {
-    const REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
-    const REDIRECT_URI = "http://localhost:8080/api/login/oauth2/code/kakao";
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    const link = `http://13.124.194.211/api/oauth2/authorization/google`;
 
     const loginHandler = () => {
         window.location.href = link;
@@ -228,10 +227,10 @@ const GoogleLogin = () => {
 };
 
 const KakaoLogin = () => {
-    const REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
-    const REDIRECT_URI = "http://localhost:8080/api/login/oauth2/code/kakao";
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    // const link = `http:///api/oauth2/authorization/kakao`
 
+    const link = `http://ec2-13-124-194-211.ap-northeast-2.compute.amazonaws.com:8080/api/oauth2/authorization/kakao`;
+    // const link = `http://localhost:8080/api/oauth2/authorization/kakao`;
     const loginHandler = () => {
         window.location.href = link;
     };
@@ -243,6 +242,73 @@ const KakaoLogin = () => {
         </KakaoLoginBtn>
     );
 };
+
+// const KakaoLogin = () => {
+//     const link = `http://13.124.194.211/api/oauth2/authorization/kakao`;
+
+//     const loginHandler = () => {
+//         window.location.href = link;
+//     };
+
+//     // useEffect(() => {
+//     //     const accessToken = new URL(window.location.href).searchParams.get(
+//     //         "code"
+//     //     );
+
+//     //     if (accessToken) {
+//     //         // access_token을 env 파일의 REACT_APP_G_ACCESS_TOKEN에 저장
+//     //         process.env.REACT_APP_G_ACCESS_TOKEN = accessToken;
+
+//     //         console.log("hi");
+//     //         // /main 페이지로 이동
+//     //         navigate("/main");
+//     //     }
+//     // }, [navigate]);
+
+//     return (
+//         <KakaoLoginBtn onClick={loginHandler}>
+//             <Icon src={kakaoLogo} alt="kakaoLogo" />
+//             카카오로 로그인
+//         </KakaoLoginBtn>
+//     );
+// };
+
+// const KakaoLogin = () => {
+//     const link = `http://13.124.194.211/api/oauth2/authorization/kakao`;
+//     const navigate = useNavigate();
+
+//     const loginHandler = () => {
+//         window.location.href = link;
+//     };
+
+//     const getToken = async () => {
+//         const token = new URL(window.location.href).searchParams.get("code");
+//         return token;
+//     };
+
+//     useEffect(() => {
+//         const checkAuth = async () => {
+//             const token = await getToken();
+
+//             if (token) {
+//                 // access_token을 로컬 스토리지에 저장
+//                 localStorage.setItem("access_token", token);
+
+//                 // /main 페이지로 이동
+//                 navigate("/main");
+//             }
+//         };
+
+//         checkAuth();
+//     }, [navigate]);
+
+//     return (
+//         <KakaoLoginBtn onClick={loginHandler}>
+//             <Icon src={kakaoLogo} alt="kakaoLogo" />
+//             카카오로 로그인
+//         </KakaoLoginBtn>
+//     );
+// };
 
 const LoginPage = () => {
     return (
