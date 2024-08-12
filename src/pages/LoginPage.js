@@ -266,7 +266,9 @@ const LoginPage = () => {
                     <HorizonLine text="또는" /> */}
                     <GoogleLogin></GoogleLogin>
                     <KakaoLogin></KakaoLogin>
-                    <AddBusiness to="/signin">기업 정보 추가하기</AddBusiness>
+                    <AddBusiness to="/signinbusiness">
+                        기업 정보 추가하기
+                    </AddBusiness>
                 </LoginContainer>
             </Container>
             <Bottombar />

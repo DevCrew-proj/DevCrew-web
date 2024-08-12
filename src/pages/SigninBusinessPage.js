@@ -253,9 +253,9 @@ const SigninBusinessPage = () => {
     const [checkedMarketingEmail, setCheckedMarketingEmail] = useState(false);
     const [checkedMarketingSms, setCheckedMarketingSms] = useState(false);
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [passwordConfirm, setPasswordConfirm] = useState("");
 
     const [managername, setManagername] = useState("");
     const [managernumber, setManagernumber] = useState("");
@@ -301,16 +301,16 @@ const SigninBusinessPage = () => {
     ]);
 
     useEffect(() => {
-        const isPasswordValid =
-            password.length >= 8 &&
-            /[a-zA-Z]/.test(password) &&
-            /\d/.test(password) &&
-            /[!@#$%^&*]/.test(password);
+        // const isPasswordValid =
+        //     password.length >= 8 &&
+        //     /[a-zA-Z]/.test(password) &&
+        //     /\d/.test(password) &&
+        //     /[!@#$%^&*]/.test(password);
 
-        const isPasswordMatch = password === passwordConfirm;
+        // const isPasswordMatch = password === passwordConfirm;
 
-        const isBasicInfoValid =
-            username.trim() !== "" && isPasswordValid && isPasswordMatch;
+        // const isBasicInfoValid =
+        //     username.trim() !== "" && isPasswordValid && isPasswordMatch;
 
         const isContactInfoValid =
             managername.trim() !== "" &&
@@ -326,15 +326,9 @@ const SigninBusinessPage = () => {
         const isCheckboxValid = checkedTerms && checkedPrivacy;
 
         setIsFormValid(
-            isBasicInfoValid &&
-                isContactInfoValid &&
-                isBusinessInfoValid &&
-                isCheckboxValid
+            isContactInfoValid && isBusinessInfoValid && isCheckboxValid
         );
     }, [
-        username,
-        password,
-        passwordConfirm,
         checkedTerms,
         checkedPrivacy,
         managername,
@@ -351,7 +345,7 @@ const SigninBusinessPage = () => {
             <Topbar />
             <Container>
                 <Description>* 표시는 필수 입력란을 나타냅니다</Description>
-                <SigninContainer1>
+                {/* <SigninContainer1>
                     <SigninNameContainer>
                         <SigninName>계정 정보</SigninName>
                         <Spacing4 />
@@ -395,9 +389,7 @@ const SigninBusinessPage = () => {
                             onChange={(e) => setPasswordConfirm(e.target.value)}
                         />
                     </TextFieldContainer>
-                </SigninContainer1>
-
-                <Spacing63 />
+                </SigninContainer1> */}
 
                 <SigninContainer1>
                     <SigninNameContainer>
@@ -468,7 +460,6 @@ const SigninBusinessPage = () => {
                         <TextFieldName>사업자 등록번호</TextFieldName>
                         <CustomTextField
                             variant="outlined"
-                            placeholder="-를 제외하고 입력해주세요"
                             value={businessnumber}
                             onChange={(e) => setBusinessnumber(e.target.value)}
                         />
