@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar.js";
@@ -65,29 +66,50 @@ const Communication1 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
-  const [communicationData, setCommunicationData] = useState([]); // 커뮤니티 data 받기
+  const [communicationData, setCommunicationData] = useState(); // 커뮤니티 data 받기
   const [chatNum, setChatNum] = useState(0); // 답변 count
+
+  useEffect(() => {
+    const searchFeedbackList = async () => {
+      try {
+        const response = await axios.get(
+          // 전체일 때 category는 빈 문자열?
+          `https://devcrew.kr/api/v1/feedback/advices?feedbackTag=${category}&page=${
+            page - 1
+          }`
+        );
+        setCommunicationData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    searchFeedbackList();
+  }, [category, page]);
+  console.log(communicationData.adviceFeedbackList);
+  console.log(dummyData);
 
   const itemsPerPage = 4; // 페이지당 게시물 수
   const searchData = Array.from(dummyData);
-  const filteredData = (tab) => {
-    if (tab === "전체") {
-      return searchData;
+  // const filteredData = (tab) => {
+  //   if (tab === "전체") {
+  //     return searchData;
+  //   }
+  //   return searchData.filter((data) => data.category === tab);
+  // }; // category에 따라 데이터 필터링
+
+  const totalcontents = 1; // 전체 데이터 수
+  const totalPages = () => {
+    if (communicationData.totalPages === 0) {
+      return 1;
     }
-    return searchData.filter((data) => data.category === tab);
-  }; // category에 따라 데이터 필터링
+    return communicationData.totalPages;
+  }; // 전체 페이지 수
 
-  const totalcontents = filteredData(category).length; // 전체 데이터 수
-  const totalPages = Math.ceil(filteredData(category).length / itemsPerPage); // 전체 페이지 수
-
-  const currentData = filteredData(category).slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  ); // 현재 페이지에 보여줄 데이터
-
-  useEffect(() => {
-    setPage(1);
-  }, [category]);
+  const currentData = communicationData.adviceFeedbackList;
+  // slice(
+  //   (page - 1) * itemsPerPage,
+  //   page * itemsPerPage
+  // ); // 현재 페이지에 보여줄 데이터
 
   return (
     <Layout>
@@ -98,7 +120,12 @@ const Communication1 = () => {
           <ListBar category={category} setCategory={setCategory} />
           <CommunicationSideBar totalcontents={totalcontents} />
           {currentData.map((data, index) => (
-            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+            <CommunicationBox
+              key={index}
+              data={data}
+              chatNum={chatNum}
+              category={category}
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard1")}>
             질문하기

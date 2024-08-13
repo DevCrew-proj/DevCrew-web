@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar.js";
@@ -62,13 +63,31 @@ const QuestionBtn = styled.button`
 const Communication1 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
+  const [communicationData, setCommunicationData] = useState(); // 커뮤니티 data 받기
   const [chatNum, setChatNum] = useState(0);
 
-  const itemsPerPage = 4;
-  const totalContents = Math.ceil(dummyData.length);
-  const totalPages = Math.ceil(totalContents / itemsPerPage);
+  useEffect(() => {
+    const searchFeedbackList = async () => {
+      try {
+        const response = await axios.get(
+          `https://devcrew.kr/api/v1/feedback/plans?page=${page - 1}`
+        );
+        setCommunicationData(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    searchFeedbackList();
+  }, [page]);
+  console.log("communicationData", communicationData);
 
-  const currentData = dummyData.slice(
+  const itemsPerPage = 4;
+  const totalContents = communicationData.planFeedbackList.length;
+  const totalPages =
+    communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
+  console.log("totalPages", totalPages);
+
+  const currentData = communicationData.planFeedbackList.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
@@ -81,7 +100,12 @@ const Communication1 = () => {
           <Title>기획 피드백</Title>
           <CommunicationSideBar totalcontents={totalContents} />
           {currentData.map((data, index) => (
-            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+            <CommunicationBox
+              key={index}
+              data={data}
+              chatNum={chatNum}
+              category='기획'
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard2")}>
             질문하기

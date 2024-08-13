@@ -44,31 +44,31 @@ const ListBar = ({ category, setCategory }) => {
       </List>
       <List
         className={`${category === "기획" ? "active" : null}`}
-        onClick={() => setCategory("기획")}
+        onClick={() => setCategory("PLAN")}
       >
         기획
       </List>
       <List
-        className={`${category === "디자인" ? "active" : null}`}
-        onClick={() => setCategory("디자인")}
+        className={`${category === "DESIGN" ? "active" : null}`}
+        onClick={() => setCategory("DESIGN")}
       >
         디자인
       </List>
       <List
-        className={`${category === "Front-end" ? "active" : null}`}
-        onClick={() => setCategory("Front-end")}
+        className={`${category === "FRONTEND" ? "active" : null}`}
+        onClick={() => setCategory("FRONTEND")}
       >
         Front-end
       </List>
       <List
-        className={`${category === "Back-end" ? "active" : null}`}
-        onClick={() => setCategory("Back-end")}
+        className={`${category === "BACKEND" ? "active" : null}`}
+        onClick={() => setCategory("BACKEND")}
       >
         Back-end
       </List>
       <List
-        className={`${category === "기타" ? "active" : null}`}
-        onClick={() => setCategory("기타")}
+        className={`${category === "OTHER" ? "active" : null}`}
+        onClick={() => setCategory("OTHER")}
       >
         기타
       </List>

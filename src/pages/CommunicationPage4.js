@@ -80,7 +80,7 @@ const Communication4 = () => {
     const searchFeedbackList = async () => {
       try {
         const response = await axios.get(
-          `http://13.124.194.211/api/v1/feedback/designs?page=${page}`
+          `https://devcrew.kr/api/v1/feedback/designs?page=${page - 1}`
         );
         console.log(response.data);
       } catch (error) {

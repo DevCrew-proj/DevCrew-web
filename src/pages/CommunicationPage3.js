@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar.js";
 import Bottombar from "../components/Bottombar.js";
@@ -66,7 +67,6 @@ const Communication4 = () => {
   const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
-  const [communicationData, setCommunicationData] = useState([]); // 커뮤니티 data 받기
   const [chatNum, setChatNum] = useState(0); // 답변 count
 
   const itemsPerPage = 4; // 페이지당 게시물 수
@@ -88,8 +88,20 @@ const Communication4 = () => {
   );
 
   useEffect(() => {
-    setPage(1);
-  }, [category]);
+    const searchFeedbackList = async () => {
+      try {
+        const response = await axios.get(
+          `https://devcrew.kr/api/v1/feedback/codes?language=${category}&page=${
+            page - 1
+          }`
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    searchFeedbackList();
+  }, [category, page]);
 
   return (
     <Layout>

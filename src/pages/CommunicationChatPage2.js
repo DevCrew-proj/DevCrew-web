@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
@@ -79,7 +80,6 @@ const SubmitBtn = styled.button`
 const CommunicationChat2 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [chatNum, setChatNum] = useState(0); // 답변 count
 
   const data = location.state.data;
 
