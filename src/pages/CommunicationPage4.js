@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
@@ -59,7 +60,7 @@ const QuestionBtn = styled.button`
   cursor: pointer;
 `;
 
-const Communication3 = () => {
+const Communication4 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const [chatNum, setChatNum] = useState(0);
@@ -74,6 +75,20 @@ const Communication3 = () => {
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+
+  useEffect(() => {
+    const searchFeedbackList = async () => {
+      try {
+        const response = await axios.get(
+          `http://13.124.194.211/api/v1/feedback/designs?page=${page}`
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    searchFeedbackList();
+  }, [page]);
 
   return (
     <Layout>
@@ -95,4 +110,4 @@ const Communication3 = () => {
     </Layout>
   );
 };
-export default Communication3;
+export default Communication4;
