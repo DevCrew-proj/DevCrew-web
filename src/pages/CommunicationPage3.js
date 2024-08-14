@@ -67,41 +67,38 @@ const Communication4 = () => {
   const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
+  const [communicationData, setCommunicationData] = useState({
+    codeFeedbackList: [],
+    totalPages: 0,
+  }); // 초기화
   const [chatNum, setChatNum] = useState(0); // 답변 count
 
-  const itemsPerPage = 4; // 페이지당 게시물 수
-  const searchData = Array.from(dummyData);
-
-  const filteredData = (tab) => {
-    if (tab === "전체") {
-      return searchData;
+  const searchFeedbackList = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/feedback/codes?language=${category}&page=${
+          page - 1
+        }`
+      );
+      setCommunicationData(response.data.data);
+    } catch (error) {
+      console.error(error);
     }
-    return searchData.filter((data) => data.category === tab);
   };
 
-  const totalcontents = Math.ceil(filteredData(category).length); // 전체 데이터 수
-  const totalPages = Math.ceil(filteredData(category).length / itemsPerPage); // 전체 페이지 수
+  useEffect(() => {
+    searchFeedbackList();
+  }, [category, page]);
 
-  const currentData = filteredData(category).slice(
+  const itemsPerPage = 4; // 페이지당 게시물 수
+  const totalcontents = communicationData.codeFeedbackList.length; // 전체 데이터 수
+  const totalPages =
+    communicationData.totalPages === 0 ? 1 : communicationData.totalPages; // 전체 페이지 수
+
+  const currentData = communicationData.codeFeedbackList.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
-
-  useEffect(() => {
-    const searchFeedbackList = async () => {
-      try {
-        const response = await axios.get(
-          `https://devcrew.kr/api/v1/feedback/codes?language=${category}&page=${
-            page - 1
-          }`
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    searchFeedbackList();
-  }, [category, page]);
 
   return (
     <Layout>
@@ -112,7 +109,12 @@ const Communication4 = () => {
           <ListBar2 category={category} setCategory={setCategory} />
           <CommunicationSideBar totalcontents={totalcontents} />
           {currentData.map((data, index) => (
-            <CommunicationBox key={index} chatNum={chatNum} data={data} />
+            <CommunicationBox
+              key={index}
+              chatNum={chatNum}
+              data={data}
+              category={category}
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard3")}>
             질문하기
