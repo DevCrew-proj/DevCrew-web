@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Chat from "../assets/image/chat.svg";
+import { useState, useEffect } from "react";
 
 const CommunityBoxContainer = styled.div`
   max-width: 1170px;
@@ -72,6 +73,25 @@ const ChatNum = styled.span`
 const CommunicationBox = ({ data, chatNum, category }) => {
   const navigate = useNavigate();
   const domain = window.location.pathname; // 현재 페이지의 url;
+  const [categoryName, setCategoryName] = useState(""); // 카테고리
+
+  // 카테고리 별로 이름 변경
+  useEffect(() => {
+    const categoryChange = () => {
+      if (category === "기획") return setCategoryName("기획");
+      else if (category === "디자인") return setCategoryName("디자인");
+      else if (category === "FRONTEND") return setCategoryName("Front-end");
+      else if (category === "BACKEND") return setCategoryName("Back-end");
+      else if (category === "JAVA") return setCategoryName("JAVA");
+      else if (category === "JAVASCRIPT") return setCategoryName("JS");
+      else if (category === "KOTLIN") return setCategoryName("Kotlin");
+      else if (category === "PYTHON") return setCategoryName("Python");
+      else if (category === "SWIFT") return setCategoryName("Swift");
+      else if (category === "C") return setCategoryName("C");
+      else if (category === "OTHER") return setCategoryName("기타");
+    };
+    categoryChange();
+  }, [category]);
 
   // 해당 박스 클릭 시 data 정보를 CommunicationChat1 페이지로 넘겨줌
   // const handleClick = () => {
@@ -103,7 +123,7 @@ const CommunicationBox = ({ data, chatNum, category }) => {
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
       <CommunityBoxContent>{data.content}</CommunityBoxContent>
       <div>
-        <CommunityBoxCategory>{category}</CommunityBoxCategory>
+        <CommunityBoxCategory>{categoryName}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
         <ChatNum>{chatNum}</ChatNum>
       </div>

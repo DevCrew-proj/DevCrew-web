@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
@@ -82,10 +82,6 @@ const CommunicationChat1 = () => {
   const location = useLocation();
 
   const data = location.state.data; // 데이터
-
-  useEffect (() => {}
-
-  
 
   return (
     <Layout>

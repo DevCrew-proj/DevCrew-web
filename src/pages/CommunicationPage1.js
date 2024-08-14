@@ -66,50 +66,42 @@ const Communication1 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
-  const [communicationData, setCommunicationData] = useState(); // 커뮤니티 data 받기
+  const [communicationData, setCommunicationData] = useState({
+    adviceFeedbackList: [],
+    totalPages: 0,
+  }); // 초기화
   const [chatNum, setChatNum] = useState(0); // 답변 count
 
+  const searchFeedbackList = async () => {
+    try {
+      const response = await axios.get(
+        // 전체일 때 category는 빈 문자열?
+        `https://devcrew.kr/api/v1/feedback/advices?feedbackTag=${category}&page=${
+          page - 1
+        }`
+      );
+      setCommunicationData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const searchFeedbackList = async () => {
-      try {
-        const response = await axios.get(
-          // 전체일 때 category는 빈 문자열?
-          `https://devcrew.kr/api/v1/feedback/advices?feedbackTag=${category}&page=${
-            page - 1
-          }`
-        );
-        setCommunicationData(response.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
     searchFeedbackList();
   }, [category, page]);
+
   console.log(communicationData.adviceFeedbackList);
   console.log(dummyData);
 
   const itemsPerPage = 4; // 페이지당 게시물 수
-  const searchData = Array.from(dummyData);
-  // const filteredData = (tab) => {
-  //   if (tab === "전체") {
-  //     return searchData;
-  //   }
-  //   return searchData.filter((data) => data.category === tab);
-  // }; // category에 따라 데이터 필터링
+  const totalcontents = communicationData.adviceFeedbackList.length; // 전체 데이터 수
+  const totalPages =
+    communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
-  const totalcontents = 1; // 전체 데이터 수
-  const totalPages = () => {
-    if (communicationData.totalPages === 0) {
-      return 1;
-    }
-    return communicationData.totalPages;
-  }; // 전체 페이지 수
-
-  const currentData = communicationData.adviceFeedbackList;
-  // slice(
-  //   (page - 1) * itemsPerPage,
-  //   page * itemsPerPage
-  // ); // 현재 페이지에 보여줄 데이터
+  const currentData = communicationData.adviceFeedbackList.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  ); // 현재 페이지에 보여줄 데이터
 
   return (
     <Layout>

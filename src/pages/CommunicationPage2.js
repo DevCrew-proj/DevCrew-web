@@ -63,28 +63,34 @@ const QuestionBtn = styled.button`
 const Communication1 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
-  const [communicationData, setCommunicationData] = useState(); // 커뮤니티 data 받기
+  const [communicationData, setCommunicationData] = useState({
+    planFeedbackList: [],
+    totalPages: 0,
+  }); // 초기화
   const [chatNum, setChatNum] = useState(0);
 
+  const searchFeedbackList = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/feedback/plans?page=${page - 1}`
+      );
+      setCommunicationData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const searchFeedbackList = async () => {
-      try {
-        const response = await axios.get(
-          `https://devcrew.kr/api/v1/feedback/plans?page=${page - 1}`
-        );
-        setCommunicationData(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     searchFeedbackList();
   }, [page]);
+
   console.log("communicationData", communicationData);
 
   const itemsPerPage = 4;
   const totalContents = communicationData.planFeedbackList.length;
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
+
   console.log("totalPages", totalPages);
 
   const currentData = communicationData.planFeedbackList.slice(
