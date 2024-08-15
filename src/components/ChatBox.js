@@ -60,10 +60,9 @@ const ChatContent = styled.div`
   color: #000;
 `;
 
-const ChatBox = (dataCategory) => {
+const ChatBox = ({ dataCategory }) => {
   const [page, setPage] = useState(1); // 현재 페이지
-  console.log(dataCategory.dataCategory);
-  const [category, setCategory] = useState(dataCategory.dataCategory); // 각 카테고리 별 표시
+  const [category, setCategory] = useState(dataCategory); // 각 카테고리 별 표시
 
   // if (dataCategory.dataCategory === null) {
   //   setCategory("전체");

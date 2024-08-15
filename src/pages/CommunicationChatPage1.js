@@ -81,14 +81,17 @@ const CommunicationChat1 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [singleData, setSingleData] = useState({
-    id: 0,
+    id: 1,
+    memberId: 1,
     title: "",
     content: "",
     memberName: "",
+    memberImageUrl: "",
     imageUrls: [],
     fileUrls: [],
+    commentCount: 0,
+    feedbackTag: "",
   });
-
   const id = location.state.id; // id 값 받아오기
 
   const retrieveFeedback = async () => {
@@ -101,7 +104,6 @@ const CommunicationChat1 = () => {
       console.error(error);
     }
   };
-  console.log(singleData);
 
   useEffect(() => {
     retrieveFeedback();
@@ -113,15 +115,12 @@ const CommunicationChat1 = () => {
       <Container>
         <IncumbentBox>
           <Title>현직자 조언</Title>
-          <CommunicationChatContainer
-            data={singleData}
-            category={location.state.category}
-          />
+          <CommunicationChatContainer data={singleData} />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication1")}>
             게시
           </SubmitBtn>
-          <ChatBox dataCategory={location.state.category} />
+          <ChatBox dataCategory={singleData.feedbackTag} />
         </IncumbentBox>
       </Container>
       <Bottombar />

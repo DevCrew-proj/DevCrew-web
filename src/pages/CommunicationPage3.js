@@ -61,13 +61,13 @@ const QuestionBtn = styled.button`
   cursor: pointer;
 `;
 
-const Communication4 = () => {
+const Communication3 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
   const [communicationData, setCommunicationData] = useState({
     codeFeedbackList: [],
-    totalPages: 0,
+    totalPages: 1,
   }); // 초기화
 
   const searchFeedbackList = async () => {
@@ -89,15 +89,9 @@ const Communication4 = () => {
     searchFeedbackList();
   }, [category, page]);
 
-  const itemsPerPage = 4; // 페이지당 게시물 수
   const totalcontents = communicationData.codeFeedbackList.length; // 전체 데이터 수
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages; // 전체 페이지 수
-
-  const currentData = communicationData.codeFeedbackList.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
 
   return (
     <Layout>
@@ -107,12 +101,11 @@ const Communication4 = () => {
           <Title>코드 리뷰</Title>
           <ListBar2 category={category} setCategory={setCategory} />
           <CommunicationSideBar totalcontents={totalcontents} />
-          {currentData.map((data, index) => (
+          {communicationData.codeFeedbackList.map((data, index) => (
             <CommunicationBox
               key={index}
-              chatNum='0'
               data={data}
-              category={category}
+              category={data.language}
             />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard3")}>
@@ -125,4 +118,4 @@ const Communication4 = () => {
     </Layout>
   );
 };
-export default Communication4;
+export default Communication3;
