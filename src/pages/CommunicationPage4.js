@@ -64,7 +64,7 @@ const Communication4 = () => {
   const [page, setPage] = useState(1); // 현재 페이지
   const [communicationData, setCommunicationData] = useState({
     designFeedbackList: [],
-    totalPages: 0,
+    totalPages: 1,
   });
 
   const searchFeedbackList = async () => {
@@ -82,15 +82,9 @@ const Communication4 = () => {
     searchFeedbackList();
   }, [page]);
 
-  const itemsPerPage = 4;
   const totalcontents = communicationData.designFeedbackList.length;
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
-
-  const currentData = communicationData.designFeedbackList.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
 
   return (
     <Layout>
@@ -99,13 +93,8 @@ const Communication4 = () => {
         <IncumbentBox>
           <Title>디자인 피드백</Title>
           <CommunicationSideBar totalcontents={totalcontents} />
-          {currentData.map((data, index) => (
-            <CommunicationBox
-              key={index}
-              data={data}
-              chatNum='0'
-              category='디자인'
-            />
+          {communicationData.designFeedbackList.map((data, index) => (
+            <CommunicationBox key={index} data={data} category='디자인' />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard4")}>
             질문하기

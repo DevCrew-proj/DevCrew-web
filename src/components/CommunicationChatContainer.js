@@ -74,7 +74,9 @@ const ChatFileBox = styled.div`
 `;
 
 const CommunicationChatContainer = ({ data, category }) => {
-  console.log(data);
+  const categoryName =
+    data.feedbackTag === undefined ? category : data.feedbackTag;
+
   return (
     <CommunicationContainer>
       <CommunicationBox>
@@ -82,7 +84,7 @@ const CommunicationChatContainer = ({ data, category }) => {
           <Profile
             memberName={data.memberName}
             memberImage={data.memberImageUrl}
-            category={category}
+            category={categoryName}
           />
         </CommunicationProfileBox>
         <CommunicationContentBox>

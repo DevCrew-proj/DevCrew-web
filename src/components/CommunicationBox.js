@@ -73,42 +73,23 @@ const ChatNum = styled.span`
 const CommunicationBox = ({ data, category }) => {
   const navigate = useNavigate();
   const domain = window.location.pathname; // 현재 페이지의 url;
-  const [categoryName, setCategoryName] = useState(""); // 카테고리
-
-  // 카테고리 별로 이름 변경
-  useEffect(() => {
-    const categoryChange = () => {
-      if (category === "기획") return setCategoryName("기획");
-      else if (category === "디자인") return setCategoryName("디자인");
-      else if (category === "FRONTEND") return setCategoryName("Front-end");
-      else if (category === "BACKEND") return setCategoryName("Back-end");
-      else if (category === "JAVA") return setCategoryName("JAVA");
-      else if (category === "JAVASCRIPT") return setCategoryName("JS");
-      else if (category === "KOTLIN") return setCategoryName("Kotlin");
-      else if (category === "PYTHON") return setCategoryName("Python");
-      else if (category === "SWIFT") return setCategoryName("Swift");
-      else if (category === "C") return setCategoryName("C");
-      else if (category === "OTHER") return setCategoryName("기타");
-    };
-    categoryChange();
-  }, [category]);
 
   const handleClick = () => {
     if (domain === "/communication1") {
       navigate("/communicationChat1", {
-        state: { id: data.id, category: categoryName },
+        state: { id: data.id },
       });
     } else if (domain === "/communication2") {
       navigate("/communicationChat2", {
-        state: { id: data.id, category: categoryName },
+        state: { id: data.id, category: "기획" },
       });
     } else if (domain === "/communication3") {
       navigate("/communicationChat3", {
-        state: { id: data.id, category: categoryName },
+        state: { id: data.id },
       });
     } else if (domain === "/communication4") {
       navigate("/communicationChat4", {
-        state: { id: data.id, category: categoryName },
+        state: { id: data.id, category: "디자인" },
       });
     }
   };
@@ -122,7 +103,7 @@ const CommunicationBox = ({ data, category }) => {
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
       <CommunityBoxContent>{data.content}</CommunityBoxContent>
       <div>
-        <CommunityBoxCategory>{categoryName}</CommunityBoxCategory>
+        <CommunityBoxCategory>{category}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
         <ChatNum>{data.commentCount}</ChatNum>
       </div>

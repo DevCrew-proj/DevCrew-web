@@ -67,7 +67,7 @@ const Communication1 = () => {
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
   const [communicationData, setCommunicationData] = useState({
     adviceFeedbackList: [],
-    totalPages: 0,
+    totalPages: 1,
   }); // 초기화
 
   const searchFeedbackList = async () => {
@@ -90,15 +90,9 @@ const Communication1 = () => {
     searchFeedbackList();
   }, [category, page]);
 
-  const itemsPerPage = 4; // 페이지당 게시물 수
   const totalcontents = communicationData.adviceFeedbackList.length; // 전체 데이터 수
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
-
-  const currentData = communicationData.adviceFeedbackList.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  ); // 현재 페이지에 보여줄 데이터
 
   return (
     <Layout>
@@ -108,8 +102,12 @@ const Communication1 = () => {
           <Title>현직자 조언</Title>
           <ListBar category={category} setCategory={setCategory} />
           <CommunicationSideBar totalcontents={totalcontents} />
-          {currentData.map((data, index) => (
-            <CommunicationBox key={index} data={data} category={category} />
+          {communicationData.adviceFeedbackList.map((data, index) => (
+            <CommunicationBox
+              key={index}
+              data={data}
+              category={data.feedbackTag}
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard1")}>
             질문하기
