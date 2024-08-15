@@ -43,16 +43,12 @@ const ImageSlider = ({ images }) => {
   return (
     <>
       {images.length === 1 ? (
-        <ImageBox
-          style={{ margin: "0 auto" }}
-          src={images[0].url}
-          alt='image1'
-        />
+        <ImageBox style={{ margin: "0 auto" }} src={images[0]} alt='image1' />
       ) : (
         <Slider {...settings}>
-          {images.map((image) => (
-            <SliderBox key={image.id}>
-              <ImageBox src={image.url} alt={`image ${image.id}`} />
+          {images.map((image, index) => (
+            <SliderBox key={index}>
+              <ImageBox src={image} alt={`image ${index}`} />
             </SliderBox>
           ))}
         </Slider>

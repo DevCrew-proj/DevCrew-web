@@ -73,25 +73,31 @@ const ChatFileBox = styled.div`
   margin: 0 auto;
 `;
 
-const CommunicationChatContainer = (data) => {
+const CommunicationChatContainer = ({ data, category }) => {
+  console.log(data);
   return (
     <CommunicationContainer>
       <CommunicationBox>
         <CommunicationProfileBox>
-          <Profile category={data.data.category} />
+          <Profile
+            memberName={data.memberName}
+            memberImage={data.memberImageUrl}
+            category={category}
+          />
         </CommunicationProfileBox>
         <CommunicationContentBox>
-          <ChatTitle>{data.data.title}</ChatTitle>
-          <ChatContent>{data.data.content}</ChatContent>
-          {data.data.image.length === 0 ? null : (
+          <ChatTitle>{data.title}</ChatTitle>
+          <ChatContent>{data.content}</ChatContent>
+          {data.imageUrls.length === 0 ? null : (
             <ChatImageBox>
-              <ImageSlider images={data.data.image} />
+              <ImageSlider images={data.imageUrls} />
             </ChatImageBox>
           )}
-          <ChatFileBox>
-            <FileUpload2 />
-          </ChatFileBox>
-          {/* {data.data.file === undefined ? null : <ChatFileBox>dk</ChatFileBox>} */}
+          {data.fileUrls.length === 0 ? null : (
+            <ChatFileBox>
+              <FileUpload2 files={data.fileUrls} />
+            </ChatFileBox>
+          )}
         </CommunicationContentBox>
       </CommunicationBox>
     </CommunicationContainer>

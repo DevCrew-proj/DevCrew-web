@@ -8,7 +8,6 @@ import ListBar from "../components/Listbar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox.js";
 import Pagination from "../components/Pagination";
-import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
@@ -70,15 +69,16 @@ const Communication1 = () => {
     adviceFeedbackList: [],
     totalPages: 0,
   }); // 초기화
-  const [chatNum, setChatNum] = useState(0); // 답변 count
 
   const searchFeedbackList = async () => {
     try {
       const response = await axios.get(
         // 전체일 때 category는 빈 문자열?
-        `https://devcrew.kr/api/v1/feedback/advices?feedbackTag=${category}&page=${
-          page - 1
-        }`
+        category === "전체"
+          ? `https://devcrew.kr/api/v1/feedback/advices/all?page=${page - 1}`
+          : `https://devcrew.kr/api/v1/feedback/advices?feedbackTag=${category}&page=${
+              page - 1
+            }`
       );
       setCommunicationData(response.data.data);
     } catch (error) {
@@ -89,9 +89,6 @@ const Communication1 = () => {
   useEffect(() => {
     searchFeedbackList();
   }, [category, page]);
-
-  console.log(communicationData.adviceFeedbackList);
-  console.log(dummyData);
 
   const itemsPerPage = 4; // 페이지당 게시물 수
   const totalcontents = communicationData.adviceFeedbackList.length; // 전체 데이터 수
@@ -112,12 +109,7 @@ const Communication1 = () => {
           <ListBar category={category} setCategory={setCategory} />
           <CommunicationSideBar totalcontents={totalcontents} />
           {currentData.map((data, index) => (
-            <CommunicationBox
-              key={index}
-              data={data}
-              chatNum={chatNum}
-              category={category}
-            />
+            <CommunicationBox key={index} data={data} category={category} />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard1")}>
             질문하기

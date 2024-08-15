@@ -55,14 +55,13 @@ const FileClickContainer = styled.div`
   scrollbar-width: none;
 `;
 
-const FileUpload2 = () => {
+const FileUpload2 = ({ files }) => {
   const [fileDropDown, setFileDropDown] = useState(false);
-
   return (
     <FileUploadContainer>
       <FileBox>
         <DownloadIcon src={download} alt='File Download' />
-        dev_crew_document.pdf
+        {files[0]}
         <ArrowIcon
           src={Vector4}
           alt='Arrow Up'
@@ -73,38 +72,14 @@ const FileUpload2 = () => {
         />
       </FileBox>
       <FileClickContainer fileDropDown={fileDropDown}>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
-        <FileBox>
-          <DownloadIcon src={download} alt='File Download' />
-          dev_crew_document.pdf
-        </FileBox>
+        {files.length === 1
+          ? null
+          : files.slice(1).map((file, index) => (
+              <FileBox key={index}>
+                <DownloadIcon src={download} alt={`File Download ${index}`} />
+                {file}
+              </FileBox>
+            ))}
       </FileClickContainer>
     </FileUploadContainer>
   );

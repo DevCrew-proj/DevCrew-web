@@ -70,7 +70,7 @@ const ChatNum = styled.span`
   font-weight: 400;
 `;
 
-const CommunicationBox = ({ data, chatNum, category }) => {
+const CommunicationBox = ({ data, category }) => {
   const navigate = useNavigate();
   const domain = window.location.pathname; // 현재 페이지의 url;
   const [categoryName, setCategoryName] = useState(""); // 카테고리
@@ -93,39 +93,38 @@ const CommunicationBox = ({ data, chatNum, category }) => {
     categoryChange();
   }, [category]);
 
-  // 해당 박스 클릭 시 data 정보를 CommunicationChat1 페이지로 넘겨줌
-  // const handleClick = () => {
-  //   if (domain === "/communication1") {
-  //     navigate("/communicationChat1", {
-  //       state: { data },
-  //     });
-  //   } else if (domain === "/communication2") {
-  //     navigate("/communicationChat2", {
-  //       state: { data },
-  //     });
-  //   } else if (domain === "/communication3") {
-  //     navigate("/communicationChat3", {
-  //       state: { data },
-  //     });
-  //   } else if (domain === "/communication4") {
-  //     navigate("/communicationChat4", {
-  //       state: { data },
-  //     });
-  //   }
-  // };
+  const handleClick = () => {
+    if (domain === "/communication1") {
+      navigate("/communicationChat1", {
+        state: { id: data.id, category: categoryName },
+      });
+    } else if (domain === "/communication2") {
+      navigate("/communicationChat2", {
+        state: { id: data.id, category: categoryName },
+      });
+    } else if (domain === "/communication3") {
+      navigate("/communicationChat3", {
+        state: { id: data.id, category: categoryName },
+      });
+    } else if (domain === "/communication4") {
+      navigate("/communicationChat4", {
+        state: { id: data.id, category: categoryName },
+      });
+    }
+  };
 
   return (
     <CommunityBoxContainer
-    // onClick={() => {
-    //   handleClick();
-    // }}
+      onClick={() => {
+        handleClick();
+      }}
     >
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
       <CommunityBoxContent>{data.content}</CommunityBoxContent>
       <div>
         <CommunityBoxCategory>{categoryName}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
-        <ChatNum>{chatNum}</ChatNum>
+        <ChatNum>{data.commentCount}</ChatNum>
       </div>
     </CommunityBoxContainer>
   );

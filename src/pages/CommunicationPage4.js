@@ -7,7 +7,6 @@ import Bottombar from "../components/Bottombar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
-import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
@@ -67,7 +66,6 @@ const Communication4 = () => {
     designFeedbackList: [],
     totalPages: 0,
   });
-  const [chatNum, setChatNum] = useState(0);
 
   const searchFeedbackList = async () => {
     try {
@@ -105,7 +103,7 @@ const Communication4 = () => {
             <CommunicationBox
               key={index}
               data={data}
-              chatNum={chatNum}
+              chatNum='0'
               category='디자인'
             />
           ))}

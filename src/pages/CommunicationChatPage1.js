@@ -80,8 +80,32 @@ const SubmitBtn = styled.button`
 const CommunicationChat1 = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [singleData, setSingleData] = useState({
+    id: 0,
+    title: "",
+    content: "",
+    memberName: "",
+    imageUrls: [],
+    fileUrls: [],
+  });
 
-  const data = location.state.data; // 데이터
+  const id = location.state.id; // id 값 받아오기
+
+  const retrieveFeedback = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/feedback/advices/${id}`
+      );
+      setSingleData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(singleData);
+
+  useEffect(() => {
+    retrieveFeedback();
+  }, []);
 
   return (
     <Layout>
@@ -89,12 +113,15 @@ const CommunicationChat1 = () => {
       <Container>
         <IncumbentBox>
           <Title>현직자 조언</Title>
-          <CommunicationChatContainer data={data} />
+          <CommunicationChatContainer
+            data={singleData}
+            category={location.state.category}
+          />
           <InputChatBox placeholder='로그인 후 댓글 남기기' />
           <SubmitBtn onClick={() => navigate("/communication1")}>
             게시
           </SubmitBtn>
-          <ChatBox dataCategory={data.category} />
+          <ChatBox dataCategory={location.state.category} />
         </IncumbentBox>
       </Container>
       <Bottombar />

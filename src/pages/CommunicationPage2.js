@@ -7,7 +7,6 @@ import Bottombar from "../components/Bottombar.js";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
-import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
@@ -67,7 +66,6 @@ const Communication1 = () => {
     planFeedbackList: [],
     totalPages: 0,
   }); // 초기화
-  const [chatNum, setChatNum] = useState(0);
 
   const searchFeedbackList = async () => {
     try {
@@ -83,8 +81,6 @@ const Communication1 = () => {
   useEffect(() => {
     searchFeedbackList();
   }, [page]);
-
-  console.log("communicationData", communicationData);
 
   const itemsPerPage = 4;
   const totalContents = communicationData.planFeedbackList.length;
@@ -109,7 +105,7 @@ const Communication1 = () => {
             <CommunicationBox
               key={index}
               data={data}
-              chatNum={chatNum}
+              chatNum='0'
               category='기획'
             />
           ))}

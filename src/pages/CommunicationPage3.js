@@ -8,7 +8,6 @@ import ListBar2 from "../components/Listbar2.js";
 import CommunicationSideBar from "../components/CommunicationSideBar.js";
 import CommunicationBox from "../components/CommunicationBox.js";
 import Pagination from "../components/Pagination.js";
-import { dummyData } from "../store/dummyData.js";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
@@ -64,21 +63,21 @@ const QuestionBtn = styled.button`
 
 const Communication4 = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState(0); // map으로 글 개수 세기
   const [page, setPage] = useState(1); // 현재 페이지
   const [category, setCategory] = useState("전체"); // 각 카테고리 별 표시
   const [communicationData, setCommunicationData] = useState({
     codeFeedbackList: [],
     totalPages: 0,
   }); // 초기화
-  const [chatNum, setChatNum] = useState(0); // 답변 count
 
   const searchFeedbackList = async () => {
     try {
       const response = await axios.get(
-        `https://devcrew.kr/api/v1/feedback/codes?language=${category}&page=${
-          page - 1
-        }`
+        category === "전체"
+          ? `https://devcrew.kr/api/v1/feedback/codes/all?page=${page - 1}`
+          : `https://devcrew.kr/api/v1/feedback/codes?language=${category}&page=${
+              page - 1
+            }`
       );
       setCommunicationData(response.data.data);
     } catch (error) {
@@ -111,7 +110,7 @@ const Communication4 = () => {
           {currentData.map((data, index) => (
             <CommunicationBox
               key={index}
-              chatNum={chatNum}
+              chatNum='0'
               data={data}
               category={category}
             />
