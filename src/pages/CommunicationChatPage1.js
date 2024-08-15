@@ -80,6 +80,9 @@ const SubmitBtn = styled.button`
 const CommunicationChat1 = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [page, setPage] = useState(1); // 댓글 페이지
+  const [commentCount, setCommentCount] = useState(0); // 댓글 수
+  const [totalChatPages, setTotalChatPages] = useState(1); // 댓글 총 페이지
   const [singleData, setSingleData] = useState({
     id: 1,
     memberId: 1,
@@ -91,15 +94,31 @@ const CommunicationChat1 = () => {
     fileUrls: [],
     commentCount: 0,
     feedbackTag: "",
-  });
+  }); // 단일 데이터
+  const [chatData, setChatData] = useState([]); // 채팅 데이터
   const id = location.state.id; // id 값 받아오기
 
   const retrieveFeedback = async () => {
     try {
-      const response = await axios.get(
+      const resSingleBoard = await axios.get(
         `https://devcrew.kr/api/v1/feedback/advices/${id}`
       );
-      setSingleData(response.data.data);
+      setCommentCount(resSingleBoard.data.data.commentCount);
+      setSingleData(resSingleBoard.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const retrieveChat = async () => {
+    try {
+      const resChat = await axios.get(
+        `https://devcrew.kr/api/v1/feedback//advices/${id}/comments?page=${
+          page - 1
+        }&size=6`
+      );
+      setTotalChatPages(resChat.data.data.totalPages);
+      setChatData(resChat.data.data.comments);
     } catch (error) {
       console.error(error);
     }
@@ -108,6 +127,10 @@ const CommunicationChat1 = () => {
   useEffect(() => {
     retrieveFeedback();
   }, []);
+
+  useEffect(() => {
+    retrieveChat();
+  });
 
   return (
     <Layout>
@@ -120,7 +143,14 @@ const CommunicationChat1 = () => {
           <SubmitBtn onClick={() => navigate("/communication1")}>
             게시
           </SubmitBtn>
-          <ChatBox dataCategory={singleData.feedbackTag} />
+          <ChatBox
+            data={chatData}
+            commentCount={commentCount}
+            page={page}
+            setPage={setPage}
+            totalPages={totalChatPages}
+            dataCategory={singleData.feedbackTag}
+          />
         </IncumbentBox>
       </Container>
       <Bottombar />
