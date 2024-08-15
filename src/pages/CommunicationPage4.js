@@ -7,7 +7,6 @@ import Bottombar from "../components/Bottombar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
-import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
@@ -63,32 +62,35 @@ const QuestionBtn = styled.button`
 const Communication4 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
-  const [chatNum, setChatNum] = useState(0);
+  const [communicationData, setCommunicationData] = useState({
+    designFeedbackList: [],
+    totalPages: 0,
+  });
+
+  const searchFeedbackList = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/feedback/designs?page=${page - 1}`
+      );
+      setCommunicationData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    searchFeedbackList();
+  }, [page]);
 
   const itemsPerPage = 4;
-  const searchData = Array.from(dummyData);
+  const totalcontents = communicationData.designFeedbackList.length;
+  const totalPages =
+    communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
-  const totalcontents = searchData.length;
-  const totalPages = Math.ceil(totalcontents / itemsPerPage);
-
-  const currentData = searchData.slice(
+  const currentData = communicationData.designFeedbackList.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
-
-  useEffect(() => {
-    const searchFeedbackList = async () => {
-      try {
-        const response = await axios.get(
-          `http://13.124.194.211/api/v1/feedback/designs?page=${page}`
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    searchFeedbackList();
-  }, [page]);
 
   return (
     <Layout>
@@ -98,7 +100,12 @@ const Communication4 = () => {
           <Title>디자인 피드백</Title>
           <CommunicationSideBar totalcontents={totalcontents} />
           {currentData.map((data, index) => (
-            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+            <CommunicationBox
+              key={index}
+              data={data}
+              chatNum='0'
+              category='디자인'
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard4")}>
             질문하기

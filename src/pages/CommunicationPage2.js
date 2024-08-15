@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar.js";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
-import { dummyData } from "../store/dummyData";
 
 const Layout = styled.div`
   width: 1920px;
@@ -62,13 +62,34 @@ const QuestionBtn = styled.button`
 const Communication1 = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
-  const [chatNum, setChatNum] = useState(0);
+  const [communicationData, setCommunicationData] = useState({
+    planFeedbackList: [],
+    totalPages: 0,
+  }); // 초기화
+
+  const searchFeedbackList = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/feedback/plans?page=${page - 1}`
+      );
+      setCommunicationData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    searchFeedbackList();
+  }, [page]);
 
   const itemsPerPage = 4;
-  const totalContents = Math.ceil(dummyData.length);
-  const totalPages = Math.ceil(totalContents / itemsPerPage);
+  const totalContents = communicationData.planFeedbackList.length;
+  const totalPages =
+    communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
-  const currentData = dummyData.slice(
+  console.log("totalPages", totalPages);
+
+  const currentData = communicationData.planFeedbackList.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
@@ -81,7 +102,12 @@ const Communication1 = () => {
           <Title>기획 피드백</Title>
           <CommunicationSideBar totalcontents={totalContents} />
           {currentData.map((data, index) => (
-            <CommunicationBox key={index} data={data} chatNum={chatNum} />
+            <CommunicationBox
+              key={index}
+              data={data}
+              chatNum='0'
+              category='기획'
+            />
           ))}
           <QuestionBtn onClick={() => navigate("/communicationBoard2")}>
             질문하기

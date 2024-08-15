@@ -229,7 +229,7 @@ const GoogleLogin = () => {
 const KakaoLogin = () => {
     // const link = `http:///api/oauth2/authorization/kakao`
 
-    const link = `https://devcrew.kr/api/oauth2/authorization/kakao`;
+    const link = `http://ec2-13-124-194-211.ap-northeast-2.compute.amazonaws.com:8080/api/oauth2/authorization/kakao`;
     // const link = `http://localhost:8080/api/oauth2/authorization/kakao`;
     const loginHandler = () => {
         window.location.href = link;

@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Chat from "../assets/image/chat.svg";
+import { useState, useEffect } from "react";
 
 const CommunityBoxContainer = styled.div`
   max-width: 1170px;
-  height: 216px;
+  max-height: 216px;
   border: 1px solid #829595;
   border-radius: 10px;
   box-shadow: 0px 2px 6px #829595;
   box-sizing: border-box;
   margin-bottom: 18px;
-  padding: 0px 110px 0px 30px;
+  padding: 25px 110px 25px 30px;
   justify-content: center;
   align-items: center;
 `;
@@ -23,7 +24,6 @@ const CommunityBoxTitle = styled.h3`
   text-align: left;
   line-height: 1;
   margin: 0 0 20px;
-  padding-top: 26px;
   letter-spacing: -0.3px;
 `;
 
@@ -70,28 +70,45 @@ const ChatNum = styled.span`
   font-weight: 400;
 `;
 
-const CommunicationBox = ({ data, chatNum }) => {
+const CommunicationBox = ({ data, category }) => {
   const navigate = useNavigate();
-
   const domain = window.location.pathname; // 현재 페이지의 url;
+  const [categoryName, setCategoryName] = useState(""); // 카테고리
 
-  // 해당 박스 클릭 시 data 정보를 CommunicationChat1 페이지로 넘겨줌
+  // 카테고리 별로 이름 변경
+  useEffect(() => {
+    const categoryChange = () => {
+      if (category === "기획") return setCategoryName("기획");
+      else if (category === "디자인") return setCategoryName("디자인");
+      else if (category === "FRONTEND") return setCategoryName("Front-end");
+      else if (category === "BACKEND") return setCategoryName("Back-end");
+      else if (category === "JAVA") return setCategoryName("JAVA");
+      else if (category === "JAVASCRIPT") return setCategoryName("JS");
+      else if (category === "KOTLIN") return setCategoryName("Kotlin");
+      else if (category === "PYTHON") return setCategoryName("Python");
+      else if (category === "SWIFT") return setCategoryName("Swift");
+      else if (category === "C") return setCategoryName("C");
+      else if (category === "OTHER") return setCategoryName("기타");
+    };
+    categoryChange();
+  }, [category]);
+
   const handleClick = () => {
     if (domain === "/communication1") {
       navigate("/communicationChat1", {
-        state: { data },
+        state: { id: data.id, category: categoryName },
       });
     } else if (domain === "/communication2") {
       navigate("/communicationChat2", {
-        state: { data },
+        state: { id: data.id, category: categoryName },
       });
     } else if (domain === "/communication3") {
       navigate("/communicationChat3", {
-        state: { data },
+        state: { id: data.id, category: categoryName },
       });
     } else if (domain === "/communication4") {
       navigate("/communicationChat4", {
-        state: { data },
+        state: { id: data.id, category: categoryName },
       });
     }
   };
@@ -105,9 +122,9 @@ const CommunicationBox = ({ data, chatNum }) => {
       <CommunityBoxTitle>{data.title}</CommunityBoxTitle>
       <CommunityBoxContent>{data.content}</CommunityBoxContent>
       <div>
-        <CommunityBoxCategory>{data.category}</CommunityBoxCategory>
+        <CommunityBoxCategory>{categoryName}</CommunityBoxCategory>
         <ChatImg src={Chat} alt='Chat' />
-        <ChatNum>{chatNum}</ChatNum>
+        <ChatNum>{data.commentCount}</ChatNum>
       </div>
     </CommunityBoxContainer>
   );

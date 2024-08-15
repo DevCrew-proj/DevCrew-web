@@ -49,26 +49,26 @@ const ListBar2 = ({ category, setCategory }) => {
         JAVA
       </List>
       <List
-        className={`${category === "JS" ? "active" : null}`}
-        onClick={() => setCategory("JS")}
+        className={`${category === "JAVASCRIPT" ? "active" : null}`}
+        onClick={() => setCategory("JAVASCRIPT")}
       >
         JS
       </List>
       <List
-        className={`${category === "Kotlin" ? "active" : null}`}
-        onClick={() => setCategory("Kotlin")}
+        className={`${category === "KOTLIN" ? "active" : null}`}
+        onClick={() => setCategory("KOTLIN")}
       >
         Kotlin
       </List>
       <List
-        className={`${category === "Python" ? "active" : null}`}
-        onClick={() => setCategory("Python")}
+        className={`${category === "PYTHON" ? "active" : null}`}
+        onClick={() => setCategory("PYTHON")}
       >
         Python
       </List>
       <List
-        className={`${category === "Swift" ? "active" : null}`}
-        onClick={() => setCategory("Swift")}
+        className={`${category === "SWIFT" ? "active" : null}`}
+        onClick={() => setCategory("SWIFT")}
       >
         Swift
       </List>
@@ -79,8 +79,8 @@ const ListBar2 = ({ category, setCategory }) => {
         C
       </List>
       <List
-        className={`${category === "기타" ? "active" : null}`}
-        onClick={() => setCategory("기타")}
+        className={`${category === "OTHER" ? "active" : null}`}
+        onClick={() => setCategory("OTHER")}
       >
         기타
       </List>

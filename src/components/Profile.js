@@ -43,15 +43,15 @@ const ChatTime = styled.span`
   font-weight: 400;
 `;
 
-const Profile = ({ name, category }) => {
+const Profile = ({ memberName, memberImage, category }) => {
   return (
     <>
       <div style={{ width: "40%", float: "left" }}>
-        <ProfileImage src='http://via.placeholder.com/50x50' />
+        <ProfileImage src={memberImage} />
       </div>
       <div style={{ width: "60%", float: "left" }}>
         <CommunicationName>
-          {name === undefined ? "신짱구" : name}
+          {memberName === undefined ? "신짱구" : memberName}
         </CommunicationName>
         <CommunicationBoxCategory>
           {category === undefined ? "카테고리" : category}
