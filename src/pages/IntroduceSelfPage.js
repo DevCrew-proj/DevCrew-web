@@ -7,8 +7,10 @@ import { DropdownInput } from "../components/DropdownInput";
 import { InputLabel } from "../components/InputLabel";
 import { GenderDropdownInput } from "../components/GenderDropdownInput";
 import Bottombar from "../components/Bottombar";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import icProfileUpload from "../assets/image/icProfileUpload.svg";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Layout = styled.div`
   width: 1920px;
@@ -63,6 +65,7 @@ const IcProfile = styled.img`
   width: 250px;
   height: 250px;
   margin: 0px 80px;
+  border-radius: 999px;
 `;
 
 const InputContainer = styled.div`
@@ -150,18 +153,106 @@ const FileButton = styled.button`
 `;
 
 const IntroduceSelfPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    profileImage: null,
+    id: "",
+    imageUrl: "",
     name: "",
-    gender: "성별 선택",
     phoneNumber: "",
     email: "",
-    highschool: "",
-    highschoolState: "상태",
-    university: "",
-    universityState: "상태",
-    introduceself: "",
+    introduction: "",
+    highSchool: "",
+    college: "",
+    gender: "MALE",
+    highSchoolStatus: "ENROLLMENT",
+    collegeStatus: "ENROLLMENT",
   });
+
+  // 공통 매핑 함수 (양방향)
+  const mapStatus = (mapping, status, defaultValue) => {
+    if (mapping[status]) return mapping[status]; // 영어 -> 한글
+    return (
+      Object.keys(mapping).find((key) => mapping[key] === status) ||
+      defaultValue
+    ); // 한글 -> 영어
+  };
+
+  // 매핑 테이블 정의
+  const statusMapping = {
+    ENROLLMENT: "재학",
+    GRADUATION: "졸업",
+    ON_LEAVE: "휴학",
+  };
+
+  const genderMapping = {
+    MALE: "남성",
+    FEMALE: "여성",
+  };
+
+  //임시 액세스 토큰
+  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
+
+  //프로필 데이터 받아오기
+  const getProfileData = async () => {
+    try {
+      const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = response.data.data;
+      data.highSchoolStatus = mapStatus(
+        statusMapping,
+        data.highSchoolStatus,
+        "상태"
+      );
+      data.collegeStatus = mapStatus(statusMapping, data.collegeStatus, "상태");
+      data.gender = mapStatus(genderMapping, data.gender, "성별 선택");
+
+      setFormData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //프로필 데이터 보내기
+  const postProfileData = async () => {
+    try {
+      const mappedFormData = {
+        ...formData,
+        highSchoolStatus: mapStatus(
+          statusMapping,
+          formData.highSchoolStatus,
+          "ENROLLMENT"
+        ),
+        collegeStatus: mapStatus(
+          statusMapping,
+          formData.collegeStatus,
+          "ENROLLMENT"
+        ),
+        gender: mapStatus(genderMapping, formData.gender, "MALE"),
+      };
+
+      const response = await axios.post(
+        `https://devcrew.kr/api/v1/profile`,
+        mappedFormData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
 
   const fileInputRef = useRef(null);
 
@@ -185,10 +276,12 @@ const IntroduceSelfPage = () => {
     fileInputRef.current.click();
   };
 
+  //폼 제출 함수
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    setFormData(formData);
+    postProfileData();
+    navigate(`/portfolio`);
   };
 
   return (
@@ -214,7 +307,7 @@ const IntroduceSelfPage = () => {
                     />
                     <InputLabel labelText="사진" />
                     <IcProfile
-                      src={icProfileUpload}
+                      src={formData.imageUrl}
                       alt="프로필 사진 업로드"
                       onClick={handleFileClick}
                       onChange={handleChange}
@@ -243,6 +336,7 @@ const IntroduceSelfPage = () => {
                       <Input
                         name="phoneNumber"
                         placeholder="010-1234-5678"
+                        value={formData.phoneNumber}
                         onChange={handleChange}
                       />
                     </InputField>
@@ -264,17 +358,17 @@ const IntroduceSelfPage = () => {
                       <InputLabel labelText="고등학교"></InputLabel>
                       <Input
                         type="text"
-                        name="highschool"
+                        name="highSchool"
                         labelText="고등학교"
-                        value={formData.highschool}
+                        value={formData.highSchool}
                         onChange={handleChange}
                       />
                     </InputField>
                     <DropdownInput
-                      name="highschoolState"
-                      value={formData.highschoolState}
+                      name="highSchoolStatus"
+                      value={formData.highSchoolStatus}
                       onChange={(value) =>
-                        handleDropdownChange("highschoolState", value)
+                        handleDropdownChange("highSchoolStatus", value)
                       }
                     />
                   </DropDownContainer>
@@ -283,17 +377,17 @@ const IntroduceSelfPage = () => {
                       <InputLabel labelText="대학교"></InputLabel>
                       <Input
                         type="text"
-                        name="university"
+                        name="college"
                         labelText="대학교"
-                        value={formData.university}
+                        value={formData.college}
                         onChange={handleChange}
                       />
                     </InputField>
                     <DropdownInput
-                      name="universityState"
-                      value={formData.universityState}
+                      name="collegeStatus"
+                      value={formData.collegeStatus}
                       onChange={(value) =>
-                        handleDropdownChange("universityState", value)
+                        handleDropdownChange("collegeStatus", value)
                       }
                     />
                   </DropDownContainer>
@@ -306,9 +400,9 @@ const IntroduceSelfPage = () => {
                 </TitleContainer>
                 <NoteInput
                   type="text"
-                  name="introduceself"
+                  name="introduction"
                   placeholder="자기소개를 입력해 주세요."
-                  value={formData.introduceself}
+                  value={formData.introduction}
                   onChange={handleChange}
                 />
               </NoteContainer>

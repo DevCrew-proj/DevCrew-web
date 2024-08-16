@@ -86,10 +86,11 @@ export const GenderDropdownInput = ({ value, onChange }) => {
           <IcChevronDown src={icChevronDown} />
         </DropdownButton>
         <DropdownContent isOpen={isOpen}>
-          <DropdownItem onClick={() => handleItemClick("남")}>남</DropdownItem>
-          <DropdownItem onClick={() => handleItemClick("여")}>여</DropdownItem>
-          <DropdownItem onClick={() => handleItemClick("해당 없음")}>
-            해당 없음
+          <DropdownItem onClick={() => handleItemClick("남성")}>
+            남성
+          </DropdownItem>
+          <DropdownItem onClick={() => handleItemClick("여성")}>
+            여성
           </DropdownItem>
         </DropdownContent>
       </DropdownContainer>

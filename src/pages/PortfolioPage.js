@@ -8,6 +8,7 @@ import Bottombar from "../components/Bottombar";
 import vector from "../assets/image/vector.svg";
 import vectors from "../assets/image/vector2.svg";
 import PortfolioModal from "../components/PortfolioModal";
+import axios from "axios";
 
 const Layout = styled.div`
   width: 1920px;
@@ -26,9 +27,8 @@ const ProfileContainer = styled.div`
   margin-top: 143px;
 `;
 
-const Profile = styled.div`
-  // background: url('');
-  background: gray;
+const Profile = styled.img`
+  object-fit: cover;
   width: 535px;
   height: 658px;
   border-radius: 17px;
@@ -189,10 +189,58 @@ const ArrowButton = styled.button`
 
 const PortfolioPage = () => {
   const navigate = useNavigate();
+  const [profileData, setProfileData] = useState({
+    id: "",
+    imageUrl: "",
+    name: "",
+    phoneNumber: "",
+    email: "",
+    introduction: "",
+    highSchool: "",
+    college: "",
+    gender: "MALE",
+    highSchoolStatus: "ENROLLMENT",
+    collegeStatus: "ENROLLMENT",
+  });
   const itemsPerPage = 9; // 한 페이지에 보여줄 아이템 수
   const [selectedTab, setSelectedTab] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setModalOpen] = useState(false);
+
+  //status mapping
+  const mapStatus = (status) => {
+    const statusMapping = {
+      ENROLLMENT: "재학",
+      GRADUATION: "졸업",
+      ON_LEAVE: "휴학",
+    };
+    return statusMapping[status] || "";
+  };
+
+  //임시 액세스 토큰
+  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
+
+  const getProfileData = async () => {
+    try {
+      const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = response.data.data;
+      data.highSchoolStatus = mapStatus(data.highSchoolStatus);
+      data.collegeStatus = mapStatus(data.collegeStatus);
+
+      setProfileData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -275,31 +323,30 @@ const PortfolioPage = () => {
         <Topbar />
         <Container>
           <ProfileContainer>
-            <Profile />
+            <Profile src={profileData.imageUrl} />
             <InfoContainer>
               <InfoWrapper>
                 <Subtitle>Contact</Subtitle>
-                <Information>전화번호: 010-1234-5678</Information>
-                <Information>이메일: abcde123@gmail.com</Information>
-                <Information>SNS: ililil1234</Information>
-                <Information>직무: PM</Information>
+                <Information>전화번호: {profileData.phoneNumber}</Information>
+                <Information>이메일: {profileData.email}</Information>
+                {/* <Information>SNS: {profileData}</Information> */}
+                {/* <Information>직무: PM</Information> */}
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>Education</Subtitle>
-                <Information>2020.02: 떡잎고등학교 졸업</Information>
-                <Information>2024.02: 서울대학교 경영학사</Information>
+                <Information>
+                  {/* 2020.02:  */}
+                  {profileData.highSchool} {profileData.highSchoolStatus}
+                </Information>
+                <Information>
+                  {/* 2024.02:  */}
+                  {profileData.college} {profileData.collegeStatus}
+                </Information>
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>About me</Subtitle>
-                <Information>안녕하세요 신짱구입니다.</Information>
-                <Information>
-                  다양한 사람들과 협업하는 것을 좋아하며, 함께 기획해나가는
-                  느낌을 들 수 있게 만들고 싶어하는 PM입니다. 많은 사람들이
-                  서비스를 편하게 이용하며 함께 상생하는 것을 목표로 합니다.
-                  저와 함께 모두가 상생하는 프로젝트를 만들어가고 싶으신 분들을
-                  찾고 싶습니다. 함께 성장해나가는 프로젝트가 될 수 있게
-                  노력하겠습니다.
-                </Information>
+                <Information>안녕하세요 {profileData.name}입니다.</Information>
+                <Information>{profileData.introduction}</Information>
               </InfoWrapper>
               <ProfileWriteBtn onClick={() => navigate(`/introduceself`)}>
                 자기소개 작성

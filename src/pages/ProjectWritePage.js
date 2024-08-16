@@ -220,12 +220,12 @@ const AddTitle = styled.div`
 
 const ProjectWritePage = () => {
   const [formData, setFormData] = useState({
-    projectTitle: "",
-    projectImage: null,
+    projectName: "",
+    images: null,
     teamName: "",
-    period: "",
-    projectField: "창업",
-    projects: "",
+    duration: "",
+    projectTag: "창업",
+    summary: "",
     roles: "",
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -255,8 +255,7 @@ const ProjectWritePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    setFormData(formData);
   };
 
   return (
@@ -269,8 +268,8 @@ const ProjectWritePage = () => {
             <Label>프로젝트명 *</Label>
             <Input
               type="text"
-              name="projectTitle"
-              value={formData.companyName}
+              name="projectName"
+              value={formData.projectName}
               onChange={handleChange}
               required
             />
@@ -279,7 +278,7 @@ const ProjectWritePage = () => {
             <Label>프로젝트 이미지 *</Label>
             <FileInput
               type="file"
-              name="projectImage"
+              name="images"
               ref={fileInputRef}
               onChange={handleChange}
               required
@@ -294,7 +293,7 @@ const ProjectWritePage = () => {
             <Input
               type="text"
               name="teamName"
-              value={formData.contestName}
+              value={formData.teamName}
               onChange={handleChange}
               required
             />
@@ -303,8 +302,8 @@ const ProjectWritePage = () => {
             <Label>기간 *</Label>
             <Input
               type="text"
-              name="period"
-              value={formData.organizingBody}
+              name="duration"
+              value={formData.duration}
               onChange={handleChange}
               required
             />
@@ -313,7 +312,7 @@ const ProjectWritePage = () => {
             <Label>분야 *</Label>
             <DropdownContainer>
               <DropdownButton onClick={handleDropdownClick}>
-                {formData.projectField}
+                {formData.projectTag}
                 <IcChevronDown src={icChevronDown} />
               </DropdownButton>
               <DropdownContent isOpen={dropdownOpen}>
@@ -340,9 +339,9 @@ const ProjectWritePage = () => {
           </FormField>
           <AddTitle>프로젝트 요약</AddTitle>
           <TextArea
-            name="projects"
+            name="summary"
             placeholder="프로젝트 내용을 요약하여 입력해 주세요"
-            value={formData.projects}
+            value={formData.summary}
             onChange={handleChange}
           />
           <AddTitle>역할</AddTitle>
