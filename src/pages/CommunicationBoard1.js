@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Listbar3 from "../components/Listbar3";
@@ -10,16 +10,22 @@ const Layout = styled.div`
   height: 1842px;
 `;
 
-const Communication1 = () => {
+const CommunicationBoard1 = () => {
+  const [selectedTag, setSelectedTag] = useState("기획");
+
   return (
     <Layout>
       <Topbar />
-      <Listbar3 title='현직자 조언' showTabs='group1' />
-      <FormBoard />
+      <Listbar3 title='현직자 조언' showTabs='group1' onTabSelect={setSelectedTag} />
+      <FormBoard
+        apiEndpoint="https://devcrew.kr/api/v1/feedback/advice/create"
+        feedbackTag={selectedTag}
+        fileUploadApiEndpoint="https://devcrew.kr/api/images/advice"
+        imageUploadApiEndpoint="https://devcrew.kr/api/images/advice"
+      />
       <Bottombar />
     </Layout>
   );
 };
 
-export default Communication1;
-/* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
+export default CommunicationBoard1;

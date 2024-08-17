@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
-import Listbar3 from "../components/Listbar3";
+import Listbar4 from "../components/Listbar4";
 import FormBoard from "../components/FormBoard";
 import Bottombar from "../components/Bottombar";
 
@@ -10,16 +10,23 @@ const Layout = styled.div`
   height: 1842px;
 `;
 
-const Communication4 = () => {
+const Communication3 = () => {
+  const [selectedTag, setSelectedTag] = useState("JAVA");
+
   return (
     <Layout>
       <Topbar />
-      <Listbar3 title='코드 리뷰' showTabs='group2' />
-      <FormBoard />
+      <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={setSelectedTag} />
+      <FormBoard 
+        apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
+        feedbackTag={selectedTag}
+        fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
+        imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
+      />
       <Bottombar />
     </Layout>
   );
 };
 
-export default Communication4;
+export default Communication3;
 /* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
