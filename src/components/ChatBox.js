@@ -70,15 +70,15 @@ const ChatBox = ({
       <ChatCounterBox>답변 {commentCount}</ChatCounterBox>
       <ShowBox>
         {data.map((data, index) => (
-          <ChatViewBox>
-            <ChatProfile key={index}>
+          <ChatViewBox key={index}>
+            <ChatProfile>
               <Profile
                 memberName={data.memberName}
                 memberImage={data.memberImageUrl}
                 category={dataCategory}
               />
             </ChatProfile>
-            <ChatContent key={index}>{data.content}</ChatContent>
+            <ChatContent>{data.content}</ChatContent>
           </ChatViewBox>
         ))}
       </ShowBox>

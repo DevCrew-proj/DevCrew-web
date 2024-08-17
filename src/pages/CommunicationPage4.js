@@ -82,7 +82,6 @@ const Communication4 = () => {
     searchFeedbackList();
   }, [page]);
 
-  const totalcontents = communicationData.designFeedbackList.length;
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
@@ -92,7 +91,9 @@ const Communication4 = () => {
       <Container>
         <IncumbentBox>
           <Title>디자인 피드백</Title>
-          <CommunicationSideBar totalcontents={totalcontents} />
+          <CommunicationSideBar
+            totalcontents={communicationData.totalFeedbacks}
+          />
           {communicationData.designFeedbackList.map((data, index) => (
             <CommunicationBox key={index} data={data} category='디자인' />
           ))}
