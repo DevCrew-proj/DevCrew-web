@@ -27,7 +27,7 @@ const TabMenu = styled.div`
 
 const TabGroup = styled.div`
   display: ${(props) => (props.visible ? "flex" : "none")};
-  flex-direction: row;
+  flex-direction: row; // 항목을 수평으로 배치
   justify-content: space-between;
 `;
 
@@ -39,16 +39,15 @@ const TabItem = styled.span`
   cursor: pointer;
 `;
 
-const Listbar3 = ({ title, showTabs, onTabSelect }) => {
-  const [activeTab, setActiveTab] = useState("기획");
+const Listbar4 = ({ title, showTabs,onTabSelect }) => {
+  const [activeTab, setActiveTab] = useState("JAVA");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     onTabSelect(tab); 
   };
 
-  const isGroup1Visible = showTabs === "group1";
-  const isNoneVisible = showTabs === "none";
+  const isGroup2Visible = showTabs === "group2";
 
   return (
     <Layout
@@ -61,30 +60,42 @@ const Listbar3 = ({ title, showTabs, onTabSelect }) => {
     >
       <MainTitle>{title}</MainTitle>
       <TabMenu>
-        <TabGroup visible={isGroup1Visible}>
+        <TabGroup visible={isGroup2Visible}>
           <TabItem
-            active={activeTab === "기획"}
-            onClick={() => handleTabClick("기획")}
+            active={activeTab === "JAVA"}
+            onClick={() => handleTabClick("JAVA")}
           >
-            기획
+            JAVA
           </TabItem>
           <TabItem
-            active={activeTab === "디자인"}
-            onClick={() => handleTabClick("디자인")}
+            active={activeTab === "JS"}
+            onClick={() => handleTabClick("JS")}
           >
-            디자인
+            JS
           </TabItem>
           <TabItem
-            active={activeTab === "Front-end"}
-            onClick={() => handleTabClick("Front-end")}
+            active={activeTab === "Kotlin"}
+            onClick={() => handleTabClick("Kotlin")}
           >
-            Front-end
+            Kotlin
           </TabItem>
           <TabItem
-            active={activeTab === "Back-end"}
-            onClick={() => handleTabClick("Back-end")}
+            active={activeTab === "Python"}
+            onClick={() => handleTabClick("Python")}
           >
-            Back-end
+            Python
+          </TabItem>
+          <TabItem
+            active={activeTab === "Swift"}
+            onClick={() => handleTabClick("Swift")}
+          >
+            Swift
+          </TabItem>
+          <TabItem
+            active={activeTab === "C"}
+            onClick={() => handleTabClick("C")}
+          >
+            C
           </TabItem>
           <TabItem
             active={activeTab === "기타"}
@@ -93,10 +104,9 @@ const Listbar3 = ({ title, showTabs, onTabSelect }) => {
             기타
           </TabItem>
         </TabGroup>
-        <TabGroup visible={isNoneVisible}></TabGroup>
       </TabMenu>
     </Layout>
   );
 };
 
-export default Listbar3;
+export default Listbar4;
