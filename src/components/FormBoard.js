@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import FileUpload from "./FileUpload";
 import ImageUpload from "./ImageUpload";
+import axios from "axios";
 
 const Layout = styled.div`
   width: 1490px;
@@ -99,9 +100,45 @@ const PreviewContainer = styled.div`
   height: 100%;
 `;
 
-const CommunicationBoard = () => {
+const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint,fileUploadApiEndpoint }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
+  const [fileUrls, setFileUrls] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+
+  const handleUpload = async () => {
+    const tagMap = {
+      "기획": "PLAN",
+      "디자인": "DESIGN",
+      "front-end": "FRONTEND",
+      "back-end": "BACKEND",
+      "기타": "ETC"
+    };
+
+    const payload = {
+      title: title || "제목 없음",
+      content: details || "내용 없음",
+      feedbackTag: tagMap[feedbackTag] || "ETC", 
+      ...(fileUrls.length > 0 && { fileUrls: fileUrls }),
+      ...(imageUrls.length > 0 && { imageUrls: imageUrls })
+    };
+
+    console.log("Payload being sent:", payload);
+
+    try {
+      const response = await axios.post(apiEndpoint, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log("Response data:", response.data);
+      alert("Upload successful!");
+    } catch (error) {
+      console.error("Error uploading:", error);
+      console.log("Server response:", error.response?.data || error.message);
+      alert("Upload failed. Please try again.");
+    }
+  };
 
   return (
     <Layout>
@@ -123,15 +160,15 @@ const CommunicationBoard = () => {
               maxLength={500}
             />
           </ContentEditor>
-          <FileUpload />
+          <FileUpload setFileUrls={setFileUrls} apiEndpoint={fileUploadApiEndpoint} />
         </ContentContainer>
         <PreviewContainer>
-          <ImageUpload />
+          <ImageUpload setImageUrls={setImageUrls} apiEndpoint={imageUploadApiEndpoint} />
         </PreviewContainer>
       </FormLayout>
-      <UploadButton>업로드 하기</UploadButton>
+      <UploadButton onClick={handleUpload}>업로드 하기</UploadButton>
     </Layout>
   );
 };
 
-export default CommunicationBoard;
+export default FormBoard;
