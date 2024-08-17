@@ -10,16 +10,20 @@ const Layout = styled.div`
   height: 1842px;
 `;
 
-const Communication3 = () => {
+const Communication4 = () => {
   return (
     <Layout>
       <Topbar />
       <Listbar3 title='디자인 피드백' showTabs='none' />
-      <FormBoard />
+      <FormBoard 
+        apiEndpoint="https://devcrew.kr/api/v1/feedback/design/create" 
+        fileUploadApiEndpoint="https://devcrew.kr/api/images/design"
+        imageUploadApiEndpoint="https://devcrew.kr/api/images/design"
+      />
       <Bottombar />
     </Layout>
   );
 };
 
-export default Communication3;
+export default Communication4;
 /* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
