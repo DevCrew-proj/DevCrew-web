@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
+import axios from 'axios';
 import Topbar from '../components/Topbar'
 import vector from '../assets/image/vector.svg'
 import logo from '../assets/image/logowhite.svg'
@@ -298,72 +299,119 @@ const PaginationContainer=styled.div`
  const ContestCheck = () =>{
   const [selectedTab, setSelectedTab] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
-
-  const searchData = Array.from({ length: 37 }, (_, index) => ({
-    title: '아트페스타',
-    type: '플랫폼',
-    company: '기관명',
-    period: '마감중요일'
-  }));
-
-  const filterDataByTab = (tab) => {
-    if (tab === '전체') {
-        return searchData;
-    }
-    return searchData.filter(item => item.type === tab);
+  const [searchData, setSearchData] = useState([]);
+  const [sector, setSector] = useState(''); // 기본값은 공백, '전체' 탭이 선택된 경우
+  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태
+  const sectorMapping = {
+    '전체': '',
+    '창업': 'STARTUP',
+    '생성형 AI': 'AI',
+    '플랫폼': 'PLATFORM',
+    '데이터 분석': 'DATAALALYSIS',
+    '게임': 'GAME',
+    '기타': 'OTHER'
 };
 
-const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage);
+const fetchContests = async () => {
+  try {
+    const sector = sectorMapping[selectedTab]; // 선택된 탭에 따라 sector 값을 설정
+      const response = await axios.get('https://devcrew.kr/api/v1/contests/', {
+          params: {
+              sector: sector || '', // 선택된 탭에 따라 sector 값 설정, 기본값은 빈 문자열
+              page: currentPage-1 , // 페이지 번호는 0부터 시작할 수도 있음
+              size: itemsPerPage,
+              sort: 'createdAt',
+              order: 'desc',
+          },
+      });
+      console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
 
-  const handleClick = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const renderPageNumbers = () => {
-    let startPage, endPage;
-    if (totalPages <= 3) {
-      startPage = 1;
-      endPage = totalPages;
-    } else {
-      if (currentPage <= 2) {
-        startPage = 1;
-        endPage = 3;
-      } else if (currentPage + 1 >= totalPages) {
-        startPage = totalPages - 2;
-        endPage = totalPages;
+      setSearchData(response.data.data.contests || []); // 데이터가 없을 때 빈 배열 설정
+      setTotalPages(Math.ceil(response.data.totalResult / itemsPerPage)); // 전체 페이지 수 계산
+  } catch (error) {
+      console.error('Error fetching contests:', error);
+      if (error.response && error.response.status === 400) {
+          alert('해당 분야의 공모전이 더 이상 존재하지 않습니다.');
+      } else if (error.response && error.response.status === 404) {
+          alert('요청한 페이지를 찾을 수 없습니다.');
       } else {
-        startPage = currentPage - 1;
-        endPage = currentPage + 1;
+          alert('An error occurred while fetching the contests.');
       }
-    }
-    const pageNumbers = [];
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumbers.push(
-        <PageButton key={i} active={currentPage === i} onClick={() => handleClick(i)}>
-          {i}
-        </PageButton>
-      );
-    }
-    return pageNumbers;
+  }
+};
+// const handleTabClick = (tab) => {
+//   console.log('Selected Tab:', tab);
+//   console.log('Mapped Sector:', sectorMapping[tab]);
+//   setSelectedTab(tab);
+//   setSector(sectorMapping[tab]);
+// };
+    // 사용자가 탭을 클릭했을 때 호출되는 함수
+    const handleTabClick = (tab) => {
+      setSelectedTab(tab); // 선택된 탭을 설정
+      setCurrentPage(1); // 페이지를 초기화
   };
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // 페이지 변경 시 currentPage 상태를 업데이트
+};
+// sector 값이 변경될 때마다 API를 호출
+useEffect(() => {
+    fetchContests();
+}, [sector]); // sector 값이 바뀔 때마다 fetchContests 실행
 
-  const currentData = filterDataByTab(selectedTab).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   useEffect(() => {
-    setCurrentPage(1);
-}, [selectedTab]);
+    fetchContests();
+  }, [selectedTab, currentPage]);
 
+  // const handleTabClick = (tabName) => {
+  //   setSelectedTab(tabName);
+  //   setCurrentPage(1); // Change page to 1 when tab changes
+  // };
+
+ // const totalPages = Math.ceil(searchData.length / itemsPerPage);
+  const renderPagination = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+            <PageButton
+                key={i}
+                active={i === currentPage}
+                onClick={() => handlePageChange(i)}
+            >
+                {i}
+            </PageButton>
+        );
+    }
+  // const renderPagination = () => {
+  //   const pageNumbers = [];
+  //   for (let i = 1; i <= totalPages; i++) {
+  //     pageNumbers.push(
+  //       <PageButton
+  //         key={i}
+  //         active={i === currentPage}
+  //         onClick={() => setCurrentPage(i)}
+  //       >
+  //         {i}
+  //       </PageButton>
+  //     );
+  //   }
+    return (
+      <PaginationContainer>
+        {/* <ArrowButton
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        >
+          <img src={vector3} alt="Previous Page" />
+        </ArrowButton> */}
+        <Pagination>{pageNumbers}</Pagination>
+        <ArrowButton
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                >
+                    <img src={vectors} alt="Next Page" />
+                </ArrowButton>
+      </PaginationContainer>
+    );
+  };
+  
 
   return (
     <Layout>
@@ -371,6 +419,17 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
 
     <Title>기업 공모전</Title>
     <MenuContainer>
+    {['전체', '생성형 AI', '플랫폼', '데이터 분석', '창업', '게임', '기타'].map((tab) => (
+          <Menu
+            key={tab}
+            active={selectedTab === tab}
+            onClick={() => handleTabClick(tab)}
+          >
+            {tab}
+          </Menu>
+        ))}
+      </MenuContainer>
+{/*       
         <Menu active={selectedTab === '전체'} onClick={() => setSelectedTab('전체')}>전체</Menu>
         <Menu active={selectedTab === '생성형 AI'} onClick={() => setSelectedTab('생성형 AI')}>생성형 AI</Menu>
         <Menu active={selectedTab === '플랫폼'} onClick={() => setSelectedTab('플랫폼')}>플랫폼</Menu>
@@ -378,7 +437,7 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
         <Menu active={selectedTab === '창업'} onClick={() => setSelectedTab('창업')}>창업</Menu>
         <Menu active={selectedTab === '게임'} onClick={() => setSelectedTab('게임')}>게임</Menu>
         <Menu active={selectedTab === '기타'} onClick={() => setSelectedTab('기타')}>기타</Menu>
-      </MenuContainer>
+      </MenuContainer> */}
       {/* <Content>
         {selectedTab === '전체' && <div>전체 내용</div>}
         {selectedTab === '생성형 AI' && <div>생성형 AI 내용</div>}
@@ -389,23 +448,36 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
         {selectedTab === '기타' && <div>기타 내용</div>}
       </Content> */}
       <SearchInfo>
-      <SearchResultCount>검색결과 {filterDataByTab(selectedTab).length}건</SearchResultCount>
+      <SearchResultCount>검색결과 {searchData.length}건</SearchResultCount>
         <Order>최신순</Order>
         <Vectors src={vector3} alt="화살표" />
         </SearchInfo>
-      <SearchResults>
-        {currentData.map((item, index) => (
-          <ResultItem key={index}  to="/teammatching">
-            <Picture> </Picture>
-            <Contents>
-              <ContestName>{item.title}</ContestName>
-              <ContestTag>{item.type}</ContestTag>
-              <ContestCompany>{item.company}</ContestCompany>
-              <ContestDday>{item.period}</ContestDday>
-            </Contents>
-          </ResultItem>
-        ))}
-      </SearchResults>
+        <SearchResults>
+    {searchData.map((contest) => {
+        // 현재 날짜와 endDate를 비교하여 D-Day 계산
+        const endDate = new Date(contest.endDate);
+        const today = new Date();
+        
+        // 밀리초 단위로 계산한 날짜 차이를 일 단위로 변환
+        const timeDifference = endDate.getTime() - today.getTime();
+        const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // 밀리초를 일로 변환
+
+        return (
+            <ResultItem to={`/contest/${contest.id}`} key={contest.id}>
+                <Picture>
+                    <img src={contest.posterUrl} alt={contest.title} />
+                </Picture>
+                <Contents>
+                    <ContestName>{contest.title}</ContestName>
+                    <ContestTag>{contest.sector}</ContestTag>
+                    <ContestCompany>{contest.organization}</ContestCompany>
+                    <ContestDday>D-{dayDifference >= 0 ? dayDifference : 0}</ContestDday> {/* D-Day 표시 */}
+                </Contents>
+            </ResultItem>
+        );
+    })}
+</SearchResults>
+
       <Upload>
       <UploadLink to="/contestupload">업로드</UploadLink>
         <Vector src = {vector} alt='화살표' />
@@ -415,10 +487,10 @@ const totalPages = Math.ceil(filterDataByTab(selectedTab).length / itemsPerPage)
           {/* <ArrowButton onClick={handlePrev} disabled={currentPage === 1}>
             <img src={vectors} alt="Previous" style={{ transform: 'rotate(180deg)' }} />
           </ArrowButton> */}
-          {renderPageNumbers()}
-          <ArrowButton onClick={handleNext} disabled={currentPage === totalPages}>
-            <img src={vectors} alt="Next" />
-          </ArrowButton>
+          {renderPagination()}
+          {/* <ArrowButton onClick={handleNext} disabled={currentPage === totalPages}>
+            <img src={vectors} alt="Next" /> 
+          </ArrowButton> */}
         </Pagination>
         </PaginationContainer>
         <Bottombar />
