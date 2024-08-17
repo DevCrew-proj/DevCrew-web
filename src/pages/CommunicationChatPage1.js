@@ -113,10 +113,13 @@ const CommunicationChat1 = () => {
   const retrieveChat = async () => {
     try {
       const resChat = await axios.get(
-        `https://devcrew.kr/api/v1/feedback/advices/${id}/comments?page=${page}&size=6`
+        `https://devcrew.kr/api/v1/feedback/advices/${id}/comments?page=${
+          page - 1
+        }&size=6`
       );
       setTotalChatPages(resChat.data.data.totalPages);
       setChatData(resChat.data.data.comments);
+      console.log(resChat.data);
     } catch (error) {
       console.error(error);
     }
