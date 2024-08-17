@@ -90,7 +90,6 @@ const Communication1 = () => {
     searchFeedbackList();
   }, [category, page]);
 
-  const totalcontents = communicationData.adviceFeedbackList.length; // 전체 데이터 수
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
@@ -101,7 +100,9 @@ const Communication1 = () => {
         <IncumbentBox>
           <Title>현직자 조언</Title>
           <ListBar category={category} setCategory={setCategory} />
-          <CommunicationSideBar totalcontents={totalcontents} />
+          <CommunicationSideBar
+            totalcontents={communicationData.totalFeedbacks}
+          />
           {communicationData.adviceFeedbackList.map((data, index) => (
             <CommunicationBox
               key={index}

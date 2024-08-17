@@ -38,6 +38,7 @@ const ImageSlider = ({ images }) => {
     slidesToScroll: 1,
     swipeToSlide: true,
   };
+  console.log(images);
 
   return (
     <>
