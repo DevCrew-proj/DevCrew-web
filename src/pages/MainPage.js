@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar3 from "../components/Topbar3";
 import logo from "../assets/image/logowhite.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
     width: 1920px;
@@ -63,24 +63,33 @@ const Container = styled.div`
     flex-direction: column;
 `;
 const MainPage = () => {
-    const [authToken, setAuthToken] = useState("");
+    // const [authToken, setAuthToken] = useState("");
+
+    // useEffect(() => {
+    //     const token = sessionStorage.getItem("auth_token");
+    //     setAuthToken(token);
+    // }, []);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("auth_token");
-        setAuthToken(token);
-    }, []);
+        const authToken = sessionStorage.getItem("auth_token");
+
+        if (!authToken) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     return (
         <Layout>
             <Topbar3 />
             <Container>
                 <Title>IT 프로젝트를 준비하는 우리를 위한 공간</Title>
-                <Title>{authToken}</Title>
                 <Logocontainer>
                     <Logoimg src={logo} alt="logo" />
                 </Logocontainer>
                 <TeamMatching>
-                    <Matching to="/team">프로젝트 팀매칭 하기</Matching>
+                    <Matching to="/team1">프로젝트 팀매칭 하기</Matching>
                 </TeamMatching>
             </Container>
         </Layout>
