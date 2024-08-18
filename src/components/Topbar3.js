@@ -144,7 +144,10 @@ const getUserName = async (accessToken) => {
 };
 
 const accessToken = sessionStorage.getItem("auth_token");
-const username = await getUserName(accessToken);
+const username = "";
+if (accessToken) {
+    username = await getUserName(accessToken);
+}
 
 const Topbar3 = () => {
     return (
