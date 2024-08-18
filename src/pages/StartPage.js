@@ -67,6 +67,7 @@ const StartPage = () => {
 
     useEffect(() => {
         const authToken = sessionStorage.getItem("auth_token");
+        console.log("sessionStorage에 저장된 엑세스토큰입니다: " + authToken);
 
         if (authToken) {
             navigate("/main");
