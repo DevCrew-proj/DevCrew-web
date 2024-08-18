@@ -122,49 +122,31 @@ const Auth = styled.div`
     line-height: normal;
 `;
 
+const getUserName = async (accessToken) => {
+    try {
+        const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        const userName = response.data.kakao_account.profile.nickname;
+        console.log(`User Name: ${userName}`);
+
+        return userName;
+    } catch (error) {
+        console.error(
+            "Error fetching user data:",
+            error.response ? error.response.data : error.message
+        );
+        throw error;
+    }
+};
+
+const accessToken = sessionStorage.getItem("auth_token");
+const username = await getUserName(accessToken);
+
 const Topbar3 = () => {
-    const [username, setUsername] = useState("");
-    const getUserName = async (accessToken) => {
-        try {
-            const response = await axios.get(
-                "https://kapi.kakao.com/v2/user/me",
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type":
-                            "application/x-www-form-urlencoded;charset=utf-8",
-                    },
-                }
-            );
-
-            const userName = response.data.kakao_account.profile.nickname;
-            console.log(`User Name: ${userName}`);
-
-            return userName;
-        } catch (error) {
-            console.error(
-                "Error fetching user data:",
-                error.response ? error.response.data : error.message
-            );
-            throw error;
-        }
-    };
-
-    useEffect(() => {
-        const authToken = sessionStorage.getItem("auth_token");
-
-        if (authToken) {
-            getUserName(authToken)
-                .then((name) => {
-                    setUsername(name);
-                })
-                .catch((error) => {
-                    console.error("Error setting username:", error);
-                    setUsername("에러");
-                });
-        }
-    }, []);
-
     return (
         <Layout>
             <Logocontainer>
