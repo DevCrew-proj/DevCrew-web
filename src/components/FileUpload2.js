@@ -13,12 +13,10 @@ const FileUploadContainer = styled.div`
 
 const FileBox = styled.div`
   width: 100%;
-  max-width: 763px;
-  max-height: 53px;
   overflow: hidden;
   background-color: #f7f7f7;
   margin: 0;
-  padding: 15px 24px;
+  padding: 15px 48px 15px 24px;
   box-sizing: border-box;
   color: #6e6e6e;
   font-family: Pretendard;
@@ -33,10 +31,12 @@ const DownloadIcon = styled.img`
 `;
 
 const ArrowIcon = styled.img`
+  position: absolute;
+  top: 45%;
+  right: 24px;
   width: 20px;
   height: 10px;
   float: right;
-  margin-top: 7px;
   cursor: pointer;
   // click 시 회전 animation
   transform: ${(props) =>
@@ -60,7 +60,9 @@ const FileUpload2 = ({ files }) => {
   return (
     <FileUploadContainer>
       <FileBox>
-        <DownloadIcon src={download} alt='File Download' />
+        <a href={files}>
+          <DownloadIcon src={download} alt='File Download' />
+        </a>
         {files[0]}
         <ArrowIcon
           src={Vector4}
@@ -76,7 +78,9 @@ const FileUpload2 = ({ files }) => {
           ? null
           : files.slice(1).map((file, index) => (
               <FileBox key={index}>
-                <DownloadIcon src={download} alt={`File Download ${index}`} />
+                <a href={file}>
+                  <DownloadIcon src={download} alt={`File Download ${index}`} />
+                </a>
                 {file}
               </FileBox>
             ))}

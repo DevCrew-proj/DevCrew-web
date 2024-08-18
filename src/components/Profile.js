@@ -26,30 +26,30 @@ const CommunicationBoxCategory = styled.span`
   color: #fff;
   background-color: #5d6c6f;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   font-family: AppleSDGothicNeoM00;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 400;
   text-align: center;
   line-height: 1.4;
-  padding: 2px 5px 1px;
+  padding: 3px 9px 2px;
   margin-right: 7px;
 `;
 
 const ChatTime = styled.span`
   color: rgba(0, 0, 0, 0.5);
   font-family: AppleSDGothicNeoM00;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 400;
 `;
 
 const Profile = ({ memberName, memberImage, category }) => {
   return (
     <>
-      <div style={{ width: "40%", float: "left" }}>
+      <div style={{ width: "35%", float: "left" }}>
         <ProfileImage src={memberImage} />
       </div>
-      <div style={{ width: "60%", float: "left" }}>
+      <div style={{ width: "65%", float: "left" }}>
         <CommunicationName>
           {memberName === undefined ? "신짱구" : memberName}
         </CommunicationName>

@@ -43,7 +43,7 @@ const ListBar = ({ category, setCategory }) => {
         전체
       </List>
       <List
-        className={`${category === "기획" ? "active" : null}`}
+        className={`${category === "PLAN" ? "active" : null}`}
         onClick={() => setCategory("PLAN")}
       >
         기획

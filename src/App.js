@@ -30,65 +30,54 @@ import TeamApplication from "./pages/TeamApplicationPage.js";
 import KakaoAuth from "./pages/KakaoAuth.js";
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Start />} />
-                <Route path="/main" element={<Main />} />
-                <Route path="/team1" element={<ContestCheck />} />
-                <Route path="/team2" element={<ContestCheckSchool />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signinbusiness" element={<SigninBusiness />} />
-                <Route path="/portfolio" element={<PortfolioPage />} />
-                <Route path="/projectWrite" element={<ProjectWritePage />} />
-                {/* <Route path='/introduce' element={<IntroducePage />} /> */}
-                <Route path="/introduceself" element={<IntroduceSelfPage />} />
-                <Route path="/teamComposition" element={<TeamComposition />} />
-                <Route path="/communication1" element={<Communication1 />} />
-                <Route
-                    path="/communicationBoard1"
-                    element={<CommunicationBoard1 />}
-                />
-                <Route
-                    path="/communicationChat1"
-                    element={<CommunicationChat1 />}
-                />
-                <Route path="/communication2" element={<Communication2 />} />
-                <Route
-                    path="/communicationBoard2"
-                    element={<CommunicationBoard2 />}
-                />
-                <Route
-                    path="/communicationChat2"
-                    element={<CommunicationChat2 />}
-                />
-                <Route path="/communication3" element={<Communication3 />} />
-                <Route
-                    path="/communicationBoard3"
-                    element={<CommunicationBoard3 />}
-                />
-                <Route
-                    path="/communicationChat3"
-                    element={<CommunicationChat3 />}
-                />
-                <Route path="/communication4" element={<Communication4 />} />
-                <Route
-                    path="/communicationBoard4"
-                    element={<CommunicationBoard4 />}
-                />
-                <Route
-                    path="/communicationChat4"
-                    element={<CommunicationChat4 />}
-                />
-                <Route path="/contestupload" element={<ContestUpload />} />
-                <Route path="/devcrewintro" element={<DevcrewIntroPage />} />
-                <Route path="/teammatching" element={<TeamMatching />} />
-                <Route path="/teamApplication" element={<TeamApplication />} />
-                <Route path="/api/social-login" element={<KakaoAuth />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<Start />} />
+        <Route path='/main' element={<Main />} />
+        <Route path='/team1' element={<ContestCheck />} />
+        <Route path='/team2' element={<ContestCheckSchool />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signin' element={<Signin />} />
+        <Route path='/signinbusiness' element={<SigninBusiness />} />
+        <Route path='/portfolio' element={<PortfolioPage />} />
+        <Route path='/projectWrite' element={<ProjectWritePage />} />
+        {/* <Route path='/introduce' element={<IntroducePage />} /> */}
+        <Route path='/introduceself' element={<IntroduceSelfPage />} />
+        <Route path='/teamComposition' element={<TeamComposition />} />
+        <Route path='/communication1' element={<Communication1 />} />
+        <Route path='/communicationBoard1' element={<CommunicationBoard1 />} />
+        <Route
+          path='/communicationChat1/:id'
+          element={<CommunicationChat1 />}
+        />
+        <Route path='/communication2' element={<Communication2 />} />
+        <Route path='/communicationBoard2' element={<CommunicationBoard2 />} />
+        <Route
+          path='/communicationChat2/:id'
+          element={<CommunicationChat2 />}
+        />
+        <Route path='/communication3' element={<Communication3 />} />
+        <Route path='/communicationBoard3' element={<CommunicationBoard3 />} />
+        <Route
+          path='/communicationChat3/:id'
+          element={<CommunicationChat3 />}
+        />
+        <Route path='/communication4' element={<Communication4 />} />
+        <Route path='/communicationBoard4' element={<CommunicationBoard4 />} />
+        <Route
+          path='/communicationChat4/:id'
+          element={<CommunicationChat4 />}
+        />
+        <Route path='/contestupload' element={<ContestUpload />} />
+        <Route path='/devcrewintro' element={<DevcrewIntroPage />} />
+        <Route path='/teammatching' element={<TeamMatching />} />
+        <Route path='/teamApplication' element={<TeamApplication />} />
+        <Route path='/social-login' element={<KakaoAuth />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
+
