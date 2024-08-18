@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/image/logowhite.svg";
 import { Link } from "react-router-dom";
@@ -123,6 +123,7 @@ const Auth = styled.div`
 `;
 
 const Topbar3 = () => {
+    const [username, setUsername] = useState("");
     const getUserName = async (accessToken) => {
         try {
             const response = await axios.get(
@@ -136,7 +137,6 @@ const Topbar3 = () => {
                 }
             );
 
-            // 사용자 정보에서 이름을 가져옴
             const userName = response.data.kakao_account.profile.nickname;
             console.log(`User Name: ${userName}`);
 
@@ -150,10 +150,20 @@ const Topbar3 = () => {
         }
     };
 
-    // Example usage
+    useEffect(() => {
+        const authToken = sessionStorage.getItem("auth_token");
 
-    const authToken = sessionStorage.getItem("auth_token");
-    const username = getUserName(authToken);
+        if (authToken) {
+            getUserName(authToken)
+                .then((name) => {
+                    setUsername(name);
+                })
+                .catch((error) => {
+                    console.error("Error setting username:", error);
+                    setUsername("에러");
+                });
+        }
+    }, []);
 
     return (
         <Layout>
