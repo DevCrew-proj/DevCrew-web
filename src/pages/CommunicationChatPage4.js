@@ -97,6 +97,7 @@ const CommunicationChat3 = () => {
   const [chatData, setChatData] = useState([]); // 채팅 데이터
   const id = location.state.id; // id 값 받아오기
   const category = location.state.category; // category 값 받아오기
+  const [content, setContent] = useState(""); // 댓글 내용
 
   const retrieveFeedback = async () => {
     try {
@@ -124,6 +125,39 @@ const CommunicationChat3 = () => {
     }
   };
 
+  const postChat = async (content) => {
+    try {
+      await axios.post(
+        `https://devcrew.kr/api/v1/feedback/designs/${id}/comments`,
+        { content: content },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        }
+      );
+      alert("댓글이 등록되었습니다.");
+      window.location.reload(function () {
+        window.scrollTo(0, 0);
+      });
+    } catch (error) {
+      console.error(error);
+      alert("댓글 등록에 실패했습니다.");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (localStorage.getItem("auth_token") === null) {
+      alert("로그인 후 이용해주세요.");
+    } else if (content === "") {
+      alert("댓글을 입력해주세요.");
+    } else {
+      postChat(content);
+      retrieveChat();
+    }
+  };
+
   useEffect(() => {
     retrieveFeedback();
   }, []);
@@ -139,10 +173,14 @@ const CommunicationChat3 = () => {
         <IncumbentBox>
           <Title>디자인 피드백</Title>
           <CommunicationChatContainer data={singleData} category={category} />
-          <InputChatBox placeholder='로그인 후 댓글 남기기' />
-          <SubmitBtn onClick={() => navigate("/communication4")}>
-            게시
-          </SubmitBtn>
+          <InputChatBox
+            placeholder='로그인 후 댓글 남기기'
+            maxLength='500'
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          />
+          <SubmitBtn onClick={() => handleSubmit()}>게시</SubmitBtn>
           <ChatBox
             data={chatData}
             commentCount={commentCount}

@@ -6,6 +6,7 @@ import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
 import ChatBox from "../components/ChatBox";
+import { set } from "react-hook-form";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
@@ -97,6 +98,7 @@ const CommunicationChat1 = () => {
   }); // 단일 데이터
   const [chatData, setChatData] = useState([]); // 채팅 데이터
   const id = location.state.id; // id 값 받아오기
+  const [content, setContent] = useState(""); // 댓글 내용
 
   const retrieveFeedback = async () => {
     try {
@@ -119,9 +121,41 @@ const CommunicationChat1 = () => {
       );
       setTotalChatPages(resChat.data.data.totalPages);
       setChatData(resChat.data.data.comments);
-      console.log(resChat.data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const postChat = async (content) => {
+    try {
+      await axios.post(
+        `https://devcrew.kr/api/v1/feedback/advices/${id}/comments`,
+        { content: content },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        }
+      );
+      alert("댓글이 등록되었습니다.");
+      window.location.reload(function () {
+        window.scrollTo(0, 0);
+      });
+    } catch (error) {
+      console.error(error);
+      alert("댓글 등록에 실패했습니다.");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (localStorage.getItem("auth_token") === null) {
+      alert("로그인 후 이용해주세요.");
+    } else if (content === "") {
+      alert("댓글을 입력해주세요.");
+    } else {
+      postChat(content);
+      retrieveChat();
     }
   };
 
@@ -139,11 +173,18 @@ const CommunicationChat1 = () => {
       <Container>
         <IncumbentBox>
           <Title>현직자 조언</Title>
-          <CommunicationChatContainer data={singleData} />
-          <InputChatBox placeholder='로그인 후 댓글 남기기' />
-          <SubmitBtn onClick={() => navigate("/communication1")}>
-            게시
-          </SubmitBtn>
+          <CommunicationChatContainer
+            data={singleData}
+            category={singleData.feedbackTag}
+          />
+          <InputChatBox
+            placeholder='로그인 후 댓글 남기기, 최대 500자 이내'
+            maxLength='500'
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          />
+          <SubmitBtn onClick={() => handleSubmit()}>게시</SubmitBtn>
           <ChatBox
             data={chatData}
             commentCount={commentCount}

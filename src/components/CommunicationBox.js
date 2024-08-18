@@ -76,19 +76,19 @@ const CommunicationBox = ({ data, category }) => {
 
   const handleClick = () => {
     if (domain === "/communication1") {
-      navigate("/communicationChat1", {
+      navigate(`/communicationChat1/${data.id}`, {
         state: { id: data.id },
       });
     } else if (domain === "/communication2") {
-      navigate("/communicationChat2", {
+      navigate(`/communicationChat2/${data.id}`, {
         state: { id: data.id, category: "기획" },
       });
     } else if (domain === "/communication3") {
-      navigate("/communicationChat3", {
+      navigate(`/communicationChat3/${data.id}`, {
         state: { id: data.id },
       });
     } else if (domain === "/communication4") {
-      navigate("/communicationChat4", {
+      navigate(`/communicationChat4/${data.id}`, {
         state: { id: data.id, category: "디자인" },
       });
     }

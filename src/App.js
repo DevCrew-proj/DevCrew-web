@@ -47,16 +47,28 @@ function App() {
         <Route path='/teamComposition' element={<TeamComposition />} />
         <Route path='/communication1' element={<Communication1 />} />
         <Route path='/communicationBoard1' element={<CommunicationBoard1 />} />
-        <Route path='/communicationChat1' element={<CommunicationChat1 />} />
+        <Route
+          path='/communicationChat1/:id'
+          element={<CommunicationChat1 />}
+        />
         <Route path='/communication2' element={<Communication2 />} />
         <Route path='/communicationBoard2' element={<CommunicationBoard2 />} />
-        <Route path='/communicationChat2' element={<CommunicationChat2 />} />
+        <Route
+          path='/communicationChat2/:id'
+          element={<CommunicationChat2 />}
+        />
         <Route path='/communication3' element={<Communication3 />} />
         <Route path='/communicationBoard3' element={<CommunicationBoard3 />} />
-        <Route path='/communicationChat3' element={<CommunicationChat3 />} />
+        <Route
+          path='/communicationChat3/:id'
+          element={<CommunicationChat3 />}
+        />
         <Route path='/communication4' element={<Communication4 />} />
         <Route path='/communicationBoard4' element={<CommunicationBoard4 />} />
-        <Route path='/communicationChat4' element={<CommunicationChat4 />} />
+        <Route
+          path='/communicationChat4/:id'
+          element={<CommunicationChat4 />}
+        />
         <Route path='/contestupload' element={<ContestUpload />} />
         <Route path='/devcrewintro' element={<DevcrewIntroPage />} />
         <Route path='/teammatching' element={<TeamMatching />} />
