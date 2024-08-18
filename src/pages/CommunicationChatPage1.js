@@ -59,6 +59,7 @@ const InputChatBox = styled.textarea`
   &:focus {
     outline: none;
   }
+  scrollbar-width: thin;
 `;
 
 const SubmitBtn = styled.button`
