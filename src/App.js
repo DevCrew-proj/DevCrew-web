@@ -73,7 +73,7 @@ function App() {
         <Route path='/devcrewintro' element={<DevcrewIntroPage />} />
         <Route path='/teammatching' element={<TeamMatching />} />
         <Route path='/teamApplication' element={<TeamApplication />} />
-        <Route path='/social-login' element={<KakaoAuth />} />
+        <Route path='/api/social-login' element={<KakaoAuth />} />
       </Routes>
     </Router>
   );
