@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/image/logowhite.svg";
 import { Link } from "react-router-dom";
 import ArrowIcon from "../assets/image/arrow2.svg";
+import axios from "axios";
 
 const Layout = styled.div`
     width: 1920px;
@@ -122,6 +123,38 @@ const Auth = styled.div`
 `;
 
 const Topbar3 = () => {
+    const getUserName = async (accessToken) => {
+        try {
+            const response = await axios.get(
+                "https://kapi.kakao.com/v2/user/me",
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        "Content-Type":
+                            "application/x-www-form-urlencoded;charset=utf-8",
+                    },
+                }
+            );
+
+            // 사용자 정보에서 이름을 가져옴
+            const userName = response.data.kakao_account.profile.nickname;
+            console.log(`User Name: ${userName}`);
+
+            return userName;
+        } catch (error) {
+            console.error(
+                "Error fetching user data:",
+                error.response ? error.response.data : error.message
+            );
+            throw error;
+        }
+    };
+
+    // Example usage
+
+    const authToken = sessionStorage.getItem("auth_token");
+    const username = getUserName(authToken);
+
     return (
         <Layout>
             <Logocontainer>
@@ -163,7 +196,7 @@ const Topbar3 = () => {
                         </DropdownItem>
                     </DropdownContent>
                 </Dropdown>
-                <Auth>신짱구 님</Auth>
+                <Auth>{username} 님</Auth>
             </MenuContainer>
         </Layout>
     );
