@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
 import ChatBox from "../components/ChatBox";
-import { set } from "react-hook-form";
 
 const Layout = styled.div`
   // 원래 크기에서 height는 60% 감소
@@ -80,7 +79,6 @@ const SubmitBtn = styled.button`
 `;
 
 const CommunicationChat1 = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [page, setPage] = useState(1); // 댓글 페이지
   const [commentCount, setCommentCount] = useState(0); // 댓글 수
@@ -135,7 +133,7 @@ const CommunicationChat1 = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`,
           },
         }
       );
