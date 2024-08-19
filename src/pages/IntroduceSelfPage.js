@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from "react";
 import icProfileUpload from "../assets/image/icProfileUpload.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import ImageUpload3 from "../components/ImageUpload3";
 
 const Layout = styled.div`
   width: 1920px;
@@ -59,13 +60,8 @@ const IcPermIdentity = styled.img`
   height: 45px;
 `;
 
-const LabelContainer = styled.div``;
-
-const IcProfile = styled.img`
-  width: 250px;
-  height: 250px;
-  margin: 0px 80px;
-  border-radius: 999px;
+const LabelContainer = styled.div`
+  position: relative;
 `;
 
 const InputContainer = styled.div`
@@ -244,7 +240,6 @@ const IntroduceSelfPage = () => {
           },
         }
       );
-      console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -254,15 +249,9 @@ const IntroduceSelfPage = () => {
     getProfileData();
   }, []);
 
-  const fileInputRef = useRef(null);
-
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "profileImage") {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleDropdownChange = (dropdown, value) => {
@@ -272,16 +261,12 @@ const IntroduceSelfPage = () => {
     }));
   };
 
-  const handleFileClick = () => {
-    fileInputRef.current.click();
-  };
-
   //폼 제출 함수
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormData(formData);
     postProfileData();
-    navigate(`/portfolio`);
+    navigate(`/portfolio`, { state: { formData } });
   };
 
   return (
@@ -299,19 +284,24 @@ const IntroduceSelfPage = () => {
               <ProfileContainer>
                 <ProfileWrapper>
                   <LabelContainer>
-                    <FileInput
+                    {/* <FileInput
                       type="file"
                       name="profileImage"
                       ref={fileInputRef}
                       onChange={handleChange}
-                    />
+                    /> */}
                     <InputLabel labelText="사진" />
-                    <IcProfile
+                    <ImageUpload3
+                      formData={formData}
+                      setFormData={setFormData}
+                      apiEndpoint="https://devcrew.kr/api/image/member"
+                    />
+                    {/* <IcProfile
                       src={formData.imageUrl}
                       alt="프로필 사진 업로드"
                       onClick={handleFileClick}
                       onChange={handleChange}
-                    />
+                    /> */}
                   </LabelContainer>
                   <InputContainer>
                     <InputField>

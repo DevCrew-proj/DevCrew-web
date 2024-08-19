@@ -13,11 +13,12 @@ const Portfolio = styled.div`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.16);
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 164px;
   height: 164px;
   background: #ffffff;
   border-radius: 20px;
+  object-fit: cover;
 `;
 
 const InfoWrapper = styled.div`
@@ -72,22 +73,20 @@ const IcArrowRightUp = styled.img`
   height: 10px;
 `;
 
-export const PortfolioCard = ({ onClick }) => {
+export const PortfolioCard = ({ onClick, data }) => {
   return (
     <>
       <Portfolio onClick={onClick}>
-        <Thumbnail />
+        <Thumbnail src={data.images[0]} />
         <InfoWrapper>
           <PortfolioInfo1>
-            <PortfolioTitle>이사.ZIP</PortfolioTitle>
-            <Chip>플랫폼</Chip>
-            <Description>
-              이사, 부동산에 스트레스를 받아하는 사회초년생을 위한 서비스
-            </Description>
+            <PortfolioTitle>{data.projectName}</PortfolioTitle>
+            <Chip>{data.tag}</Chip>
+            <Description>{data.summary}</Description>
           </PortfolioInfo1>
           <PortfolioInfo2>
-            <Description>UMC 데모데이</Description>
-            <Description>2023/10/2</Description>
+            <Description>{data.teamName}</Description>
+            <Description>{data.duration}</Description>
             <IcArrowRightUp src={icArrowRightUp} />
           </PortfolioInfo2>
         </InfoWrapper>
