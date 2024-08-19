@@ -1,5 +1,6 @@
 // src/pages/ContestUpload.js
 import React, { useState, useRef } from "react";
+import axios from 'axios';
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import addfile from "../assets/image/AddFile.svg";
@@ -276,11 +277,38 @@ const ContestUpload = () => {
         fileInputRef.current.click();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => { // async 추가
         e.preventDefault();
-        // Handle form submission logic here
-        console.log(formData);
+    
+        const data = new FormData();
+        data.append("poster", formData.posterImage);
+        data.append("title", formData.contestName);
+        data.append("organization", formData.organizingBody);
+        data.append("participantTarget", formData.targetAudience);
+        data.append("award", formData.prizeAmount);
+        data.append("homepageUrl", formData.website);
+        data.append("acceptancePeriod", formData.applicationPeriod);
+        data.append("sector", formData.contestField.toUpperCase());
+        data.append("benefits", formData.activityBenefits);
+        data.append("plusBenefits", formData.additionalBenefits);
+        data.append("description", formData.additionalNotes);
+    
+        try {
+            const response = await axios.post("https://devcrew.kr/api/v1/contest/", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDYwOTM2OCwiZW1haWwiOiJnYWh5dW5nMTlAbmF2ZXIuY29tIn0.7Yt0khjYHs2nqhNNP4HvzUsi-0tW0yWzUSsObHo71OjdhDGbVPz_BCQuoU2VhiodXr1H7E4cOl9mgQ_Hh9JA2Q`
+                },
+            });
+            console.log("응답 데이터:", response.data);
+            alert("공모전이 성공적으로 등록되었습니다.");
+        } catch (error) {
+            console.error("공모전 등록 중 오류 발생:", error);
+            alert("공모전 등록 중 오류가 발생했습니다.");
+        }
     };
+    
+
 
     return (
         <Layout>

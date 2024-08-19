@@ -1,8 +1,9 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 import ContestInfo from '../components/ContestInfo'
 import Topbar from '../components/Topbar'
-import {Link } from 'react-router-dom'
+import {Link ,useParams} from 'react-router-dom'
 import Bottombar from '../components/Bottombar'
 
 
@@ -26,8 +27,16 @@ flex-shrink: 0;
 background: rgba(47, 79, 79, 0.30);
 margin-left : 150px;
 `
+const TitleContainer = styled.div`
+  margin-top: 130px;
+  margin-left: 342px;
+  position: relative;  /* UnderLine의 위치를 Title과 맞추기 위해 부모 컨테이너에 relative 설정 */
+  display: inline-block;  /* Title의 크기를 텍스트 내용에 맞추기 위해 inline-block 설정 */
+`;
+
 const Title = styled.div`
-width: 732px;
+display : inline-block; /* 내용에 맞춰서 너비가 조정되도록 설정 */
+width: fit-content;
 height: 61px;
 flex-shrink: 0;
 color: #2F4F4F;
@@ -36,16 +45,19 @@ font-size: 43px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-margin-top : 130px;
-margin-left: 342px;
+position : relative;
+z-index: 1;  /* Title을 앞쪽에 배치 */
 `
 const UnderLine=styled.div`
-width: 760px;
+width: 120%;
 height: 44px;
 flex-shrink: 0;
+position : absolute;
 background: rgba(186, 203, 206, 0.40);
-margin-left: 342px;
-margin-top : -37px;
+left: 0;  /* 왼쪽 정렬 */
+bottom: -5px;  /* Title의 하단에 위치하도록 조정 */
+z-index: -1;
+
 
 `
 const ContentLayout = styled.div`
@@ -218,6 +230,32 @@ color: #5D6C6F;
 `
 
 const TeamMatching = () => {
+  const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
+  const [error, setError] = useState(null); // 오류 상태를 위한 상태
+
+  const { contestId } = useParams();  // contestId 가져오기
+
+  useEffect(() => {
+    console.log("Fetching data for contestId:", contestId); // 이 라인을 추가하여 contestId를 확인합니다.
+    const fetchContestData = async () => {
+      try {
+        const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}`);
+        setContestData(response.data.data);
+        setLoading(false);
+        console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
+
+      } catch (err) {
+        console.error('Error fetching contest data:', err.response ? err.response.data : err.message);
+        setError(err);
+        setLoading(false);
+      }
+    };
+  
+    fetchContestData();
+  }, [contestId]);
+
+
   const [teamData, setTeamData] = useState([
     { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
     { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
@@ -245,14 +283,22 @@ const TeamMatching = () => {
   return (
     <Layout>
     <Topbar />
+    {contestData ? (
+      <>
     <ContestInfoWrapper>
-        <ContestInfo />
+        <ContestInfo contestId={contestId} />
       </ContestInfoWrapper>
     <Divider />
-    <Title>[아트페스타 제주 2024] 아트링커 5기 모집</Title>
+    <TitleContainer>
+  <Title>
+    {contestData.title}
     <UnderLine />
-    <ContentLayout>
-    <Introduce>
+  </Title>
+ 
+</TitleContainer>
+    
+    <ContentLayout> {contestData.description}
+    {/* <Introduce>
       공공인재스쿨은 팀별 프로젝트를 통해 공공마인드와 문제해결력을 갖춘 미래 리더를 양성합니다. <br />
       공공인재스쿨 2기는 외국인과 함께 지방 관광지를 탐방 및 분석하며 외국인의 관점에서 관광지를 개선하는 프로젝트에 참여합니다.
     </Introduce>
@@ -275,7 +321,7 @@ const TeamMatching = () => {
       - 면접(오프라인) : 7.16(화) ~ 7.17(수)<br />
       - 최종합격자 발표 : 7.18(목), 10시 이후<br />
       * 상세한 일정은 포스터를 참고해 주시기 바랍니다
-      </Content>
+      </Content> */}
     </ContentLayout>
     <Divider />
     <MatchingTitle>프로젝트팀 매칭</MatchingTitle>
@@ -346,6 +392,10 @@ const TeamMatching = () => {
         </Button2>
       </ButtonGroup>
       <Bottombar />
+      </>
+    ) : (
+      <div>Loading...</div>
+    )}
     </Layout>
   );
 }
