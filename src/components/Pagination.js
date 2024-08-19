@@ -94,6 +94,18 @@ const Pagination = ({ page, totalPages, setPage }) => {
     }
   };
 
+  const handleAfterArrow = () => {
+    // 페이지가 3페이지 이하일 때
+    if (totalPages <= 3) return false;
+
+    // 페이지가 4페이지 이상일 때
+    if (page === firstPageNum && page + 3 <= totalPages) return true;
+    if (page === firstPageNum + 1 && page + 2 <= totalPages) return true;
+    if (page === firstPageNum + 2 && page + 1 <= totalPages) return true;
+
+    return false;
+  };
+
   return (
     <PaginationContainer>
       <PagingBox>
@@ -144,9 +156,9 @@ const Pagination = ({ page, totalPages, setPage }) => {
           as='button'
           onClick={() => handlePageAdd()}
         >
-          {totalPages <= 3 || page > totalPages - 2 ? null : (
+          {handleAfterArrow() ? (
             <ArrowImg src={Arrow} alt='Arrow' rotate='rotate(0deg)' />
-          )}
+          ) : null}
         </PageList>
       </PagingBox>
     </PaginationContainer>
