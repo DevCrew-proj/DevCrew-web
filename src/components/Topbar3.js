@@ -122,36 +122,37 @@ const Auth = styled.div`
     line-height: normal;
 `;
 
-// const getUserName = async (accessToken) => {
-//     try {
-//         const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
-//             headers: {
-//                 Authorization: `Bearer ${accessToken}`,
-//             },
-//         });
-
-//         const userName = response.data.kakao_account.profile.nickname;
-//         console.log(`User Name: ${userName}`);
-
-//         return userName;
-//     } catch (error) {
-//         console.error(
-//             "Error fetching user data:",
-//             error.response ? error.response.data : error.message
-//         );
-//         throw error;
-//     }
-// };
-
 const accessToken = sessionStorage.getItem("auth_token");
 console.log("sessionStorage에 저장된 엑세스토큰입니다: " + accessToken);
 
-const username = "";
-// if (accessToken) {
-//     username = await getUserName(accessToken);
-// }
-
 const Topbar3 = () => {
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    "https://devcrew.kr/api/name",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                            accept: "*/*",
+                        },
+                    }
+                );
+
+                if (response.data && response.data.data) {
+                    setUsername(response.data.data.name);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setUsername("신짱구");
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Layout>
             <Logocontainer>
