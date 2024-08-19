@@ -82,6 +82,7 @@ const CommunicationChatContainer = ({ data, category }) => {
             memberName={data.memberName}
             memberImage={data.memberImageUrl}
             category={category}
+            createdAt={data.createAt}
           />
         </CommunicationProfileBox>
         <CommunicationContentBox>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
 const ProfileImage = styled.img`
   width: 50px;
@@ -43,7 +44,31 @@ const ChatTime = styled.span`
   font-weight: 400;
 `;
 
-const Profile = ({ memberName, memberImage, category }) => {
+const Profile = ({ memberName, memberImage, category, createdAt }) => {
+  // 시간 표기를 위한 state
+  const [timeAgo, setTimeAgo] = useState("");
+  const updateTimeStamp = () => {
+    // 경과된 시간 계산 (1초 = 1000)
+    const timeElapsed = Math.floor((new Date() - new Date(createdAt)) / 1000);
+
+    if (timeElapsed < 60) {
+      setTimeAgo(`방금 전`);
+    } else if (timeElapsed < 60 * 60) {
+      const minutes = Math.floor(timeElapsed / 60);
+      setTimeAgo(`${minutes}분 전`);
+    } else if (timeElapsed < 60 * 60 * 24) {
+      const hours = Math.floor(timeElapsed / (60 * 60));
+      setTimeAgo(`${hours}시간 전`);
+    } else {
+      const days = Math.floor(timeElapsed / (60 * 60 * 24));
+      setTimeAgo(`${days}일 전`);
+    }
+  };
+
+  useEffect(() => {
+    updateTimeStamp();
+  });
+
   return (
     <>
       <div style={{ width: "35%", float: "left" }}>
@@ -56,7 +81,7 @@ const Profile = ({ memberName, memberImage, category }) => {
         <CommunicationBoxCategory>
           {category === undefined ? "카테고리" : category}
         </CommunicationBoxCategory>
-        <ChatTime>5분 전</ChatTime>
+        <ChatTime>{timeAgo}</ChatTime>
       </div>
     </>
   );
