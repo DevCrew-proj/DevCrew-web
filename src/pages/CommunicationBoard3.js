@@ -16,7 +16,7 @@ const Communication3 = () => {
   return (
     <Layout>
       <Topbar />
-      <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={setSelectedTag} />
+      <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={(tab) => {setSelectedTag(tab);}}/>
       <FormBoard 
         apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
         feedbackTag={selectedTag}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FileUpload from "./FileUpload";
 import ImageUpload from "./ImageUpload";
@@ -100,43 +100,65 @@ const PreviewContainer = styled.div`
   height: 100%;
 `;
 
-const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint,fileUploadApiEndpoint }) => {
+const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [fileUrls, setFileUrls] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("auth_token");
+    if (accessToken) {
+      setToken(accessToken);
+    } else {
+      alert("Token not found in session storage!");
+    }
+  }, []);
 
   const handleUpload = async () => {
     const tagMap = {
       "기획": "PLAN",
       "디자인": "DESIGN",
-      "front-end": "FRONTEND",
-      "back-end": "BACKEND",
+      "Front-end": "FRONTEND",
+      "Back-end": "BACKEND",
       "기타": "ETC"
     };
 
     const payload = {
       title: title || "제목 없음",
       content: details || "내용 없음",
-      feedbackTag: tagMap[feedbackTag] || "ETC", 
-      ...(fileUrls.length > 0 && { fileUrls: fileUrls }),
-      ...(imageUrls.length > 0 && { imageUrls: imageUrls })
+      feedbackTag: tagMap[feedbackTag] || "ETC",
+      fileUrls,
+      imageUrls
     };
 
     console.log("Payload being sent:", payload);
 
+    setLoading(true);
+
     try {
       const response = await axios.post(apiEndpoint, payload, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`  
         }
       });
       console.log("Response data:", response.data);
       alert("Upload successful!");
     } catch (error) {
       console.error("Error uploading:", error);
-      console.log("Server response:", error.response?.data || error.message);
+      if (error.response) {
+        console.log("Server response data:", error.response.data);
+        console.log("Server response status:", error.response.status);
+        console.log("Server response headers:", error.response.headers);
+      } else {
+        console.log("Error message:", error.message);
+      }
       alert("Upload failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,6 +172,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint,fileUpload
               placeholder='제목을 입력하세요'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              maxLength={50}  
             />
           </TitleInputBox>
           <ContentEditor>
