@@ -122,10 +122,11 @@ const Auth = styled.div`
     line-height: normal;
 `;
 
-const accessToken = sessionStorage.getItem("auth_token");
-console.log("sessionStorage에 저장된 엑세스토큰입니다: " + accessToken);
-
 const Topbar3 = () => {
+    const accessToken = sessionStorage.getItem("auth_token");
+    console.log(
+        "Topbar3의 sessionStorage에 저장된 엑세스토큰입니다: " + accessToken
+    );
     console.log("hihi");
 
     const [username, setUsername] = useState("");
