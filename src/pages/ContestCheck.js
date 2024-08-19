@@ -8,6 +8,7 @@ import {Link } from 'react-router-dom'
 import vectors from '../assets/image/vector2.svg'
 import vector3 from '../assets/image/vector3.svg'
 import Bottombar from '../components/Bottombar'
+import Pagination from '../components/Pagination';
 
 const Layout = styled.div`
 width : 1920px;
@@ -148,6 +149,12 @@ justify-content: flex-end;
 align-items: center;
 border-radius: 20px;
 background: #FFF;
+
+`
+const Image= styled.img`
+width : 164px;
+height : 164px;
+border-radius: 20px;
 `
 
 const Contents = styled.div`
@@ -247,14 +254,14 @@ text-decoration : none;
  margin-left: 9px;
  
  `
- const Pagination = styled.div`
- display: flex;
- justify-content: center;
- margin-top: 5px;
+//  const Pagination = styled.div`
+//  display: flex;
+//  justify-content: center;
+//  margin-top: 5px;
 
 
 
-`;
+// `;
 
 const PageButton = styled.button`
   width: 34px;
@@ -381,19 +388,6 @@ useEffect(() => {
             </PageButton>
         );
     }
-  // const renderPagination = () => {
-  //   const pageNumbers = [];
-  //   for (let i = 1; i <= totalPages; i++) {
-  //     pageNumbers.push(
-  //       <PageButton
-  //         key={i}
-  //         active={i === currentPage}
-  //         onClick={() => setCurrentPage(i)}
-  //       >
-  //         {i}
-  //       </PageButton>
-  //     );
-  //   }
     return (
       <PaginationContainer>
         {/* <ArrowButton
@@ -463,9 +457,9 @@ useEffect(() => {
         const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // 밀리초를 일로 변환
 
         return (
-            <ResultItem to={`/contest/${contest.id}`} key={contest.id}>
+          <ResultItem to={`/teammatching/${contest.id}`} key={contest.id}>
                 <Picture>
-                    <img src={contest.posterUrl} alt={contest.title} />
+                    <Image src={contest.posterUrl} alt={contest.title} />
                 </Picture>
                 <Contents>
                     <ContestName>{contest.title}</ContestName>
@@ -484,10 +478,13 @@ useEffect(() => {
          </Upload>
          <PaginationContainer>
          <Pagination>
+         page={currentPage}
+        totalPages={totalPages}
+        setPage={handlePageChange}
           {/* <ArrowButton onClick={handlePrev} disabled={currentPage === 1}>
             <img src={vectors} alt="Previous" style={{ transform: 'rotate(180deg)' }} />
           </ArrowButton> */}
-          {renderPagination()}
+          {/* {renderPagination()} */}
           {/* <ArrowButton onClick={handleNext} disabled={currentPage === totalPages}>
             <img src={vectors} alt="Next" /> 
           </ArrowButton> */}

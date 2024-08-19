@@ -28,7 +28,7 @@ import TeamMatching from "./pages/TeamMatching.js";
 import ProjectWritePage from "./pages/ProjectWritePage.js";
 import TeamApplication from "./pages/TeamApplicationPage.js";
 import KakaoAuth from "./pages/KakaoAuth.js";
-
+import ContestInfo from "./components/ContestInfo.js"
 function App() {
   return (
     <Router>
@@ -59,7 +59,8 @@ function App() {
         <Route path='/communicationChat4' element={<CommunicationChat4 />} />
         <Route path='/contestupload' element={<ContestUpload />} />
         <Route path='/devcrewintro' element={<DevcrewIntroPage />} />
-        <Route path='/teammatching' element={<TeamMatching />} />
+        <Route path='/teammatching/:contestId' element={<TeamMatching />} />
+        {/* <Route path="/teammatching/:contestId" component={ContestInfo} /> */}
         <Route path='/teamApplication' element={<TeamApplication />} />
         <Route path='/social-login' element={<KakaoAuth />} />
       </Routes>

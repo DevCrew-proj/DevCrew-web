@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom'; 
 import contestimage from '../assets/image/contestimage.svg';
+import axios from 'axios';
 
 const Container = styled.div`
   margin: 100px 30.3px 36px 0;
@@ -58,7 +60,7 @@ const ImageContainer = styled.div`
   margin: 0 93px 0 0;
   width: 269px;
   height: 380px;
-  background: url(${contestimage}) 50% 50% / cover no-repeat;
+  background: ${({ imageUrl }) => `url(${imageUrl})`} 50% 50% / cover no-repeat;
 `;
 
 const InfoContainer = styled.div`
@@ -159,34 +161,75 @@ font-weight: 400;
 line-height: normal;
 `;
 
-const ContestInfo = () => {
+const ContestInfo = ({ contestId }) => {
+  // const { contestId } = useParams(); // URL에서 contestId 가져오기
+  const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
+  const [error, setError] = useState(null); // 오류 상태를 위한 상태
+
+  useEffect(() => {
+    console.log("Fetching data for contestId:", contestId); // 이 라인을 추가하여 contestId를 확인합니다.
+    const fetchContestData = async () => {
+      try {
+        const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}`);
+        setContestData(response.data.data);
+        setLoading(false);
+        console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
+
+      } catch (err) {
+        console.error('Error fetching contest data:', err.response ? err.response.data : err.message);
+        setError(err);
+        setLoading(false);
+      }
+    };
+  
+    fetchContestData();
+  }, [contestId]);
+
+
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 중일 때 표시
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>; // 오류 발생 시 표시
+  }
+
+  if (!contestData) {
+    return <div>No contest data found.</div>; // 공모전 데이터가 없을 때 표시
+  }
+
+
+
   return (
     <Container>
       <Countdown>
-        <CountdownText>D-30</CountdownText>
+         <CountdownText>D-{contestData.remainingPeriod}</CountdownText>
       </Countdown>
       <Title>
-        [아트페스타 제주 2024] 아트링커 5기 모집<br />
+      {contestData.title}<br />
         <br />
       </Title>
       <ContentContainer>
-        <ImageContainer />
+
+
+        <ImageContainer imageUrl={contestData.poster}/>
         <InfoContainer>
-          <InfoTitle>떡잎회사</InfoTitle>
+        <InfoTitle>{contestData.organization}</InfoTitle>
           <InfoGrid>
-            <InfoItem><InfoLabel>주최기관</InfoLabel><InfoValue>중소기업</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>참여대상</InfoLabel><InfoValue>대상 제한 없음</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>주최기관</InfoLabel><InfoValue>{contestData.organization}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>참여대상</InfoLabel><InfoValue>{contestData.participantTarget}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>담당자 정보</InfoLabel></InfoItem>
-            <InfoItem><InfoLabel>시상규모</InfoLabel><InfoValue>3000 만원</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>접수기간</InfoLabel><InfoValue>24.6.5 ~ 24.6.23</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>담당자</InfoLabel><InfoValue>신형만</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>홈페이지</InfoLabel><InfoValue>www.asd.asd</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>활동혜택</InfoLabel><InfoValue>기타, 상장 수여</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>연락처</InfoLabel><InfoValue>010-1234-5678</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>공모분야</InfoLabel><InfoValue><Tag><TagText>창업</TagText></Tag></InfoValue></InfoItem>
+            <InfoItem><InfoLabel>시상규모</InfoLabel><InfoValue>{contestData.award}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>접수기간</InfoLabel><InfoValue>{contestData.acceptancePeriod}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>담당자</InfoLabel><InfoValue>{contestData.ceoName}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>홈페이지</InfoLabel><InfoValue>{contestData.homepageUrl}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>활동혜택</InfoLabel><InfoValue>{contestData.benefits}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>연락처</InfoLabel><InfoValue>{contestData.ceoPhoneNum}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>공모분야</InfoLabel><InfoValue><Tag><TagText>{contestData.sector}</TagText></Tag></InfoValue></InfoItem>
             <InfoItem><InfoLabel></InfoLabel><InfoValue></InfoValue></InfoItem>
-            <InfoItem><InfoLabel>이메일</InfoLabel><InfoValue>qwer@naver.com</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>추가혜택</InfoLabel><InfoValue>-</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>이메일</InfoLabel><InfoValue>{contestData.ceoEmail}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>추가혜택</InfoLabel><InfoValue>{contestData.plusBenefits || '-'}</InfoValue></InfoItem>
           </InfoGrid>
           <Button>
             <ButtonText>홈페이지 지원</ButtonText>
