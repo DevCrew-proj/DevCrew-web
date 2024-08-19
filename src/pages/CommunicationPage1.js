@@ -113,7 +113,12 @@ const Communication1 = () => {
           <QuestionBtn onClick={() => navigate("/communicationBoard1")}>
             질문하기
           </QuestionBtn>
-          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            category={category}
+          />
         </IncumbentBox>
       </Container>
       <Bottombar />

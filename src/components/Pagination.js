@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Arrow from "../assets/image/arrow3.svg";
+import { useEffect } from "react";
 
 const PaginationContainer = styled.div`
   width: 100%;
@@ -58,7 +59,12 @@ const ArrowImg = styled.img`
   display: block;
 `;
 
-const Pagination = ({ page, totalPages, setPage }) => {
+const Pagination = ({ page, totalPages, setPage, category }) => {
+  // 카테고리 변경 시 페이지 초기화
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
+
   /** Pagination
    * 어떤 한 페이지 그룹의 첫번째 페이지 번호 = ((페이지 그룹 - 1) * 한 화면에 보여질 페이지 개수) + 1
    * 어떤 한 페이지 그룹의 마지막 페이지 번호 = 페이지 그룹 * 한 화면에 보여질 페이지 개수
