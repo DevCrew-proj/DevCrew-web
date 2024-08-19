@@ -1,40 +1,27 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Delete from "../assets/image/delete.svg";
 import addfile from "../assets/image/AddFile.svg";
+import icProfileUpload from "../assets/image/icProfileUpload.svg";
 
 // 스타일 정의
 const Layout = styled.div`
   width: 100%;
-  position: relative;
-`;
-
-const IcProfile = styled.img`
-  width: 250px;
-  height: 250px;
-  margin: 0px 80px;
-  border-radius: 999px;
-  object-fit: cover;
+  //   position: relative;
 `;
 
 const FileInput = styled.input`
   display: none;
 `;
 
-const FileButton = styled.button`
-  position: absolute;
-  top: 180px;
-  right: 80px;
-  width: 80px;
-  height: 80px;
-  border-radius: 999px;
-  border: none;
-  background-color: gray;
+const FileButton = styled.img`
+  width: 216px;
+  height: 206px;
+  margin-left: 44.25px;
+  margin-right: 69.75px;
 `;
 
 const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
-  //   const [image, setImage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -106,7 +93,6 @@ const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        // setImage(reader.result);
         setIsLoading(false);
       };
       reader.readAsDataURL(file);
@@ -125,11 +111,12 @@ const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
 
   return (
     <Layout>
-      {isLoading ? <IcProfile /> : <IcProfile src={formData.imageUrl} />}
       <FileInput type="file" ref={fileInputRef} onChange={handleFileChange} />
-      <FileButton type="button" onClick={handleFileUploadClick}>
-        <img src={addfile} alt="프로필 설정" />
-      </FileButton>
+      <FileButton
+        type="button"
+        src={icProfileUpload}
+        onClick={handleFileUploadClick}
+      ></FileButton>
     </Layout>
   );
 };

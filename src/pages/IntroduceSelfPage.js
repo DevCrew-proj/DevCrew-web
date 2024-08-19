@@ -7,8 +7,7 @@ import { DropdownInput } from "../components/DropdownInput";
 import { InputLabel } from "../components/InputLabel";
 import { GenderDropdownInput } from "../components/GenderDropdownInput";
 import Bottombar from "../components/Bottombar";
-import { useState, useRef, useEffect } from "react";
-import icProfileUpload from "../assets/image/icProfileUpload.svg";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ImageUpload3 from "../components/ImageUpload3";
@@ -125,27 +124,6 @@ const InfoRegisterBtn = styled.input`
   border-radius: 5px;
   border: none;
   left: 45%;
-`;
-
-const FileInput = styled.input`
-  display: none;
-`;
-
-const FileButton = styled.button`
-  font-size: 16px;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  background: #829595;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 135px;
-  height: 58px;
-  padding: 15px 17px 15px 16px;
-  margin-top: 22px;
-  margin-left: 27px;
 `;
 
 const IntroduceSelfPage = () => {
@@ -284,24 +262,12 @@ const IntroduceSelfPage = () => {
               <ProfileContainer>
                 <ProfileWrapper>
                   <LabelContainer>
-                    {/* <FileInput
-                      type="file"
-                      name="profileImage"
-                      ref={fileInputRef}
-                      onChange={handleChange}
-                    /> */}
                     <InputLabel labelText="사진" />
                     <ImageUpload3
                       formData={formData}
                       setFormData={setFormData}
                       apiEndpoint="https://devcrew.kr/api/image/member"
                     />
-                    {/* <IcProfile
-                      src={formData.imageUrl}
-                      alt="프로필 사진 업로드"
-                      onClick={handleFileClick}
-                      onChange={handleChange}
-                    /> */}
                   </LabelContainer>
                   <InputContainer>
                     <InputField>

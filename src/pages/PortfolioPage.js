@@ -259,7 +259,7 @@ const PortfolioPage = () => {
 
       setProjectData(data);
       setTotalpage(response.data.data.totalPages);
-      // console.log(response.data.data.totalPages);
+      filterDataByTab(selectedTab); // getProjectData가 실행된 후 데이터를 필터링하여 설정
     } catch (error) {
       console.error(error);
     }
@@ -285,17 +285,11 @@ const PortfolioPage = () => {
     }
   };
 
-  useEffect(() => {
-    getProfileData();
-    getProjectData();
-  }, [page]);
-
-  const totalPages = projectData.totalPages === 0 ? 1 : projectData.totalPages;
-
   const openModal = (projectId) => {
     getModalData(projectId);
     setModalOpen(true);
   };
+
   const closeModal = () => setModalOpen(false);
 
   const filterDataByTab = (tab) => {
@@ -307,8 +301,14 @@ const PortfolioPage = () => {
   };
 
   useEffect(() => {
+    getProfileData();
+    getProjectData();
     filterDataByTab(selectedTab);
-  }, [selectedTab]);
+  }, [page]);
+
+  useEffect(() => {
+    filterDataByTab(selectedTab);
+  }, [selectedTab, projectData]);
 
   return (
     <>
@@ -322,8 +322,7 @@ const PortfolioPage = () => {
                 <Subtitle>Contact</Subtitle>
                 <Information>전화번호: {profileData.phoneNumber}</Information>
                 <Information>이메일: {profileData.email}</Information>
-                {/* <Information>SNS: {profileData}</Information> */}
-                {/* <Information>직무: PM</Information> */}
+                <Information>직무: PM</Information>
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>Education</Subtitle>
@@ -417,7 +416,7 @@ const PortfolioPage = () => {
             />
             <Pagination
               page={page}
-              totalPages={totalPages}
+              totalPages={totalpage}
               setPage={setPage}
               category={selectedTab}
             />

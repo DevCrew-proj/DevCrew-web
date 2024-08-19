@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import icChevronDown from "../assets/image/icChevronDown.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -196,12 +196,10 @@ const AddTitle = styled.div`
   font-weight: 400;
   line-height: normal;
   margin-top: 101px;
-  //margin-left : 293px;
 `;
 
 const ProjectWritePage = () => {
   const navigate = useNavigate();
-  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     projectName: "",
     images: [],
@@ -275,7 +273,7 @@ const ProjectWritePage = () => {
 
   //폼 제출 함수
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setFormData(formData);
     postProjectData();
     navigate(`/portfolio`);

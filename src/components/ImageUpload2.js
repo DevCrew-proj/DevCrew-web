@@ -8,6 +8,8 @@ import addfile from "../assets/image/AddFile.svg";
 const Layout = styled.div`
   width: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
 `;
 
 const FileInput = styled.input`
@@ -27,12 +29,13 @@ const FileButton = styled.button`
   width: 135px;
   height: 58px;
   padding: 15px 17px 15px 16px;
-  margin-top: 22px;
   margin-left: 27px;
 `;
 
 const FileInfo = styled.div`
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
   font-size: 14px;
   color: #333;
 `;
@@ -42,6 +45,13 @@ const DeleteIcon = styled.img`
   cursor: pointer;
   width: 20px;
   height: 20px;
+`;
+
+const Preview = styled.img`
+  width: 40px;
+  height: 40px;
+  border: 1px solid gray;
+  object-fit: cover;
 `;
 
 const ImageUpload2 = ({ formData, setFormData, apiEndpoint }) => {
@@ -149,7 +159,6 @@ const ImageUpload2 = ({ formData, setFormData, apiEndpoint }) => {
 
   return (
     <Layout>
-      {isLoading && <div>업로드 중...</div>}
       <FileInput
         type="file"
         ref={fileInputRef}
@@ -160,9 +169,10 @@ const ImageUpload2 = ({ formData, setFormData, apiEndpoint }) => {
         <img src={addfile} alt="파일 추가" style={{ marginRight: 8 }} />
         파일추가
       </FileButton>
-      {images.map((file, index) => (
+      {images.map((image, index) => (
         <FileInfo key={index}>
-          {file.name} - {file.size}
+          {isLoading && <div>업로드 중...</div>}
+          <Preview src={image} />
           <DeleteIcon
             src={Delete}
             alt="파일 삭제"

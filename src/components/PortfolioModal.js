@@ -83,13 +83,11 @@ const InfoText = styled.p`
 
 const ImageContainer = styled.img`
   width: 100%;
-  height: 200px;
   background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  object-fit: contain;
 `;
 
 const PortfolioModal = ({ isOpen, onClose, data }) => {
