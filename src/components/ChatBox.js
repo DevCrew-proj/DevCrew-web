@@ -75,6 +75,7 @@ const ChatBox = ({
                 memberName={data.memberName}
                 memberImage={data.memberImageUrl}
                 category={dataCategory}
+                createdAt={data.createdAt}
               />
             </ChatProfile>
             <ChatContent>{data.content}</ChatContent>
