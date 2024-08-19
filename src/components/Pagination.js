@@ -4,21 +4,6 @@ import Arrow from "../assets/image/arrow3.svg";
 const PaginationContainer = styled.div`
   width: 100%;
   height: 26px;
-
-  & > ol > li {
-    display: block;
-    float: left;
-  }
-  & > ol > li {
-    margin: 0 4px;
-  }
-  & > ol > button {
-    margin-top: 5px;
-    background-color: transparent;
-    display: block;
-    float: left;
-    padding: 0;
-  }
 `;
 
 const PagingBox = styled.ol`
@@ -45,18 +30,26 @@ const PageList = styled.li`
   box-sizing: border-box;
   line-height: 1.3;
   cursor: pointer;
+  display: block;
+  float: left;
+  margin: 0 2px;
+
+  &.Arrow {
+    margin-top: 5px;
+    background-color: transparent;
+    padding: 0;
+  }
 
   ${(props) => props.active && `background-color: #2f4f4f; color: #fff;`}
 
-  &:nth-child(2):hover,
-  &:nth-child(3):hover,
-  &:nth-child(4):hover {
+  &.Number:hover {
     color: #fff;
     border: 1px solid #2f4f4f;
     border-radius: 14px;
     background-color: #2f4f4f;
   }
 `;
+
 const ArrowImg = styled.img`
   width: 22px;
   height: 18px;
@@ -105,15 +98,16 @@ const Pagination = ({ page, totalPages, setPage }) => {
     <PaginationContainer>
       <PagingBox>
         <PageList
+          className='Before Arrow'
           as='button'
           onClick={() => handlePageSub()}
-          disabled={page <= 3}
         >
           {page <= 3 ? null : (
             <ArrowImg src={Arrow} alt='Arrow' rotate='rotate(180deg)' />
           )}
         </PageList>
         <PageList
+          className='Page Number'
           onClick={() => {
             setPage(firstPageNum);
           }}
@@ -123,6 +117,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
         </PageList>
         {firstPageNum + 1 > totalPages ? null : (
           <PageList
+            className='Page Number'
             onClick={() => {
               if (firstPageNum + 1 > totalPages) setPage(totalPages);
               else setPage(firstPageNum + 1);
@@ -134,6 +129,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
         )}
         {lastPageNum > totalPages ? null : (
           <PageList
+            className='Page Number'
             onClick={() => {
               if (lastPageNum > totalPages) setPage(totalPages);
               else setPage(lastPageNum);
@@ -143,13 +139,12 @@ const Pagination = ({ page, totalPages, setPage }) => {
             {lastPageNum}
           </PageList>
         )}
-
         <PageList
+          className='After Arrow'
           as='button'
           onClick={() => handlePageAdd()}
-          disabled={page > totalPages - 1}
         >
-          {totalPages <= 3 || page > totalPages - 1 ? null : (
+          {totalPages <= 3 || page > totalPages - 2 ? null : (
             <ArrowImg src={Arrow} alt='Arrow' rotate='rotate(0deg)' />
           )}
         </PageList>
