@@ -81,17 +81,18 @@ const InfoText = styled.p`
   color: #565656;
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.img`
   width: 100%;
   height: 200px;
-  background: grey;
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  object-fit: contain;
 `;
 
-const PortfolioModal = ({ isOpen, onClose }) => {
+const PortfolioModal = ({ isOpen, onClose, data }) => {
   if (!isOpen) return null;
 
   return (
@@ -102,29 +103,29 @@ const PortfolioModal = ({ isOpen, onClose }) => {
         </CloseButton>
         <ModalContent>
           <TitleContainer>
-            <ProjectTitle>[양식] 프로젝트 이름</ProjectTitle>
-            <InfoText>
+            <ProjectTitle>{data.projectName}</ProjectTitle>
+            {/* <InfoText>
               IT 프로젝트를 하기 위한 학생들의 참여를 매력적이고, 소중하는
               서비스
-            </InfoText>
+            </InfoText> */}
           </TitleContainer>
-          <ImageContainer>사진</ImageContainer>
-          <InfoText>프로젝트 대표 이미지를 넣어주세요</InfoText>
+          <ImageContainer src={data.images[0]} />
+          {/* <InfoText>프로젝트 대표 이미지를 넣어주세요</InfoText> */}
           <InfoContainer>
             <SubTitle>요약</SubTitle>
-            <InfoText>- 프로젝트 내용 요약</InfoText>
+            <InfoText>- {data.summary}</InfoText>
           </InfoContainer>
           <InfoContainer>
             <SubTitle>팀명</SubTitle>
-            <InfoText>- 프로젝트 팀명</InfoText>
+            <InfoText>- {data.teamName}</InfoText>
           </InfoContainer>
-          <InfoContainer>
+          {/* <InfoContainer>
             <SubTitle>역할</SubTitle>
-            <InfoText>- 프로젝트에서 역할</InfoText>
-          </InfoContainer>
+            <InfoText>- {data.roles}</InfoText>
+          </InfoContainer> */}
           <InfoContainer>
             <SubTitle>기간</SubTitle>
-            <InfoText>- 2020.4 - 2020.7</InfoText>
+            <InfoText>- {data.duration}</InfoText>
           </InfoContainer>
         </ModalContent>
       </ModalContainer>

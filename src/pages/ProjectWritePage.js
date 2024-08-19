@@ -3,8 +3,10 @@ import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
 import { useState, useRef } from "react";
-import addfile from "../assets/image/AddFile.svg";
 import icChevronDown from "../assets/image/icChevronDown.svg";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ImageUpload2 from "../components/ImageUpload2";
 
 const Layout = styled.div`
   width: 1920px;
@@ -186,27 +188,6 @@ const Button2 = styled.button`
   cursor: pointer;
 `;
 
-const FileInput = styled.input`
-  display: none;
-`;
-
-const FileButton = styled.button`
-  font-size: 16px;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  background: #829595;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 135px;
-  height: 58px;
-  padding: 15px 17px 15px 16px;
-  margin-top: 22px;
-  margin-left: 27px;
-`;
-
 const AddTitle = styled.div`
   color: #000;
   font-family: AppleSDGothicNeoEB00;
@@ -219,44 +200,85 @@ const AddTitle = styled.div`
 `;
 
 const ProjectWritePage = () => {
+  const navigate = useNavigate();
+  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
-    projectTitle: "",
-    projectImage: null,
+    projectName: "",
+    images: [],
     teamName: "",
-    period: "",
-    projectField: "창업",
-    projects: "",
+    duration: "",
+    projectTag: "창업",
+    summary: "",
     roles: "",
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const fileInputRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "projectImage") {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+  // 공통 매핑 함수 (양방향)
+  const mapTags = (mapping, tag, defaultValue) => {
+    if (mapping[tag]) return mapping[tag]; // 영어 -> 한글
+    return (
+      Object.keys(mapping).find((key) => mapping[key] === tag) || defaultValue
+    ); // 한글 -> 영어
+  };
+
+  // 매핑 테이블 정의
+  const tagsMapping = {
+    STARTUP: "창업",
+    GENERATIVE_AI: "생성형 AI",
+    PLATFORM: "플랫폼",
+    GAME: "게임",
+    OTHERS: "기타",
+  };
+
+  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
+
+  //프로젝트 데이터 보내기
+  const postProjectData = async () => {
+    try {
+      const mappedFormData = {
+        ...formData,
+        projectTag: mapTags(tagsMapping, formData.projectTag, "창업"),
+      };
+
+      console.log("Sending data:", mappedFormData);
+
+      const response = await axios.post(
+        `https://devcrew.kr/api/v1/projects`,
+        mappedFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      console.log(response.data.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  const handleDropdownClick = () => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDropdownClick = (e) => {
+    e.preventDefault();
     setDropdownOpen(!dropdownOpen);
   };
 
   const handleItemClick = (value) => {
-    setFormData({ ...formData, projectField: value });
+    setFormData({ ...formData, projectTag: value });
     setDropdownOpen(false);
   };
 
-  const handleFileClick = () => {
-    fileInputRef.current.click();
-  };
-
+  //폼 제출 함수
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    setFormData(formData);
+    postProjectData();
+    navigate(`/portfolio`);
   };
 
   return (
@@ -269,32 +291,26 @@ const ProjectWritePage = () => {
             <Label>프로젝트명 *</Label>
             <Input
               type="text"
-              name="projectTitle"
-              value={formData.companyName}
+              name="projectName"
+              value={formData.projectName}
               onChange={handleChange}
               required
             />
           </FormField>
           <FormField>
             <Label>프로젝트 이미지 *</Label>
-            <FileInput
-              type="file"
-              name="projectImage"
-              ref={fileInputRef}
-              onChange={handleChange}
-              required
+            <ImageUpload2
+              formData={formData}
+              setFormData={setFormData}
+              apiEndpoint="https://devcrew.kr/api/images/project"
             />
-            <FileButton type="button" onClick={handleFileClick}>
-              <img src={addfile} alt="파일 추가" style={{ marginRight: 8 }} />
-              파일추가
-            </FileButton>
           </FormField>
           <FormField>
             <Label>팀명 *</Label>
             <Input
               type="text"
               name="teamName"
-              value={formData.contestName}
+              value={formData.teamName}
               onChange={handleChange}
               required
             />
@@ -303,8 +319,8 @@ const ProjectWritePage = () => {
             <Label>기간 *</Label>
             <Input
               type="text"
-              name="period"
-              value={formData.organizingBody}
+              name="duration"
+              value={formData.duration}
               onChange={handleChange}
               required
             />
@@ -313,7 +329,7 @@ const ProjectWritePage = () => {
             <Label>분야 *</Label>
             <DropdownContainer>
               <DropdownButton onClick={handleDropdownClick}>
-                {formData.projectField}
+                {formData.projectTag}
                 <IcChevronDown src={icChevronDown} />
               </DropdownButton>
               <DropdownContent isOpen={dropdownOpen}>
@@ -326,9 +342,9 @@ const ProjectWritePage = () => {
                 <DropdownItem onClick={() => handleItemClick("플랫폼")}>
                   플랫폼
                 </DropdownItem>
-                <DropdownItem onClick={() => handleItemClick("데이터분석")}>
+                {/* <DropdownItem onClick={() => handleItemClick("데이터분석")}>
                   데이터분석
-                </DropdownItem>
+                </DropdownItem> */}
                 <DropdownItem onClick={() => handleItemClick("게임")}>
                   게임
                 </DropdownItem>
@@ -340,9 +356,9 @@ const ProjectWritePage = () => {
           </FormField>
           <AddTitle>프로젝트 요약</AddTitle>
           <TextArea
-            name="projects"
+            name="summary"
             placeholder="프로젝트 내용을 요약하여 입력해 주세요"
-            value={formData.projects}
+            value={formData.summary}
             onChange={handleChange}
           />
           <AddTitle>역할</AddTitle>
