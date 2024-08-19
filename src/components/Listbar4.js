@@ -39,7 +39,7 @@ const TabItem = styled.span`
   cursor: pointer;
 `;
 
-const Listbar4 = ({ title, showTabs,onTabSelect }) => {
+const Listbar4 = ({ title, showTabs, onTabSelect }) => {
   const [activeTab, setActiveTab] = useState("JAVA");
 
   const handleTabClick = (tab) => {
