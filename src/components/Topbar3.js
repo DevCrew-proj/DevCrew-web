@@ -126,6 +126,8 @@ const accessToken = sessionStorage.getItem("auth_token");
 console.log("sessionStorage에 저장된 엑세스토큰입니다: " + accessToken);
 
 const Topbar3 = () => {
+    console.log("hihi");
+
     const [username, setUsername] = useState("");
 
     useEffect(() => {
@@ -140,6 +142,11 @@ const Topbar3 = () => {
                         },
                     }
                 );
+                console.log("hihiin useeffect");
+
+                console.log("API Response:", response);
+                console.log("Data:", response.data);
+                console.log("Name:", response.data.data.name);
 
                 if (response.data && response.data.data) {
                     setUsername(response.data.data.name);
