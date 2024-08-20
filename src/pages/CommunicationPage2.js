@@ -10,12 +10,12 @@ import Pagination from "../components/Pagination";
 
 const Layout = styled.div`
   width: 1680px;
-  min-height: 1612px; // 1842 - 116 - 210 = 1286px
+  min-height: 1612px;
 `;
 
 const Container = styled.div`
   width: 1680px;
-  min-height: 1286px;
+  min-height: 1328px; // 1612 - 100 - 184 = 1328px
   background-color: #fff;
   display: flex;
   justify-content: center;

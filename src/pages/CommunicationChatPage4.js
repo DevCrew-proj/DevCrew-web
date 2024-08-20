@@ -14,7 +14,7 @@ const Layout = styled.div`
 
 const Container = styled.div`
   width: 1680px;
-  min-height: 1240px; // 1566 - 116 - 210 = 1240px
+  min-height: 1282px; // 1566 - 100 - 184 = 1282px
   margin: 80px 0 90px;
   background-color: #fff;
   display: flex;

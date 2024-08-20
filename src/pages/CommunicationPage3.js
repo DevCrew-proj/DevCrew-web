@@ -16,7 +16,7 @@ const Layout = styled.div`
 
 const Container = styled.div`
   width: 1680px;
-  min-height: 1489px; // 1815 - 116 - 210 = 1489px
+  min-height: 1531px; // 1815 - 100 - 184 = 1531px
   background-color: #fff;
   display: flex;
   justify-content: center;
