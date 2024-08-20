@@ -13,7 +13,7 @@ const Layout = styled.div`
       rgba(0, 0, 0, 0.2) 0%,
       rgba(0, 0, 0, 0.2) 100%
     ),
-    #333;
+    7f7f7f;
   padding: 26px 48px 20px;
 `;
 
