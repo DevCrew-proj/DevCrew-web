@@ -34,9 +34,9 @@ const CommunicationContentBox = styled.div`
 `;
 
 const CommunicationProfileBox = styled.div`
-  width: 20%;
+  width: 25%;
   margin-bottom: 34px;
-  padding: 0 70px;
+  padding: 0 0 0 70px;
   &:after {
     content: "";
     clear: both;
