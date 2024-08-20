@@ -14,7 +14,12 @@ const KakaoAuth = () => {
         console.log("Authorization:", authorization);
 
         if (authorization) {
-            localStorage.setItem("auth_token", authorization);
+            // localStorage.setItem("auth_token", authorization);
+            sessionStorage.setItem("auth_token", authorization);
+            console.log(
+                "Authin session:",
+                sessionStorage.getItem("auth_token")
+            );
             navigate("/main");
         } else {
             // 예외 처리 로직 추가 가능

@@ -8,6 +8,7 @@ import {Link } from 'react-router-dom'
 import vectors from '../assets/image/vector2.svg'
 import vector3 from '../assets/image/vector3.svg'
 import Bottombar from '../components/Bottombar'
+// import Pagination from '../components/Pagination';
 
 const Layout = styled.div`
 width : 1920px;
@@ -148,6 +149,12 @@ justify-content: flex-end;
 align-items: center;
 border-radius: 20px;
 background: #FFF;
+
+`
+const Image= styled.img`
+width : 164px;
+height : 164px;
+border-radius: 20px;
 `
 
 const Contents = styled.div`
@@ -254,7 +261,7 @@ text-decoration : none;
 
 
 
-`;
+// `;
 
 const PageButton = styled.button`
   width: 34px;
@@ -301,7 +308,7 @@ const PaginationContainer=styled.div`
   const [currentPage, setCurrentPage] = useState(1);
   const [searchData, setSearchData] = useState([]);
   const [sector, setSector] = useState(''); // 기본값은 공백, '전체' 탭이 선택된 경우
-  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태
+  // const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태
   const sectorMapping = {
     '전체': '',
     '창업': 'STARTUP',
@@ -327,7 +334,7 @@ const fetchContests = async () => {
       console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
 
       setSearchData(response.data.data.contests || []); // 데이터가 없을 때 빈 배열 설정
-      setTotalPages(Math.ceil(response.data.totalResult / itemsPerPage)); // 전체 페이지 수 계산
+      // setTotalPages(Math.ceil(response.data.totalResult / itemsPerPage)); // 전체 페이지 수 계산
   } catch (error) {
       console.error('Error fetching contests:', error);
       if (error.response && error.response.status === 400) {
@@ -368,49 +375,36 @@ useEffect(() => {
   // };
 
  // const totalPages = Math.ceil(searchData.length / itemsPerPage);
-  const renderPagination = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(
-            <PageButton
-                key={i}
-                active={i === currentPage}
-                onClick={() => handlePageChange(i)}
-            >
-                {i}
-            </PageButton>
-        );
-    }
   // const renderPagination = () => {
   //   const pageNumbers = [];
   //   for (let i = 1; i <= totalPages; i++) {
-  //     pageNumbers.push(
-  //       <PageButton
-  //         key={i}
-  //         active={i === currentPage}
-  //         onClick={() => setCurrentPage(i)}
-  //       >
-  //         {i}
-  //       </PageButton>
-  //     );
+  //       pageNumbers.push(
+  //           <PageButton
+  //               key={i}
+  //               active={i === currentPage}
+  //               onClick={() => handlePageChange(i)}
+  //           >
+  //               {i}
+  //           </PageButton>
+  //       );
   //   }
-    return (
-      <PaginationContainer>
-        {/* <ArrowButton
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-        >
-          <img src={vector3} alt="Previous Page" />
-        </ArrowButton> */}
-        <Pagination>{pageNumbers}</Pagination>
-        <ArrowButton
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                    disabled={currentPage === totalPages}
-                >
-                    <img src={vectors} alt="Next Page" />
-                </ArrowButton>
-      </PaginationContainer>
-    );
-  };
+  //   return (
+  //     <PaginationContainer>
+  //       {/* <ArrowButton
+  //         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+  //       >
+  //         <img src={vector3} alt="Previous Page" />
+  //       </ArrowButton> */}
+  //       <Pagination>{pageNumbers}</Pagination>
+  //       <ArrowButton
+  //                   onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+  //                   disabled={currentPage === totalPages}
+  //               >
+  //                   <img src={vectors} alt="Next Page" />
+  //               </ArrowButton>
+  //     </PaginationContainer>
+  //   );
+  // };
   
 
   return (
@@ -463,9 +457,9 @@ useEffect(() => {
         const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // 밀리초를 일로 변환
 
         return (
-            <ResultItem to={`/contest/${contest.id}`} key={contest.id}>
+          <ResultItem to={`/teammatching/${contest.id}`} key={contest.id}>
                 <Picture>
-                    <img src={contest.posterUrl} alt={contest.title} />
+                    <Image src={contest.posterUrl} alt={contest.title} />
                 </Picture>
                 <Contents>
                     <ContestName>{contest.title}</ContestName>
@@ -484,10 +478,13 @@ useEffect(() => {
          </Upload>
          <PaginationContainer>
          <Pagination>
+         {/* page={currentPage}
+        totalPages={totalPages} */}
+        {/* setPage={handlePageChange} */}
           {/* <ArrowButton onClick={handlePrev} disabled={currentPage === 1}>
             <img src={vectors} alt="Previous" style={{ transform: 'rotate(180deg)' }} />
           </ArrowButton> */}
-          {renderPagination()}
+          {/* {renderPagination()} */}
           {/* <ArrowButton onClick={handleNext} disabled={currentPage === totalPages}>
             <img src={vectors} alt="Next" /> 
           </ArrowButton> */}

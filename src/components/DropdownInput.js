@@ -65,7 +65,10 @@ const IcChevronDown = styled.img``;
 
 export const DropdownInput = ({ value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+  };
 
   const handleItemClick = (item) => {
     onChange(item);

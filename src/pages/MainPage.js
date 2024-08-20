@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar3 from "../components/Topbar3";
 import logo from "../assets/image/logowhite.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
     width: 1920px;
@@ -46,7 +46,7 @@ const TeamMatching = styled.button`
     margin-top: 56px;
 `;
 
-const Matching = styled(Link)`
+const Business = styled(Link)`
     text-decoration: none;
     color: #2f4f4f;
     font-family: AppleSDGothicNeoB00;
@@ -63,24 +63,37 @@ const Container = styled.div`
     flex-direction: column;
 `;
 const MainPage = () => {
-    const [authToken, setAuthToken] = useState("");
+    // const [authToken, setAuthToken] = useState("");
+
+    // useEffect(() => {
+    //     const token = sessionStorage.getItem("auth_token");
+    //     setAuthToken(token);
+    // }, []);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("auth_token");
-        setAuthToken(token);
-    }, []);
+        const authToken = sessionStorage.getItem("auth_token");
+
+        console.log("sessionStorage에 저장된 엑세스토큰입니다: " + authToken);
+
+        if (!authToken) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     return (
         <Layout>
             <Topbar3 />
             <Container>
                 <Title>IT 프로젝트를 준비하는 우리를 위한 공간</Title>
-                <Title>{authToken}</Title>
                 <Logocontainer>
                     <Logoimg src={logo} alt="logo" />
                 </Logocontainer>
                 <TeamMatching>
-                    <Matching to="/team">프로젝트 팀매칭 하기</Matching>
+                    <Business to="/signinbusiness">
+                        기업회원 정보 입력하기
+                    </Business>
                 </TeamMatching>
             </Container>
         </Layout>

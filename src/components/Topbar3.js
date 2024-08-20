@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/image/logowhite.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowIcon from "../assets/image/arrow2.svg";
+import axios from "axios";
 
 const Layout = styled.div`
     width: 1920px;
@@ -121,7 +122,71 @@ const Auth = styled.div`
     line-height: normal;
 `;
 
+const Business = styled.div`
+    display: flex;
+    margin-left: 750px;
+    width: 101px;
+    height: 38px;
+    margin-top: 51px;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #2f4f4f;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+`;
+
 const Topbar3 = () => {
+    const accessToken = sessionStorage.getItem("auth_token");
+    console.log(
+        "Topbar3의 sessionStorage에 저장된 엑세스토큰입니다: " + accessToken
+    );
+    console.log("hihi");
+
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    "https://devcrew.kr/api/name",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                            accept: "*/*",
+                        },
+                    }
+                );
+                console.log("hihiin useeffect");
+
+                console.log("API Response:", response);
+                console.log("Data:", response.data);
+                console.log("Name:", response.data.data.name);
+
+                if (response.data && response.data.data) {
+                    setUsername(response.data.data.name);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setUsername("신짱구");
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // const navigate = useNavigate();
+
+    // const handleAuthClick = () => {
+    //     navigate("/signinbusiness");
+    // };
+
     return (
         <Layout>
             <Logocontainer>
@@ -163,7 +228,7 @@ const Topbar3 = () => {
                         </DropdownItem>
                     </DropdownContent>
                 </Dropdown>
-                <Auth>신짱구 님</Auth>
+                <Auth>{username} 님</Auth>
             </MenuContainer>
         </Layout>
     );
