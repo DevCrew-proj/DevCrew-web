@@ -13,7 +13,7 @@ import axios from "axios";
 import ImageUpload3 from "../components/ImageUpload3";
 
 const Layout = styled.div`
-  width: 1920px;
+  width: 1680px;
   align-items: center;
 `;
 
@@ -26,7 +26,7 @@ const Container = styled.div`
 `;
 
 const Container2 = styled.div`
-  width: 1453px;
+  width: 1191.75px;
 `;
 
 const TitleContainer = styled.div`
@@ -66,9 +66,9 @@ const LabelContainer = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0 62px;
+  gap: 0 54.25px;
   background-color: #d3dada;
-  padding: 72px 63px 20px;
+  padding: 36px 54.25px 0px;
   border-radius: 17px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
@@ -133,7 +133,7 @@ const IntroduceSelfPage = () => {
     imageUrl: "",
     name: "",
     phoneNumber: "",
-    email: "",
+    userEmail: "",
     introduction: "",
     highSchool: "",
     college: "",

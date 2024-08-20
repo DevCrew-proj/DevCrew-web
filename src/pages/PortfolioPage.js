@@ -12,7 +12,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 
 const Layout = styled.div`
-  width: 1920px;
+  width: 1680px;
 `;
 
 const Container = styled.div`
@@ -25,13 +25,13 @@ const Container = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  margin-top: 143px;
+  margin-top: 108.5px;
 `;
 
 const Profile = styled.img`
   object-fit: cover;
-  width: 535px;
-  height: 658px;
+  width: 468.13px;
+  height: 575.75px;
   border-radius: 17px;
 `;
 
@@ -59,7 +59,7 @@ const Subtitle = styled.h2`
 `;
 
 const Information = styled.p`
-  width: 782px;
+  width: 684.25px;
   margin: 0;
   font-family: Pretendard;
   font-size: 20px;
