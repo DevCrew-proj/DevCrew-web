@@ -181,11 +181,11 @@ const Topbar3 = () => {
         fetchData();
     }, []);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const handleAuthClick = () => {
-        navigate("/signinbusiness");
-    };
+    // const handleAuthClick = () => {
+    //     navigate("/signinbusiness");
+    // };
 
     return (
         <Layout>
@@ -228,9 +228,6 @@ const Topbar3 = () => {
                         </DropdownItem>
                     </DropdownContent>
                 </Dropdown>
-                <Business onClick={handleAuthClick}>
-                    기업 정보 추가하기
-                </Business>
                 <Auth>{username} 님</Auth>
             </MenuContainer>
         </Layout>
