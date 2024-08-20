@@ -46,7 +46,7 @@ const TeamMatching = styled.button`
     margin-top: 56px;
 `;
 
-const Matching = styled(Link)`
+const Business = styled(Link)`
     text-decoration: none;
     color: #2f4f4f;
     font-family: AppleSDGothicNeoB00;
@@ -91,7 +91,9 @@ const MainPage = () => {
                     <Logoimg src={logo} alt="logo" />
                 </Logocontainer>
                 <TeamMatching>
-                    <Matching to="/team1">프로젝트 팀매칭 하기</Matching>
+                    <Business to="/signinbusiness">
+                        기업회원 정보 입력하기
+                    </Business>
                 </TeamMatching>
             </Container>
         </Layout>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/image/logowhite.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowIcon from "../assets/image/arrow2.svg";
 import axios from "axios";
 
@@ -122,6 +122,26 @@ const Auth = styled.div`
     line-height: normal;
 `;
 
+const Business = styled.div`
+    display: flex;
+    margin-left: 750px;
+    width: 101px;
+    height: 38px;
+    margin-top: 51px;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #2f4f4f;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+`;
+
 const Topbar3 = () => {
     const accessToken = sessionStorage.getItem("auth_token");
     console.log(
@@ -160,6 +180,12 @@ const Topbar3 = () => {
 
         fetchData();
     }, []);
+
+    // const navigate = useNavigate();
+
+    // const handleAuthClick = () => {
+    //     navigate("/signinbusiness");
+    // };
 
     return (
         <Layout>
