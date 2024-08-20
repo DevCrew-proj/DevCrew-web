@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
+import axios from "axios";
 
 const Layout = styled.div`
     width: 1920px;
@@ -247,15 +248,13 @@ const CustomCheckboxWithLabel2 = ({ label, checked, onChange }) => (
 );
 
 const SigninBusinessPage = () => {
+    const navigate = useNavigate();
+
     const [checkedAll, setCheckedAll] = useState(false);
     const [checkedTerms, setCheckedTerms] = useState(false);
     const [checkedPrivacy, setCheckedPrivacy] = useState(false);
     const [checkedMarketingEmail, setCheckedMarketingEmail] = useState(false);
     const [checkedMarketingSms, setCheckedMarketingSms] = useState(false);
-
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [passwordConfirm, setPasswordConfirm] = useState("");
 
     const [managername, setManagername] = useState("");
     const [managernumber, setManagernumber] = useState("");
@@ -282,10 +281,6 @@ const SigninBusinessPage = () => {
         setCheckedMarketingSms(isChecked);
     };
 
-    // const handleBusinessTypeChange = (event) => {
-    //     setBusinessType(event.target.value);
-    // };
-
     useEffect(() => {
         const allChecked =
             checkedTerms &&
@@ -301,33 +296,14 @@ const SigninBusinessPage = () => {
     ]);
 
     useEffect(() => {
-        // const isPasswordValid =
-        //     password.length >= 8 &&
-        //     /[a-zA-Z]/.test(password) &&
-        //     /\d/.test(password) &&
-        //     /[!@#$%^&*]/.test(password);
-
-        // const isPasswordMatch = password === passwordConfirm;
-
-        // const isBasicInfoValid =
-        //     username.trim() !== "" && isPasswordValid && isPasswordMatch;
-
         const isContactInfoValid =
             managername.trim() !== "" &&
             managernumber.trim() !== "" &&
             manageremail.trim() !== "";
 
-        const isBusinessInfoValid =
-            businessname.trim() !== "" &&
-            businessnumber.trim() !== "" &&
-            businessmanager.trim() !== "" &&
-            businessType.trim() !== "";
-
         const isCheckboxValid = checkedTerms && checkedPrivacy;
 
-        setIsFormValid(
-            isContactInfoValid && isBusinessInfoValid && isCheckboxValid
-        );
+        setIsFormValid(isContactInfoValid && isCheckboxValid);
     }, [
         checkedTerms,
         checkedPrivacy,
@@ -340,57 +316,70 @@ const SigninBusinessPage = () => {
         businessType,
     ]);
 
+    const handleSubmit = async () => {
+        const accessToken = sessionStorage.getItem("auth_token");
+
+        const requestBody = {
+            contactNumber: managernumber,
+            responsiblePartyName: managername,
+            contactEmail: manageremail,
+        };
+
+        const companySize = mapBusinessType(businessType);
+
+        if (businessname.trim() !== "") {
+            requestBody.companyName = businessname;
+        }
+        if (businessnumber.trim() !== "") {
+            requestBody.businessRegistrationNumber = businessnumber;
+        }
+        if (businessmanager.trim() !== "") {
+            requestBody.ceoName = businessmanager;
+        }
+        if (companySize !== "선택안함") {
+            requestBody.companySize = companySize;
+        }
+
+        try {
+            const response = await axios.post(
+                "https://devcrew.kr/api/signup-company",
+                requestBody,
+                {
+                    headers: {
+                        Accept: "*/*",
+                        Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log("Signup successful:", response.data);
+            alert("기업회원 가입신청이 완료 되었습니다.");
+            navigate("/main");
+        } catch (error) {
+            console.error("Error during signup:", error);
+        }
+    };
+
+    const mapBusinessType = (type) => {
+        const typeMap = {
+            대기업: "CONGLOMERATE",
+            중소기업: "SMALL_AND_MID_SIZE_COMPANY",
+            공공기관공기업: "PUBLIC_ENTERPRISE",
+            외국계기업: "FOREIGN_ENTERPRISE",
+            비영리단체: "NON_PROFIT_ORGANIZATION",
+            스타트업: "START_UP",
+            금융권: "FINANCE",
+            학교: "SCHOOL",
+            기타: "ETC",
+        };
+        return typeMap[type] || "선택안함";
+    };
+
     return (
         <Layout>
             <Topbar />
             <Container>
                 <Description>* 표시는 필수 입력란을 나타냅니다</Description>
-                {/* <SigninContainer1>
-                    <SigninNameContainer>
-                        <SigninName>계정 정보</SigninName>
-                        <Spacing4 />
-                        <Star>*</Star>
-                    </SigninNameContainer>
-
-                    <Spacing49 />
-
-                    <TextFieldContainer>
-                        <TextFieldName>아이디</TextFieldName>
-                        <CustomTextField
-                            variant="outlined"
-                            placeholder="아이디를 입력해주세요"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </TextFieldContainer>
-
-                    <Spacing33 />
-
-                    <TextFieldContainer>
-                        <TextFieldName>비밀번호</TextFieldName>
-                        <CustomTextField
-                            variant="outlined"
-                            placeholder="영문, 숫자, 특수문자를 사용하여 8자 이상으로 기입해주세요"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </TextFieldContainer>
-
-                    <Spacing33 />
-
-                    <TextFieldContainer>
-                        <TextFieldName>비밀번호 확인</TextFieldName>
-                        <CustomTextField
-                            variant="outlined"
-                            placeholder="다시 한번 입력해주세요"
-                            type="password"
-                            value={passwordConfirm}
-                            onChange={(e) => setPasswordConfirm(e.target.value)}
-                        />
-                    </TextFieldContainer>
-                </SigninContainer1> */}
-
                 <SigninContainer1>
                     <SigninNameContainer>
                         <SigninName>담당자 정보</SigninName>
@@ -439,8 +428,6 @@ const SigninBusinessPage = () => {
                 <SigninContainer2>
                     <SigninNameContainer>
                         <SigninName>기업 정보</SigninName>
-                        <Spacing4 />
-                        <Star>*</Star>
                     </SigninNameContainer>
 
                     <Spacing49 />
@@ -492,13 +479,13 @@ const SigninBusinessPage = () => {
                         />
                         <CustomCheckboxWithLabel2
                             label="공공기관/공기업"
-                            checked={businessType === "공공기관/공기업"}
-                            onChange={() => setBusinessType("공공기관/공기업")}
+                            checked={businessType === "공공기관공기업"}
+                            onChange={() => setBusinessType("공공기관공기업")}
                         />
                         <CustomCheckboxWithLabel2
                             label="외국계 기업"
-                            checked={businessType === "외국계 기업"}
-                            onChange={() => setBusinessType("외국계 기업")}
+                            checked={businessType === "외국계기업"}
+                            onChange={() => setBusinessType("외국계기업")}
                         />
                     </TextFieldContainer>
                     <Spacing33 />
@@ -608,7 +595,7 @@ const SigninBusinessPage = () => {
                 <Spacing20 />
 
                 {isFormValid ? (
-                    <AbleSubmitBtn>
+                    <AbleSubmitBtn onClick={handleSubmit}>
                         <Submit>가입신청 완료</Submit>
                     </AbleSubmitBtn>
                 ) : (
