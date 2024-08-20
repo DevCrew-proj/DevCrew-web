@@ -6,7 +6,6 @@ import Topbar from '../components/Topbar'
 import {Link ,useParams} from 'react-router-dom'
 import Bottombar from '../components/Bottombar'
 
-
 const Layout = styled.div`
 width : 1920px;
 display : flex;
@@ -383,12 +382,12 @@ const TeamMatching = () => {
         </tbody>
       </Table>
       <ButtonGroup>
-    
+
         <Button1>
-          <ButtonLink1 to ="/teamComposition">팀 구성하기</ButtonLink1>
+        <ButtonLink1 to={`/teamComposition/${contestId}`}>팀 구성하기</ButtonLink1>
         </Button1>
         <Button2>
-          <ButtonLink2 to ="/teamApplication">팀 신청하기</ButtonLink2>
+        <ButtonLink2 to={`/teamApplication/${contestId}`}>팀 구성하기</ButtonLink2>
         </Button2>
       </ButtonGroup>
       <Bottombar />
