@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import ArrowIcon from "../assets/image/arrow.svg";
 
 const Layout = styled.div`
-  width: 1680px;
+  width: 1584px; // padding 값까지 포함하여 1680px
   display: flex;
   flex-direction: row;
   background: #f7f7f7;
@@ -63,7 +63,7 @@ const MenuItem = styled(Link)`
 
     background-color: #2e4f4f;
     //top: 100%; /* 부모 요소의 아래에 위치하도록 설정 */
-    margin-top: 15px; /* 원하는 margin-top 값을 설정 */
+    margin-top: 14px; /* 원하는 margin-top 값을 설정 */
   }
 `;
 
