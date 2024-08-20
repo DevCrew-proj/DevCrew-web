@@ -9,13 +9,13 @@ import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
 
 const Layout = styled.div`
-  width: 1920px;
-  min-height: 1842px; // 1842 - 116 - 210 = 1516px
+  width: 1680px;
+  min-height: 1612px; // 1842 - 116 - 210 = 1286px
 `;
 
 const Container = styled.div`
-  width: 1920px;
-  min-height: 1516px;
+  width: 1680px;
+  min-height: 1286px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -24,8 +24,8 @@ const Container = styled.div`
 `;
 
 const IncumbentBox = styled.div`
-  width: 1170px;
-  height: 1203px;
+  width: 1024px;
+  height: 1052px;
 `;
 
 const Title = styled.h2`
@@ -38,13 +38,11 @@ const Title = styled.h2`
   display: flex;
   justify-content: left;
   align-items: top;
-  margin: 0 0 50px;
+  margin: 0 0 40px;
 `;
 
 const QuestionBtn = styled.button`
-  width: 15%;
-  min-width: 170px;
-  height: 50px;
+  width: 14%;
   color: #fff;
   background-color: #5d6c6f;
   border: none;
@@ -53,9 +51,8 @@ const QuestionBtn = styled.button`
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  line-height: 1;
-  padding: 13px 38px 15px;
-  margin: 0 0 58px 85%;
+  padding: 10px 0;
+  margin: 0 0 50px 86%;
   cursor: pointer;
 `;
 

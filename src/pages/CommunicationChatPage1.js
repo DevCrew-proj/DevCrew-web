@@ -8,15 +8,14 @@ import CommunicationChatContainer from "../components/CommunicationChatContainer
 import ChatBox from "../components/ChatBox";
 
 const Layout = styled.div`
-  // 원래 크기에서 height는 60% 감소
-  width: 1920px;
-  min-height: 1790px; // 1790 - 116 - 210 = 1464px
+  width: 1680px;
+  min-height: 1566px;
 `;
 
 const Container = styled.div`
-  width: 1920px;
-  margin: 140px 0 216px;
-  min-height: 1464px;
+  width: 1680px;
+  min-height: 1240px; // 1566 - 116 - 210 = 1240px
+  margin: 80px 0 90px;
   background-color: #fff;
   display: flex;
   justify-content: center;
@@ -25,8 +24,8 @@ const Container = styled.div`
 `;
 
 const IncumbentBox = styled.div`
-  width: 905px;
-  min-height: 1270px;
+  width: 792px;
+  min-height: 1000px;
 `;
 
 const Title = styled.h2`
@@ -34,16 +33,15 @@ const Title = styled.h2`
   font-family: AppleSDGothicNeoB00;
   font-size: 40px;
   font-weight: 400;
-  line-height: 1.2;
   display: flex;
   justify-content: left;
   align-items: top;
-  margin: 0 0 74px;
+  margin: 0 0 48px;
 `;
 
 const InputChatBox = styled.textarea`
   width: 100%;
-  min-height: 230px;
+  min-height: 200px;
   border: 1px solid #a6b4b4;
   box-sizing: border-box;
   border-radius: 20px;
@@ -52,13 +50,13 @@ const InputChatBox = styled.textarea`
   font-size: 20px;
   font-weight: 400;
   line-height: 1.4;
-  margin: 30px 0 18px;
+  margin: 0 0 18px;
   padding: 32px 38px;
   resize: none;
+  scrollbar-width: thin;
   &:focus {
     outline: none;
   }
-  scrollbar-width: thin;
 `;
 
 const SubmitBtn = styled.button`
@@ -70,8 +68,7 @@ const SubmitBtn = styled.button`
   font-family: AppleSDGothicNeoB00;
   font-size: 20px;
   text-align: center;
-  line-height: 1.2;
-  padding: 8px 20px 4px;
+  padding: 3px 15px 1px;
   text-align: center;
   display: block;
   float: right;

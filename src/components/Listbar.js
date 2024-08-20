@@ -30,7 +30,7 @@ const ListBarContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto 82px;
+  margin: 0 auto 74px;
 `;
 
 const ListBar = ({ category, setCategory }) => {

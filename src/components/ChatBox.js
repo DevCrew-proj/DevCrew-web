@@ -11,7 +11,7 @@ const ShowBox = styled.div`
 const ChatCounterBox = styled.div`
   width: 100%;
   text-align: left;
-  margin: 90px 0 auto;
+  margin: 56px 0 auto;
   padding-bottom: 14px;
   font-family: AppleSDGothicNeoM00;
   font-size: 20px;

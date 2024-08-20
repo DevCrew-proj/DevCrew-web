@@ -9,8 +9,8 @@ const CommunicationContainer = styled.div`
   border: 1px solid #97a7a7;
   border-radius: 20px;
   box-sizing: border-box;
-  margin-bottom: 70px;
-  padding: 70px 0 54px;
+  margin-bottom: 44px;
+  padding: 70px 0 35px;
   &:after {
     content: "";
     clear: both;
