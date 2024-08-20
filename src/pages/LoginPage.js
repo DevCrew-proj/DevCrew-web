@@ -212,7 +212,7 @@ const HorizonLine = ({ text }) => {
 };
 
 const GoogleLogin = () => {
-    const link = `http://13.124.194.211/api/oauth2/authorization/google`;
+    const link = `https://devcrew.kr/api/oauth2/authorization/google`;
 
     const loginHandler = () => {
         window.location.href = link;
@@ -227,10 +227,8 @@ const GoogleLogin = () => {
 };
 
 const KakaoLogin = () => {
-    // const link = `http:///api/oauth2/authorization/kakao`
-
     const link = `https://devcrew.kr/api/oauth2/authorization/kakao`;
-    // const link = `http://localhost:8080/api/oauth2/authorization/kakao`;
+
     const loginHandler = () => {
         window.location.href = link;
     };
