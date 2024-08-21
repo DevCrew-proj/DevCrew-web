@@ -252,6 +252,13 @@ const TeamCompositionPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("PM");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        teamName: "", 
+        teamPassword: "",
+        name: "",
+        portfolioUrl: "",
+        objective: "PM"
+    });
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -259,12 +266,43 @@ const TeamCompositionPage = () => {
 
     const handleOptionClick = (option) => {
         setSelectedOption(option);
+        setFormData({
+            ...formData,
+            objective: option
+        });
         setIsDropdownOpen(false);
     };
 
-    const handleSubmit = () => {
-        setIsModalOpen(true);
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
     };
+
+    const handleSubmit = async () => {
+        try {
+            const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM5MzU4MiwiZW1haWwiOiJyeXVqdzAzMTlAbmF2ZXIuY29tIn0.jn8SOvKQ_ty78uBBPYJxJ0i75fqOpuH8vDeQH5zk4bhPfuu86dSBEw8SjcQ3yWVz2hdvGvt00tkQvLraFcgd1g"; 
+            const response = await fetch("https://devcrew.kr/api/v1/teams/apply", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` 
+                },
+                body: JSON.stringify(formData)
+            });
+    
+            if (response.ok) {
+                setIsModalOpen(true);
+            } else {
+                console.error("Failed to submit form");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
+    };
+    
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -280,7 +318,23 @@ const TeamCompositionPage = () => {
                         <FormLabel>신청자 정보</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
-                    <FormInput />
+                    <FormInput
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                    />
+                </FormRow>
+                <FormDivider />
+                <FormRow>
+                    <FormLabelContainer>
+                        <FormLabel>팀 명</FormLabel>
+                        <RequiredMark>*</RequiredMark>
+                    </FormLabelContainer>
+                    <FormInput
+                        name="teamName"
+                        value={formData.teamName}
+                        onChange={handleInputChange}
+                    />
                 </FormRow>
                 <FormDivider />
                 <FormRow>
@@ -288,7 +342,11 @@ const TeamCompositionPage = () => {
                         <FormLabel>팀 패스워드</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
-                    <FormInput />
+                    <FormInput
+                        name="teamPassword"
+                        value={formData.teamPassword}
+                        onChange={handleInputChange}
+                    />
                     <HelperText>
                         팀으로 가입하기 위해 팀원이 입력해야하는 비밀번호(4자리
                         이상의 숫자)를 입력하여 주십시오.
@@ -297,18 +355,14 @@ const TeamCompositionPage = () => {
                 <FormDivider />
                 <FormRow>
                     <FormLabelContainer>
-                        <FormLabel>전화번호</FormLabel>
-                        <RequiredMark>*</RequiredMark>
-                    </FormLabelContainer>
-                    <FormInput />
-                </FormRow>
-                <FormDivider />
-                <FormRow>
-                    <FormLabelContainer>
                         <FormLabel>포트폴리오 링크</FormLabel>
                         <RequiredMark>*</RequiredMark>
                     </FormLabelContainer>
-                    <FormInput />
+                    <FormInput
+                        name="portfolioUrl"
+                        value={formData.portfolioUrl}
+                        onChange={handleInputChange}
+                    />
                 </FormRow>
                 <FormDivider />
                 <FormRow>
