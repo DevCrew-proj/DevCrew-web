@@ -11,8 +11,8 @@ import Bottombar from '../components/Bottombar'
 // import Pagination from '../components/Pagination';
 
 const Layout = styled.div`
-width : 1920px;
-height : 2236px;
+width : 1680px;
+//height : 2236px;
 `
 
 
@@ -25,15 +25,15 @@ font-size: 40px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-margin-top : 147px;
-margin-left : 279px;
+margin-top : 128.62px;
+margin-left : 244.13px;
 `
 const MenuContainer=styled.div`
 display: flex;
 flex-direction : row;
 cursor : pointer;
 margin-top : 103px;
-margin-left : 180px;
+margin-left : 140px;
 
 `
 
@@ -46,6 +46,7 @@ position : relative;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+
 color: ${(props) => (props.active ? '#2E4F4F' : '#B8B8B8')};
   //border-top: ${(props) => (props.active ? '8px solid #2E4F4F' : 'none')};
   /* &:hover {
@@ -63,6 +64,7 @@ color: ${(props) => (props.active ? '#2E4F4F' : '#B8B8B8')};
     box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.12);
     display: ${(props) => (props.active ? 'block' : 'none')};
   }
+  
 `
 const Content = styled.div`
   margin-left: 279px;
