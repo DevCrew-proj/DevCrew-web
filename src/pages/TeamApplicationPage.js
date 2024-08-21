@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom'; 
 import Topbar from '../components/Topbar'; 
 import ContestInfo from '../components/ContestInfo';
 import ApplicationForm from '../components/ApplicationForm';
@@ -31,13 +32,16 @@ const Divider = styled.div`
 
 
 const TeamAplicationPage = () => {
+
+  const { contestId } = useParams(); 
+
   return (
     <Container>
       <InnerContainer>
         <Topbar />
-        <ContestInfo />
+         <ContestInfo contestId={contestId} />
         <Divider />
-        <ApplicationForm />
+        <ApplicationForm contestId={contestId} />
       </InnerContainer>
     </Container>
   );
