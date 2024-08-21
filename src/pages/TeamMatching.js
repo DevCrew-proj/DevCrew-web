@@ -64,38 +64,8 @@ margin-left : 338px;
 margin-top : 43px;
 margin-bottom : 94px;
 `
-const Introduce = styled.p`
-  white-space: pre-line;
-  color: #4A4A4A;
-font-family: AppleSDGothicNeoM00;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom : 75px;
-`
 
-const Content = styled.div`
-white-space: pre-line;
-color: #4A4A4A;
-font-family: AppleSDGothicNeoM00;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom : 20px;
 
-`
-
-const ContentTitle=styled.div`
-color: #4A4A4A;
-font-family: AppleSDGothicNeoB00;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom : 20px;
-`
 const MatchingTitle=styled.div`
 color: var(--kakao-logo, #000);
 //text-align: center;
@@ -232,6 +202,7 @@ const TeamMatching = () => {
   const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
   const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
   const [error, setError] = useState(null); // 오류 상태를 위한 상태
+  const [teamData, setTeamData] = useState([]);
 
   const { contestId } = useParams();  // contestId 가져오기
 
@@ -242,24 +213,37 @@ const TeamMatching = () => {
         const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}`);
         setContestData(response.data.data);
         setLoading(false);
-        console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
-
+        console.log("Contest Data:", response.data); // 콘테스트 데이터 출력
       } catch (err) {
         console.error('Error fetching contest data:', err.response ? err.response.data : err.message);
         setError(err);
         setLoading(false);
       }
     };
+
+    const fetchTeamData = async () => {
+      try {
+        const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}/teams`);
+        setTeamData(response.data.data.teamInfoList);
+        console.log("Team Data:", response.data.data.teamInfoList);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching team data:', err.response ? err.response.data : err.message);
+        setError(err);
+        setLoading(false);
+      }
+    };
   
     fetchContestData();
+    fetchTeamData();
   }, [contestId]);
 
 
-  const [teamData, setTeamData] = useState([
-    { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-    { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-    { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-  ]);
+  // const [teamData, setTeamData] = useState([
+  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
+  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
+  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
+  // ]);
 
   const handleInputChange = (index, field, value) => {
     const newTeamData = [...teamData];
@@ -297,30 +281,6 @@ const TeamMatching = () => {
 </TitleContainer>
     
     <ContentLayout> {contestData.description}
-    {/* <Introduce>
-      공공인재스쿨은 팀별 프로젝트를 통해 공공마인드와 문제해결력을 갖춘 미래 리더를 양성합니다. <br />
-      공공인재스쿨 2기는 외국인과 함께 지방 관광지를 탐방 및 분석하며 외국인의 관점에서 관광지를 개선하는 프로젝트에 참여합니다.
-    </Introduce>
-    <ContentTitle>1. 선발 인원 및 지원 자격</ContentTitle>
-    <Content>
-      - 선발 인원: 70명 (한국인 학생 56명, 외국인 학생 14명) <br />
-      지원 자격: 전국 4년제 대학교 재휴학생 (2025년 2월 졸업예정자 포함)
-    </Content>
-    <ContentTitle>※ 우대 조건</ContentTitle>
-    <Content>
-      * 외국인 유학생 함께 지원 시, 서류 자동 합격 및 면접 기회 제공<br />
-      * 외국어 소통 가능자(영어, 중국어 등)<br />
-      * 유사 프로그램 경험자<br />
-      * 국민기초생활보장 수급자, 한부모가족, 차상위계층
-    </Content>
-    <ContentTitle>2. 지원 일정</ContentTitle>
-    <Content>
-      - 서류 지원: 2024.7.14(일), 23시 59분까지<br />
-      - 서류 결과발표 : 7.15(월), 14시 이후<br />
-      - 면접(오프라인) : 7.16(화) ~ 7.17(수)<br />
-      - 최종합격자 발표 : 7.18(목), 10시 이후<br />
-      * 상세한 일정은 포스터를 참고해 주시기 바랍니다
-      </Content> */}
     </ContentLayout>
     <Divider />
     <MatchingTitle>프로젝트팀 매칭</MatchingTitle>
@@ -334,8 +294,24 @@ const TeamMatching = () => {
           </TableRow>
         </thead>
         <tbody>
+              {teamData.map((team, index) => (
+                <TableRow key={team.teamId}>
+                  <TableCell>{team.teamName}</TableCell>
+                  <TableCell>
+                    <StyledLink href={team.planUrl} target="_blank">
+                      {team.planUrl}
+                    </StyledLink>
+                  </TableCell>
+                  <TableCell>{team.teamEmail}</TableCell>
+                  <TableCell>
+                    <InputCheckbox />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </tbody>
+        {/* <tbody>
           {teamData.map((team, index) => (
-            <TableRow key={index}>
+            <TableRow key={team.teamId}>
               <TableCell>
                 <InputText
                   value={team.teamName}
@@ -379,7 +355,7 @@ const TeamMatching = () => {
               </TableCell>
             </TableRow>
           ))}
-        </tbody>
+        </tbody> */}
       </Table>
       <ButtonGroup>
 
@@ -387,7 +363,7 @@ const TeamMatching = () => {
         <ButtonLink1 to={`/teamComposition/${contestId}`}>팀 구성하기</ButtonLink1>
         </Button1>
         <Button2>
-        <ButtonLink2 to={`/teamApplication/${contestId}`}>팀 구성하기</ButtonLink2>
+        <ButtonLink2 to={`/teamApplication/${contestId}`}>팀 신청하기</ButtonLink2>
         </Button2>
       </ButtonGroup>
       <Bottombar />
