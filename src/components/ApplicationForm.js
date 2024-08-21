@@ -286,7 +286,7 @@ const TeamCompositionPage = ({ contestId }) => {
 
     const handleSubmit = async () => {
         try {
-            const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM5MzU4MiwiZW1haWwiOiJyeXVqdzAzMTlAbmF2ZXIuY29tIn0.jn8SOvKQ_ty78uBBPYJxJ0i75fqOpuH8vDeQH5zk4bhPfuu86dSBEw8SjcQ3yWVz2hdvGvt00tkQvLraFcgd1g"; 
+            const token = '';
             const response = await fetch("https://devcrew.kr/api/v1/teams/apply", {
                 method: "POST",
                 headers: {
