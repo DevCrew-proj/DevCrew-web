@@ -256,8 +256,6 @@ const PortfolioPage = () => {
 
       setProjectData(data);
       setTotalpage(response.data.data.totalPages);
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -280,8 +278,6 @@ const PortfolioPage = () => {
 
       setProjectData(data);
       setTotalpage(response.data.data.totalPages);
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     }

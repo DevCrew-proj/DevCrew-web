@@ -249,8 +249,6 @@ const ProjectWritePage = () => {
           },
         }
       );
-
-      console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -340,9 +338,6 @@ const ProjectWritePage = () => {
                 <DropdownItem onClick={() => handleItemClick("플랫폼")}>
                   플랫폼
                 </DropdownItem>
-                {/* <DropdownItem onClick={() => handleItemClick("데이터분석")}>
-                  데이터분석
-                </DropdownItem> */}
                 <DropdownItem onClick={() => handleItemClick("게임")}>
                   게임
                 </DropdownItem>
@@ -367,7 +362,9 @@ const ProjectWritePage = () => {
             onChange={handleChange}
           />
           <Button type="submit">등록하기</Button>
-          <Button2 type="reset">등록취소</Button2>
+          <Button2 type="reset" onClick={() => navigate(`/portfolio`)}>
+            등록취소
+          </Button2>
         </form>
       </FormContainer>
       <Bottombar />
