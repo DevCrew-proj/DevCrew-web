@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DropdownArrow from "../assets/image/DropdownArrow.svg";
 import DropUpArrow from "../assets/image/DropUpArrow.svg";
@@ -248,7 +249,9 @@ const CloseButton = styled.button`
     margin-top: 20px;
 `;
 
-const TeamCompositionPage = () => {
+const TeamCompositionPage = ({ contestId }) => {
+    const navigate = useNavigate(); // Use navigate from react-router-dom
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("PM");
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -302,7 +305,10 @@ const TeamCompositionPage = () => {
             console.error("Error submitting form:", error);
         }
     };
-    
+
+    const handleCancel = () => {
+        navigate(`/teammatching/${contestId}`);
+      };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -426,7 +432,7 @@ const TeamCompositionPage = () => {
                     <SubmitButton onClick={handleSubmit}>
                         <SubmitButtonText>신청하기</SubmitButtonText>
                     </SubmitButton>
-                    <CancelButton>
+                    <CancelButton onClick={handleCancel}>
                         <CancelButtonText>신청취소</CancelButtonText>
                     </CancelButton>
                 </SubmitButtonContainer>
