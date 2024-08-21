@@ -12,7 +12,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 
 const Layout = styled.div`
-  width: 1920px;
+  width: 1680px;
 `;
 
 const Container = styled.div`
@@ -25,13 +25,13 @@ const Container = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  margin-top: 143px;
+  margin-top: 108.5px;
 `;
 
 const Profile = styled.img`
   object-fit: cover;
-  width: 535px;
-  height: 658px;
+  width: 468.13px;
+  height: 575.75px;
   border-radius: 17px;
 `;
 
@@ -59,7 +59,7 @@ const Subtitle = styled.h2`
 `;
 
 const Information = styled.p`
-  width: 782px;
+  width: 684.25px;
   margin: 0;
   font-family: Pretendard;
   font-size: 20px;
@@ -157,7 +157,7 @@ const PortfolioPage = () => {
     imageUrl: "",
     name: "",
     phoneNumber: "",
-    email: "",
+    userEmail: "",
     introduction: "",
     highSchool: "",
     college: "",
@@ -191,8 +191,7 @@ const PortfolioPage = () => {
     summary: "",
     roles: "",
   });
-  const [selectedTab, setSelectedTab] = useState("전체");
-  const [selectedData, setSelectedData] = useState();
+  const [projectTag, setProjectTag] = useState("전체"); // 프로젝트 태그
   const [page, setPage] = useState(1); // 프로젝트 카드 페이지
   const [totalpage, setTotalpage] = useState(1); // 프로젝트 카드 총 페이지
   const [isModalOpen, setModalOpen] = useState(false);
@@ -215,7 +214,6 @@ const PortfolioPage = () => {
       PLATFORM: "플랫폼",
       GAME: "게임",
       OTHERS: "기타",
-      //데이터 분석?
     };
     return tagsMapping[tag] || "";
   };
@@ -236,17 +234,16 @@ const PortfolioPage = () => {
       data.collegeStatus = mapStatus(data.collegeStatus);
 
       setProfileData(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  //프로젝트 데이터 받아오기
-  const getProjectData = async () => {
+  //전체 프로젝트 데이터 받아오기
+  const getProjectDataAll = async () => {
     try {
       const response = await axios.get(
-        `https://devcrew.kr/api/v1/projects?page=${page}&size=9`,
+        `https://devcrew.kr/api/v1/projects/all?page=${page}&size=9`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -259,7 +256,28 @@ const PortfolioPage = () => {
 
       setProjectData(data);
       setTotalpage(response.data.data.totalPages);
-      // console.log(response.data.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //태그별 프로젝트 데이터 받아오기
+  const getProjectDataByTag = async () => {
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/projects?page=${page}&size=9&projectTag=${projectTag}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = response.data.data.projectList;
+      data.map((data) => (data.tag = mapTags(data.tag)));
+
+      setProjectData(data);
+      setTotalpage(response.data.data.totalPages);
     } catch (error) {
       console.error(error);
     }
@@ -285,30 +303,29 @@ const PortfolioPage = () => {
     }
   };
 
-  useEffect(() => {
-    getProfileData();
-    getProjectData();
-  }, [page]);
-
-  const totalPages = projectData.totalPages === 0 ? 1 : projectData.totalPages;
-
   const openModal = (projectId) => {
     getModalData(projectId);
     setModalOpen(true);
   };
+
   const closeModal = () => setModalOpen(false);
 
-  const filterDataByTab = (tab) => {
-    if (tab === "전체") {
-      setSelectedData(projectData);
-    } else {
-      setSelectedData(projectData.filter((data) => data.tag === tab));
-    }
+  const handleMenuClick = (tag) => {
+    setProjectTag(tag);
+    setPage(1);
   };
 
   useEffect(() => {
-    filterDataByTab(selectedTab);
-  }, [selectedTab]);
+    getProfileData();
+  }, []);
+
+  useEffect(() => {
+    if (projectTag === "전체") {
+      getProjectDataAll();
+    } else {
+      getProjectDataByTag(projectTag);
+    }
+  }, [projectTag, page]);
 
   return (
     <>
@@ -321,8 +338,7 @@ const PortfolioPage = () => {
               <InfoWrapper>
                 <Subtitle>Contact</Subtitle>
                 <Information>전화번호: {profileData.phoneNumber}</Information>
-                <Information>이메일: {profileData.email}</Information>
-                {/* <Information>SNS: {profileData}</Information> */}
+                <Information>이메일: {profileData.userEmail}</Information>
                 {/* <Information>직무: PM</Information> */}
               </InfoWrapper>
               <InfoWrapper>
@@ -349,52 +365,46 @@ const PortfolioPage = () => {
           <PortfolioContainer>
             <MenuContainer>
               <Menu
-                active={selectedTab === "전체"}
-                onClick={() => setSelectedTab("전체")}
+                active={projectTag === "전체"}
+                onClick={() => handleMenuClick("전체")}
               >
                 전체
               </Menu>
               <Menu
-                active={selectedTab === "생성형 AI"}
-                onClick={() => setSelectedTab("생성형 AI")}
+                active={projectTag === "STARTUP"}
+                onClick={() => handleMenuClick("STARTUP")}
+              >
+                창업
+              </Menu>
+              <Menu
+                active={projectTag === "GENERATIVE_AI"}
+                onClick={() => handleMenuClick("GENERATIVE_AI")}
               >
                 생성형 AI
               </Menu>
               <Menu
-                active={selectedTab === "플랫폼"}
-                onClick={() => setSelectedTab("플랫폼")}
+                active={projectTag === "PLATFORM"}
+                onClick={() => handleMenuClick("PLATFORM")}
               >
                 플랫폼
               </Menu>
-              {/* <Menu
-                active={selectedTab === "데이터 분석"}
-                onClick={() => setSelectedTab("데이터 분석")}
-              >
-                데이터 분석
-              </Menu>
               <Menu
-                active={selectedTab === "창업"}
-                onClick={() => setSelectedTab("창업")}
-              >
-                창업
-              </Menu> */}
-              <Menu
-                active={selectedTab === "게임"}
-                onClick={() => setSelectedTab("게임")}
+                active={projectTag === "GAME"}
+                onClick={() => handleMenuClick("GAME")}
               >
                 게임
               </Menu>
               <Menu
-                active={selectedTab === "기타"}
-                onClick={() => setSelectedTab("기타")}
+                active={projectTag === "OTHERS"}
+                onClick={() => handleMenuClick("OTHERS")}
               >
                 기타
               </Menu>
             </MenuContainer>
 
             <PortfolioWrapper>
-              {Array.isArray(selectedData) && selectedData.length > 0 ? (
-                selectedData.map((item) => (
+              {Array.isArray(projectData) && projectData.length > 0 ? (
+                projectData.map((item) => (
                   <PortfolioCard
                     key={item.id}
                     onClick={() => openModal(item.id)}
@@ -417,9 +427,9 @@ const PortfolioPage = () => {
             />
             <Pagination
               page={page}
-              totalPages={totalPages}
+              totalPages={totalpage}
               setPage={setPage}
-              category={selectedTab}
+              category={projectTag}
             />
           </PortfolioContainer>
         </Container>

@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Bottombar from "../components/Bottombar";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import icChevronDown from "../assets/image/icChevronDown.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ImageUpload2 from "../components/ImageUpload2";
 
 const Layout = styled.div`
-  width: 1920px;
+  width: 1680px;
 `;
 
 const Title = styled.div`
@@ -19,23 +19,23 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 170px;
-  margin-left: 292px;
+  margin-top: 148.75px;
+  margin-left: 255.5px;
 `;
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 282px;
+  margin-left: 246.75px;
   margin-top: 78px;
-  width: 60%;
+  width: 50%;
 `;
 
 const FormField = styled.div`
   display: flex;
   flex-direction: row;
   border-top: 1px solid #97a7a7;
-  width: 1356px;
+  width: 1191.75px;
   &:last-child {
     border: 1px solid #97a7a7;
   }
@@ -70,7 +70,7 @@ const Input = styled.input`
 
 const TextArea = styled.textarea`
   display: flex;
-  width: 1313px;
+  width: 1191.75px;
   height: 315px;
   padding: 40px 0 0 49px;
   align-items: center;
@@ -83,13 +83,13 @@ const TextArea = styled.textarea`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 23px;
+  margin-top: 41.25px;
 `;
 
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: 280px;
+  width: 245px;
   height: 54px;
   margin-top: 23px;
   margin-left: 33px;
@@ -118,7 +118,6 @@ const DropdownContent = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
   background-color: #fff;
-  min-width: 100%;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
   border: 1px solid #ccc;
@@ -138,6 +137,7 @@ const DropdownItem = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  width: 208px;
   height: 55px;
   padding-left: 22px;
   &:hover {
@@ -152,7 +152,7 @@ const IcChevronDown = styled.img`
 `;
 
 const Button = styled.button`
-  width: 160.562px;
+  width: 140.49px;
   height: 50px;
   flex-shrink: 0;
   border-radius: 5px;
@@ -165,13 +165,13 @@ const Button = styled.button`
   font-weight: 400;
   line-height: normal;
   margin-top: 111px;
-  margin-left: 505px;
+  margin-left: 470px;
   margin-bottom: 117px;
   cursor: pointer;
 `;
 
 const Button2 = styled.button`
-  width: 160.562px;
+  width: 140.49px;
   height: 50px;
   flex-shrink: 0;
   border-radius: 5px;
@@ -195,13 +195,11 @@ const AddTitle = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 101px;
-  //margin-left : 293px;
+  margin-top: 62.13px;
 `;
 
 const ProjectWritePage = () => {
   const navigate = useNavigate();
-  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     projectName: "",
     images: [],
@@ -251,8 +249,6 @@ const ProjectWritePage = () => {
           },
         }
       );
-
-      console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -275,7 +271,7 @@ const ProjectWritePage = () => {
 
   //폼 제출 함수
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setFormData(formData);
     postProjectData();
     navigate(`/portfolio`);
@@ -342,9 +338,6 @@ const ProjectWritePage = () => {
                 <DropdownItem onClick={() => handleItemClick("플랫폼")}>
                   플랫폼
                 </DropdownItem>
-                {/* <DropdownItem onClick={() => handleItemClick("데이터분석")}>
-                  데이터분석
-                </DropdownItem> */}
                 <DropdownItem onClick={() => handleItemClick("게임")}>
                   게임
                 </DropdownItem>
@@ -369,7 +362,9 @@ const ProjectWritePage = () => {
             onChange={handleChange}
           />
           <Button type="submit">등록하기</Button>
-          <Button2 type="reset">등록취소</Button2>
+          <Button2 type="reset" onClick={() => navigate(`/portfolio`)}>
+            등록취소
+          </Button2>
         </form>
       </FormContainer>
       <Bottombar />

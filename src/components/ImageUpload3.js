@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Delete from "../assets/image/delete.svg";
 import addfile from "../assets/image/AddFile.svg";
+import icProfileUpload from "../assets/image/icProfileUpload.svg";
 
 // 스타일 정의
 const Layout = styled.div`
@@ -16,6 +16,7 @@ const IcProfile = styled.img`
   margin: 0px 80px;
   border-radius: 999px;
   object-fit: cover;
+  background-color: #eeeeee;
 `;
 
 const FileInput = styled.input`
@@ -33,8 +34,14 @@ const FileButton = styled.button`
   background-color: gray;
 `;
 
+// const FileButton = styled.button`
+//   width: 216px;
+//   height: 206px;
+//   margin-left: 44.25px;
+//   margin-right: 69.75px;
+// `;
+
 const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
-  //   const [image, setImage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -106,7 +113,6 @@ const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        // setImage(reader.result);
         setIsLoading(false);
       };
       reader.readAsDataURL(file);
@@ -131,6 +137,14 @@ const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
         <img src={addfile} alt="프로필 설정" />
       </FileButton>
     </Layout>
+    // <Layout>
+    //   <FileInput type="file" ref={fileInputRef} onChange={handleFileChange} />
+    //   <FileButton
+    //     type="button"
+    //     src={icProfileUpload}
+    //     onClick={handleFileUploadClick}
+    //   ></FileButton>
+    // </Layout>
   );
 };
 

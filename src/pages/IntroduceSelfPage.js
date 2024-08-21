@@ -7,14 +7,13 @@ import { DropdownInput } from "../components/DropdownInput";
 import { InputLabel } from "../components/InputLabel";
 import { GenderDropdownInput } from "../components/GenderDropdownInput";
 import Bottombar from "../components/Bottombar";
-import { useState, useRef, useEffect } from "react";
-import icProfileUpload from "../assets/image/icProfileUpload.svg";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ImageUpload3 from "../components/ImageUpload3";
 
 const Layout = styled.div`
-  width: 1920px;
+  width: 1680px;
   align-items: center;
 `;
 
@@ -27,7 +26,7 @@ const Container = styled.div`
 `;
 
 const Container2 = styled.div`
-  width: 1453px;
+  width: 1191.75px;
 `;
 
 const TitleContainer = styled.div`
@@ -67,9 +66,9 @@ const LabelContainer = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0 62px;
+  gap: 0 54.25px;
   background-color: #d3dada;
-  padding: 72px 63px 20px;
+  padding: 36px 54.25px 0px;
   border-radius: 17px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
@@ -127,27 +126,6 @@ const InfoRegisterBtn = styled.input`
   left: 45%;
 `;
 
-const FileInput = styled.input`
-  display: none;
-`;
-
-const FileButton = styled.button`
-  font-size: 16px;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  background: #829595;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 135px;
-  height: 58px;
-  padding: 15px 17px 15px 16px;
-  margin-top: 22px;
-  margin-left: 27px;
-`;
-
 const IntroduceSelfPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -155,7 +133,7 @@ const IntroduceSelfPage = () => {
     imageUrl: "",
     name: "",
     phoneNumber: "",
-    email: "",
+    userEmail: "",
     introduction: "",
     highSchool: "",
     college: "",
@@ -284,24 +262,12 @@ const IntroduceSelfPage = () => {
               <ProfileContainer>
                 <ProfileWrapper>
                   <LabelContainer>
-                    {/* <FileInput
-                      type="file"
-                      name="profileImage"
-                      ref={fileInputRef}
-                      onChange={handleChange}
-                    /> */}
                     <InputLabel labelText="사진" />
                     <ImageUpload3
                       formData={formData}
                       setFormData={setFormData}
                       apiEndpoint="https://devcrew.kr/api/image/member"
                     />
-                    {/* <IcProfile
-                      src={formData.imageUrl}
-                      alt="프로필 사진 업로드"
-                      onClick={handleFileClick}
-                      onChange={handleChange}
-                    /> */}
                   </LabelContainer>
                   <InputContainer>
                     <InputField>
@@ -334,9 +300,9 @@ const IntroduceSelfPage = () => {
                       <InputLabel labelText="이메일"></InputLabel>
                       <Input
                         type="email"
-                        name="email"
+                        name="userEmail"
                         labelText="이메일"
-                        value={formData.email}
+                        value={formData.userEmail}
                         onChange={handleChange}
                       />
                     </InputField>
