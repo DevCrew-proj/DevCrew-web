@@ -267,7 +267,8 @@ const TeamApplicationForm = ({ contestId }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM5MzU4MiwiZW1haWwiOiJyeXVqdzAzMTlAbmF2ZXIuY29tIn0.jn8SOvKQ_ty78uBBPYJxJ0i75fqOpuH8vDeQH5zk4bhPfuu86dSBEw8SjcQ3yWVz2hdvGvt00tkQvLraFcgd1g"
+  // Retrieve token from sessionStorage
+  const token = sessionStorage.getItem('token');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
