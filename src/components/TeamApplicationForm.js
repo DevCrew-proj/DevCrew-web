@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import DropdownArrow from "../assets/image/DropdownArrow.svg";
@@ -250,6 +251,8 @@ const CloseButton = styled.button`
 `;
 
 const TeamApplicationForm = ({ contestId }) => {
+  const navigate = useNavigate(); // Use navigate from react-router-dom
+
   const [formData, setFormData] = useState({
     name: '',
     password: '',
@@ -308,6 +311,10 @@ const TeamApplicationForm = ({ contestId }) => {
     } catch (error) {
       console.error("There was an error submitting the form:", error);
     }
+  };
+
+  const handleCancel = () => {
+    navigate(`/teammatching/${contestId}`);
   };
 
   const handleCloseModal = () => {
@@ -441,7 +448,7 @@ const TeamApplicationForm = ({ contestId }) => {
           <SubmitButton onClick={handleSubmit}>
             <SubmitButtonText>신청하기</SubmitButtonText>
           </SubmitButton>
-          <CancelButton>
+          <CancelButton onClick={handleCancel}>
             <CancelButtonText>신청취소</CancelButtonText>
           </CancelButton>
         </SubmitButtonContainer>
@@ -459,4 +466,3 @@ const TeamApplicationForm = ({ contestId }) => {
 };
 
 export default TeamApplicationForm;
-
