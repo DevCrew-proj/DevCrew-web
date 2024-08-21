@@ -300,9 +300,9 @@ const IntroduceSelfPage = () => {
                       <InputLabel labelText="이메일"></InputLabel>
                       <Input
                         type="email"
-                        name="email"
+                        name="userEmail"
                         labelText="이메일"
-                        value={formData.email}
+                        value={formData.userEmail}
                         onChange={handleChange}
                       />
                     </InputField>
