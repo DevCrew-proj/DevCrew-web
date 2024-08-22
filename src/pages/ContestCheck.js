@@ -8,10 +8,10 @@ import {Link } from 'react-router-dom'
 import vectors from '../assets/image/vector2.svg'
 import vector3 from '../assets/image/vector3.svg'
 import Bottombar from '../components/Bottombar'
-// import Pagination from '../components/Pagination';
+import Pagination from '../components/Pagination';
 
 const Layout = styled.div`
-width : 1680px;
+width : 1920px;
 //height : 2236px;
 `
 
@@ -181,7 +181,7 @@ display: flex;
 width: 51px;
 height: 23px;
 padding: 0px 6px;
-justify-content: center;
+justify-content: centernn;
 align-items: center;
 gap: 10px;
 flex-shrink: 0;
@@ -242,6 +242,15 @@ margin-top : 40px;
 margin-left : 1476px;
 
 `
+const Submit = styled.div`
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+color : white;
+text-decoration : none;
+`
 const UploadLink = styled(Link)`
 font-family: Pretendard;
 font-size: 24px;
@@ -256,14 +265,14 @@ text-decoration : none;
  margin-left: 9px;
  
  `
- const Pagination = styled.div`
- display: flex;
- justify-content: center;
- margin-top: 5px;
+//  const Pagination = styled.div`
+//  display: flex;
+//  justify-content: center;
+//  margin-top: 5px;
 
 
 
-// `;
+// // `;
 
 const PageButton = styled.button`
   width: 34px;
@@ -301,16 +310,42 @@ const PaginationContainer=styled.div`
 
 `;
 
+const DropdownButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #000;
+  font-family: Pretendard;
+  display: flex;
+  align-items: center;
+`;
+
+const DropdownContent = styled.select`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: block;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 18px;
+  font-family: Pretendard;
+`;
 
 
-
- const itemsPerPage = 12; // 한 페이지에 보여줄 아이템 수
+ 
  const ContestCheck = () =>{
   const [selectedTab, setSelectedTab] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
   const [searchData, setSearchData] = useState([]);
   const [sector, setSector] = useState(''); // 기본값은 공백, '전체' 탭이 선택된 경우
-  // const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태
+  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 상태
+  const [totalResult, setTotalResult] = useState(0); // 전체 검색 결과 개수를 위한 상태
+  const itemsPerPage = 12; // 한 페이지에 보여줄 아이템 수
+  const [role, setRole] = useState(null); // 역할 상태 추가
   const sectorMapping = {
     '전체': '',
     '창업': 'STARTUP',
@@ -321,10 +356,29 @@ const PaginationContainer=styled.div`
     '기타': 'OTHER'
 };
 
+
+useEffect(() => {
+  const fetchRole = async () => {
+    try {
+      const response = await axios.get('https://devcrew.kr/api/role', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('auth_token')}`,
+        },
+      });
+      setRole(response.data.data.role);
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+    }
+  };
+
+  fetchRole();
+}, []);
 const fetchContests = async () => {
   try {
     const sector = sectorMapping[selectedTab]; // 선택된 탭에 따라 sector 값을 설정
-      const response = await axios.get('https://devcrew.kr/api/v1/contests/', {
+       // axios 요청 전에 URL을 콘솔에 출력
+    console.log('Fetching contests with URL:', `https://devcrew.kr/api/v1/contests/?sector=${sector}&page=${currentPage-1}&size=${itemsPerPage}&sort=createdAt&order=desc`);
+    const response = await axios.get('https://devcrew.kr/api/v1/contests/', {
           params: {
               sector: sector || '', // 선택된 탭에 따라 sector 값 설정, 기본값은 빈 문자열
               page: currentPage-1 , // 페이지 번호는 0부터 시작할 수도 있음
@@ -334,10 +388,19 @@ const fetchContests = async () => {
           },
       });
       console.log('API 응답:', response.data); // API 응답 데이터를 콘솔에 출력
-
+     
       setSearchData(response.data.data.contests || []); // 데이터가 없을 때 빈 배열 설정
-      // setTotalPages(Math.ceil(response.data.totalResult / itemsPerPage)); // 전체 페이지 수 계산
-  } catch (error) {
+
+      setTotalResult(response.data.data.totalResult); // 전체 검색 결과 개수를 상태로 저장
+      //console.log('Total Pages:', response.data.data.totalPages);
+      console.log('Total Results:', response.data.data.totalResult);
+
+      console.log('Total Pages:', response.data.data.totalPages); // 이 값이 제대로 나오나 확인
+      setTotalPages(response.data.data.totalPages); 
+      console.log('After setting Total Pages:', response.data.data.totalPages);
+      
+  
+    } catch (error) {
       console.error('Error fetching contests:', error);
       if (error.response && error.response.status === 400) {
           alert('해당 분야의 공모전이 더 이상 존재하지 않습니다.');
@@ -364,50 +427,20 @@ const fetchContests = async () => {
 };
 // sector 값이 변경될 때마다 API를 호출
 useEffect(() => {
+  console.log('Selected Sector:', sector);
+  console.log('Current Page:', currentPage);
     fetchContests();
-}, [sector]); // sector 값이 바뀔 때마다 fetchContests 실행
+}, [sector,currentPage]); // sector 값이 바뀔 때마다 fetchContests 실행
 
   useEffect(() => {
     fetchContests();
-  }, [selectedTab, currentPage]);
+  }, [selectedTab]);
 
-  // const handleTabClick = (tabName) => {
-  //   setSelectedTab(tabName);
-  //   setCurrentPage(1); // Change page to 1 when tab changes
-  // };
-
- // const totalPages = Math.ceil(searchData.length / itemsPerPage);
-  // const renderPagination = () => {
-  //   const pageNumbers = [];
-  //   for (let i = 1; i <= totalPages; i++) {
-  //       pageNumbers.push(
-  //           <PageButton
-  //               key={i}
-  //               active={i === currentPage}
-  //               onClick={() => handlePageChange(i)}
-  //           >
-  //               {i}
-  //           </PageButton>
-  //       );
-  //   }
-  //   return (
-  //     <PaginationContainer>
-  //       {/* <ArrowButton
-  //         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-  //       >
-  //         <img src={vector3} alt="Previous Page" />
-  //       </ArrowButton> */}
-  //       <Pagination>{pageNumbers}</Pagination>
-  //       <ArrowButton
-  //                   onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-  //                   disabled={currentPage === totalPages}
-  //               >
-  //                   <img src={vectors} alt="Next Page" />
-  //               </ArrowButton>
-  //     </PaginationContainer>
-  //   );
-  // };
-  
+  const handleUploadClick = () => {
+    if (role !== 'COMPANY_USER') {
+      alert('기업회원만 공모전을 업로드할 수 있습니다.');
+    }
+  };
 
   return (
     <Layout>
@@ -425,28 +458,12 @@ useEffect(() => {
           </Menu>
         ))}
       </MenuContainer>
-{/*       
-        <Menu active={selectedTab === '전체'} onClick={() => setSelectedTab('전체')}>전체</Menu>
-        <Menu active={selectedTab === '생성형 AI'} onClick={() => setSelectedTab('생성형 AI')}>생성형 AI</Menu>
-        <Menu active={selectedTab === '플랫폼'} onClick={() => setSelectedTab('플랫폼')}>플랫폼</Menu>
-        <Menu active={selectedTab === '데이터 분석'} onClick={() => setSelectedTab('데이터 분석')}>데이터 분석</Menu>
-        <Menu active={selectedTab === '창업'} onClick={() => setSelectedTab('창업')}>창업</Menu>
-        <Menu active={selectedTab === '게임'} onClick={() => setSelectedTab('게임')}>게임</Menu>
-        <Menu active={selectedTab === '기타'} onClick={() => setSelectedTab('기타')}>기타</Menu>
-      </MenuContainer> */}
-      {/* <Content>
-        {selectedTab === '전체' && <div>전체 내용</div>}
-        {selectedTab === '생성형 AI' && <div>생성형 AI 내용</div>}
-        {selectedTab === '플랫폼' && <div>플랫폼 내용</div>}
-        {selectedTab === '데이터 분석' && <div>데이터 분석 내용</div>}
-        {selectedTab === '창업' && <div>창업 내용</div>}
-        {selectedTab === '게임' && <div>게임 내용</div>}
-        {selectedTab === '기타' && <div>기타 내용</div>}
-      </Content> */}
       <SearchInfo>
-      <SearchResultCount>검색결과 {searchData.length}건</SearchResultCount>
+      <SearchResultCount>검색결과 {totalResult}건</SearchResultCount>
         <Order>최신순</Order>
         <Vectors src={vector3} alt="화살표" />
+      
+        
         </SearchInfo>
         <SearchResults>
     {searchData.map((contest) => {
@@ -474,22 +491,24 @@ useEffect(() => {
     })}
 </SearchResults>
 
-      <Upload>
-      <UploadLink to="/contestupload">업로드</UploadLink>
-        <Vector src = {vector} alt='화살표' />
-         </Upload>
+{role === 'COMPANY_USER' ? (
+        <Upload>
+          <UploadLink to="/contestupload">업로드</UploadLink>
+          <Vector src={vector} alt='화살표' />
+        </Upload>
+      ) : (
+        <Upload onClick={handleUploadClick}>
+         <Submit>업로드</Submit>
+         <Vector src={vector} alt='화살표' />
+        </Upload>
+      )}
          <PaginationContainer>
-         <Pagination>
-         {/* page={currentPage}
-        totalPages={totalPages} */}
-        {/* setPage={handlePageChange} */}
-          {/* <ArrowButton onClick={handlePrev} disabled={currentPage === 1}>
-            <img src={vectors} alt="Previous" style={{ transform: 'rotate(180deg)' }} />
-          </ArrowButton> */}
-          {/* {renderPagination()} */}
-          {/* <ArrowButton onClick={handleNext} disabled={currentPage === totalPages}>
-            <img src={vectors} alt="Next" /> 
-          </ArrowButton> */}
+         <Pagination 
+           page={currentPage}
+           totalPages={totalPages}
+           setPage={handlePageChange}
+           category={selectedTab}>
+       
         </Pagination>
         </PaginationContainer>
         <Bottombar />

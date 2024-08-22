@@ -203,8 +203,13 @@ const TeamMatching = () => {
   const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
   const [error, setError] = useState(null); // 오류 상태를 위한 상태
   const [teamData, setTeamData] = useState([]);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { contestId } = useParams();  // contestId 가져오기
+
+  useEffect(() => {
+    const authToken = sessionStorage.getItem('auth_token');
+    setIsLoggedIn(!!authToken); // 로그인 여부 설정
+  }, []);
 
   useEffect(() => {
     console.log("Fetching data for contestId:", contestId); // 이 라인을 추가하여 contestId를 확인합니다.
@@ -224,13 +229,27 @@ const TeamMatching = () => {
     const fetchTeamData = async () => {
       try {
         const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}/teams`);
-        setTeamData(response.data.data.teamInfoList);
+        // setTeamData(response.data.data.teamInfoList);
+        const fetchedTeamData = response.data.data.teamInfoList;
+        const emptyRows = Math.max(3 - fetchedTeamData.length, 0);
+        const filledTeamData = [...fetchedTeamData, ...Array(emptyRows).fill({ teamName: '', planUrl: '', teamEmail: '' })];
+        console.log("Filled Team Data:", filledTeamData);  // 이 줄 추가
+        setTeamData(filledTeamData);
         console.log("Team Data:", response.data.data.teamInfoList);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching team data:', err.response ? err.response.data : err.message);
-        setError(err);
-        setLoading(false);
+
+        if (err.response && err.response.status === 404) {
+          // 팀 정보를 찾지 못했을 때 (404 에러)
+          const emptyRows = 3;
+          const filledTeamData = Array(emptyRows).fill({ teamName: '', planUrl: '', teamEmail: '' });
+          setTeamData(filledTeamData);
+          setLoading(false);
+        } else {
+          console.error('Error fetching team data:', err.response ? err.response.data : err.message);
+          setError(err);
+          setLoading(false);
+        }
       }
     };
   
@@ -238,12 +257,6 @@ const TeamMatching = () => {
     fetchTeamData();
   }, [contestId]);
 
-
-  // const [teamData, setTeamData] = useState([
-  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-  //   { teamName: '', planLink: '', email: '', apply: false, isEditing: false },
-  // ]);
 
   const handleInputChange = (index, field, value) => {
     const newTeamData = [...teamData];
@@ -261,6 +274,13 @@ const TeamMatching = () => {
     const newTeamData = [...teamData];
     newTeamData[index].isEditing = true;
     setTeamData(newTeamData);
+  };
+
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      alert('로그인해주세요!');
+
+    }
   };
 
   return (
@@ -296,9 +316,11 @@ const TeamMatching = () => {
         <tbody>
               {teamData.map((team, index) => (
                 <TableRow key={team.teamId}>
+                   {/* <TableRow key={index}> */}
                   <TableCell>{team.teamName}</TableCell>
                   <TableCell>
-                    <StyledLink href={team.planUrl} target="_blank">
+                  <StyledLink href={team.planUrl.startsWith('http') ? team.planUrl : `https://${team.planUrl}`} target="_blank">
+                  {/* <StyledLink href={team.planUrl} target="_blank"> */}
                       {team.planUrl}
                     </StyledLink>
                   </TableCell>
@@ -309,63 +331,15 @@ const TeamMatching = () => {
                 </TableRow>
               ))}
             </tbody>
-        {/* <tbody>
-          {teamData.map((team, index) => (
-            <TableRow key={team.teamId}>
-              <TableCell>
-                <InputText
-                  value={team.teamName}
-                  onChange={(e) =>
-                    handleInputChange(index, 'teamName', e.target.value)
-                  }
-                
-                />
-              </TableCell>
-              <TableCell>
-                {team.planLink ? (
-                  <StyledLink href={team.planLink} target="_blank">
-                    {team.planLink}
-                  </StyledLink>
-                ) : (
-                  <InputText
-                    value={team.planLink}
-                    onChange={(e) =>
-                      handleInputChange(index, 'planLink', e.target.value)
-                    }
-                  
-                  />
-                )}
-              </TableCell>
-              <TableCell>
-                <InputText
-                  value={team.email}
-                  onChange={(e) =>
-                    handleInputChange(index, 'email', e.target.value)
-                  }
-                
-                />
-              </TableCell>
-              <TableCell>
-                <InputCheckbox
-                  checked={team.apply}
-                  onChange={(e) =>
-                    handleInputChange(index, 'apply', e.target.checked)
-                  }
-                />
-              </TableCell>
-            </TableRow>
-          ))}
-        </tbody> */}
       </Table>
       <ButtonGroup>
-
-        <Button1>
-        <ButtonLink1 to={`/teamComposition/${contestId}`}>팀 구성하기</ButtonLink1>
-        </Button1>
-        <Button2>
-        <ButtonLink2 to={`/teamApplication/${contestId}`}>팀 신청하기</ButtonLink2>
-        </Button2>
-      </ButtonGroup>
+            <Button1 onClick={handleClick} as={isLoggedIn ? ButtonLink1 : 'button'} to={`/teamComposition/${contestId}`}>
+              팀 구성하기
+            </Button1>
+            <Button2 onClick={handleClick} as={isLoggedIn ? ButtonLink2 : 'button'} to={`/teamApplication/${contestId}`}>
+              팀 신청하기
+            </Button2>
+          </ButtonGroup>
       <Bottombar />
       </>
     ) : (

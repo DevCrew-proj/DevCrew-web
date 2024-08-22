@@ -61,6 +61,7 @@ const ArrowImg = styled.img`
 
 const Pagination = ({ page, totalPages, setPage, category }) => {
   // 카테고리 변경 시 페이지 초기화
+
   useEffect(() => {
     setPage(1);
   }, [category]);
@@ -83,6 +84,7 @@ const Pagination = ({ page, totalPages, setPage, category }) => {
 
   let firstPageNum = lastPageNum - (3 - 1) <= 0 ? 1 : lastPageNum - (3 - 1);
   // 첫 페이지
+
 
   const handlePageSub = () => {
     for (let i = 0; i < 9999; i++) {
