@@ -5,10 +5,10 @@ import contestimage from '../assets/image/contestimage.svg';
 import axios from 'axios';
 
 const Container = styled.div`
-  margin: 100px 30.3px 36px 0;
+  //margin: 100px 30.3px 36px 0;
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 1101.63px;
   box-sizing: border-box;
 `;
 
@@ -16,12 +16,12 @@ const Countdown = styled.div`
   border-radius: 5px;
   background-color: #2F4F4F;
   position: relative;
-  margin: 0 1212.7px 35px 0;
+  //margin: 0 1212.7px 35px 0;
   display: flex;
   align-self: start;
   //padding: 12px 0 14px 1px;
-  width: 200px;
-  height : 44px;
+  width: 175px;
+  height : 38.5px;
   box-sizing: border-box;
   align-items: center; 
   justify-content: center;
@@ -31,22 +31,23 @@ const CountdownText = styled.span`
   word-break: break-word;
   font-family: AppleSDGothicNeoEB00;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 17.5px;
   color: #FFFFFF;
 `;
 
 const Title = styled.div`
-  margin: 0 0 56px 0;
+  //margin: 0 0 56px 0;
+  margin-top :30.63px;
   display: inline-block;
   align-self: start;
   word-break: break-word;
   font-family: AppleSDGothicNeoEB00;
-  font-size: 43px;
+  font-size: 37.625px;
   color: #2F4F4F;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  height : 61px;
+  //height : 61px;
 `;
 
 const ContentContainer = styled.div`
@@ -58,19 +59,17 @@ const ContentContainer = styled.div`
 
 const ImageContainer = styled.div`
   margin: 0 93px 0 0;
-  width: 269px;
-  height: 380px;
+  width: 235.375px;
+  height: 332.5px;
   background: ${({ imageUrl }) => `url(${imageUrl})`} 50% 50% / cover no-repeat;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 15.75px;
   color: #333333;
   line-height: 1.5;
- 
-
 `;
 
 const InfoGrid = styled.div`
@@ -90,26 +89,32 @@ const InfoTitle = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  font-size: 25px;
+  font-size: 21.875px;
   color: #000000;
 `;
 
 const InfoItem = styled.div`
   display: flex;
-  justify-content: flex-start;
-  margin-right: 100px;
+  //justify-content: flex-start;
+  margin-right: 20px;
+  
 
 `;
 
 const InfoLabel = styled.div`
-  margin-right: 20px;
+  //margin-right: 20px;
+  width : 100px;
+  
 `;
 
 const InfoValue = styled.div`
-  margin-left: 20px;
+  margin-left: -20px;
   display : flex;
+  width : 160px;
   justify-content : flex-start;
-  align-items: center;
+  //align-items: center;
+  word-break: break-all; /* This will force the text to break at any character */
+  overflow-wrap: break-word; /* This allows breaking within words if necessary */
 `;
 
 const Button = styled.div`
@@ -231,9 +236,9 @@ const ContestInfo = ({ contestId }) => {
             <InfoItem><InfoLabel>이메일</InfoLabel><InfoValue>{contestData.ceoEmail}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>추가혜택</InfoLabel><InfoValue>{contestData.plusBenefits || '-'}</InfoValue></InfoItem>
           </InfoGrid>
-          <Button>
+          {/* <Button>
             <ButtonText>홈페이지 지원</ButtonText>
-          </Button>
+          </Button> */}
         </InfoContainer>
       </ContentContainer>
     </Container>

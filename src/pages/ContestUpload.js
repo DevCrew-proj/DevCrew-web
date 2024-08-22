@@ -10,25 +10,25 @@ import Bottombar from "../components/Bottombar";
 import PresignedImageUpload from "../components/ContestImageUpload"; // PresignedImageUpload 컴포넌트 임포트
 
 const Layout = styled.div`
-    width: 1920px;
+    width: 1680px;
 `;
 
 const Title = styled.div`
     color: var(--Gray-zip_gray800, #373737);
     font-family: AppleSDGothicNeoB00;
-    font-size: 40px;
+    font-size: 35px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 170px;
-    margin-left: 292px;
+    margin-top: 148.75px;
+    margin-left: 255px;
 `;
 
 const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-left: 282px;
-    margin-top: 78px;
+    margin-left: 255px;
+    margin-top: 68.25px;
     width: 60%;
 `;
 
@@ -36,7 +36,7 @@ const FormField = styled.div`
     display: flex;
     flex-direction: row;
     border-top: 1px solid #97a7a7;
-    width: 1356px;
+    width: 1200px;
     &:last-child {
         border: 1px solid #97a7a7;
     }
@@ -44,12 +44,12 @@ const FormField = styled.div`
 
 const Label = styled.label`
     width: 243px;
-    height: 62px;
+    height: 60px;
     flex-shrink: 0;
     background: #f1f1f1;
     color: var(--Gray-zip_gray800, #373737);
     font-family: AppleSDGothicNeoM00;
-    font-size: 20px;
+    font-size: 17.5px;
     font-style: normal;
     font-weight: 400;
     line-height: 140%; /* 28px */
@@ -62,8 +62,8 @@ const Input = styled.input`
     font-size: 16px;
     border-radius: 11px;
     border: 1px solid #829595;
-    width: 201px;
-    height: 52px;
+    width: 175.875px;
+    height: 45.5px;
     flex-shrink: 0;
     margin-top: 23px;
     margin-left: 33px;
@@ -72,7 +72,7 @@ const Input = styled.input`
 
 const TextArea = styled.textarea`
     display: flex;
-    width: 1313px;
+    width: 1191.75px;
     height: 598px;
     padding: 40px 0 0 49px;
     align-items: center;
@@ -185,7 +185,7 @@ const Button = styled.button`
     font-weight: 400;
     line-height: normal;
     margin-top: 111px;
-    margin-left: 505px;
+   margin-left: 441.8px;
     margin-bottom: 117px;
     cursor: pointer;
 `;
@@ -360,12 +360,22 @@ const ContestUpload = () => {
             <Title>기업 공모전 등록</Title>
             <FormContainer>
                 <form onSubmit={handleSubmit}>
-                    <FormField>
+                    {/* <FormField>
                         <Label>회사명 *</Label>
                         <Input
                             type="text"
                             name="companyName"
                             value={formData.companyName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </FormField> */}
+                     <FormField>
+                        <Label>공모전명 *</Label>
+                        <Input
+                            type="text"
+                            name="contestName"
+                            value={formData.contestName}
                             onChange={handleChange}
                             required
                         />
@@ -394,16 +404,7 @@ const ContestUpload = () => {
                             파일추가 */}
                         {/* </FileButton> */}
                     </FormField>
-                    <FormField>
-                        <Label>공모전명 *</Label>
-                        <Input
-                            type="text"
-                            name="contestName"
-                            value={formData.contestName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </FormField>
+                   
                     <FormField>
                         <Label>주최기관 *</Label>
                         <Input
@@ -424,7 +425,7 @@ const ContestUpload = () => {
                             required
                         />
                     </FormField>
-                    <FormField>
+                    {/* <FormField>
                         <Label>담당자 정보 *</Label>
                         <Input
                             type="text"
@@ -433,7 +434,7 @@ const ContestUpload = () => {
                             onChange={handleChange}
                             required
                         />
-                    </FormField>
+                    </FormField> */}
                     <FormField>
                         <Label>시상 규모 *</Label>
                         <Input

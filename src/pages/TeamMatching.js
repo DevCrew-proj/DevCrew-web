@@ -8,188 +8,200 @@ import { Link, useParams } from "react-router-dom";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
-    width: 1920px;
-    display: flex;
-    flex-direction: column;
-    /* justify-content:center;
+width : 1680px;
+display : flex;
+flex-direction : column;
+/* justify-content:center;
 align-items : center; */
-`;
+`
 
 const ContestInfoWrapper = styled.div`
-    margin-top: 63px;
-    margin-bottom: 86px;
-    margin-left: 338px;
-`;
+  margin-top: 142.63px;
+  margin-bottom: 86px;
+ // margin-left : 295.75px;
+  display : flex;
+  align-items: center;
+  justify-content: center;
+`
 const Divider = styled.div`
-    width: 1620px;
-    height: 4px;
-    flex-shrink: 0;
-    background: rgba(47, 79, 79, 0.3);
-    margin-left: 150px;
-`;
+width: 1417.5px;
+height: 4px;
+flex-shrink: 0;
+background: rgba(47, 79, 79, 0.30);
+margin-left : 150px;
+`
 const TitleContainer = styled.div`
-    margin-top: 130px;
-    margin-left: 342px;
-    position: relative; /* UnderLine의 위치를 Title과 맞추기 위해 부모 컨테이너에 relative 설정 */
-    display: inline-block; /* Title의 크기를 텍스트 내용에 맞추기 위해 inline-block 설정 */
+  margin-top: 130px;
+  margin-left: 299px;
+  position: relative;  /* UnderLine의 위치를 Title과 맞추기 위해 부모 컨테이너에 relative 설정 */
+  display: inline-block;  /* Title의 크기를 텍스트 내용에 맞추기 위해 inline-block 설정 */
 `;
 
 const Title = styled.div`
-    display: inline-block; /* 내용에 맞춰서 너비가 조정되도록 설정 */
-    width: fit-content;
-    height: 61px;
-    flex-shrink: 0;
-    color: #2f4f4f;
-    font-family: AppleSDGothicNeoEB00;
-    font-size: 43px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: relative;
-    z-index: 1; /* Title을 앞쪽에 배치 */
-`;
-const UnderLine = styled.div`
-    width: 120%;
-    height: 44px;
-    flex-shrink: 0;
-    position: absolute;
-    background: rgba(186, 203, 206, 0.4);
-    left: 0; /* 왼쪽 정렬 */
-    bottom: -5px; /* Title의 하단에 위치하도록 조정 */
-    z-index: -1;
-`;
-const ContentLayout = styled.div`
-    margin-left: 338px;
-    margin-top: 43px;
-    margin-bottom: 94px;
-`;
+display : inline-block; /* 내용에 맞춰서 너비가 조정되도록 설정 */
+width: fit-content;
+height: 61px;
+flex-shrink: 0;
+color: #2F4F4F;
+font-family: AppleSDGothicNeoEB00;
+font-size: 43px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+position : relative;
+z-index: 1;  /* Title을 앞쪽에 배치 */
+`
+const UnderLine=styled.div`
+width: 110%;
+height: 44px;
+flex-shrink: 0;
+position : absolute;
+background: rgba(186, 203, 206, 0.40);
+left: 0;  /* 왼쪽 정렬 */
+bottom: -5px;  /* Title의 하단에 위치하도록 조정 */
+z-index: -1;
 
-const MatchingTitle = styled.div`
-    color: var(--kakao-logo, #000);
-    //text-align: center;
-    font-family: AppleSDGothicNeoR00;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-left: 342px;
-    margin-top: 95px;
-`;
+
+`
+const ContentLayout = styled.div`
+margin-left :299px;
+margin-top : 43px;
+margin-bottom : 94px;
+width : 1100px;
+`
+
+
+const MatchingTitle=styled.div`
+color: var(--kakao-logo, #000);
+//text-align: center;
+font-family: AppleSDGothicNeoR00;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-left : 299px;
+margin-top : 95px;
+`
 // 테이블 스타일링
 const Table = styled.table`
-    width: 1237px;
-    border-collapse: collapse;
-    margin-left: 342px;
-    margin-top: 55px;
+  width: 1150px;
+  border-collapse: collapse;
+  margin-left : 299px;
+  margin-top : 55px;
 `;
 
 const TableRow = styled.tr`
-    border: 1px solid rgba(51, 51, 51, 0.2);
+  border: 1px solid rgba(51, 51, 51, 0.20);
 `;
 
 const TableHeader = styled.th`
-    padding: 12px;
-    text-align: left;
-    background: #fafafa;
-    height: 71px;
-    text-align: center;
-    color: #4a4a4a;
-    text-align: center;
-    border: 1px solid rgba(51, 51, 51, 0.2);
+  padding: 12px;
+  text-align: left;
+background: #FAFAFA;
+height : 71px;
+text-align :center;
+color: #4A4A4A;
+text-align: center;
+border: 1px solid rgba(51, 51, 51, 0.20);
 
-    /* body/medium */
-    font-family: AppleSDGothicNeoR00;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+/* body/medium */
+font-family: AppleSDGothicNeoR00;
+font-size: 26.25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 `;
 
 const TableCell = styled.td`
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
 `;
-const InputText = styled.input.attrs({ type: "text" })`
-    flex-shrink: 0;
-    padding: 8px;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    color: #4a4a4a;
-    text-align: center;
-    font-family: AppleSDGothicNeoUL00;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+const InputText = styled.input.attrs({ type: 'text' })`
+  
+flex-shrink: 0;
+  padding: 8px;
+  box-sizing: border-box;
+  border : none;
+  outline:none;
+  color: #4A4A4A;
+text-align: center;
+font-family: AppleSDGothicNeoUL00;
+font-size: 28px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
 `;
 
-const InputCheckbox = styled.input.attrs({ type: "checkbox" })`
-    width: 47px;
-    height: 47px;
-    cursor: pointer;
-    &:hover {
-        background-color: #2f4f4f;
-    }
+const InputCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  width: 47px;
+  height: 47px;
+  cursor: pointer;
+  &:hover {
+    background-color :  #2F4F4F;
+  }
 `;
 // 링크 스타일링
 const StyledLink = styled.a`
-    color: #0066cc;
-    text-decoration: none;
+  color: #0066cc;
+  text-decoration: none;
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
+  }
 `;
+
 
 // 버튼 스타일링
 const ButtonGroup = styled.div`
-    margin-top: 53px;
-    margin-left: 784px;
-    margin-bottom: 157px;
+  margin-top: 53px;
+  margin-left: 686px;
+  margin-bottom : 157px;
 `;
 
 const Button1 = styled.button`
-    width: 169px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    background: var(--sub, #5d6c6f);
-    color: #fff;
-    text-align: center;
-    font-family: AppleSDGothicNeoB00;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  width: 169px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 5px;
+background: var(--sub, #5D6C6F);
+color: #FFF;
+text-align: center;
+font-family: AppleSDGothicNeoB00;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+
 `;
 
-const Button2 = styled.button`
-    width: 169px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    border: 1px solid #5d6c6f;
-    color: #5d6c6f;
-    text-align: center;
-    font-family: AppleSDGothicNeoB00;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-left: 13px;
-`;
+const Button2=styled.button`
+width: 169px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 5px;
+border: 1px solid #5D6C6F;
+color: #5D6C6F;
+text-align: center;
+font-family: AppleSDGothicNeoB00;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-left: 13px;
+`
 
 const ButtonLink1 = styled(Link)`
-    text-decoration: none;
-    color: white;
-`;
+text-decoration : none;
+color : white;
+`
 const ButtonLink2 = styled(Link)`
-    text-decoration: none;
-    color: #5d6c6f;
-`;
+text-decoration : none;
+color: #5D6C6F;
 
+`
 const TeamMatching = () => {
     const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
     const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
