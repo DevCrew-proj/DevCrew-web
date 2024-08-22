@@ -100,7 +100,7 @@ const PreviewContainer = styled.div`
   height: 100%;
 `;
 
-const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
+const FormBoard2 = ({ apiEndpoint, laguage, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [fileUrls, setFileUrls] = useState([]);
@@ -119,17 +119,19 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
 
   const handleUpload = async () => {
     const tagMap = {
-      "기획": "PLAN",
-      "디자인": "DESIGN",
-      "Front-end": "FRONTEND",
-      "Back-end": "BACKEND",
+      "JAVA": "JAVA",
+      "JS": "JS",
+      "Kotlin": "Kotlin",
+      "Python": "Python",
+      "Swift": "Swift",
+      "C": "C",
       "기타": "OTHER"
     };
 
     const payload = {
       title: title || "제목 없음",
       content: details || "내용 없음",
-      feedbackTag: tagMap[feedbackTag],
+      language: tagMap[laguage],
       fileUrls,
       imageUrls
     };
@@ -194,4 +196,4 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
   );
 };
 
-export default FormBoard;
+export default FormBoard2;
