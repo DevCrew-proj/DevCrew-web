@@ -63,7 +63,7 @@ const DropdownItem = styled.div`
 
 const IcChevronDown = styled.img``;
 
-export const DropdownInput = ({ value, onChange }) => {
+export const DropdownInput = ({ value, onChange, options = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = (e) => {
     e.preventDefault();
@@ -82,15 +82,11 @@ export const DropdownInput = ({ value, onChange }) => {
         <IcChevronDown src={icChevronDown} />
       </DropdownButton>
       <DropdownContent isOpen={isOpen}>
-        <DropdownItem onClick={() => handleItemClick("재학")}>
-          재학
-        </DropdownItem>
-        <DropdownItem onClick={() => handleItemClick("휴학")}>
-          휴학
-        </DropdownItem>
-        <DropdownItem onClick={() => handleItemClick("졸업")}>
-          졸업
-        </DropdownItem>
+        {options.map((option) => (
+          <DropdownItem key={option} onClick={() => handleItemClick(option)}>
+            {option}
+          </DropdownItem>
+        ))}
       </DropdownContent>
     </DropdownContainer>
   );
