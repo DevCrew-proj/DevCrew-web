@@ -25,7 +25,7 @@ const PreviewItem = styled.div`
   box-sizing: border-box;
   background: #d9d9d9;
   position: relative;
-  width: 202px;
+  width: 180px;
   height: 176px;
   margin-bottom: 16px;
   float: left;
