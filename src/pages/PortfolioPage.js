@@ -121,7 +121,7 @@ const Menu = styled.div`
 `;
 
 const PortfolioWrapper = styled.div`
-  width: 1363px;
+  width: 1210px;
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
