@@ -100,12 +100,46 @@ const PreviewContainer = styled.div`
   height: 100%;
 `;
 
-const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+`;
+
+const CloseButton = styled.button`
+  background-color: #5d6c6f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "AppleSDGothicNeoB00", "Roboto Condensed";
+  font-size: 20px;
+  margin-top: 20px;
+`;
+
+const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploadApiEndpoint, onSuccess }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [fileUrls, setFileUrls] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -146,7 +180,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
         }
       });
       console.log("Response data:", response.data);
-      alert("Upload successful!");
+      setIsModalOpen(true); 
     } catch (error) {
       console.error("Error uploading:", error);
       if (error.response) {
@@ -159,6 +193,13 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
       alert("Upload failed. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    if (onSuccess) {
+      onSuccess(); // 업로드 성공 후 콜백 호출
     }
   };
 
@@ -190,6 +231,14 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
         </PreviewContainer>
       </FormLayout>
       <UploadButton onClick={handleUpload}>업로드 하기</UploadButton>
+      {isModalOpen && (
+        <ModalOverlay>
+          <ModalContent>
+            <h2>업로드 완료되었습니다!</h2>
+            <CloseButton onClick={handleCloseModal}>닫기</CloseButton>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </Layout>
   );
 };
