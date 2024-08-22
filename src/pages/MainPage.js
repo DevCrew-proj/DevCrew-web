@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Topbar3 from "../components/Topbar3";
+import Topbar4 from "../components/Topbar4";
 import logo from "../assets/image/logowhite.svg";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -84,7 +84,7 @@ const MainPage = () => {
 
     return (
         <Layout>
-            <Topbar3 />
+            <Topbar4 />
             <Container>
                 <Title>IT 프로젝트를 준비하는 우리를 위한 공간</Title>
                 <Logocontainer>
