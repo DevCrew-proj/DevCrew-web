@@ -129,13 +129,13 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
       "Python": "Python",
       "Swift": "Swift",
       "C": "C",
-      "기타": "ETC"
+      "기타": "OTHER"
     };
 
     const payload = {
       title: title || "제목 없음",
       content: details || "내용 없음",
-      feedbackTag: tagMap[feedbackTag] || "ETC",
+      feedbackTag: tagMap[feedbackTag] || "OTHER",
       fileUrls,
       imageUrls
     };
