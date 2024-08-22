@@ -213,7 +213,7 @@ const FormBoard2 = ({ apiEndpoint, language, imageUploadApiEndpoint, fileUploadA
           <TitleInputBox>
             <TitleInput
               type='text'
-              placeholder='제목을 입력하세요'
+              placeholder='제목을 입력하세요 (최대 50자까지 입력 가능합니다.)'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={50}  
