@@ -14,222 +14,216 @@ import axios from "axios";
 import ImageUpload3 from "../components/ImageUpload3";
 
 const Layout = styled.div`
-    width: 1680px;
-    align-items: center;
+  width: 1680px;
+  align-items: center;
 `;
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 150px;
-    margin-bottom: 185px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
+  margin-bottom: 185px;
 `;
 
 const Container2 = styled.div`
-    width: 1191.75px;
+  width: 1191.75px;
 `;
 
 const TitleContainer = styled.div`
-    display: flex;
+  display: flex;
 `;
 
 const Title = styled.h1`
-    margin: 0;
-    font-size: 38px;
-    margin-bottom: 22px;
-    color: #2f4f4f;
+  margin: 0;
+  font-size: 38px;
+  margin-bottom: 22px;
+  color: #2f4f4f;
 `;
 
 const FormContainer = styled.form``;
 
 const ProfileContainer = styled.div`
-    padding-bottom: 49px;
-    border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 49px;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const ProfileWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 29px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 29px;
 `;
 
 const IcPermIdentity = styled.img`
-    width: 45px;
-    height: 45px;
+  width: 45px;
+  height: 45px;
 `;
 
 const LabelContainer = styled.div`
-    position: relative;
+  position: relative;
 `;
 
 const InputContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 54.25px;
-    background-color: #d3dada;
-    padding: 36px 54.25px 0px;
-    border-radius: 17px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 54.25px;
+  background-color: #d3dada;
+  padding: 36px 54.25px 0px;
+  border-radius: 17px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const InputField = styled.div`
-    flex: 1 1 calc(50% - 67px);
-    box-sizing: border-box;
-    margin-bottom: 67px;
+  flex: 1 1 calc(50% - 67px);
+  box-sizing: border-box;
+  margin-bottom: 67px;
 `;
 
 const Input = styled.input`
-    width: 100%;
-    box-sizing: border-box;
-    padding: 19px 18px;
-    border-radius: 9px;
-    border: none;
-    font-size: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 19px 18px;
+  border-radius: 9px;
+  border: none;
+  font-size: 20px;
 `;
 
 const DropDownContainer = styled.div`
-    display: flex;
-    gap: 11px;
-    flex: 1 1;
+  display: flex;
+  gap: 11px;
+  flex: 1 1;
 `;
 
 const NoteContainer = styled.div`
-    margin-top: 106px;
+  margin-top: 106px;
 `;
 
 const NoteInput = styled.textarea`
-    width: 100%;
-    height: 638px;
-    box-sizing: border-box;
-    padding: 40px 49px;
-    background-color: #f7f7f7;
-    border-radius: 20px;
-    border: none;
-    margin-bottom: 57px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: AppleSDGothicNeoL00;
-    font-size: 25px;
-    font-weight: 400;
-    line-height: 31.9px;
-    text-align: left;
+  width: 100%;
+  height: 638px;
+  box-sizing: border-box;
+  padding: 40px 49px;
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 57px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: AppleSDGothicNeoL00;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 31.9px;
+  text-align: left;
 `;
 
 const InfoRegisterBtn = styled.input`
-    position: relative;
-    padding: 8px 36px;
-    background-color: #5d6c6f;
-    color: #ffffff;
-    font-size: 25px;
-    border-radius: 5px;
-    border: none;
-    left: 45%;
+  position: relative;
+  padding: 8px 36px;
+  background-color: #5d6c6f;
+  color: #ffffff;
+  font-size: 25px;
+  border-radius: 5px;
+  border: none;
+  left: 45%;
 `;
 
 const IntroduceSelfPage = () => {
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        id: "",
-        imageUrl: "",
-        name: "",
-        phoneNumber: "",
-        userEmail: "",
-        introduction: "",
-        highSchool: "",
-        college: "",
-        gender: "성별 선택",
-        highSchoolStatus: "상태",
-        collegeStatus: "상태",
-    });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    id: "",
+    imageUrl: "",
+    name: "",
+    phoneNumber: "",
+    userEmail: "",
+    introduction: "",
+    highSchool: "",
+    college: "",
+    gender: "성별 선택",
+    highSchoolStatus: "상태",
+    collegeStatus: "상태",
+  });
 
-    const accessToken = sessionStorage.getItem("auth_token");
+  const accessToken = sessionStorage.getItem("auth_token");
 
-    // 공통 매핑 함수 (양방향)
-    const mapStatus = (mapping, status, defaultValue) => {
-        if (mapping[status]) return mapping[status]; // 영어 -> 한글
-        return (
-            Object.keys(mapping).find((key) => mapping[key] === status) ||
-            defaultValue
-        ); // 한글 -> 영어
-    };
+  // 공통 매핑 함수 (양방향)
+  const mapStatus = (mapping, status, defaultValue) => {
+    if (mapping[status]) return mapping[status]; // 영어 -> 한글
+    return (
+      Object.keys(mapping).find((key) => mapping[key] === status) ||
+      defaultValue
+    ); // 한글 -> 영어
+  };
 
-    // 매핑 테이블 정의
-    const statusMapping = {
-        ENROLLMENT: "재학",
-        GRADUATION: "졸업",
-        ON_LEAVE: "휴학",
-    };
+  // 매핑 테이블 정의
+  const statusMapping = {
+    ENROLLMENT: "재학",
+    GRADUATION: "졸업",
+    ON_LEAVE: "휴학",
+  };
 
-    const genderMapping = {
-        MALE: "남성",
-        FEMALE: "여성",
-    };
+  const genderMapping = {
+    MALE: "남성",
+    FEMALE: "여성",
+  };
 
-    //프로필 데이터 받아오기
-    const getProfileData = async () => {
-        try {
-            const response = await axios.get(
-                `https://devcrew.kr/api/v1/profile`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            const data = response.data.data;
-            data.highSchoolStatus = mapStatus(
-                statusMapping,
-                data.highSchoolStatus,
-                "상태"
-            );
-            data.collegeStatus = mapStatus(
-                statusMapping,
-                data.collegeStatus,
-                "상태"
-            );
-            data.gender = mapStatus(genderMapping, data.gender, "성별 선택");
+  //프로필 데이터 받아오기
+  const getProfileData = async () => {
+    try {
+      const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const data = response.data.data;
+      data.highSchoolStatus = mapStatus(
+        statusMapping,
+        data.highSchoolStatus,
+        "상태"
+      );
+      data.collegeStatus = mapStatus(statusMapping, data.collegeStatus, "상태");
+      data.gender = mapStatus(genderMapping, data.gender, "성별 선택");
 
-            setFormData(data);
-        } catch (error) {
-            console.error(error);
+      setFormData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //프로필 데이터 보내기
+  const postProfileData = async () => {
+    try {
+      const mappedFormData = {
+        ...formData,
+        highSchoolStatus: mapStatus(
+          statusMapping,
+          formData.highSchoolStatus,
+          "ENROLLMENT"
+        ),
+        collegeStatus: mapStatus(
+          statusMapping,
+          formData.collegeStatus,
+          "ENROLLMENT"
+        ),
+        gender: mapStatus(genderMapping, formData.gender, "MALE"),
+      };
+
+      const response = await axios.post(
+        `https://devcrew.kr/api/v1/profile`,
+        mappedFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-    };
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    //프로필 데이터 보내기
-    const postProfileData = async () => {
-        try {
-            const mappedFormData = {
-                ...formData,
-                highSchoolStatus: mapStatus(
-                    statusMapping,
-                    formData.highSchoolStatus,
-                    "ENROLLMENT"
-                ),
-                collegeStatus: mapStatus(
-                    statusMapping,
-                    formData.collegeStatus,
-                    "ENROLLMENT"
-                ),
-                gender: mapStatus(genderMapping, formData.gender, "MALE"),
-            };
-
-            const response = await axios.post(
-                `https://devcrew.kr/api/v1/profile`,
-                mappedFormData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-        } catch (error) {
-            console.error(error);
-        };
-      
-useEffect(() => {
+  useEffect(() => {
     getProfileData();
   }, []);
 

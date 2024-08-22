@@ -12,177 +12,177 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 
 const Layout = styled.div`
-    width: 1680px;
+  width: 1680px;
 `;
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 250px;
 `;
 
 const ProfileContainer = styled.div`
-    display: flex;
-    margin-top: 108.5px;
+  display: flex;
+  margin-top: 108.5px;
 `;
 
 const Profile = styled.img`
-    object-fit: cover;
-    width: 468.13px;
-    height: 575.75px;
-    border-radius: 17px;
+  object-fit: cover;
+  width: 468.13px;
+  height: 575.75px;
+  border-radius: 17px;
 `;
 
 const InfoContainer = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 70px;
-    margin-left: 17px;
-    background-color: rgba(217, 217, 217, 0.2);
-    padding: 38px 60px;
-    border-radius: 17px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 70px;
+  margin-left: 17px;
+  background-color: rgba(217, 217, 217, 0.2);
+  padding: 38px 60px;
+  border-radius: 17px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 const InfoWrapper = styled.div``;
 
 const Subtitle = styled.h2`
-    font-size: 24px;
-    color: #2f4f4f;
-    text-decoration: underline;
-    margin: 0;
-    margin-bottom: 24px;
+  font-size: 24px;
+  color: #2f4f4f;
+  text-decoration: underline;
+  margin: 0;
+  margin-bottom: 24px;
 `;
 
 const Information = styled.p`
-    width: 684.25px;
-    margin: 0;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 23.87px;
-    text-align: left;
+  width: 684.25px;
+  margin: 0;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 23.87px;
+  text-align: left;
 `;
 
 const ProfileWriteBtn = styled.button`
-    position: absolute;
-    top: 48px;
-    right: 61px;
-    background-color: #2f4f4f;
-    padding: 13px 24px;
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 999px;
+  position: absolute;
+  top: 48px;
+  right: 61px;
+  background-color: #2f4f4f;
+  padding: 13px 24px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 999px;
 `;
 
 const PortfolioContainer = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 96px;
-    margin-bottom: 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 96px;
+  margin-bottom: 80px;
 `;
 
 const MenuContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    margin-top: 103px;
-    gap: 100px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  margin-top: 103px;
+  gap: 100px;
 `;
 
 const Menu = styled.div`
-    color: #2e4f4f;
-    font-family: AppleSDGothicNeoM00;
-    font-size: 30px;
-    position: relative;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    color: ${(props) => (props.active ? "#2E4F4F" : "#B8B8B8")};
-    &::before {
-        content: "";
-        position: absolute;
-        top: -21px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 93px;
-        height: 8px;
-        background: #2e4f4f;
-        box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.12);
-        display: ${(props) => (props.active ? "block" : "none")};
-    }
+  color: #2e4f4f;
+  font-family: AppleSDGothicNeoM00;
+  font-size: 30px;
+  position: relative;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: ${(props) => (props.active ? "#2E4F4F" : "#B8B8B8")};
+  &::before {
+    content: "";
+    position: absolute;
+    top: -21px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 93px;
+    height: 8px;
+    background: #2e4f4f;
+    box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.12);
+    display: ${(props) => (props.active ? "block" : "none")};
+  }
 `;
 
 const PortfolioWrapper = styled.div`
-    width: 1210px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin-top: 97px;
-    margin-bottom: 87px;
+  width: 1210px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 97px;
+  margin-bottom: 87px;
 `;
 
 const Upload = styled.button`
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    padding: 16px 26px;
-    border-radius: 999px;
-    background: var(--main, #2f4f4f);
-    color: #fff;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    display: flex;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  background: var(--main, #2f4f4f);
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
 `;
 
 const Vector = styled.img`
-    margin-left: 9px;
+  margin-left: 9px;
 `;
 
 const PortfolioPage = () => {
-    const navigate = useNavigate();
-    const [profileData, setProfileData] = useState({
-        id: "",
-        imageUrl: "",
-        name: "",
-        phoneNumber: "",
-        userEmail: "",
-        introduction: "자기소개를 작성해주세요.",
-        highSchool: "",
-        college: "",
-        gender: "",
-        highSchoolStatus: "고등학교",
-        collegeStatus: "대학교",
-    });
-    const [projectData, setProjectData] = useState({
-        memberId: 0,
-        projectList: [
-            {
-                id: 0,
-                projectName: "",
-                images: [],
-                tag: "STARTUP",
-                oneLineSummary: "",
-                summary: "",
-                teamName: "",
-                duration: "",
-            },
-        ],
-        totalElements: 0,
-        totalPages: 0,
-    });
-    const [modalData, setModalData] = useState({
+  const navigate = useNavigate();
+  const [profileData, setProfileData] = useState({
+    id: "",
+    imageUrl: "",
+    name: "",
+    phoneNumber: "",
+    userEmail: "",
+    introduction: "자기소개를 작성해주세요.",
+    highSchool: "",
+    college: "",
+    gender: "",
+    highSchoolStatus: "고등학교",
+    collegeStatus: "대학교",
+  });
+  const [projectData, setProjectData] = useState({
+    memberId: 0,
+    projectList: [
+      {
+        id: 0,
+        projectName: "",
+        images: [],
+        tag: "STARTUP",
+        oneLineSummary: "",
+        summary: "",
+        teamName: "",
+        duration: "",
+      },
+    ],
+    totalElements: 0,
+    totalPages: 0,
+  });
+  const [modalData, setModalData] = useState({
     id: "",
     projectName: "",
     images: "",
@@ -199,133 +199,129 @@ const PortfolioPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const accessToken = sessionStorage.getItem("auth_token");
-  
-    //status mapping
-    const mapStatus = (status) => {
-        const statusMapping = {
-            ENROLLMENT: "재학",
-            GRADUATION: "졸업",
-            ON_LEAVE: "휴학",
-        };
-        return statusMapping[status] || "";
 
+  //status mapping
+  const mapStatus = (status) => {
+    const statusMapping = {
+      ENROLLMENT: "재학",
+      GRADUATION: "졸업",
+      ON_LEAVE: "휴학",
     };
+    return statusMapping[status] || "";
+  };
 
-    //tags mapping
-    const mapTags = (tag) => {
-        const tagsMapping = {
-            STARTUP: "창업",
-            GENERATIVE_AI: "생성형 AI",
-            PLATFORM: "플랫폼",
-            GAME: "게임",
-            OTHERS: "기타",
-        };
-        return tagsMapping[tag] || "";
+  //tags mapping
+  const mapTags = (tag) => {
+    const tagsMapping = {
+      STARTUP: "창업",
+      GENERATIVE_AI: "생성형 AI",
+      PLATFORM: "플랫폼",
+      GAME: "게임",
+      OTHERS: "기타",
     };
+    return tagsMapping[tag] || "";
+  };
 
-    const getProfileData = async () => {
-        if (!accessToken) {
-            return profileData;
+  const getProfileData = async () => {
+    if (!accessToken) {
+      return profileData;
+    }
+
+    try {
+      const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = response.data.data;
+      data.highSchoolStatus = mapStatus(data.highSchoolStatus);
+      data.collegeStatus = mapStatus(data.collegeStatus);
+
+      setProfileData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //전체 프로젝트 데이터 받아오기
+  const getProjectDataAll = async () => {
+    if (!accessToken) return;
+
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/projects/all?page=${page}&size=9`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
+      );
+      const data = response.data.data.projectList;
+      data.map((data) => (data.tag = mapTags(data.tag)));
 
-        try {
-            const response = await axios.get(
-                `https://devcrew.kr/api/v1/profile`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                }
-            );
-            const data = response.data.data;
-            data.highSchoolStatus = mapStatus(data.highSchoolStatus);
-            data.collegeStatus = mapStatus(data.collegeStatus);
+      setProjectData(data);
+      setTotalpage(response.data.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-            setProfileData(data);
-        } catch (error) {
-            console.error(error);
+  //태그별 프로젝트 데이터 받아오기
+  const getProjectDataByTag = async () => {
+    if (!accessToken) return;
+
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/projects?page=${page}&size=9&projectTag=${projectTag}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-    };
+      );
+      const data = response.data.data.projectList;
+      data.map((data) => (data.tag = mapTags(data.tag)));
 
-    //전체 프로젝트 데이터 받아오기
-    const getProjectDataAll = async () => {
-        if (!accessToken) return;
+      setProjectData(data);
+      setTotalpage(response.data.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-        try {
-            const response = await axios.get(
-                `https://devcrew.kr/api/v1/projects/all?page=${page}&size=9`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            const data = response.data.data.projectList;
-            data.map((data) => (data.tag = mapTags(data.tag)));
+  //개별 프로젝트 데이터 받아오기
+  const getModalData = async (projectId) => {
+    if (!accessToken) return;
 
-            setProjectData(data);
-            setTotalpage(response.data.data.totalPages);
-        } catch (error) {
-            console.error(error);
+    try {
+      const response = await axios.get(
+        `https://devcrew.kr/api/v1/projects/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-    };
+      );
+      const data = response.data.data;
 
-    //태그별 프로젝트 데이터 받아오기
-    const getProjectDataByTag = async () => {
-        if (!accessToken) return;
+      setModalData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-        try {
-            const response = await axios.get(
-                `https://devcrew.kr/api/v1/projects?page=${page}&size=9&projectTag=${projectTag}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            const data = response.data.data.projectList;
-            data.map((data) => (data.tag = mapTags(data.tag)));
+  const openModal = (projectId) => {
+    getModalData(projectId);
+    setModalOpen(true);
+  };
 
-            setProjectData(data);
-            setTotalpage(response.data.data.totalPages);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  const closeModal = () => setModalOpen(false);
 
-    //개별 프로젝트 데이터 받아오기
-    const getModalData = async (projectId) => {
-        if (!accessToken) return;
-
-        try {
-            const response = await axios.get(
-                `https://devcrew.kr/api/v1/projects/${projectId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            const data = response.data.data;
-
-            setModalData(data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const openModal = (projectId) => {
-        getModalData(projectId);
-        setModalOpen(true);
-    };
-
-    const closeModal = () => setModalOpen(false);
-
-const handleNavigation = (path) => {
+  const handleNavigation = (path) => {
     if (!accessToken) {
       alert("로그인 후 이용해주세요.");
       navigate(`/login`);

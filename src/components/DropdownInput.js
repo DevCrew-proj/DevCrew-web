@@ -32,7 +32,7 @@ const DropdownContent = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
   background-color: #fff;
-  min-width: 100%;
+  min-width: 91%;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
   border: 1px solid #ccc;
