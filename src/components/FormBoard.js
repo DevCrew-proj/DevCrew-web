@@ -5,8 +5,8 @@ import ImageUpload from "./ImageUpload";
 import axios from "axios";
 
 const Layout = styled.div`
-  width: 1490px;
-  height: 1019px;
+  width: 1680px;
+  min-height: 1815px;
   margin: 0 auto 230px;
 `;
 
