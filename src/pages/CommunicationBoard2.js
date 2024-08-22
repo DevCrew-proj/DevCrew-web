@@ -18,7 +18,7 @@ const CommunicationBoard2 = () => {
     const accessToken = sessionStorage.getItem("auth_token");
 
     const handleSuccess = () => {
-        navigate("/communicationPage2");
+        navigate("/communication2");
     };
 
     return (
