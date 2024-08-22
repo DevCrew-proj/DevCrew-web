@@ -120,7 +120,7 @@ const FormBoard2 = ({ apiEndpoint, language, imageUploadApiEndpoint, fileUploadA
   const handleUpload = async () => {
     const tagMap = {
       "JAVA": "JAVA",
-      "JS": "JS",
+      "JS": "JAVASCRIPT",
       "Kotlin": "KOTLIN",
       "Python": "PYTHON",
       "Swift": "SWIFT",
