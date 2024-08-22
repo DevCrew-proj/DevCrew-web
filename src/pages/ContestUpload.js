@@ -290,11 +290,12 @@ const ContestUpload = () => {
     const handleFileClick = () => {
         fileInputRef.current.click();
     };
+    const access_token = sessionStorage.getItem('auth_token');
 
     const handleSubmit = async (e) => { // async 추가
         e.preventDefault();
-        const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDYwOTM2OCwiZW1haWwiOiJnYWh5dW5nMTlAbmF2ZXIuY29tIn0.7Yt0khjYHs2nqhNNP4HvzUsi-0tW0yWzUSsObHo71OjdhDGbVPz_BCQuoU2VhiodXr1H7E4cOl9mgQ_Hh9JA2Q'
-       
+       // const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDYwOTM2OCwiZW1haWwiOiJnYWh5dW5nMTlAbmF2ZXIuY29tIn0.7Yt0khjYHs2nqhNNP4HvzUsi-0tW0yWzUSsObHo71OjdhDGbVPz_BCQuoU2VhiodXr1H7E4cOl9mgQ_Hh9JA2Q'
+      
         if (imageUrls.length === 0) {
             alert("포스터 사진을 업로드해 주세요.");
             return;
