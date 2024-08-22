@@ -192,6 +192,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 margin-left: 13px;
+padding : 10px;
 `
 
 const ButtonLink1 = styled(Link)`
@@ -225,6 +226,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 margin-left: 13px;
+padding : 10px;
 `
 const TeamMatching = () => {
     const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
