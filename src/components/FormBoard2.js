@@ -121,9 +121,9 @@ const FormBoard2 = ({ apiEndpoint, language, imageUploadApiEndpoint, fileUploadA
     const tagMap = {
       "JAVA": "JAVA",
       "JS": "JS",
-      "Kotlin": "Kotlin",
-      "Python": "Python",
-      "Swift": "Swift",
+      "Kotlin": "KOTLIN",
+      "Python": "PYTHON",
+      "Swift": "SWIFT",
       "C": "C",
       "기타": "OTHER"
     };

@@ -37,4 +37,3 @@ const Communication3 = () => {
 };
 
 export default Communication3;
-/* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
