@@ -117,6 +117,24 @@ const InfoValue = styled.div`
   overflow-wrap: break-word; /* This allows breaking within words if necessary */
 `;
 
+const InfoValues = styled.div`
+margin-left: -20px;
+  display : flex;
+  width : 160px;
+  justify-content : flex-start;
+  //align-items: center;
+  text-decoration : none;
+  word-break: break-all; /* This will force the text to break at any character */
+  overflow-wrap: break-word; /* This allows breaking within words if necessary */
+  a {
+    color: black; /* 기본 링크 색상 */
+    text-decoration: none; /* 링크 밑줄 */
+    &:hover {
+      color: #551A8B; /* 링크에 마우스를 올렸을 때 색상 */
+    }
+  }
+`
+
 const Button = styled.div`
   width: 169px;
   height: 50px;
@@ -228,7 +246,7 @@ const ContestInfo = ({ contestId }) => {
             <InfoItem><InfoLabel>시상규모</InfoLabel><InfoValue>{contestData.award}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>접수기간</InfoLabel><InfoValue>{contestData.acceptancePeriod}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>담당자</InfoLabel><InfoValue>{contestData.ceoName}</InfoValue></InfoItem>
-            <InfoItem><InfoLabel>홈페이지</InfoLabel><InfoValue>{contestData.homepageUrl}</InfoValue></InfoItem>
+            <InfoItem><InfoLabel>홈페이지</InfoLabel><InfoValues><a href={contestData.homepageUrl} target="_blank" rel="noopener noreferrer">{contestData.homepageUrl}</a></InfoValues></InfoItem>
             <InfoItem><InfoLabel>활동혜택</InfoLabel><InfoValue>{contestData.benefits}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>연락처</InfoLabel><InfoValue>{contestData.ceoPhoneNum}</InfoValue></InfoItem>
             <InfoItem><InfoLabel>공모분야</InfoLabel><InfoValue><Tag><TagText>{contestData.sector}</TagText></Tag></InfoValue></InfoItem>
