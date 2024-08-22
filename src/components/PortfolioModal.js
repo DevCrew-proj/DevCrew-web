@@ -102,13 +102,9 @@ const PortfolioModal = ({ isOpen, onClose, data }) => {
         <ModalContent>
           <TitleContainer>
             <ProjectTitle>{data.projectName}</ProjectTitle>
-            {/* <InfoText>
-              IT 프로젝트를 하기 위한 학생들의 참여를 매력적이고, 소중하는
-              서비스
-            </InfoText> */}
+            <InfoText>{data.oneLineSummary}</InfoText>
           </TitleContainer>
           <ImageContainer src={data.images[0]} />
-          {/* <InfoText>프로젝트 대표 이미지를 넣어주세요</InfoText> */}
           <InfoContainer>
             <SubTitle>요약</SubTitle>
             <InfoText>- {data.summary}</InfoText>

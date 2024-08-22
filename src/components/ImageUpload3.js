@@ -17,6 +17,7 @@ const IcProfile = styled.img`
   border-radius: 999px;
   object-fit: cover;
   background-color: #eeeeee;
+  border: 1px solid #eeeeee;
 `;
 
 const FileInput = styled.input`
@@ -137,14 +138,6 @@ const ImageUpload3 = ({ formData, setFormData, apiEndpoint }) => {
         <img src={addfile} alt="프로필 설정" />
       </FileButton>
     </Layout>
-    // <Layout>
-    //   <FileInput type="file" ref={fileInputRef} onChange={handleFileChange} />
-    //   <FileButton
-    //     type="button"
-    //     src={icProfileUpload}
-    //     onClick={handleFileUploadClick}
-    //   ></FileButton>
-    // </Layout>
   );
 };
 

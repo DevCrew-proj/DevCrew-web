@@ -162,10 +162,10 @@ const PortfolioPage = () => {
   const [profileData, setProfileData] = useState({
     id: "",
     imageUrl: "",
-    name: "OOO",
+    name: "",
     phoneNumber: "",
     userEmail: "",
-    introduction: "",
+    introduction: "자기소개를 작성해주세요.",
     highSchool: "",
     college: "",
     gender: "",
@@ -180,6 +180,7 @@ const PortfolioPage = () => {
         projectName: "",
         images: [],
         tag: "STARTUP",
+        oneLineSummary: "",
         summary: "",
         teamName: "",
         duration: "",
@@ -195,8 +196,9 @@ const PortfolioPage = () => {
     teamName: "",
     duration: "",
     tag: "STARTUP",
+    oneLineSummary: "",
     summary: "",
-    roles: "",
+    role: "",
   });
   const [projectTag, setProjectTag] = useState("전체"); // 프로젝트 태그
   const [page, setPage] = useState(1); // 프로젝트 카드 페이지
@@ -204,6 +206,7 @@ const PortfolioPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const accessToken = sessionStorage.getItem("auth_token");
+  // const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
 
   //status mapping
   const mapStatus = (status) => {
@@ -380,7 +383,6 @@ const PortfolioPage = () => {
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>About me</Subtitle>
-                <Information>안녕하세요 {profileData.name}입니다.</Information>
                 <Information>{profileData.introduction}</Information>
               </InfoWrapper>
               <ProfileWriteBtn

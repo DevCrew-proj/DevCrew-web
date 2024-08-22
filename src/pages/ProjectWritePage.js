@@ -61,7 +61,7 @@ const Input = styled.input`
   font-size: 16px;
   border-radius: 11px;
   border: 1px solid #829595;
-  width: 168px;
+  width: ${(props) => props.width || "168px"};
   height: 52px;
   flex-shrink: 0;
   margin-top: 23px;
@@ -206,6 +206,7 @@ const ProjectWritePage = () => {
     teamName: "",
     duration: "",
     projectTag: "창업",
+    oneLineSummary: "",
     summary: "",
     role: "",
   });
@@ -228,7 +229,7 @@ const ProjectWritePage = () => {
     OTHERS: "기타",
   };
 
-  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
+  const accessToken = sessionStorage.getItem("auth_token");
 
   //프로젝트 데이터 보내기
   const postProjectData = async () => {
@@ -246,8 +247,7 @@ const ProjectWritePage = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${accessToken}`,
-            Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
@@ -292,6 +292,17 @@ const ProjectWritePage = () => {
               name="projectName"
               value={formData.projectName}
               onChange={handleChange}
+              required
+            />
+          </FormField>
+          <FormField>
+            <Label>프로젝트 한 줄 소개 *</Label>
+            <Input
+              type="text"
+              name="oneLineSummary"
+              value={formData.oneLineSummary}
+              onChange={handleChange}
+              width="800px"
               required
             />
           </FormField>

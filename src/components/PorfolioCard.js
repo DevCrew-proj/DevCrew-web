@@ -82,7 +82,7 @@ export const PortfolioCard = ({ onClick, data }) => {
           <PortfolioInfo1>
             <PortfolioTitle>{data.projectName}</PortfolioTitle>
             <Chip>{data.tag}</Chip>
-            <Description>{data.summary}</Description>
+            <Description>{data.oneLineSummary}</Description>
           </PortfolioInfo1>
           <PortfolioInfo2>
             <Description>{data.teamName}</Description>
