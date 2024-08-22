@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
 import Topbar from "../components/Topbar";
 import Topbar3 from "../components/Topbar3";
 import Listbar3 from "../components/Listbar3";
@@ -13,8 +14,13 @@ const Layout = styled.div`
 
 const CommunicationBoard1 = () => {
     const [selectedTag, setSelectedTag] = useState("기획");
+    const navigate = useNavigate(); 
 
     const accessToken = sessionStorage.getItem("auth_token");
+
+    const handleSuccess = () => {
+        navigate("/communicationPage1");
+    };
 
     return (
         <Layout>
@@ -31,6 +37,7 @@ const CommunicationBoard1 = () => {
                 feedbackTag={selectedTag}
                 fileUploadApiEndpoint="https://devcrew.kr/api/images/advice"
                 imageUploadApiEndpoint="https://devcrew.kr/api/images/advice"
+                onSuccess={handleSuccess} 
             />
             <Bottombar />
         </Layout>
