@@ -211,6 +211,7 @@ line-height: normal;
 padding : 10px;
 `
 const ButtonLink2 = styled(Link)`
+text-decoration : none;
 width: 169px;
 height: 50px;
 flex-shrink: 0;
