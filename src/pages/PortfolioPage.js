@@ -361,7 +361,7 @@ const PortfolioPage = () => {
         <Topbar />
         <Container>
           <ProfileContainer>
-            {!projectData.imageUrl ? (
+            {projectData.imageUrl == null ? (
               <EmptyProfile />
             ) : (
               <Profile src={profileData.imageUrl} />
