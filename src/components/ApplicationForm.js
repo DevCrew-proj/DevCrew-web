@@ -295,19 +295,21 @@ const ApplicationForm = ({ contestId }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting form data:", formData);
+    console.log("Submitting form data:", {
+      contestId: contestId,
+      ...formData,
+    });
 
     try {
-      const response = await axios.post(
-        "https://devcrew.kr/api/v1/teams/apply",
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`  
-          },
+      const response = await axios.post("https://devcrew.kr/api/v1/teams/apply", {
+        contestId: contestId,
+        ...formData,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`   
         }
-      );
+      });
 
       if (response.status === 200) {
         setIsModalOpen(true);
