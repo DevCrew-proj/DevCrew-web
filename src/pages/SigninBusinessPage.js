@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import { useNavigate } from "react-router-dom";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
@@ -375,9 +376,11 @@ const SigninBusinessPage = () => {
         return typeMap[type] || "선택안함";
     };
 
+    const accessToken = sessionStorage.getItem("auth_token");
+
     return (
         <Layout>
-            <Topbar />
+            {accessToken ? <Topbar3 /> : <Topbar />}
             <Container>
                 <Description>* 표시는 필수 입력란을 나타냅니다</Description>
                 <SigninContainer1>

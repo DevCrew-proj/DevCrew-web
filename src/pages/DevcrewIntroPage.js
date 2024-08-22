@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import peopleImg from "../assets/image/people_outline.svg";
 import noteImg from "../assets/image/sticky_note_2.svg";
@@ -120,9 +121,11 @@ const FeatureContainer = styled.div`
 `;
 
 const DevcrewIntroPage = () => {
+    const accessToken = sessionStorage.getItem("auth_token");
+
     return (
         <Layout>
-            <Topbar />
+            {accessToken ? <Topbar3 /> : <Topbar />}
             <Title>데브 크루 소개</Title>
             <SubTitle1>
                 <Highlight>IT 계열로 준비하는 여러분들,</Highlight> <br />
