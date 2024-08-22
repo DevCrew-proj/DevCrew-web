@@ -5,7 +5,7 @@ import logo from "../assets/image/logowhite.svg";
 import { Link, useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
-    width: 1920px;
+    width: 1680px;
     height: 1243px;
     background: linear-gradient(
             0deg,
