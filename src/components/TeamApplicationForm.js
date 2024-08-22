@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -251,7 +251,7 @@ const CloseButton = styled.button`
 `;
 
 const TeamApplicationForm = ({ contestId }) => {
-  const navigate = useNavigate(); // Use navigate from react-router-dom
+  const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
     name: '',
@@ -266,9 +266,16 @@ const TeamApplicationForm = ({ contestId }) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [token, setToken] = useState("");
 
-  // Retrieve token from sessionStorage
-  const token = sessionStorage.getItem('token');
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("auth_token");
+    if (accessToken) {
+      setToken(accessToken);
+    } else {
+      alert("Token not found in session storage!");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
