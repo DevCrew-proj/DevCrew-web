@@ -25,9 +25,10 @@ const PreviewItem = styled.div`
   box-sizing: border-box;
   background: #d9d9d9;
   position: relative;
-  width: 180px;
+  width: calc(50% - 15px);
   height: 176px;
   margin-bottom: 16px;
+  margin-left: 5px;
   float: left;
   display: flex;
   justify-content: center;

@@ -73,15 +73,16 @@ const DeleteIcon = styled.img`
 
 const FileClickContainer = styled.div`
   width: 100%;
-  max-height: 229px;
+  max-height: 129px; 
   background-color: #f7f7f7;
   display: ${(props) => (props.$fileDropDown ? "block" : "none")};
   position: absolute;
   top: 84px;
   left: 0;
-  overflow-y: scroll;
-  scrollbar-width: none;
+  overflow-y: auto; 
+  scrollbar-width: none;  
 `;
+
 
 const HiddenFileInput = styled.input`
   display: none;

@@ -199,7 +199,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
   const handleCloseModal = () => {
     setIsModalOpen(false);
     if (onSuccess) {
-      onSuccess(); // 업로드 성공 후 콜백 호출
+      onSuccess(); 
     }
   };
 
@@ -210,7 +210,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
           <TitleInputBox>
             <TitleInput
               type='text'
-              placeholder='제목을 입력하세요'
+              placeholder='제목을 입력하세요 (최대 50자까지 입력 가능합니다.)'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={50}  
