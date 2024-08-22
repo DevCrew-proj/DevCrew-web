@@ -196,12 +196,34 @@ margin-left: 13px;
 
 const ButtonLink1 = styled(Link)`
 text-decoration : none;
-color : white;
+width: 169px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 5px;
+background: var(--sub, #5D6C6F);
+color: #FFF;
+text-align: center;
+font-family: AppleSDGothicNeoB00;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+padding : 10px;
 `
 const ButtonLink2 = styled(Link)`
-text-decoration : none;
+width: 169px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 5px;
+border: 1px solid #5D6C6F;
 color: #5D6C6F;
-
+text-align: center;
+font-family: AppleSDGothicNeoB00;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-left: 13px;
 `
 const TeamMatching = () => {
     const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
