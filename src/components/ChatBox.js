@@ -34,7 +34,7 @@ const ChatViewBox = styled.div`
 `;
 
 const ChatProfile = styled.div`
-  width: 21%;
+  width: 25%;
   margin: 0 2% 0 1%;
   float: left;
 
@@ -46,12 +46,13 @@ const ChatProfile = styled.div`
 `;
 
 const ChatContent = styled.div`
-  width: 76%;
+  width: 72%;
   float: left;
   font-family: AppleSDGothicNeoL00;
   font-size: 20px;
   line-height: 1.4;
   color: #000;
+  white-space: pre-wrap;
 `;
 
 const ChatBox = ({

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
@@ -82,9 +83,19 @@ const Communication4 = () => {
   const totalPages =
     communicationData.totalPages === 0 ? 1 : communicationData.totalPages;
 
+  const accessToken = sessionStorage.getItem("auth_token");
+
+  const boardNavigate = () => {
+    if (accessToken) {
+      navigate("/communicationBoard1");
+    } else {
+      alert("로그인 후 이용 가능합니다.");
+    }
+  };
+
   return (
     <Layout>
-      <Topbar />
+      {accessToken ? <Topbar3 /> : <Topbar />}
       <Container>
         <IncumbentBox>
           <Title>디자인 피드백</Title>
@@ -94,9 +105,7 @@ const Communication4 = () => {
           {communicationData.designFeedbackList.map((data, index) => (
             <CommunicationBox key={index} data={data} category='디자인' />
           ))}
-          <QuestionBtn onClick={() => navigate("/communicationBoard4")}>
-            질문하기
-          </QuestionBtn>
+          <QuestionBtn onClick={() => boardNavigate()}>질문하기</QuestionBtn>
           <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </IncumbentBox>
       </Container>

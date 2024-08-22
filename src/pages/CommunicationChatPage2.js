@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import CommunicationChatContainer from "../components/CommunicationChatContainer";
 import ChatBox from "../components/ChatBox";
@@ -95,6 +96,15 @@ const CommunicationChat2 = () => {
   const id = location.state.id; // id 값 받아오기
   const category = location.state.category; // category 값 받아오기
   const [content, setContent] = useState(""); // 댓글 내용
+  const [placeholderContent, setPlaceholderContent] = useState(
+    "로그인 후 댓글 남기기, 최대 500자 이내"
+  );
+
+  useEffect(() => {
+    if (sessionStorage.getItem("auth_token") !== null) {
+      setPlaceholderContent("최대 500자 이내");
+    }
+  });
 
   const retrieveFeedback = async () => {
     try {
@@ -145,7 +155,7 @@ const CommunicationChat2 = () => {
   };
 
   const handleSubmit = () => {
-    if (localStorage.getItem("auth_token") === null) {
+    if (sessionStorage.getItem("auth_token") === null) {
       alert("로그인 후 이용해주세요.");
     } else if (content === "") {
       alert("댓글을 입력해주세요.");
@@ -163,15 +173,17 @@ const CommunicationChat2 = () => {
     retrieveChat();
   }, [page]);
 
+  const accessToken = sessionStorage.getItem("auth_token");
+
   return (
     <Layout>
-      <Topbar />
+      {accessToken ? <Topbar3 /> : <Topbar />}
       <Container>
         <IncumbentBox>
           <Title>기획 피드백</Title>
           <CommunicationChatContainer data={singleData} category={category} />
           <InputChatBox
-            placeholder='로그인 후 댓글 남기기, 최대 500자 이내'
+            placeholder={placeholderContent}
             maxLength={500}
             onChange={(event) => {
               setContent(event.target.value);

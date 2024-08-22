@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import logo from "../assets/image/logowhite.svg";
 import googleLogo from "../assets/image/google.svg";
@@ -10,7 +11,7 @@ import { TextField } from "@mui/material";
 // import axios from "axios";
 
 const Layout = styled.div`
-    width: 1920px;
+    width: 1680px;
     height: 1243px;
     background: #778181;
     display: flex;

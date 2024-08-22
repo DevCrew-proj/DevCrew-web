@@ -34,9 +34,9 @@ const CommunicationContentBox = styled.div`
 `;
 
 const CommunicationProfileBox = styled.div`
-  width: 20%;
+  width: 25%;
   margin-bottom: 34px;
-  padding: 0 70px;
+  padding: 0 0 0 70px;
   &:after {
     content: "";
     clear: both;
@@ -60,6 +60,7 @@ const ChatContent = styled.p`
   margin: 0 0 35px;
   padding: 0 70px;
   line-height: 1.2;
+  white-space: pre-wrap;
 `;
 
 const ChatImageBox = styled.div`

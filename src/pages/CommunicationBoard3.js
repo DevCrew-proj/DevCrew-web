@@ -1,32 +1,47 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Listbar4 from "../components/Listbar4";
-import FormBoard from "../components/FormBoard";
+import FormBoard2 from "../components/FormBoard2";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
-  width: 1920px;
-  height: 1842px;
+    width: 1920px;
+    height: 1842px;
 `;
 
-const Communication3 = () => {
-  const [selectedTag, setSelectedTag] = useState("JAVA");
+const CommunicationBoard3 = () => {
+    const [selectedTag, setSelectedTag] = useState("JAVA");
+    const navigate = useNavigate(); 
 
-  return (
-    <Layout>
-      <Topbar />
-      <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={(tab) => {setSelectedTag(tab);}}/>
-      <FormBoard 
-        apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
-        feedbackTag={selectedTag}
-        fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
-        imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
-      />
-      <Bottombar />
-    </Layout>
-  );
+    const accessToken = sessionStorage.getItem("auth_token");
+
+    const handleSuccess = () => {
+        navigate("/communication3");
+    };
+
+    return (
+        <Layout>
+            {accessToken ? <Topbar3 /> : <Topbar />}
+            <Listbar4
+                title="코드 리뷰"
+                showTabs="group2"
+                onTabSelect={(tab) => {
+                    setSelectedTag(tab);
+                }}
+            />
+            <FormBoard2
+                apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create"
+                language={selectedTag}
+                fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
+                imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
+                onSuccess={handleSuccess} 
+            />
+            <Bottombar />
+        </Layout>
+    );
 };
 
-export default Communication3;
-/* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
+export default CommunicationBoard3;

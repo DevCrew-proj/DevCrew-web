@@ -44,7 +44,7 @@ function App() {
         <Route path='/projectWrite' element={<ProjectWritePage />} />
         {/* <Route path='/introduce' element={<IntroducePage />} /> */}
         <Route path='/introduceself' element={<IntroduceSelfPage />} />
-        <Route path='/teamComposition' element={<TeamComposition />} />
+        <Route path='/teamComposition/:contestId' element={<TeamComposition />} />
         <Route path='/communication1' element={<Communication1 />} />
         <Route path='/communicationBoard1' element={<CommunicationBoard1 />} />
         <Route
@@ -73,7 +73,7 @@ function App() {
         <Route path='/devcrewintro' element={<DevcrewIntroPage />} />
         <Route path='/teammatching/:contestId' element={<TeamMatching />} />
         {/* <Route path="/teammatching/:contestId" component={ContestInfo} /> */}
-        <Route path='/teamApplication' element={<TeamApplication />} />
+        <Route path='/teamApplication/:contestId' element={<TeamApplication />} />
         <Route path='/api/social-login' element={<KakaoAuth />} />
       </Routes>
     </Router>
