@@ -38,11 +38,11 @@ const MenuContainer = styled.div`
   }
 
   & > a:first-child {
-    margin-right: 57px;
+    margin-right: 46px;
   }
 
   & > a:nth-child(2) {
-    margin-right: 37px;
+    margin-right: 24px;
   }
 
   & > a:last-of-type {
@@ -119,7 +119,7 @@ const DropdownItem = styled(Link)``;
 const Auth = styled.div`
   display: flex;
   margin-top: 21px;
-  margin-left: 700px;
+  margin-left: 745px;
   width: 158px;
   height: 33px;
   border-radius: 5px;
