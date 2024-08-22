@@ -60,6 +60,7 @@ const ChatContent = styled.p`
   margin: 0 0 35px;
   padding: 0 70px;
   line-height: 1.2;
+  white-space: pre-wrap;
 `;
 
 const ChatImageBox = styled.div`
