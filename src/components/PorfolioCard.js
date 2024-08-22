@@ -50,6 +50,7 @@ const Description = styled.p`
   font-size: 14px;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 6px;
 `;
 
 const PortfolioInfo1 = styled.div`
@@ -59,18 +60,20 @@ const PortfolioInfo1 = styled.div`
 `;
 
 const PortfolioInfo2 = styled.div`
-  width: 200px;
+  width: 175px;
   display: flex;
   justify-content: space-between;
+  gap: 6px;
   padding-top: 6px;
   float: bottom;
   border-top: 1px solid #dadada;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const IcArrowRightUp = styled.img`
   width: 10px;
   height: 10px;
+  margin-top: 4px;
 `;
 
 export const PortfolioCard = ({ onClick, data }) => {
