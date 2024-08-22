@@ -52,10 +52,10 @@ const Listbar4 = ({ title, showTabs, onTabSelect }) => {
   return (
     <Layout
       paddingTop={
-        title === "기획 피드백" || title === "디자인 피드백" ? "128px" : null
+        title === "자바 피드백" || title === "C 피드백" ? "128px" : null
       }
       marginButton={
-        title === "기획 피드백" || title === "디자인 피드백" ? "47px" : null
+        title === "자바 피드백" || title === "C 피드백" ? "47px" : null
       }
     >
       <MainTitle>{title}</MainTitle>
