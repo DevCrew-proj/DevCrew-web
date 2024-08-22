@@ -14,11 +14,9 @@ const SliderBox = styled.div`
 
 const ImageBox = styled.img`
   width: 100%;
-  height: auto;
+  height: 443px;
   display: block;
   padding: 0 20px;
-  width: 782px;
-  height: 439px;
   box-sizing: border-box;
   background-size: cover;
   outline: none;
