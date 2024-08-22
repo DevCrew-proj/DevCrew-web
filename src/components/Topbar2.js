@@ -187,9 +187,9 @@ const Topbar2 = () => {
           </MenuItem>
           <DropdownContent className='dropdown-content'>
             <DropdownItem to='/communication1'>현직자 조언</DropdownItem>
-            <DropdownItem to='/communication2'>기획 리뷰</DropdownItem>
+            <DropdownItem to='/communication2'>기획 피드백</DropdownItem>
             <DropdownItem to='/communication3'>코드 리뷰</DropdownItem>
-            <DropdownItem to='/communication4'>디자인 리뷰</DropdownItem>
+            <DropdownItem to='/communication4'>디자인 피드백</DropdownItem>
           </DropdownContent>
         </Dropdown>
         {/* <Auth>
