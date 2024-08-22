@@ -154,7 +154,7 @@ const CommunicationChat4 = () => {
   };
 
   const handleSubmit = () => {
-    if (localStorage.getItem("auth_token") === null) {
+    if (sessionStorage.getItem("auth_token") === null) {
       alert("로그인 후 이용해주세요.");
     } else if (content === "") {
       alert("댓글을 입력해주세요.");
