@@ -123,6 +123,12 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
       "디자인": "DESIGN",
       "Front-end": "FRONTEND",
       "Back-end": "BACKEND",
+      "JAVA": "JAVA",
+      "JS": "JS",
+      "Kotlin": "Kotlin",
+      "Python": "Python",
+      "Swift": "Swift",
+      "C": "C",
       "기타": "ETC"
     };
 
