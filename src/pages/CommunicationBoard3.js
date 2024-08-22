@@ -8,8 +8,8 @@ import FormBoard2 from "../components/FormBoard2";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
-    width: 1920px;
-    height: 1842px;
+    width: 1680px;
+    min-height: 1815px;
 `;
 
 const CommunicationBoard3 = () => {
