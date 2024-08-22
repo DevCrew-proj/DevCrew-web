@@ -7,7 +7,7 @@ import { TextField, Checkbox, FormControlLabel } from "@mui/material";
 import axios from "axios";
 
 const Layout = styled.div`
-    width: 1920px;
+    width: 1680px;
     height: 1243px;
     background: #fff;
 `;

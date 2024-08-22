@@ -7,7 +7,7 @@ import noteImg from "../assets/image/sticky_note_2.svg";
 import feedbackImg from "../assets/image/feedback.svg";
 
 const Layout = styled.div`
-    width: 1920px;
+    width: 1680px;
     height: 3244px;
     background: #fff;
 `;
@@ -27,7 +27,7 @@ const IntroContainer = styled.div`
     border-radius: 98px;
     background: #f7f7f7;
     margin-top: 125px;
-    margin-left: 250px;
+    margin-left: 150px;
     margin-bottom: 250px;
 `;
 
@@ -39,7 +39,7 @@ const Title = styled.div`
     font-weight: 400;
     line-height: normal;
     padding-top: 145px;
-    margin-left: 279px;
+    margin-left: 150px;
 `;
 
 const SubTitle1 = styled.div`
@@ -50,7 +50,7 @@ const SubTitle1 = styled.div`
     font-weight: 400;
     line-height: normal;
     padding-top: 132px;
-    padding-left: 279px;
+    padding-left: 150px;
 `;
 
 const Highlight = styled.span`
@@ -76,7 +76,7 @@ const SubTitle2 = styled.div`
     font-weight: 400;
     line-height: normal;
     padding-top: 77px;
-    padding-left: 279px;
+    padding-left: 150px;
 `;
 
 const SubTitle3 = styled.div`
