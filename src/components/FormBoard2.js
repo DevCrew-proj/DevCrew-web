@@ -100,7 +100,7 @@ const PreviewContainer = styled.div`
   height: 100%;
 `;
 
-const FormBoard2 = ({ apiEndpoint, laguage, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
+const FormBoard2 = ({ apiEndpoint, language, imageUploadApiEndpoint, fileUploadApiEndpoint }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [fileUrls, setFileUrls] = useState([]);
@@ -131,7 +131,7 @@ const FormBoard2 = ({ apiEndpoint, laguage, imageUploadApiEndpoint, fileUploadAp
     const payload = {
       title: title || "제목 없음",
       content: details || "내용 없음",
-      language: tagMap[laguage],
+      language: tagMap[language],
       fileUrls,
       imageUrls
     };
