@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import logo from "../assets/image/logowhite.svg";
+import logo from "../assets/image/logo.svg";
 import { Link, useLocation } from "react-router-dom";
-import ArrowIcon from "../assets/image/arrow2.svg";
+import ArrowIcon from "../assets/image/arrow.svg";
 import axios from "axios";
 
 const Layout = styled.div`
