@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Listbar4 from "../components/Listbar4";
-import FormBoard2 from "../components/FormBoard2";
+import FormBoard from "../components/FormBoard";
 import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
@@ -17,7 +17,7 @@ const Communication3 = () => {
     <Layout>
       <Topbar />
       <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={(tab) => {setSelectedTag(tab);}}/>
-      <FormBoard2 
+      <FormBoard 
         apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
         feedbackTag={selectedTag}
         fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
