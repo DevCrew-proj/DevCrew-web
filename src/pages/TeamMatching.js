@@ -169,10 +169,11 @@ background: var(--sub, #5D6C6F);
 color: #FFF;
 text-align: center;
 font-family: AppleSDGothicNeoB00;
-font-size: 25px;
+font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+padding : 10px;
 
 
 `;
@@ -186,7 +187,7 @@ border: 1px solid #5D6C6F;
 color: #5D6C6F;
 text-align: center;
 font-family: AppleSDGothicNeoB00;
-font-size: 25px;
+font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
