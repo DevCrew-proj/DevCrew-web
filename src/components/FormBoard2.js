@@ -10,6 +10,7 @@ const Layout = styled.div`
   margin: 50px 20px 100px 190px;
 `;
 
+
 const FormLayout = styled.div`
   width: 100%;
   height: 946px;
@@ -133,7 +134,7 @@ const CloseButton = styled.button`
   margin-top: 20px;
 `;
 
-const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploadApiEndpoint, onSuccess }) => {
+const FormBoard2 = ({ apiEndpoint, language, imageUploadApiEndpoint, fileUploadApiEndpoint, onSuccess }) => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [fileUrls, setFileUrls] = useState([]);
@@ -153,17 +154,19 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
 
   const handleUpload = async () => {
     const tagMap = {
-      "기획": "PLAN",
-      "디자인": "DESIGN",
-      "Front-end": "FRONTEND",
-      "Back-end": "BACKEND",
+      "JAVA": "JAVA",
+      "JS": "JAVASCRIPT",
+      "Kotlin": "KOTLIN",
+      "Python": "PYTHON",
+      "Swift": "SWIFT",
+      "C": "C",
       "기타": "OTHER"
     };
 
     const payload = {
       title: title || "제목 없음",
       content: details || "내용 없음",
-      feedbackTag: tagMap[feedbackTag],
+      language: tagMap[language],
       fileUrls,
       imageUrls
     };
@@ -180,7 +183,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
         }
       });
       console.log("Response data:", response.data);
-      setIsModalOpen(true); 
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error uploading:", error);
       if (error.response) {
@@ -231,6 +234,7 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
         </PreviewContainer>
       </FormLayout>
       <UploadButton onClick={handleUpload}>업로드 하기</UploadButton>
+
       {isModalOpen && (
         <ModalOverlay>
           <ModalContent>
@@ -243,4 +247,4 @@ const FormBoard = ({ apiEndpoint, feedbackTag, imageUploadApiEndpoint, fileUploa
   );
 };
 
-export default FormBoard;
+export default FormBoard2;

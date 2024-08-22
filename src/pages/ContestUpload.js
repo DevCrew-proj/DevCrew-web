@@ -1,12 +1,13 @@
 // src/pages/ContestUpload.js
 import React, { useState, useRef } from "react";
-import axios from 'axios';
+import axios from "axios";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import addfile from "../assets/image/AddFile.svg";
 import Bottombar from "../components/Bottombar";
-import PresignedImageUpload from "../components/ContestImageUpload";  // PresignedImageUpload 컴포넌트 임포트
+import PresignedImageUpload from "../components/ContestImageUpload"; // PresignedImageUpload 컴포넌트 임포트
 
 const Layout = styled.div`
     width: 1680px;
@@ -258,15 +259,15 @@ const ContestUpload = () => {
 
     const navigate = useNavigate();
     const sectorMapping = {
-        "창업": "STARTUP",
+        창업: "STARTUP",
         "생성형 AI": "AI",
-        "플랫폼": "PLATFORM",
-        "데이터분석": "DATAALALYSIS",
-        "게임": "GAME",
-        "기타": "OTHER"
+        플랫폼: "PLATFORM",
+        데이터분석: "DATAALALYSIS",
+        게임: "GAME",
+        기타: "OTHER",
     };
-    
-    const [imageUrls, setImageUrls] = useState([]);  // 업로드된 이미지 URL들을 관리하는 상태
+
+    const [imageUrls, setImageUrls] = useState([]); // 업로드된 이미지 URL들을 관리하는 상태
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const fileInputRef = useRef(null);
 
@@ -290,41 +291,46 @@ const ContestUpload = () => {
     const handleFileClick = () => {
         fileInputRef.current.click();
     };
-    const access_token = sessionStorage.getItem('auth_token');
+    const access_token = sessionStorage.getItem("auth_token");
 
-    const handleSubmit = async (e) => { // async 추가
+    const handleSubmit = async (e) => {
+        // async 추가
         e.preventDefault();
-       // const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDYwOTM2OCwiZW1haWwiOiJnYWh5dW5nMTlAbmF2ZXIuY29tIn0.7Yt0khjYHs2nqhNNP4HvzUsi-0tW0yWzUSsObHo71OjdhDGbVPz_BCQuoU2VhiodXr1H7E4cOl9mgQ_Hh9JA2Q'
-      
+        // const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDYwOTM2OCwiZW1haWwiOiJnYWh5dW5nMTlAbmF2ZXIuY29tIn0.7Yt0khjYHs2nqhNNP4HvzUsi-0tW0yWzUSsObHo71OjdhDGbVPz_BCQuoU2VhiodXr1H7E4cOl9mgQ_Hh9JA2Q'
+
         if (imageUrls.length === 0) {
             alert("포스터 사진을 업로드해 주세요.");
             return;
         }
-        const selectedSector = sectorMapping[formData.contestField];  // 한국어를 영문 코드로 변환
-    
+        const selectedSector = sectorMapping[formData.contestField]; // 한국어를 영문 코드로 변환
+
         const data = {
-            poster: imageUrls[0],  // 업로드된 이미지 URL 중 첫 번째 이미지를 사용
+            poster: imageUrls[0], // 업로드된 이미지 URL 중 첫 번째 이미지를 사용
             title: formData.contestName.trim(), // 공모전 제목
             organization: formData.organizingBody.trim(), // 주최 기관
             participantTarget: formData.targetAudience.trim(), // 참여 대상
             award: formData.prizeAmount.trim(), // 시상 규모
             homepageUrl: formData.website.trim(), // 홈페이지 URL
             acceptancePeriod: formData.applicationPeriod.trim(), // 접수 기간
-            sector: selectedSector,  // 변환된 영문 코드 사용
+            sector: selectedSector, // 변환된 영문 코드 사용
             benefits: formData.activityBenefits.trim(), // 활동 혜택
             plusBenefits: formData.additionalBenefits.trim(), // 추가 혜택
             description: formData.additionalNotes.trim(), // 추가 설명
         };
 
-    console.log("전송할 데이터:", data);
-    
+        console.log("전송할 데이터:", data);
+
         try {
-            const response = await axios.post("https://devcrew.kr/api/v1/contests/", data, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${access_token}`,
-                },
-            });
+            const response = await axios.post(
+                "https://devcrew.kr/api/v1/contests/",
+                data,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }
+            );
             console.log("응답 데이터:", response.data);
             alert("공모전이 성공적으로 등록되었습니다.");
             navigate("/team1");
@@ -333,7 +339,9 @@ const ContestUpload = () => {
                 console.log("서버 응답 데이터:", error.response.data); // 서버 응답 데이터 출력
                 console.log("서버 상태 코드:", error.response.status); // 서버 상태 코드 출력
                 console.log("서버 응답 헤더:", error.response.headers); // 서버 응답 헤더 출력
-                const errorMessage = error.response.data.errorMessage || "알 수 없는 오류가 발생했습니다.";
+                const errorMessage =
+                    error.response.data.errorMessage ||
+                    "알 수 없는 오류가 발생했습니다.";
                 alert(`${errorMessage}`);
                 // alert(`서버 오류 발생: ${error.response.data.message || "알 수 없는 오류"}`);
             } else {
@@ -341,12 +349,14 @@ const ContestUpload = () => {
                 alert("공모전 등록 중 오류가 발생했습니다.");
             }
         }
-    }
+    };
 
+    const accessToken = sessionStorage.getItem("auth_token");
 
     return (
         <Layout>
-            <Topbar />
+            {accessToken ? <Topbar3 /> : <Topbar />}
+
             <Title>기업 공모전 등록</Title>
             <FormContainer>
                 <form onSubmit={handleSubmit}>

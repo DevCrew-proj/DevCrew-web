@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import icPermIdentity from "../assets/image/icPermIdentity.svg";
 import icWriteNote from "../assets/image/icWriteNote.svg";
 import { DropdownInput } from "../components/DropdownInput";
@@ -137,10 +138,12 @@ const IntroduceSelfPage = () => {
     introduction: "",
     highSchool: "",
     college: "",
-    gender: "MALE",
-    highSchoolStatus: "ENROLLMENT",
-    collegeStatus: "ENROLLMENT",
+    gender: "성별 선택",
+    highSchoolStatus: "상태",
+    collegeStatus: "상태",
   });
+
+  const accessToken = sessionStorage.getItem("auth_token");
 
   // 공통 매핑 함수 (양방향)
   const mapStatus = (mapping, status, defaultValue) => {
@@ -163,16 +166,13 @@ const IntroduceSelfPage = () => {
     FEMALE: "여성",
   };
 
-  //임시 액세스 토큰
-  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
-
   //프로필 데이터 받아오기
   const getProfileData = async () => {
     try {
       const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
       });
       const data = response.data.data;
@@ -213,8 +213,8 @@ const IntroduceSelfPage = () => {
         mappedFormData,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -267,6 +267,7 @@ const IntroduceSelfPage = () => {
                       formData={formData}
                       setFormData={setFormData}
                       apiEndpoint="https://devcrew.kr/api/image/member"
+                      required
                     />
                   </LabelContainer>
                   <InputContainer>
@@ -278,6 +279,7 @@ const IntroduceSelfPage = () => {
                         labelText="이름"
                         value={formData.name}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <GenderDropdownInput
@@ -286,6 +288,7 @@ const IntroduceSelfPage = () => {
                       onChange={(value) =>
                         handleDropdownChange("gender", value)
                       }
+                      required
                     />
                     <InputField>
                       <InputLabel labelText="전화번호"></InputLabel>
@@ -294,6 +297,7 @@ const IntroduceSelfPage = () => {
                         placeholder="010-1234-5678"
                         value={formData.phoneNumber}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <InputField>
@@ -304,6 +308,7 @@ const IntroduceSelfPage = () => {
                         labelText="이메일"
                         value={formData.userEmail}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                   </InputContainer>
@@ -318,6 +323,7 @@ const IntroduceSelfPage = () => {
                         labelText="고등학교"
                         value={formData.highSchool}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <DropdownInput
@@ -326,6 +332,8 @@ const IntroduceSelfPage = () => {
                       onChange={(value) =>
                         handleDropdownChange("highSchoolStatus", value)
                       }
+                      options={["재학", "졸업"]}
+                      required
                     />
                   </DropDownContainer>
                   <DropDownContainer>
@@ -337,6 +345,7 @@ const IntroduceSelfPage = () => {
                         labelText="대학교"
                         value={formData.college}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <DropdownInput
@@ -345,6 +354,8 @@ const IntroduceSelfPage = () => {
                       onChange={(value) =>
                         handleDropdownChange("collegeStatus", value)
                       }
+                      options={["재학", "휴학", "졸업"]}
+                      required
                     />
                   </DropDownContainer>
                 </InputContainer>
@@ -360,6 +371,7 @@ const IntroduceSelfPage = () => {
                   placeholder="자기소개를 입력해 주세요."
                   value={formData.introduction}
                   onChange={handleChange}
+                  required
                 />
               </NoteContainer>
               <InfoRegisterBtn type="submit" value="정보 등록" />

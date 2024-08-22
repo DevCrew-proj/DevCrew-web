@@ -1,10 +1,11 @@
-import {React, useState, useEffect} from 'react'
-import styled from 'styled-components'
-import axios from 'axios'
-import ContestInfo from '../components/ContestInfo'
-import Topbar from '../components/Topbar'
-import {Link ,useParams} from 'react-router-dom'
-import Bottombar from '../components/Bottombar'
+import { React, useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import ContestInfo from "../components/ContestInfo";
+import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
+import { Link, useParams } from "react-router-dom";
+import Bottombar from "../components/Bottombar";
 
 const Layout = styled.div`
 width : 1680px;
@@ -201,156 +202,188 @@ text-decoration : none;
 color: #5D6C6F;
 
 `
-
 const TeamMatching = () => {
-  const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
-  const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
-  const [error, setError] = useState(null); // 오류 상태를 위한 상태
-  const [teamData, setTeamData] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { contestId } = useParams();  // contestId 가져오기
+    const [contestData, setContestData] = useState(null); // 공모전 데이터를 위한 상태
+    const [loading, setLoading] = useState(true); // 로딩 상태를 위한 상태
+    const [error, setError] = useState(null); // 오류 상태를 위한 상태
+    const [teamData, setTeamData] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { contestId } = useParams(); // contestId 가져오기
 
-  useEffect(() => {
-    const authToken = sessionStorage.getItem('auth_token');
-    setIsLoggedIn(!!authToken); // 로그인 여부 설정
-  }, []);
+    useEffect(() => {
+        const authToken = sessionStorage.getItem("auth_token");
+        setIsLoggedIn(!!authToken); // 로그인 여부 설정
+    }, []);
 
-  useEffect(() => {
-    console.log("Fetching data for contestId:", contestId); // 이 라인을 추가하여 contestId를 확인합니다.
-    const fetchContestData = async () => {
-      try {
-        const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}`);
-        setContestData(response.data.data);
-        setLoading(false);
-        console.log("Contest Data:", response.data); // 콘테스트 데이터 출력
-      } catch (err) {
-        console.error('Error fetching contest data:', err.response ? err.response.data : err.message);
-        setError(err);
-        setLoading(false);
-      }
+    useEffect(() => {
+        console.log("Fetching data for contestId:", contestId); // 이 라인을 추가하여 contestId를 확인합니다.
+        const fetchContestData = async () => {
+            try {
+                const response = await axios.get(
+                    `https://devcrew.kr/api/v1/contests/${contestId}`
+                );
+                setContestData(response.data.data);
+                setLoading(false);
+                console.log("Contest Data:", response.data); // 콘테스트 데이터 출력
+            } catch (err) {
+                console.error(
+                    "Error fetching contest data:",
+                    err.response ? err.response.data : err.message
+                );
+                setError(err);
+                setLoading(false);
+            }
+        };
+
+        const fetchTeamData = async () => {
+            try {
+                const response = await axios.get(
+                    `https://devcrew.kr/api/v1/contests/${contestId}/teams`
+                );
+                // setTeamData(response.data.data.teamInfoList);
+                const fetchedTeamData = response.data.data.teamInfoList;
+                const emptyRows = Math.max(3 - fetchedTeamData.length, 0);
+                const filledTeamData = [
+                    ...fetchedTeamData,
+                    ...Array(emptyRows).fill({
+                        teamName: "",
+                        planUrl: "",
+                        teamEmail: "",
+                    }),
+                ];
+                console.log("Filled Team Data:", filledTeamData); // 이 줄 추가
+                setTeamData(filledTeamData);
+                console.log("Team Data:", response.data.data.teamInfoList);
+                setLoading(false);
+            } catch (err) {
+                if (err.response && err.response.status === 404) {
+                    // 팀 정보를 찾지 못했을 때 (404 에러)
+                    const emptyRows = 3;
+                    const filledTeamData = Array(emptyRows).fill({
+                        teamName: "",
+                        planUrl: "",
+                        teamEmail: "",
+                    });
+                    setTeamData(filledTeamData);
+                    setLoading(false);
+                } else {
+                    console.error(
+                        "Error fetching team data:",
+                        err.response ? err.response.data : err.message
+                    );
+                    setError(err);
+                    setLoading(false);
+                }
+            }
+        };
+
+        fetchContestData();
+        fetchTeamData();
+    }, [contestId]);
+
+    const handleInputChange = (index, field, value) => {
+        const newTeamData = [...teamData];
+        newTeamData[index][field] = value;
+        setTeamData(newTeamData);
     };
 
-    const fetchTeamData = async () => {
-      try {
-        const response = await axios.get(`https://devcrew.kr/api/v1/contests/${contestId}/teams`);
-        // setTeamData(response.data.data.teamInfoList);
-        const fetchedTeamData = response.data.data.teamInfoList;
-        const emptyRows = Math.max(3 - fetchedTeamData.length, 0);
-        const filledTeamData = [...fetchedTeamData, ...Array(emptyRows).fill({ teamName: '', planUrl: '', teamEmail: '' })];
-        console.log("Filled Team Data:", filledTeamData);  // 이 줄 추가
-        setTeamData(filledTeamData);
-        console.log("Team Data:", response.data.data.teamInfoList);
-        setLoading(false);
-      } catch (err) {
+    const handleBlur = (index) => {
+        const newTeamData = [...teamData];
+        newTeamData[index].isEditing = false;
+        setTeamData(newTeamData);
+    };
 
-        if (err.response && err.response.status === 404) {
-          // 팀 정보를 찾지 못했을 때 (404 에러)
-          const emptyRows = 3;
-          const filledTeamData = Array(emptyRows).fill({ teamName: '', planUrl: '', teamEmail: '' });
-          setTeamData(filledTeamData);
-          setLoading(false);
-        } else {
-          console.error('Error fetching team data:', err.response ? err.response.data : err.message);
-          setError(err);
-          setLoading(false);
+    const handleEditClick = (index) => {
+        const newTeamData = [...teamData];
+        newTeamData[index].isEditing = true;
+        setTeamData(newTeamData);
+    };
+
+    const handleClick = () => {
+        if (!isLoggedIn) {
+            alert("로그인해주세요!");
         }
-      }
     };
-  
-    fetchContestData();
-    fetchTeamData();
-  }, [contestId]);
 
+    const accessToken = sessionStorage.getItem("auth_token");
 
-  const handleInputChange = (index, field, value) => {
-    const newTeamData = [...teamData];
-    newTeamData[index][field] = value;
-    setTeamData(newTeamData);
-  };
+    return (
+        <Layout>
+            {accessToken ? <Topbar3 /> : <Topbar />}
+            {contestData ? (
+                <>
+                    <ContestInfoWrapper>
+                        <ContestInfo contestId={contestId} />
+                    </ContestInfoWrapper>
+                    <Divider />
+                    <TitleContainer>
+                        <Title>
+                            {contestData.title}
+                            <UnderLine />
+                        </Title>
+                    </TitleContainer>
 
-  const handleBlur = (index) => {
-    const newTeamData = [...teamData];
-    newTeamData[index].isEditing = false;
-    setTeamData(newTeamData);
-  };
-
-  const handleEditClick = (index) => {
-    const newTeamData = [...teamData];
-    newTeamData[index].isEditing = true;
-    setTeamData(newTeamData);
-  };
-
-  const handleClick = () => {
-    if (!isLoggedIn) {
-      alert('로그인해주세요!');
-
-    }
-  };
-
-  return (
-    <Layout>
-    <Topbar />
-    {contestData ? (
-      <>
-    <ContestInfoWrapper>
-        <ContestInfo contestId={contestId} />
-      </ContestInfoWrapper>
-    <Divider />
-    <TitleContainer>
-  <Title>
-    {contestData.title}
-    <UnderLine />
-  </Title>
- 
-</TitleContainer>
-    
-    <ContentLayout> {contestData.description}
-    </ContentLayout>
-    <Divider />
-    <MatchingTitle>프로젝트팀 매칭</MatchingTitle>
-    <Table>
-        <thead>
-          <TableRow>
-            <TableHeader>팀명</TableHeader>
-            <TableHeader>세부 기획안</TableHeader>
-            <TableHeader>문의 이메일</TableHeader>
-            <TableHeader>신청하기</TableHeader>
-          </TableRow>
-        </thead>
-        <tbody>
-              {teamData.map((team, index) => (
-                <TableRow key={team.teamId}>
-                   {/* <TableRow key={index}> */}
-                  <TableCell>{team.teamName}</TableCell>
-                  <TableCell>
-                  <StyledLink href={team.planUrl.startsWith('http') ? team.planUrl : `https://${team.planUrl}`} target="_blank">
-                  {/* <StyledLink href={team.planUrl} target="_blank"> */}
-                      {team.planUrl}
-                    </StyledLink>
-                  </TableCell>
-                  <TableCell>{team.teamEmail}</TableCell>
-                  <TableCell>
-                    <InputCheckbox />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </tbody>
-      </Table>
-      <ButtonGroup>
-            <Button1 onClick={handleClick} as={isLoggedIn ? ButtonLink1 : 'button'} to={`/teamComposition/${contestId}`}>
-              팀 구성하기
-            </Button1>
-            <Button2 onClick={handleClick} as={isLoggedIn ? ButtonLink2 : 'button'} to={`/teamApplication/${contestId}`}>
-              팀 신청하기
-            </Button2>
-          </ButtonGroup>
-      <Bottombar />
-      </>
-    ) : (
-      <div>Loading...</div>
-    )}
-    </Layout>
-  );
-}
+                    <ContentLayout> {contestData.description}</ContentLayout>
+                    <Divider />
+                    <MatchingTitle>프로젝트팀 매칭</MatchingTitle>
+                    <Table>
+                        <thead>
+                            <TableRow>
+                                <TableHeader>팀명</TableHeader>
+                                <TableHeader>세부 기획안</TableHeader>
+                                <TableHeader>문의 이메일</TableHeader>
+                                <TableHeader>신청하기</TableHeader>
+                            </TableRow>
+                        </thead>
+                        <tbody>
+                            {teamData.map((team, index) => (
+                                <TableRow key={team.teamId}>
+                                    {/* <TableRow key={index}> */}
+                                    <TableCell>{team.teamName}</TableCell>
+                                    <TableCell>
+                                        <StyledLink
+                                            href={
+                                                team.planUrl.startsWith("http")
+                                                    ? team.planUrl
+                                                    : `https://${team.planUrl}`
+                                            }
+                                            target="_blank"
+                                        >
+                                            {/* <StyledLink href={team.planUrl} target="_blank"> */}
+                                            {team.planUrl}
+                                        </StyledLink>
+                                    </TableCell>
+                                    <TableCell>{team.teamEmail}</TableCell>
+                                    <TableCell>
+                                        <InputCheckbox />
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </tbody>
+                    </Table>
+                    <ButtonGroup>
+                        <Button1
+                            onClick={handleClick}
+                            as={isLoggedIn ? ButtonLink1 : "button"}
+                            to={`/teamComposition/${contestId}`}
+                        >
+                            팀 구성하기
+                        </Button1>
+                        <Button2
+                            onClick={handleClick}
+                            as={isLoggedIn ? ButtonLink2 : "button"}
+                            to={`/teamApplication/${contestId}`}
+                        >
+                            팀 신청하기
+                        </Button2>
+                    </ButtonGroup>
+                    <Bottombar />
+                </>
+            ) : (
+                <div>Loading...</div>
+            )}
+        </Layout>
+    );
+};
 
 export default TeamMatching;

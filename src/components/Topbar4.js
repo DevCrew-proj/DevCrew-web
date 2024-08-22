@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import logo from "../assets/image/logo.svg";
-import { Link, useLocation } from "react-router-dom";
-import ArrowIcon from "../assets/image/arrow.svg";
+import logo from "../assets/image/logowhite.svg";
+import { Link, useNavigate } from "react-router-dom";
+import ArrowIcon from "../assets/image/arrow2.svg";
 import axios from "axios";
 
 const Layout = styled.div`
   width: 1584px; // padding 값까지 포함하여 1680px
   display: flex;
   flex-direction: row;
-  background: #f7f7f7;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    #7f7f7f;
   padding: 26px 48px 20px;
 `;
 
@@ -28,6 +33,10 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
 
+  & > * {
+    margin-top: 26px;
+  }
+
   & > a:first-child {
     margin-right: 46px;
   }
@@ -43,29 +52,14 @@ const MenuContainer = styled.div`
 
 const MenuItem = styled(Link)`
   width: 100px;
-  text-align: center;
   text-decoration: none;
-  color: ${({ isActive }) => (isActive ? "black" : "#B8B8B8;")};
+  color: white;
   font-family: AppleSDGothicNeoB00;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 26px;
   height: 28px;
-  //border-bottom: ${({ isActive }) =>
-    isActive ? "8px solid #2E4F4F" : "none"};
-  &::after {
-    content: "";
-    display: ${({ isActive }) => (isActive ? "block" : "none")};
-    position: absolute;
-    width: 100px;
-    height: 8px;
-
-    background-color: #2e4f4f;
-    //top: 100%; /* 부모 요소의 아래에 위치하도록 설정 */
-    margin-top: 14px; /* 원하는 margin-top 값을 설정 */
-  }
 `;
 
 const Dropdown = styled.div`
@@ -91,8 +85,8 @@ const DropdownContent = styled.div`
   width: 120px;
   border: 1px solid #829595;
   z-index: 1;
-  left: 90%;
-  transform: translateX(-85%);
+  left: 110%;
+  transform: translateX(-85%); /* 중앙 정렬 */
   text-align: center;
   border-radius: 8px;
   color: #2f4f4f;
@@ -100,16 +94,18 @@ const DropdownContent = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%;
+  line-height: 140%; /* 22.4px */
   & a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+
     &:hover {
-      background-color: #f1f1f1;
       border-radius: 11px;
-      text-decoration: none;
+      background: rgba(130, 149, 149, 0.59);
+      // width: 102px;
+      //height: 37px;
     }
   }
 `;
@@ -123,7 +119,7 @@ const DropdownItem = styled(Link)``;
 const Auth = styled.div`
   display: flex;
   margin-top: 21px;
-  margin-left: 700px;
+  margin-left: 745px;
   width: 158px;
   height: 33px;
   border-radius: 5px;
@@ -140,7 +136,27 @@ const Auth = styled.div`
   line-height: normal;
 `;
 
-const Topbar3 = () => {
+const Business = styled.div`
+  display: flex;
+  margin-left: 750px;
+  width: 101px;
+  height: 38px;
+  margin-top: 51px;
+  border-radius: 5px;
+  background: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #2f4f4f;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const Topbar4 = () => {
   const accessToken = sessionStorage.getItem("auth_token");
   console.log(
     "Topbar3의 sessionStorage에 저장된 엑세스토큰입니다: " + accessToken
@@ -181,7 +197,6 @@ const Topbar3 = () => {
   // const handleAuthClick = () => {
   //     navigate("/signinbusiness");
   // };
-  const location = useLocation();
 
   return (
     <Layout>
@@ -191,23 +206,21 @@ const Topbar3 = () => {
         </Link>
       </Logocontainer>
       <MenuContainer>
-        <MenuItem
-          to='/devcrewintro'
-          isActive={location.pathname === "/devcrewintro"}
-        >
-          데브크루 소개
-        </MenuItem>
-        <MenuItem to='/portfolio' isActive={location.pathname === "/portfolio"}>
-          포트폴리오
-        </MenuItem>
-        <MenuItem to='/team1' isActive={location.pathname === "/team1"}>
-          팀 매칭
-        </MenuItem>
+        <MenuItem to='/devcrewintro'>데브크루 소개</MenuItem>
+        <MenuItem to='/portfolio'>포트폴리오</MenuItem>
+        <MenuItem to='/team1'>팀 매칭</MenuItem>
+        {/* <Dropdown>
+                    <MenuItem>
+                        팀 매칭
+                        <Arrow src={ArrowIcon} alt="dropdown arrow" />
+                    </MenuItem>
+                    <DropdownContent className="dropdown-content">
+                        <DropdownItem to="/team1">공모전 매칭</DropdownItem>
+                        <DropdownItem to="/team2">교내 매칭</DropdownItem>
+                    </DropdownContent>
+                </Dropdown> */}
         <Dropdown>
-          <MenuItem
-            as='div'
-            isActive={location.pathname.startsWith("/communication")}
-          >
+          <MenuItem>
             소통
             <Arrow src={ArrowIcon} alt='dropdown arrow' />
           </MenuItem>
@@ -224,4 +237,4 @@ const Topbar3 = () => {
   );
 };
 
-export default Topbar3;
+export default Topbar4;

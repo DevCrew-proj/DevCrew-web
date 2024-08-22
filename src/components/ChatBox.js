@@ -52,6 +52,7 @@ const ChatContent = styled.div`
   font-size: 20px;
   line-height: 1.4;
   color: #000;
+  white-space: pre-wrap;
 `;
 
 const ChatBox = ({

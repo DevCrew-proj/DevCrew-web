@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import { PortfolioCard } from "../components/PorfolioCard";
 import { useNavigate } from "react-router-dom";
 import Bottombar from "../components/Bottombar";
 import vector from "../assets/image/vector.svg";
-import vectors from "../assets/image/vector2.svg";
 import PortfolioModal from "../components/PortfolioModal";
 import axios from "axios";
 import Pagination from "../components/Pagination";
@@ -121,7 +121,7 @@ const Menu = styled.div`
 `;
 
 const PortfolioWrapper = styled.div`
-  width: 1363px;
+  width: 1210px;
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
@@ -158,12 +158,12 @@ const PortfolioPage = () => {
     name: "",
     phoneNumber: "",
     userEmail: "",
-    introduction: "",
+    introduction: "자기소개를 작성해주세요.",
     highSchool: "",
     college: "",
-    gender: "MALE",
-    highSchoolStatus: "ENROLLMENT",
-    collegeStatus: "ENROLLMENT",
+    gender: "",
+    highSchoolStatus: "고등학교",
+    collegeStatus: "대학교",
   });
   const [projectData, setProjectData] = useState({
     memberId: 0,
@@ -173,6 +173,7 @@ const PortfolioPage = () => {
         projectName: "",
         images: [],
         tag: "STARTUP",
+        oneLineSummary: "",
         summary: "",
         teamName: "",
         duration: "",
@@ -188,13 +189,16 @@ const PortfolioPage = () => {
     teamName: "",
     duration: "",
     tag: "STARTUP",
+    oneLineSummary: "",
     summary: "",
-    roles: "",
+    role: "",
   });
   const [projectTag, setProjectTag] = useState("전체"); // 프로젝트 태그
   const [page, setPage] = useState(1); // 프로젝트 카드 페이지
   const [totalpage, setTotalpage] = useState(1); // 프로젝트 카드 총 페이지
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const accessToken = sessionStorage.getItem("auth_token");
 
   //status mapping
   const mapStatus = (status) => {
@@ -218,10 +222,11 @@ const PortfolioPage = () => {
     return tagsMapping[tag] || "";
   };
 
-  //임시 액세스 토큰
-  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
-
   const getProfileData = async () => {
+    if (!accessToken) {
+      return profileData;
+    }
+
     try {
       const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
         headers: {
@@ -241,13 +246,15 @@ const PortfolioPage = () => {
 
   //전체 프로젝트 데이터 받아오기
   const getProjectDataAll = async () => {
+    if (!accessToken) return;
+
     try {
       const response = await axios.get(
         `https://devcrew.kr/api/v1/projects/all?page=${page}&size=9`,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -263,13 +270,15 @@ const PortfolioPage = () => {
 
   //태그별 프로젝트 데이터 받아오기
   const getProjectDataByTag = async () => {
+    if (!accessToken) return;
+
     try {
       const response = await axios.get(
         `https://devcrew.kr/api/v1/projects?page=${page}&size=9&projectTag=${projectTag}`,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -285,13 +294,15 @@ const PortfolioPage = () => {
 
   //개별 프로젝트 데이터 받아오기
   const getModalData = async (projectId) => {
+    if (!accessToken) return;
+
     try {
       const response = await axios.get(
         `https://devcrew.kr/api/v1/projects/${projectId}`,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -309,6 +320,15 @@ const PortfolioPage = () => {
   };
 
   const closeModal = () => setModalOpen(false);
+
+  const handleNavigation = (path) => {
+    if (!accessToken) {
+      alert("로그인 후 이용해주세요.");
+      navigate(`/login`);
+    } else {
+      navigate(path);
+    }
+  };
 
   const handleMenuClick = (tag) => {
     setProjectTag(tag);
@@ -339,25 +359,25 @@ const PortfolioPage = () => {
                 <Subtitle>Contact</Subtitle>
                 <Information>전화번호: {profileData.phoneNumber}</Information>
                 <Information>이메일: {profileData.userEmail}</Information>
-                {/* <Information>직무: PM</Information> */}
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>Education</Subtitle>
                 <Information>
-                  {/* 2020.02:  */}
                   {profileData.highSchool} {profileData.highSchoolStatus}
                 </Information>
                 <Information>
-                  {/* 2024.02:  */}
                   {profileData.college} {profileData.collegeStatus}
                 </Information>
               </InfoWrapper>
               <InfoWrapper>
                 <Subtitle>About me</Subtitle>
-                <Information>안녕하세요 {profileData.name}입니다.</Information>
                 <Information>{profileData.introduction}</Information>
               </InfoWrapper>
-              <ProfileWriteBtn onClick={() => navigate(`/introduceself`)}>
+              <ProfileWriteBtn
+                onClick={() => {
+                  handleNavigation("/introduceself");
+                }}
+              >
                 자기소개 작성
               </ProfileWriteBtn>
             </InfoContainer>
@@ -416,7 +436,11 @@ const PortfolioPage = () => {
               )}
             </PortfolioWrapper>
 
-            <Upload onClick={() => navigate(`/projectWrite`)}>
+            <Upload
+              onClick={() => {
+                handleNavigation("/projectWrite");
+              }}
+            >
               업로드
               <Vector src={vector} alt="화살표" />
             </Upload>

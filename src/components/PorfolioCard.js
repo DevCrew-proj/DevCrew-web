@@ -5,8 +5,8 @@ import icArrowRightUp from "../assets/image/icArrowRightUp.svg";
 const Portfolio = styled.div`
   width: fit-content;
   display: flex;
-  gap: 28px;
-  padding: 26px 21px;
+  gap: 27.13px;
+  padding: 22.75px 18.38px;
   background-color: rgba(47, 79, 79, 0.6);
   border: 1px solid #dadada;
   border-radius: 20px;
@@ -14,8 +14,8 @@ const Portfolio = styled.div`
 `;
 
 const Thumbnail = styled.img`
-  width: 164px;
-  height: 164px;
+  width: 143.5px;
+  height: 143.5px;
   background: #ffffff;
   border-radius: 20px;
   object-fit: cover;
@@ -25,7 +25,7 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 200px;
+  width: 175px;
 `;
 
 const PortfolioTitle = styled.h3`
@@ -82,7 +82,7 @@ export const PortfolioCard = ({ onClick, data }) => {
           <PortfolioInfo1>
             <PortfolioTitle>{data.projectName}</PortfolioTitle>
             <Chip>{data.tag}</Chip>
-            <Description>{data.summary}</Description>
+            <Description>{data.oneLineSummary}</Description>
           </PortfolioInfo1>
           <PortfolioInfo2>
             <Description>{data.teamName}</Description>

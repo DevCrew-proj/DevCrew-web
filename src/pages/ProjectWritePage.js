@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
+import Topbar3 from "../components/Topbar3";
 import Bottombar from "../components/Bottombar";
 import { useState } from "react";
 import icChevronDown from "../assets/image/icChevronDown.svg";
@@ -61,7 +62,7 @@ const Input = styled.input`
   font-size: 16px;
   border-radius: 11px;
   border: 1px solid #829595;
-  width: 168px;
+  width: ${(props) => props.width || "168px"};
   height: 52px;
   flex-shrink: 0;
   margin-top: 23px;
@@ -206,8 +207,9 @@ const ProjectWritePage = () => {
     teamName: "",
     duration: "",
     projectTag: "창업",
+    oneLineSummary: "",
     summary: "",
-    roles: "",
+    role: "",
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -228,7 +230,7 @@ const ProjectWritePage = () => {
     OTHERS: "기타",
   };
 
-  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
+  const accessToken = sessionStorage.getItem("auth_token");
 
   //프로젝트 데이터 보내기
   const postProjectData = async () => {
@@ -245,6 +247,7 @@ const ProjectWritePage = () => {
         mappedFormData,
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -279,7 +282,7 @@ const ProjectWritePage = () => {
 
   return (
     <Layout>
-      <Topbar />
+      {accessToken ? <Topbar3 /> : <Topbar />}
       <Title>참여 프로젝트 작성</Title>
       <FormContainer>
         <form onSubmit={handleSubmit}>
@@ -294,11 +297,23 @@ const ProjectWritePage = () => {
             />
           </FormField>
           <FormField>
+            <Label>프로젝트 한 줄 소개 *</Label>
+            <Input
+              type="text"
+              name="oneLineSummary"
+              value={formData.oneLineSummary}
+              onChange={handleChange}
+              width="800px"
+              required
+            />
+          </FormField>
+          <FormField>
             <Label>프로젝트 이미지 *</Label>
             <ImageUpload2
               formData={formData}
               setFormData={setFormData}
               apiEndpoint="https://devcrew.kr/api/images/project"
+              required
             />
           </FormField>
           <FormField>
@@ -356,9 +371,9 @@ const ProjectWritePage = () => {
           />
           <AddTitle>역할</AddTitle>
           <TextArea
-            name="roles"
+            name="role"
             placeholder="본인의 역할을 입력해 주세요"
-            value={formData.roles}
+            value={formData.role}
             onChange={handleChange}
           />
           <Button type="submit">등록하기</Button>

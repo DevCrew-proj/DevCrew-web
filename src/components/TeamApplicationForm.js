@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -9,6 +9,7 @@ const Container = styled.div`
   background-color: #ffffff;
   display: flex;
   width: 1920px;
+  margin-left: 100px;
   box-sizing: border-box;
 `;
 
@@ -251,7 +252,7 @@ const CloseButton = styled.button`
 `;
 
 const TeamApplicationForm = ({ contestId }) => {
-  const navigate = useNavigate(); // Use navigate from react-router-dom
+  const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
     name: '',
@@ -266,9 +267,16 @@ const TeamApplicationForm = ({ contestId }) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [token, setToken] = useState("");
 
-  // Retrieve token from sessionStorage
-  const token = sessionStorage.getItem('token');
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("auth_token");
+    if (accessToken) {
+      setToken(accessToken);
+    } else {
+      alert("Token not found in session storage!");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -302,7 +310,8 @@ const TeamApplicationForm = ({ contestId }) => {
         ...formData,
       }, {
         headers: {
-          Authorization: `Bearer ${token}`,  
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`   
         }
       });
 
@@ -320,6 +329,7 @@ const TeamApplicationForm = ({ contestId }) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    navigate(`/teammatching/${contestId}`);
   };
 
   return (

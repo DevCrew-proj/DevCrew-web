@@ -46,10 +46,10 @@ const ArrowIcon = styled.img`
 
 const FileClickContainer = styled.div`
   width: 100%;
-  max-height: 220px;
+  max-height: 303px;
   display: ${(props) => (props.fileDropDown ? "block" : "none")};
   position: absolute;
-  top: 57px;
+  top: 107px;
   left: 0;
   overflow-y: scroll;
   scrollbar-width: none;

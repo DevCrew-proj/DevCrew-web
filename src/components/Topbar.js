@@ -80,7 +80,7 @@ const DropdownContent = styled.div`
   display: none;
   position: absolute;
   background-color: #fff;
-  width: 118px;
+  width: 120px;
   border: 1px solid #829595;
   z-index: 1;
   left: 90%;
@@ -147,9 +147,9 @@ const Topbar = () => {
           </MenuItem>
           <DropdownContent className='dropdown-content'>
             <DropdownItem to='/communication1'>현직자 조언</DropdownItem>
-            <DropdownItem to='/communication2'>기획 리뷰</DropdownItem>
+            <DropdownItem to='/communication2'>기획 피드백</DropdownItem>
             <DropdownItem to='/communication3'>코드 리뷰</DropdownItem>
-            <DropdownItem to='/communication4'>디자인 리뷰</DropdownItem>
+            <DropdownItem to='/communication4'>디자인 피드백</DropdownItem>
           </DropdownContent>
         </Dropdown>
         {/* <Auth>
