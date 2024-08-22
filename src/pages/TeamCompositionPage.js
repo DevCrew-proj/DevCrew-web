@@ -5,6 +5,7 @@ import Topbar from "../components/Topbar";
 import Topbar3 from "../components/Topbar3";
 import ContestInfo from "../components/ContestInfo";
 import TeamApplicationForm from "../components/TeamApplicationForm";
+import Bottombar from "../components/Bottombar";
 
 const Container = styled.div`
     background-color: #ffffff;
@@ -41,6 +42,7 @@ const TeamCompositionPage = () => {
                 <ContestInfo contestId={contestId} />
                 <Divider />
                 <TeamApplicationForm contestId={contestId} />
+                <Bottombar />
             </InnerContainer>
         </Container>
     );
