@@ -101,7 +101,7 @@ const CommunicationChat1 = () => {
   );
 
   useEffect(() => {
-    if (localStorage.getItem("auth_token") !== null) {
+    if (sessionStorage.getItem("auth_token") !== null) {
       setPlaceholderContent("최대 500자 이내");
     }
   });
