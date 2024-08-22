@@ -323,6 +323,7 @@ const ApplicationForm = ({ contestId }) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    navigate(`/teammatching/${contestId}`);
   };
 
   return (
