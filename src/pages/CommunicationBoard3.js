@@ -16,10 +16,14 @@ const Communication3 = () => {
   return (
     <Layout>
       <Topbar />
-      <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={(tab) => {setSelectedTag(tab);}}/>
+      <Listbar4
+        title='코드 리뷰'
+        showTabs='group2'
+        onTabSelect={(tab) => { setSelectedTag(tab); }}
+      />
       <FormBoard2
         apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
-        language={selectedTag}
+        language={selectedTag}  
         fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
         imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
       />
@@ -29,4 +33,3 @@ const Communication3 = () => {
 };
 
 export default Communication3;
-/* <TabBar title="현직자 조언" showTabs={false} /> 탭 아이템이 숨겨짐 */
