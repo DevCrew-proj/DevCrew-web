@@ -28,7 +28,7 @@ const IntroContainer = styled.div`
     border-radius: 98px;
     background: #f7f7f7;
     margin-top: 125px;
-    margin-left: 150px;
+    margin-left: 110px;
     margin-bottom: 250px;
 `;
 

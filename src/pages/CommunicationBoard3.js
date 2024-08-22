@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
 import Topbar from "../components/Topbar";
 import Topbar3 from "../components/Topbar3";
 import Listbar4 from "../components/Listbar4";
@@ -11,9 +12,15 @@ const Layout = styled.div`
     height: 1842px;
 `;
 
-const Communication3 = () => {
+const CommunicationBoard3 = () => {
     const [selectedTag, setSelectedTag] = useState("JAVA");
+    const navigate = useNavigate(); 
+
     const accessToken = sessionStorage.getItem("auth_token");
+
+    const handleSuccess = () => {
+        navigate("/communication3");
+    };
 
     return (
         <Layout>
@@ -30,10 +37,11 @@ const Communication3 = () => {
                 language={selectedTag}
                 fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
                 imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
+                onSuccess={handleSuccess} 
             />
             <Bottombar />
         </Layout>
     );
 };
 
-export default Communication3;
+export default CommunicationBoard3;

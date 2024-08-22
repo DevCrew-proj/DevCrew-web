@@ -157,8 +157,8 @@ const CancelButtonText = styled.span`
 
 const DropdownContainer = styled.div`
   position: relative;
-  width: 300px; /* Adjusted to make the dropdown wider */
-  margin-left: 40px; /* Adjust as necessary */
+  width: 300px;
+  margin-left: 40px;
 `;
 
 const DropdownButton = styled.div`
@@ -250,6 +250,11 @@ const CloseButton = styled.button`
   margin-top: 20px;
 `;
 
+const ErrorModalContent = styled(ModalContent)`
+  background-color: #ffebeb;
+  border: 1px solid #ff0000;
+`;
+
 const ApplicationForm = ({ contestId }) => {
   const navigate = useNavigate();
 
@@ -263,6 +268,7 @@ const ApplicationForm = ({ contestId }) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -315,7 +321,11 @@ const ApplicationForm = ({ contestId }) => {
         setIsModalOpen(true);
       }
     } catch (error) {
-      console.error("There was an error submitting the form:", error);
+      if (error.response && error.response.status === 400) {
+        setIsErrorModalOpen(true);
+      } else {
+        console.error("There was an error submitting the form:", error);
+      }
     }
   };
 
@@ -326,6 +336,10 @@ const ApplicationForm = ({ contestId }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     navigate(`/teammatching/${contestId}`);
+  };
+
+  const handleCloseErrorModal = () => {
+    setIsErrorModalOpen(false);
   };
 
   return (
@@ -443,6 +457,14 @@ const ApplicationForm = ({ contestId }) => {
             <h2>신청 완료되었습니다!</h2>
             <CloseButton onClick={handleCloseModal}>닫기</CloseButton>
           </ModalContent>
+        </ModalOverlay>
+      )}
+      {isErrorModalOpen && (
+        <ModalOverlay>
+          <ErrorModalContent>
+            <h2>팀 패스워드가 일치하지 않습니다!</h2>
+            <CloseButton onClick={handleCloseErrorModal}>닫기</CloseButton>
+          </ErrorModalContent>
         </ModalOverlay>
       )}
     </Container>
