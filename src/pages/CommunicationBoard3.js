@@ -19,7 +19,7 @@ const Communication3 = () => {
       <Listbar4 title='코드 리뷰' showTabs='group2' onTabSelect={(tab) => {setSelectedTag(tab);}}/>
       <FormBoard2
         apiEndpoint="https://devcrew.kr/api/v1/feedback/code/create" 
-        feedbackTag={selectedTag}
+        language={selectedTag}
         fileUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
         imageUploadApiEndpoint="https://devcrew.kr/api/images/codeReview"
       />
