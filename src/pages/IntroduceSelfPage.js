@@ -143,6 +143,7 @@ const IntroduceSelfPage = () => {
   });
 
   const accessToken = sessionStorage.getItem("auth_token");
+  // const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
 
   // 공통 매핑 함수 (양방향)
   const mapStatus = (mapping, status, defaultValue) => {
@@ -277,6 +278,7 @@ const IntroduceSelfPage = () => {
                         labelText="이름"
                         value={formData.name}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <GenderDropdownInput
@@ -293,6 +295,7 @@ const IntroduceSelfPage = () => {
                         placeholder="010-1234-5678"
                         value={formData.phoneNumber}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <InputField>
@@ -303,6 +306,7 @@ const IntroduceSelfPage = () => {
                         labelText="이메일"
                         value={formData.userEmail}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                   </InputContainer>
@@ -317,6 +321,7 @@ const IntroduceSelfPage = () => {
                         labelText="고등학교"
                         value={formData.highSchool}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <DropdownInput
@@ -325,6 +330,7 @@ const IntroduceSelfPage = () => {
                       onChange={(value) =>
                         handleDropdownChange("highSchoolStatus", value)
                       }
+                      required
                     />
                   </DropDownContainer>
                   <DropDownContainer>
@@ -336,6 +342,7 @@ const IntroduceSelfPage = () => {
                         labelText="대학교"
                         value={formData.college}
                         onChange={handleChange}
+                        required
                       />
                     </InputField>
                     <DropdownInput
@@ -344,6 +351,7 @@ const IntroduceSelfPage = () => {
                       onChange={(value) =>
                         handleDropdownChange("collegeStatus", value)
                       }
+                      required
                     />
                   </DropDownContainer>
                 </InputContainer>
@@ -359,6 +367,7 @@ const IntroduceSelfPage = () => {
                   placeholder="자기소개를 입력해 주세요."
                   value={formData.introduction}
                   onChange={handleChange}
+                  required
                 />
               </NoteContainer>
               <InfoRegisterBtn type="submit" value="정보 등록" />

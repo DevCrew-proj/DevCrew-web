@@ -230,6 +230,7 @@ const ProjectWritePage = () => {
   };
 
   const accessToken = sessionStorage.getItem("auth_token");
+  // const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
 
   //프로젝트 데이터 보내기
   const postProjectData = async () => {

@@ -34,14 +34,6 @@ const Profile = styled.img`
   border-radius: 17px;
 `;
 
-const EmptyProfile = styled.div`
-  object-fit: cover;
-  width: 468.13px;
-  height: 575.75px;
-  border-radius: 17px;
-  background-color: #d6d6d6;
-`;
-
 const InfoContainer = styled.div`
   position: relative;
   display: flex;
@@ -361,11 +353,7 @@ const PortfolioPage = () => {
         <Topbar />
         <Container>
           <ProfileContainer>
-            {projectData.imageUrl == null ? (
-              <EmptyProfile />
-            ) : (
-              <Profile src={profileData.imageUrl} />
-            )}
+            <Profile src={profileData.imageUrl} />
             <InfoContainer>
               <InfoWrapper>
                 <Subtitle>Contact</Subtitle>
