@@ -207,7 +207,7 @@ const ProjectWritePage = () => {
     duration: "",
     projectTag: "창업",
     summary: "",
-    roles: "",
+    role: "",
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -245,7 +245,9 @@ const ProjectWritePage = () => {
         mappedFormData,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`,
           },
         }
       );
@@ -356,9 +358,9 @@ const ProjectWritePage = () => {
           />
           <AddTitle>역할</AddTitle>
           <TextArea
-            name="roles"
+            name="role"
             placeholder="본인의 역할을 입력해 주세요"
-            value={formData.roles}
+            value={formData.role}
             onChange={handleChange}
           />
           <Button type="submit">등록하기</Button>

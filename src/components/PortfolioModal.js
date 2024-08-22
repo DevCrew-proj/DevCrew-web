@@ -117,10 +117,10 @@ const PortfolioModal = ({ isOpen, onClose, data }) => {
             <SubTitle>팀명</SubTitle>
             <InfoText>- {data.teamName}</InfoText>
           </InfoContainer>
-          {/* <InfoContainer>
+          <InfoContainer>
             <SubTitle>역할</SubTitle>
-            <InfoText>- {data.roles}</InfoText>
-          </InfoContainer> */}
+            <InfoText>- {data.role}</InfoText>
+          </InfoContainer>
           <InfoContainer>
             <SubTitle>기간</SubTitle>
             <InfoText>- {data.duration}</InfoText>
