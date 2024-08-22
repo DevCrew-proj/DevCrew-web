@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SelectFile from "../assets/image/selectfile.svg";
 import Delete from "../assets/image/delete.svg";
 
+// 스타일 정의
 const Layout = styled.div`
   width: 100%;
   position: relative;
@@ -118,6 +119,7 @@ const FileUpload = ({ apiEndpoint, setFileUrls }) => {
 
     const fileExtension = file.name.split('.').pop().toLowerCase();
 
+    // 지원되는 파일 형식 목록
     const allowedExtensions = ["pdf", "doc", "docx","txt"];
     
     if (!allowedExtensions.includes(fileExtension)) {
@@ -133,6 +135,7 @@ const FileUpload = ({ apiEndpoint, setFileUrls }) => {
     setIsLoading(true);
 
     try {
+        // 파일 형식에 따른 Content-Type 설정
         let contentType = '';
         switch(fileExtension) {
             case 'pdf':
@@ -151,6 +154,7 @@ const FileUpload = ({ apiEndpoint, setFileUrls }) => {
                 contentType = 'application/octet-stream';
         }
 
+        // Step 1: Upload the file to get the presigned URL
         const formData = new FormData();
         formData.append("file", file);
         formData.append("fileExtension", fileExtension);
@@ -174,6 +178,7 @@ const FileUpload = ({ apiEndpoint, setFileUrls }) => {
 
             console.log("Using presigned URL:", presignedUrl);
 
+            // Step 2: Upload the file to the presigned URL
             await axios.put(presignedUrl, file, {
                 headers: {
                     "Content-Type": contentType,  
@@ -210,6 +215,7 @@ const FileUpload = ({ apiEndpoint, setFileUrls }) => {
 
     setIsLoading(false);
 };
+
 
   return (
     <Layout>

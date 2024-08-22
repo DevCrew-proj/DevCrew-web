@@ -5,10 +5,11 @@ import ImageUpload from "./ImageUpload";
 import axios from "axios";
 
 const Layout = styled.div`
-  width: 1490px;
+  width: 1290px;
   height: 1019px;
-  margin: 0 auto 230px;
+  margin: 50px 20px 100px 190px;
 `;
+
 
 const FormLayout = styled.div`
   width: 100%;
