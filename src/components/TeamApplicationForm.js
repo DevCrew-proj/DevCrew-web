@@ -9,6 +9,7 @@ const Container = styled.div`
   background-color: #ffffff;
   display: flex;
   width: 1920px;
+  margin-left: 100px;
   box-sizing: border-box;
 `;
 

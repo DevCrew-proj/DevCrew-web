@@ -18,7 +18,7 @@ const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1920.4px;
+    width: 1680px;
     height: fit-content;
     box-sizing: border-box;
 `;
