@@ -80,7 +80,7 @@ const DropdownContent = styled.div`
   display: none;
   position: absolute;
   background-color: #fff;
-  width: 118px;
+  width: 120px;
   border: 1px solid #829595;
   z-index: 1;
   left: 90%;
