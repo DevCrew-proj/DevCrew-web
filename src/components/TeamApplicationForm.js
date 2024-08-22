@@ -309,7 +309,8 @@ const TeamApplicationForm = ({ contestId }) => {
         ...formData,
       }, {
         headers: {
-          Authorization: `Bearer ${token}`,  
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`   
         }
       });
 
