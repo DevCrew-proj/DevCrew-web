@@ -11,7 +11,8 @@ import Bottombar from '../components/Bottombar'
 import Pagination from '../components/Pagination';
 
 const Layout = styled.div`
-width : 1920px;
+width : 1680px;
+
 //height : 2236px;
 `
 
@@ -28,20 +29,21 @@ line-height: normal;
 margin-top : 128.62px;
 margin-left : 244.13px;
 `
+
 const MenuContainer=styled.div`
 display: flex;
 flex-direction : row;
 cursor : pointer;
-margin-top : 103px;
-margin-left : 140px;
+margin-top : 90px;
+margin-left : 156px;
 
 `
 
 const Menu=styled.div`
-margin-left : 128px;
+/* margin-left : 112px;
 color: #2E4F4F;
 font-family: AppleSDGothicNeoM00;
-font-size: 30px;
+font-size: 26.25px;
 position : relative;
 font-style: normal;
 font-weight: 400;
@@ -52,7 +54,7 @@ color: ${(props) => (props.active ? '#2E4F4F' : '#B8B8B8')};
   /* &:hover {
     color: #2E8B57;
   } */
-    &::before {
+    /* &::before {
     content: '';
     position: absolute;
     top: -21px;
@@ -63,24 +65,41 @@ color: ${(props) => (props.active ? '#2E4F4F' : '#B8B8B8')};
     background: #2E4F4F;
     box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.12);
     display: ${(props) => (props.active ? 'block' : 'none')};
+  } */
+    margin-left : 112px;
+    //min-width: 128px;
+  color: #b8b8b8;
+  font-family: AppleSDGothicNeoM00;
+  font-size: 26.25px;
+  line-height: 1.2;
+  top : -21px;
+  padding-top: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  border-top: 8px solid #fff;
+  transition: border-top 0.3s ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: #2e4f4f;
+    border-top: 8px solid #2e4f4f;
+  }
+
+  &.active {
+    color: #2e4f4f;
+    border-top: 8px solid #2e4f4f;
   }
   
 `
-const Content = styled.div`
-  margin-left: 279px;
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #e9ecef;
-  border-radius: 5px;
-  width: calc(100% - 558px);
-`;
+
 
 const SearchResultCount = styled.div`
-margin-top : 74px;
-margin-left : 304px;
+margin-top : 64.87px;
+margin-left : 266px;
   color: #000;
 font-family: Pretendard;
-font-size: 20px;
+font-size: 17.5px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
@@ -90,16 +109,27 @@ line-height: normal;
 const SearchResults = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 35px;
-  margin-left : 292px;
-  margin-top : 61px;
-  margin-right : 291px;
+  gap: 27.12px;
+  margin-left : 266px;
+  margin-top : 53.38px;
+ margin-right : 254px;
   
 `;
+const Order = styled.div`
+margin-top : 82px;
+color: #000;
+text-align: right;
+font-family: Pretendard;
+font-size: 17.5px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-left: 975.63px;
+`
 
 const ResultItem = styled(Link)`
-  width: 425px;
-  height: 216px;
+  width: 371.875px;
+  height: 189px;
   //padding: 26px 146px 26px 21px;
   gap: 16px;
   flex-shrink: 0;
@@ -120,17 +150,7 @@ flex-direction : row;
 text-decoration : none;
 `;
 
-const Order = styled.div`
-margin-top : 82px;
-color: #000;
-text-align: right;
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-left: 1115px;
-`
+
 const Vectors = styled.img`
 margin-top : 82px;
 margin-left: 13px;
@@ -142,46 +162,49 @@ flex-direction : row;
 
 const Picture = styled.div`
 display: flex;
-height: 164px;
-width : 164px;
-margin-left : 21px;
-margin-top : 26px;
+height: 143.5px;
+width : 143.5px;
+margin-left : 18.38px;
+margin-top : 22.75px;
 //padding: 119px 42px 21px 55px;
 justify-content: flex-end;
 align-items: center;
-border-radius: 20px;
+border-radius: 17.5px;
 background: #FFF;
 
 `
 const Image= styled.img`
-width : 164px;
-height : 164px;
+width : 143.5px;
+height : 143.5px;
 border-radius: 20px;
 `
 
 const Contents = styled.div`
 display : flex;
 flex-direction : column;
+justify-content: center;
+
 `
 
 const ContestName=styled.div`
 align-self: stretch;
 color: #FFF;
 font-family: Pretendard;
-font-size: 18px;
+font-size: 15.75px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
-margin-top : 53px;
-margin-left : 16px;
+//margin-top : 53px;
+margin-left : 14px;
+width : 150px;
 `
 
 const ContestTag = styled.div`
 display: flex;
-width: 51px;
+width: 60px;
 height: 23px;
 padding: 0px 6px;
-justify-content: centernn;
+justify-content: center;
 align-items: center;
 gap: 10px;
 flex-shrink: 0;
@@ -189,24 +212,26 @@ border-radius: 21px;
 background: #FFF;
 color: #829595;
 font-family: Pretendard;
-font-size: 12px;
+font-size: 10.5px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
-margin-top : 11px;
-margin-left : 16px;
+margin-top : 9.62px;
+margin-left : 14px;
+text-align : center;
 `
 
 const ContestCompany=styled.div`
 align-self: stretch;
 color: #FFF;
 font-family: Pretendard;
-font-size: 14px;
+font-size: 12.25px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-margin-top : 11px;
-margin-left : 16px;
+margin-top : 9.62px;
+margin-left : 14px;
+width : 150px;
 
 `
 
@@ -214,12 +239,12 @@ const ContestDday = styled.div`
 align-self: stretch;
 color: #FFF;
 font-family: Pretendard;
-font-size: 14px;
+font-size: 12.25px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-margin-top : 11px;
-margin-left : 16px;
+margin-top : 9.62px;
+margin-left : 14px;
 `
 
 const Upload=styled.button`
@@ -239,7 +264,7 @@ display : flex;
 justify-content : center;
 align-items:center;
 margin-top : 40px;
-margin-left : 1476px;
+margin-left : 1291.5px;
 
 `
 const Submit = styled.div`
@@ -369,7 +394,7 @@ useEffect(() => {
     } catch (error) {
       console.error('Error fetching user role:', error);
     }
-  };
+  }; 
 
   fetchRole();
 }, []);
@@ -502,6 +527,7 @@ useEffect(() => {
          <Vector src={vector} alt='화살표' />
         </Upload>
       )}
+      
          <PaginationContainer>
          <Pagination 
            page={currentPage}

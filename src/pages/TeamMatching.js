@@ -7,7 +7,7 @@ import {Link ,useParams} from 'react-router-dom'
 import Bottombar from '../components/Bottombar'
 
 const Layout = styled.div`
-width : 1920px;
+width : 1680px;
 display : flex;
 flex-direction : column;
 /* justify-content:center;
@@ -15,12 +15,15 @@ align-items : center; */
 `
 
 const ContestInfoWrapper = styled.div`
-  margin-top: 63px;
+  margin-top: 142.63px;
   margin-bottom: 86px;
-  margin-left : 338px;
+ // margin-left : 295.75px;
+  display : flex;
+  align-items: center;
+  justify-content: center;
 `
 const Divider = styled.div`
-width: 1620px;
+width: 1417.5px;
 height: 4px;
 flex-shrink: 0;
 background: rgba(47, 79, 79, 0.30);
@@ -28,7 +31,7 @@ margin-left : 150px;
 `
 const TitleContainer = styled.div`
   margin-top: 130px;
-  margin-left: 342px;
+  margin-left: 299px;
   position: relative;  /* UnderLine의 위치를 Title과 맞추기 위해 부모 컨테이너에 relative 설정 */
   display: inline-block;  /* Title의 크기를 텍스트 내용에 맞추기 위해 inline-block 설정 */
 `;
@@ -48,7 +51,7 @@ position : relative;
 z-index: 1;  /* Title을 앞쪽에 배치 */
 `
 const UnderLine=styled.div`
-width: 120%;
+width: 110%;
 height: 44px;
 flex-shrink: 0;
 position : absolute;
@@ -60,9 +63,10 @@ z-index: -1;
 
 `
 const ContentLayout = styled.div`
-margin-left : 338px;
+margin-left :299px;
 margin-top : 43px;
 margin-bottom : 94px;
+width : 1100px;
 `
 
 
@@ -74,14 +78,14 @@ font-size: 30px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-margin-left : 342px;
+margin-left : 299px;
 margin-top : 95px;
 `
 // 테이블 스타일링
 const Table = styled.table`
-  width: 1237px;
+  width: 1150px;
   border-collapse: collapse;
-  margin-left : 342px;
+  margin-left : 299px;
   margin-top : 55px;
 `;
 
@@ -101,14 +105,14 @@ border: 1px solid rgba(51, 51, 51, 0.20);
 
 /* body/medium */
 font-family: AppleSDGothicNeoR00;
-font-size: 30px;
+font-size: 26.25px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
 `;
 
 const TableCell = styled.td`
-  padding: 12px;
+  padding: 8px;
   text-align: center;
   border: 1px solid #ddd;
 `;
@@ -151,7 +155,7 @@ const StyledLink = styled.a`
 // 버튼 스타일링
 const ButtonGroup = styled.div`
   margin-top: 53px;
-  margin-left: 784px;
+  margin-left: 686px;
   margin-bottom : 157px;
 `;
 
