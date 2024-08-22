@@ -245,7 +245,9 @@ const ProjectWritePage = () => {
         mappedFormData,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`,
           },
         }
       );

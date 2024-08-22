@@ -137,10 +137,12 @@ const IntroduceSelfPage = () => {
     introduction: "",
     highSchool: "",
     college: "",
-    gender: "MALE",
-    highSchoolStatus: "ENROLLMENT",
-    collegeStatus: "ENROLLMENT",
+    gender: "성별 선택",
+    highSchoolStatus: "상태",
+    collegeStatus: "상태",
   });
+
+  const accessToken = sessionStorage.getItem("auth_token");
 
   // 공통 매핑 함수 (양방향)
   const mapStatus = (mapping, status, defaultValue) => {
@@ -163,16 +165,13 @@ const IntroduceSelfPage = () => {
     FEMALE: "여성",
   };
 
-  //임시 액세스 토큰
-  const accessToken = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDM0MjczOCwiZW1haWwiOiJkdWppMTIzNEBkYXVtLm5ldCJ9.bhWigDdqkIpOoq3Ixrg0GGvB2pAYBjyqbplc53EEdHtcL9tFjQ8BT6SsNO5chI4gC8JUdxcR65450EfBZfb2Bw`;
-
   //프로필 데이터 받아오기
   const getProfileData = async () => {
     try {
       const response = await axios.get(`https://devcrew.kr/api/v1/profile`, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
       });
       const data = response.data.data;
@@ -213,8 +212,8 @@ const IntroduceSelfPage = () => {
         mappedFormData,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
