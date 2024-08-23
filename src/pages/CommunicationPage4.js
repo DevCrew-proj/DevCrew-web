@@ -90,6 +90,7 @@ const Communication4 = () => {
       navigate("/communicationBoard4");
     } else {
       alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
     }
   };
 

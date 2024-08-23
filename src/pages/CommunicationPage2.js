@@ -8,6 +8,7 @@ import Bottombar from "../components/Bottombar.js";
 import CommunicationSideBar from "../components/CommunicationSideBar";
 import CommunicationBox from "../components/CommunicationBox";
 import Pagination from "../components/Pagination";
+import { nativeSelectClasses } from "@mui/material";
 
 const Layout = styled.div`
   width: 1680px;
@@ -90,6 +91,7 @@ const Communication1 = () => {
       navigate("/communicationBoard2");
     } else {
       alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
     }
   };
 
