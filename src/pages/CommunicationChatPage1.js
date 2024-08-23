@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Topbar from "../components/Topbar";
 import Topbar3 from "../components/Topbar3";
@@ -78,6 +78,7 @@ const SubmitBtn = styled.button`
 
 const CommunicationChat1 = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [page, setPage] = useState(1); // 댓글 페이지
   const [commentCount, setCommentCount] = useState(0); // 댓글 수
   const [totalChatPages, setTotalChatPages] = useState(1); // 댓글 총 페이지
@@ -157,6 +158,7 @@ const CommunicationChat1 = () => {
   const handleSubmit = () => {
     if (sessionStorage.getItem("auth_token") === null) {
       alert("로그인 후 이용해주세요.");
+      navigate("/login");
     } else if (content === "") {
       alert("댓글을 입력해주세요.");
     } else {
